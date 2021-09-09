@@ -131,6 +131,7 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-LiveAMessage.xcodeproj/project.pbxproj
+LiveAMessage.xcodeproj/
+LiveAMessage.xcworkspace/
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
