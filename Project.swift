@@ -18,7 +18,7 @@ let targets = [
             "Targets/LiveAMessage/Resources/**"
         ],
         dependencies: [
-//            .package(product: "Nimble")
+            .package(product: "TinyConstraints")
         ]
     ),
     Target(
@@ -30,7 +30,7 @@ let targets = [
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
         dependencies: [
-//            .package(product: "Nimble")
+            .package(product: "TinyConstraints")
         ]
     ),
     Target(
@@ -52,18 +52,18 @@ let targets = [
         bundleId: "io.tuist.DesignSystem",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
-        sources: ["Targets/DesignSystem/Sources/**"],
+        sources: ["Targets/DesignSystem/**"],
         dependencies: [
-
+            .package(product: "TinyConstraints")
         ]
     )
 ]
 
 let packages: [Package] = [
-//    .remote(
-//        url: "https://github.com/Quick/Nimble",
-//        requirement: .exact(Version(9, 2, 1))
-//    )
+    .remote(
+        url: "https://github.com/roberthein/TinyConstraints",
+        requirement: .exact(Version(4, 0, 2))
+    )
 ]
 
 let project = Project(
