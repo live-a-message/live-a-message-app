@@ -133,5 +133,9 @@ iOSInjectionProject/
 
 LiveAMessage.xcodeproj/
 LiveAMessage.xcworkspace/
+Derived/InfoPlists/DesignSystem.plist
+Derived/InfoPlists/LiveAMessage.plist
+Derived/InfoPlists/Networking.plist
+Derived/InfoPlists/LiveAMessageTests.plist
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
