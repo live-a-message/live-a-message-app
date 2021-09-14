@@ -1,5 +1,5 @@
 //
-//  AdMessageView.swift
+//  AddMessageView.swift
 //  LiveAMessage
 //
 //  Created by Albert on 13/09/21.
@@ -10,11 +10,15 @@ import UIKit
 import DesignSystem
 import TinyConstraints
 
-class AdMessageView: UIView {
+class AddMessageView: UIView, ViewCode {
+    var cancelAction: (() -> ())?
+    var saveAction: (() -> ())?
+    
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -25,9 +29,9 @@ class AdMessageView: UIView {
         return button
     }()
     
-    lazy var textField: UITextField = {
-        let textField = UITextField()
-        return textField
+    lazy var textView: UITextView = {
+        let textView = UITextView()
+        return textView
     }()
     
     override init(frame: CGRect) {
@@ -44,7 +48,7 @@ class AdMessageView: UIView {
     func buildHierarchy() {
         addSubview(cancelButton)
         addSubview(saveButton)
-        addSubview(textField)
+        addSubview(textView)
     }
     
     func setupConstraints() {
@@ -52,12 +56,22 @@ class AdMessageView: UIView {
         cancelButton.left(to: self, offset: 24)
         saveButton.top(to: self, offset: 24)
         saveButton.right(to: self, offset: -24)
-        textField.edgesToSuperview(excluding: .top)
-        textField.topToBottom(of: cancelButton, offset: 16)
+        textView.edgesToSuperview(excluding: .top, insets: .horizontal(16))
+        textView.topToBottom(of: cancelButton, offset: 16)
     }
     
     func configureViews() {
-        
+        textView.becomeFirstResponder()
+        textView.isScrollEnabled = true
+        textView.tintColor = .red
+        textView.font = .systemFont(ofSize: 14)
     }
     
+    func setKeyboardView(height: CGFloat) {
+        textView.bottom(to: self, offset: -height)
+    }
+    
+    @objc func cancelButtonAction() {
+        cancelAction?()
+    }
 }
