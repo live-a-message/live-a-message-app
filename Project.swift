@@ -2,7 +2,15 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let infoPlist: [String: InfoPlist.Value] = [
-    "UILaunchScreen": [:]
+    "UILaunchScreen": [:],
+    "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
+    "CFBundleDocumentTypes": [
+        [
+            "CFBundleTypeName":"MKDirectionsRequest",
+            "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
+        ]
+    ],
+  "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location"
 ]
 
 let targets = [
@@ -48,7 +56,7 @@ let targets = [
     Target(
         name: "DesignSystem",
         platform: .iOS,
-        product: .app,
+        product: .framework,
         bundleId: "io.tuist.DesignSystem",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
