@@ -15,14 +15,7 @@ class MapViewController: UIViewController {
   
   let viewModel = MapViewModel()
 
-  let mapView: MKMapView = {
-    let mapView = MKMapView()
-    mapView.isZoomEnabled = true
-    mapView.tintColor = Colors.mainRed
-    mapView.showsUserLocation = true
-    mapView.translatesAutoresizingMaskIntoConstraints = false
-    return mapView
-  }()
+  let mapView = MapView()
   
   let locationManager: CLLocationManager = {
     let locationManager = CLLocationManager()
@@ -42,11 +35,7 @@ class MapViewController: UIViewController {
     self.view.addSubview(mapView)
   }
   func setupConstraints() {
-    NSLayoutConstraint.activate([
-                                  self.mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                                  self.mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-                                  self.mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                                  self.mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)])
+    mapView.setupConstraints()
   }
   
   func configureViews() {
