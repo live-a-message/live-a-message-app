@@ -56,7 +56,7 @@ let targets = [
     Target(
         name: "DesignSystem",
         platform: .iOS,
-        product: .app,
+        product: .framework,
         bundleId: "io.tuist.DesignSystem",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
