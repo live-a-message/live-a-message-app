@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 protocol CloseMessagesViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var sections: [[CloseMessageCellViewModel]] { get set }
@@ -73,7 +74,7 @@ extension CloseMessagesViewModel: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = .systemPink
+        (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = Colors.shadowRed
     }
 }
 
