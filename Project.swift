@@ -2,7 +2,14 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let infoPlist: [String: InfoPlist.Value] = [
-    "UILaunchScreen": [:]
+    "UILaunchScreen": [:],
+    "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
+    "CFBundleDocumentTypes": [
+        [
+            "CFBundleTypeName":"MKDirectionsRequest",
+            "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
+        ]
+    ]
 ]
 
 let targets = [
