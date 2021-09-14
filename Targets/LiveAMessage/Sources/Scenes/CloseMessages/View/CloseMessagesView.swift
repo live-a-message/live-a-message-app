@@ -28,7 +28,10 @@ class CloseMessagesView: UIView {
     func bind(viewModel: CloseMessagesViewModelProtocol) {
         for section in viewModel.sections {
             for cell in section {
-                tableView.register(CloseMessageTableViewCell.self, forCellReuseIdentifier: cell.identifier)
+                tableView.register(
+                    CloseMessageTableViewCell.self,
+                    forCellReuseIdentifier: cell.identifier
+                )
             }
         }
         
