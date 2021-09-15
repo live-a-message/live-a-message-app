@@ -25,6 +25,7 @@ let targets = [
         resources: [
             "Targets/LiveAMessage/Resources/**"
         ],
+        actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
             .package(product: "TinyConstraints")
         ]
