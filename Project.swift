@@ -9,7 +9,8 @@ let infoPlist: [String: InfoPlist.Value] = [
             "CFBundleTypeName":"MKDirectionsRequest",
             "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
         ]
-    ]
+    ],
+  "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location"
 ]
 
 let targets = [
