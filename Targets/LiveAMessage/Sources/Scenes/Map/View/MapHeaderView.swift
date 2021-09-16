@@ -16,10 +16,10 @@ enum ButtonInsets: CGFloat {
 }
 
 class MapHeaderView: UIView, ViewCode {
-    
-    var rightButtonAction: (() -> ())?
-    var leftButtonAction: (() -> ())?
-    
+
+    var rightButtonAction: (() -> Void)?
+    var leftButtonAction: (() -> Void)?
+
     lazy var rightButton: UIButton = {
         let button = UIButton()
         button.setImage(.add, for: .normal)
@@ -34,46 +34,47 @@ class MapHeaderView: UIView, ViewCode {
         button.tintColor = Colors.mainRed
         button.setTitleColor(Colors.mainRed, for: .normal)
         button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
+        button.backgroundColor = Colors.mainRed
         return button
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildHierarchy()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func buildHierarchy() {
         addSubview(rightButton)
         addSubview(leftButton)
     }
-    
+
     func setupConstraints() {
         rightButton.right(to: self, offset: -ButtonInsets.border.rawValue)
         rightButton.top(to: self, offset: ButtonInsets.top.rawValue)
         rightButton.width(ButtonInsets.width.rawValue)
         rightButton.aspectRatio(1)
-        
+
         leftButton.left(to: self, offset: ButtonInsets.border.rawValue)
         leftButton.top(to: self, offset: ButtonInsets.top.rawValue)
         leftButton.width(ButtonInsets.width.rawValue)
         leftButton.aspectRatio(1)
-        
+
         height(64)
         edgesToSuperview(excluding: .bottom)
     }
-    
+
     func configureViews() {
-        
+
     }
-    
+
     @objc func rightButtonTouched() {
         rightButtonAction?()
     }
-    
+
     @objc func leftButtonTouched() {
         leftButtonAction?()
     }

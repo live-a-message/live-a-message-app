@@ -69,14 +69,6 @@ extension CloseMessagesViewModel: UITableViewDelegate, UITableViewDataSource {
         cell.setup(viewModel: cellViewModel)
         return cell
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section].rawValue
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = Colors.shadowRed
-    }
 }
 
 extension CloseMessagesViewModel {
