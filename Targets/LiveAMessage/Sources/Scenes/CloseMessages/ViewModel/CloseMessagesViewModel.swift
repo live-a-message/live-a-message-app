@@ -8,10 +8,11 @@
 
 import UIKit
 import DesignSystem
+import Networking
 
 protocol CloseMessagesViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var sections: [[CloseMessageCellViewModel]] { get set }
-    func setupCells(messages: [CloseMessagesViewModel.Message])
+    func setupCells(messages: [Message])
 }
 
 class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
@@ -38,7 +39,7 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
         )
     }
 
-    func addSection(title: SectionTitle, messages: [CloseMessagesViewModel.Message]) {
+    func addSection(title: SectionTitle, messages: [Message]) {
         guard !messages.isEmpty else { return }
         var section = [CloseMessageCellViewModel]()
         messages.forEach { section.append(CloseMessageCellViewModel(message: $0)) }
@@ -72,33 +73,15 @@ extension CloseMessagesViewModel: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section].rawValue
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = Colors.shadowRed
     }
 }
 
 extension CloseMessagesViewModel {
-
     enum SectionTitle: String {
         case read = "Readed Messages"
-        case unread = "Non read"
-    }
-
-    struct Message {
-        let id: String
-        let content: String
-        let location: Location
-        let status: Status
-        
-        enum Status {
-            case read
-            case unread
-        }
-
-    }
-    struct Location {
-        let latitude: String
-        let longitude: String
+        case unread = "Unreaded messages"
     }
 }

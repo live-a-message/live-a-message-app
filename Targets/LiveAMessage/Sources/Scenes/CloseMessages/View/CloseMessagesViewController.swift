@@ -12,17 +12,17 @@ class CloseMessagesViewController: UIViewController {
 
     let mainView = CloseMessagesView()
     var viewModel: CloseMessagesViewModelProtocol?
-    
+
     init(viewModel: CloseMessagesViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func loadView() {
         view = mainView
     }
@@ -35,4 +35,3 @@ class CloseMessagesViewController: UIViewController {
         }
     }
 }
-

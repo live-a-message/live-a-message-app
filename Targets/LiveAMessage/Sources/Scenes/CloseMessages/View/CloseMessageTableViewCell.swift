@@ -10,7 +10,7 @@ import UIKit
 import DesignSystem
 
 class CloseMessageTableViewCell: UITableViewCell {
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }

@@ -6,7 +6,7 @@ let infoPlist: [String: InfoPlist.Value] = [
     "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
     "CFBundleDocumentTypes": [
         [
-            "CFBundleTypeName":"MKDirectionsRequest",
+            "CFBundleTypeName": "MKDirectionsRequest",
             "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
         ]
     ],

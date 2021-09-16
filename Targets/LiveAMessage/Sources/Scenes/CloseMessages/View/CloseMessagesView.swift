@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DesignSystem
 import TinyConstraints
 
 class CloseMessagesView: UIView {
@@ -34,13 +35,13 @@ class CloseMessagesView: UIView {
                 )
             }
         }
-        
+
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
     }
 }
 
-extension CloseMessagesView {
+extension CloseMessagesView: ViewCode {
 
     func configureViews() {
         buildHierarchy()

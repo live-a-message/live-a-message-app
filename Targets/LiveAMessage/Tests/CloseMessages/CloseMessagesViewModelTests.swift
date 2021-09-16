@@ -10,14 +10,14 @@
 import XCTest
 
 final class CloseMessageViewModelTests: XCTestCase {
-    
+
     func test_addSectionRead_oneSection() {
         let sut = makeSut()
         let data = makeData(type: [.read, .read, .read])
         sut.setupCells(messages: data)
         XCTAssertEqual(sut.sections.count, 1)
     }
-    
+
     func test_addSectionRead_TwoSections() {
         let sut = makeSut()
         let data = makeData(type: [.read, .unread])
@@ -27,7 +27,7 @@ final class CloseMessageViewModelTests: XCTestCase {
 }
 
 extension CloseMessageViewModelTests {
-    
+
     typealias Sut = CloseMessagesViewModelProtocol
     typealias Data = [CloseMessagesViewModel.Message]
     typealias Message = CloseMessagesViewModel.Message

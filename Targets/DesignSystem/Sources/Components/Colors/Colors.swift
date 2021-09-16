@@ -19,7 +19,7 @@ public class Colors: UIColor {
               return traitCollection.userInterfaceStyle == .dark ? UIColor(hex: "ED6E7E") : UIColor(hex: "F85F71")
       }
   }
-  
+
   /// the secondary  red color used for pop-up label over label in mainred components
   public static var shadowRed: UIColor {
     return UIColor(hex: "FDD2D7")
@@ -27,7 +27,7 @@ public class Colors: UIColor {
 }
 
 extension UIColor {
-    
+
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexFormatted: String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
 
@@ -45,14 +45,14 @@ extension UIColor {
                   blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
                   alpha: alpha)
     }
-    
+
     func toHexString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        var a:CGFloat = 0
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
         getRed(&r, green: &g, blue: &b, alpha: &a)
-        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        return String(format:"#%06x", rgb)
+        let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format: "#%06x", rgb)
     }
 }
