@@ -8,16 +8,17 @@
 
 @testable import LiveAMessage
 import XCTest
+import Networking
 
 final class CloseMessageViewModelTests: XCTestCase {
-    
+
     func test_addSectionRead_oneSection() {
         let sut = makeSut()
         let data = makeData(type: [.read, .read, .read])
         sut.setupCells(messages: data)
         XCTAssertEqual(sut.sections.count, 1)
     }
-    
+
     func test_addSectionRead_TwoSections() {
         let sut = makeSut()
         let data = makeData(type: [.read, .unread])
@@ -27,19 +28,20 @@ final class CloseMessageViewModelTests: XCTestCase {
 }
 
 extension CloseMessageViewModelTests {
-    
-    typealias Sut = CloseMessagesViewModelProtocol
-    typealias Data = [CloseMessagesViewModel.Message]
-    typealias Message = CloseMessagesViewModel.Message
 
-    private func makeData(type: [CloseMessagesViewModel.Message.Status]) -> Data {
+    typealias Sut = CloseMessagesViewModelProtocol
+    typealias Data = [Message]
+
+    private func makeData(type: [MessageStatus]) -> Data {
         return type.map {
-            Message(
-                id: "",
+            var message = Message(
+                userId: nil,
                 content: "",
-                location: .init(latitude: "", longitude: ""),
-                status: $0
+                image: nil,
+                location: Location(lat: "", lon: "")
             )
+            message.status = $0
+            return message
         }
     }
 

@@ -10,7 +10,7 @@ import UIKit
 import DesignSystem
 
 class CloseMessageTableViewCell: UITableViewCell {
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
@@ -21,12 +21,12 @@ class CloseMessageTableViewCell: UITableViewCell {
     }
 
     func setup(viewModel: CloseMessageCellViewModel) {
+        self.selectionStyle = .none
         self.tintColor = Colors.mainRed
-        self.accessoryType = .disclosureIndicator
         self.imageView?.image = UIImage(color: Colors.mainRed, size: CGSize(width: 24, height: 24))
         self.imageView?.layer.cornerRadius = 8
         self.imageView?.clipsToBounds = true
-        self.textLabel?.text = "Message"
+        self.textLabel?.text = "LiveMe"
         self.detailTextLabel?.text = viewModel.message.content
     }
 }
