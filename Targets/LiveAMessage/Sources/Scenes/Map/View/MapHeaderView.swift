@@ -11,7 +11,6 @@ import DesignSystem
 
 enum ButtonInsets: CGFloat {
     case border = 16
-    case top = 32
     case width = 36
 }
 
@@ -53,13 +52,13 @@ class MapHeaderView: UIView, ViewCode {
     }
 
     func setupConstraints() {
+        rightButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
         rightButton.right(to: self, offset: -ButtonInsets.border.rawValue)
-        rightButton.top(to: self, offset: ButtonInsets.top.rawValue)
         rightButton.width(ButtonInsets.width.rawValue)
         rightButton.aspectRatio(1)
-
+        
+        leftButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
         leftButton.left(to: self, offset: ButtonInsets.border.rawValue)
-        leftButton.top(to: self, offset: ButtonInsets.top.rawValue)
         leftButton.width(ButtonInsets.width.rawValue)
         leftButton.aspectRatio(1)
 

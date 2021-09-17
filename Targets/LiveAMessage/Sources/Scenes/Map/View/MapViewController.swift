@@ -84,7 +84,7 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController {
     func addMessage() {
-        let controller = AddMessageViewController()
+        let controller = AddMessageViewController(viewModel: AddMessageViewModel())
         controller.modalPresentationStyle = .formSheet
         present(controller, animated: true, completion: nil)
     }
