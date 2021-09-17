@@ -11,17 +11,35 @@ import Networking
 import MapKit
 import CoreLocation
 
-class MapViewModel: NSObject, MapViewModelProtocol{
-  
-  typealias MessagesHandler = (Result<[Message], MessageServiceError>) -> Void
-  var currentLocation = Location(lat: "0", lon: "0")
+class MapViewModel: NSObject, MapViewModelProtocol {
+
+  lazy var locationManager: CLLocationManager = {
+    let locationManager = CLLocationManager()
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.distanceFilter = kCLDistanceFilterNone
+    return locationManager
+  }()
+
+  var currentLocation = CLLocation() {
+    didSet {
+      didUpdatedLocation(for: self.currentLocation)
+    }
+  }
+  weak var mainView: MapView?
   let localService = LocalMessageService()
-  var messages : [Message] = []
+  var messages: [Message] = []
   var radius: Double = 300
 
+  override init() {
+    super.init()
+    self.locationManager.delegate = self
+    self.locationManager.requestWhenInUseAuthorization()
+    self.locationManager.startUpdatingLocation()
+  }
+
   func getMessages() {
-    localService.fetchMessages(location: currentLocation, radius: radius){ result in
-      switch result{
+    localService.fetchMessages { result in
+      switch result {
       case .success(let messages):
         self.messages = messages
       case .failure(let error):
@@ -29,19 +47,31 @@ class MapViewModel: NSObject, MapViewModelProtocol{
       }
     }
   }
-  
-  func didUpdatedLocation() {
-    
-  }
-  
-  func addMessage(message: Message) {
-    localService.addMessage(message: message) { result in
-      switch result {
-      case .success(let result):
-        print(result)
-      case .failure(let error):
-        print(error)
-      }
+
+  func didUpdatedLocation(for location: CLLocation) {
+    self.getMessages()
+    self.messages.forEach {
+      let location = $0.location
+      let anotation = MKPointAnnotation()
+      anotation.coordinate.latitude = Double(location.lat) ?? 0
+      anotation.coordinate.longitude = Double(location.lon) ?? 0
+      self.mainView?.addAnnotation(anotation)
     }
+  }
+}
+
+extension MapViewModel: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.first {
+      let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000)
+      self.mainView?.setRegion(coordinateRegion, animated: true)
+      self.currentLocation = location
+    }}
+
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print(error.localizedDescription)
   }
 }

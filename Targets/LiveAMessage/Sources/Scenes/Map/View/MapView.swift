@@ -13,55 +13,30 @@ import TinyConstraints
 import Networking
 
 class MapView: MKMapView {
-  
-  var viewModel = MapViewModel()
-  
-  let locationManager: CLLocationManager = {
-    let locationManager = CLLocationManager()
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    locationManager.distanceFilter = kCLDistanceFilterNone
-    return locationManager
-  }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    configure()
+  }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  func setupConstraints() {
+    self.edgesToSuperview()
+  }
+
+  func configure() {
     self.isZoomEnabled = true
     self.isZoomEnabled = true
     self.tintColor = Colors.mainRed
     self.showsUserLocation = true
     self.translatesAutoresizingMaskIntoConstraints = false
   }
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func setupConstraints() {
-    self.edgesToSuperview()
-  }
-  
-  func bind(){
+
+  func bind(viewModel: MapViewModel) {
     self.delegate = self
-    locationManager.delegate = self
-    locationManager.requestWhenInUseAuthorization()
-    locationManager.startUpdatingLocation()
-  }
-}
-
-
-extension MapView: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    if let location = locations.first {
-      let coordinateRegion = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: 1000,
-            longitudinalMeters: 1000)
-      self.setRegion(coordinateRegion, animated: true)
-      self.viewModel.getMessages()
-     }
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print(error.localizedDescription)
+    viewModel.mainView = self 
   }
 }
 
@@ -70,11 +45,24 @@ extension MapView: MKMapViewDelegate {
     let circle = MKCircle(center: mapView.userLocation.coordinate, radius: 200)
     mapView.addOverlay(circle)
   }
-  
+
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
       let circleRenderer = MKCircleRenderer(overlay: overlay)
       circleRenderer.fillColor = Colors.mainRed
       circleRenderer.alpha = 0.08
       return circleRenderer
+  }
+
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+      guard annotation is MKPointAnnotation else { return nil }
+      let identifier = "Annotation"
+      var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+      if annotationView == nil {
+          annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+          annotationView!.canShowCallout = true
+      } else {
+          annotationView!.annotation = annotation
+      }
+      return annotationView
   }
 }

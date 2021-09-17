@@ -8,4 +8,4 @@
 
 import MapKit
 
-protocol MapViewModelProtocol: CLLocationManagerDelegate, MKMapViewDelegate{}
+protocol MapViewModelProtocol { }

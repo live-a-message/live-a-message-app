@@ -9,24 +9,25 @@
 import UIKit
 
 class MapViewController: UIViewController {
-  
+
   let viewModel = MapViewModel()
   let mapView = MapView()
 
   override func viewDidLoad() {
     self.view.backgroundColor = .white
+    self.mapView.bind(viewModel: viewModel)
     buildHierarchy()
     setupConstraints()
     configureViews()
   }
-  
+
   func buildHierarchy() {
     self.view.addSubview(mapView)
   }
   func setupConstraints() {
     mapView.setupConstraints()
   }
-  
+
   func configureViews() {
   }
 }
