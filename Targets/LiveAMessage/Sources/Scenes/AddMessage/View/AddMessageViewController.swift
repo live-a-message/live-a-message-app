@@ -9,7 +9,7 @@
 import UIKit
 
 class AddMessageViewController: UIViewController {
-    
+
     private weak var viewModel: AddMessageViewModelProtocol?
     private lazy var messageView = AddMessageView()
     
@@ -27,16 +27,16 @@ class AddMessageViewController: UIViewController {
         messageView.saveAction = save(_:)
         view = messageView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setKeyboardObserver()
     }
-    
+
     private func cancel() {
         dismiss(animated: true, completion: nil)
     }
-    
+
     private func save(_ message: String) {
         viewModel?.saveMessage(
             with: message,
@@ -44,7 +44,7 @@ class AddMessageViewController: UIViewController {
         )
         dismiss(animated: true, completion: nil)
     }
-    
+
     private func setKeyboardObserver() {
         NotificationCenter.default.addObserver(
             self,
@@ -53,7 +53,7 @@ class AddMessageViewController: UIViewController {
             object: nil
         )
     }
-    
+
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue

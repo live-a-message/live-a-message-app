@@ -12,6 +12,3 @@ public enum MessageStatus: String, Codable {
     case read
     case unread
 }
-
-
-

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Networking
 
 protocol TableViewCell {
     var identifier: String { get }
@@ -14,9 +15,9 @@ protocol TableViewCell {
 
 class CloseMessageCellViewModel: TableViewCell {
     lazy var identifier: String = String(describing: type(of: self))
-    var message: CloseMessagesViewModel.Message
+    var message: Message
 
-    init(message: CloseMessagesViewModel.Message) {
+    init(message: Message) {
         self.message = message
     }
 }

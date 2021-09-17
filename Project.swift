@@ -6,7 +6,7 @@ let infoPlist: [String: InfoPlist.Value] = [
     "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
     "CFBundleDocumentTypes": [
         [
-            "CFBundleTypeName":"MKDirectionsRequest",
+            "CFBundleTypeName": "MKDirectionsRequest",
             "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
         ]
     ],
@@ -25,6 +25,7 @@ let targets = [
         resources: [
             "Targets/LiveAMessage/Resources/**"
         ],
+        actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
             .package(product: "TinyConstraints")
         ]
