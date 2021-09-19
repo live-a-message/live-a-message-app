@@ -49,6 +49,7 @@ extension MapViewController {
 
     func showCloseMessages() {
         let closeMessagesViewModel = CloseMessagesViewModel(messages: viewModel.messages)
+
         let controller = CloseMessagesViewController(viewModel: closeMessagesViewModel)
         let navController = UINavigationController(rootViewController: controller)
 

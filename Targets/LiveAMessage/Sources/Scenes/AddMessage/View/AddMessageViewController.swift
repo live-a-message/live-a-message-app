@@ -21,7 +21,7 @@ class AddMessageViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+  
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)
