@@ -25,7 +25,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
       didUpdatedLocation(for: self.currentLocation)
     }
   }
-  weak var mainView: MapView?
+  weak var mapView: MapView?
   let localService = LocalMessageService()
   var messages: [Message] = []
   var radius: Double = 300
@@ -55,7 +55,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
       let anotation = MKPointAnnotation()
       anotation.coordinate.latitude = Double(location.lat) ?? 0
       anotation.coordinate.longitude = Double(location.lon) ?? 0
-      self.mainView?.addAnnotation(anotation)
+      self.mapView?.addAnnotation(anotation)
     }
   }
 }
@@ -67,7 +67,7 @@ extension MapViewModel: CLLocationManagerDelegate {
             center: location.coordinate,
             latitudinalMeters: 1000,
             longitudinalMeters: 1000)
-      self.mainView?.setRegion(coordinateRegion, animated: true)
+      self.mapView?.setRegion(coordinateRegion, animated: true)
       self.currentLocation = location
     }}
 

@@ -32,7 +32,7 @@ class MapView: MKMapView {
 
   func bind(viewModel: MapViewModel) {
     self.delegate = self
-    viewModel.mainView = self
+    viewModel.mapView = self
   }
 
   func setupConstraints() {

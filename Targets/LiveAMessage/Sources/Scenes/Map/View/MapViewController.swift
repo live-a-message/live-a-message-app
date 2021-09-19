@@ -19,6 +19,7 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = .white
+        self.mapView.bind(viewModel: viewModel)
         buildHierarchy()
         setupConstraints()
         configureViews()
