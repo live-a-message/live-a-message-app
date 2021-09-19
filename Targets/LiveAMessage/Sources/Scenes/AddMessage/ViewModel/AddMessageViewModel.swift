@@ -6,12 +6,31 @@
 //  Copyright © 2021 LiveAMessage. All rights reserved.
 //
 
-import Foundation
+import Networking
 
 protocol AddMessageViewModelProtocol: AnyObject {
-    func saveMessage()
+    var messageService: MessageService { get }
+    func saveMessage(
+        with content: String,
+        image: String?
+    )
 }
 
 class AddMessageViewModel: AddMessageViewModelProtocol {
-    func saveMessage() {}
+    var messageService: MessageService = LocalMessageService()
+
+    func saveMessage(
+        with content: String,
+        image: String?
+    ) {
+        let message = Message(
+            userId: "",
+            content: content,
+            image: image,
+            location: Location(lat: "", lon: "")
+        )
+
+        messageService.addMessage(message: message) { _ in }
+    }
+
 }

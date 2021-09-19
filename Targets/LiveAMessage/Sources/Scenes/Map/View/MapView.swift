@@ -22,10 +22,6 @@ class MapView: MKMapView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func setupConstraints() {
-    self.edgesToSuperview()
-  }
-
   func configure() {
     self.isZoomEnabled = true
     self.isZoomEnabled = true
@@ -36,33 +32,32 @@ class MapView: MKMapView {
 
   func bind(viewModel: MapViewModel) {
     self.delegate = self
-    viewModel.mainView = self 
+    viewModel.mainView = self
+  }
+
+  func setupConstraints() {
+    self.edgesToSuperview()
   }
 }
 
 extension MapView: MKMapViewDelegate {
-  func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-    let circle = MKCircle(center: mapView.userLocation.coordinate, radius: 200)
-    mapView.addOverlay(circle)
-  }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay)
+        circleRenderer.fillColor = Colors.mainRed
+        circleRenderer.alpha = 0.08
+        return circleRenderer
+    }
 
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-      let circleRenderer = MKCircleRenderer(overlay: overlay)
-      circleRenderer.fillColor = Colors.mainRed
-      circleRenderer.alpha = 0.08
-      return circleRenderer
-  }
-
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-      guard annotation is MKPointAnnotation else { return nil }
-      let identifier = "Annotation"
-      var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-      if annotationView == nil {
-          annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-          annotationView!.canShowCallout = true
-      } else {
-          annotationView!.annotation = annotation
-      }
-      return annotationView
-  }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { return nil }
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        return annotationView
+    }
 }

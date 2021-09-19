@@ -33,5 +33,20 @@ class CloseMessagesViewController: UIViewController {
         if let viewModel = viewModel {
             mainView.bind(viewModel: viewModel)
         }
+        setupCloseAction()
+    }
+
+    private func setupCloseAction() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.leftBarButtonItem = mainView.closeButton
+        mainView.closeButton.target = self
+        mainView.closeButton.action = #selector(dismissView)
+    }
+
+    @objc private func dismissView() {
+        dismiss(animated: true)
     }
 }

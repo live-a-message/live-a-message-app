@@ -8,8 +8,8 @@
 
 import Foundation
 import Networking
-import MapKit
 import CoreLocation
+import MapKit
 
 class MapViewModel: NSObject, MapViewModelProtocol {
 

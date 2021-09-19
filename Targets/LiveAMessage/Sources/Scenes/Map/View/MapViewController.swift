@@ -7,27 +7,51 @@
 //
 
 import UIKit
+import DesignSystem
 
 class MapViewController: UIViewController {
 
-  let viewModel = MapViewModel()
-  let mapView = MapView()
+    let viewModel = MapViewModel()
 
-  override func viewDidLoad() {
-    self.view.backgroundColor = .white
-    self.mapView.bind(viewModel: viewModel)
-    buildHierarchy()
-    setupConstraints()
-    configureViews()
-  }
+    let headerView = MapHeaderView()
 
-  func buildHierarchy() {
-    self.view.addSubview(mapView)
-  }
-  func setupConstraints() {
-    mapView.setupConstraints()
-  }
+    let mapView = MapView()
 
-  func configureViews() {
-  }
+    override func viewDidLoad() {
+        view.backgroundColor = .white
+        buildHierarchy()
+        setupConstraints()
+        configureViews()
+    }
+
+    func buildHierarchy() {
+        view.addSubview(mapView)
+        view.addSubview(headerView)
+    }
+    func setupConstraints() {
+        mapView.setupConstraints()
+        headerView.setupConstraints()
+    }
+
+    func configureViews() {
+        headerView.rightButtonAction = addMessage
+        headerView.leftButtonAction = showCloseMessages
+    }
+}
+
+extension MapViewController {
+    func addMessage() {
+        let controller = AddMessageViewController(viewModel: AddMessageViewModel())
+        controller.modalPresentationStyle = .formSheet
+        present(controller, animated: true, completion: nil)
+    }
+
+    func showCloseMessages() {
+        let closeMessagesViewModel = CloseMessagesViewModel(messages: viewModel.messages)
+        let controller = CloseMessagesViewController(viewModel: closeMessagesViewModel)
+        let navController = UINavigationController(rootViewController: controller)
+
+        navController.modalPresentationStyle = .overFullScreen
+        present(navController, animated: true)
+    }
 }

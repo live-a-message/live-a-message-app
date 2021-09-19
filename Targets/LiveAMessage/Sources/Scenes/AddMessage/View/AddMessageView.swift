@@ -12,12 +12,11 @@ import TinyConstraints
 
 class AddMessageView: UIView, ViewCode {
     var cancelAction: (() -> Void)?
-    var saveAction: (() -> Void)?
-
+    var saveAction: ((String) -> Void)?
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(Colors.mainRed, for: .normal)
         button.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         return button
     }()
@@ -25,7 +24,8 @@ class AddMessageView: UIView, ViewCode {
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Post", for: .normal)
-        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(Colors.mainRed, for: .normal)
+        button.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -62,6 +62,7 @@ class AddMessageView: UIView, ViewCode {
 
     func configureViews() {
         textView.becomeFirstResponder()
+        backgroundColor = .white
         textView.isScrollEnabled = true
         textView.tintColor = .red
         textView.font = .systemFont(ofSize: 14)
@@ -69,6 +70,10 @@ class AddMessageView: UIView, ViewCode {
 
     func setKeyboardView(height: CGFloat) {
         textView.bottom(to: self, offset: -height)
+    }
+
+    @objc func saveButtonAction() {
+        saveAction?(textView.text)
     }
 
     @objc func cancelButtonAction() {

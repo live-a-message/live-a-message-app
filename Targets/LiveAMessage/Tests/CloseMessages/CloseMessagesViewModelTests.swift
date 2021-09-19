@@ -8,6 +8,7 @@
 
 @testable import LiveAMessage
 import XCTest
+import Networking
 
 final class CloseMessageViewModelTests: XCTestCase {
 
@@ -29,17 +30,18 @@ final class CloseMessageViewModelTests: XCTestCase {
 extension CloseMessageViewModelTests {
 
     typealias Sut = CloseMessagesViewModelProtocol
-    typealias Data = [CloseMessagesViewModel.Message]
-    typealias Message = CloseMessagesViewModel.Message
+    typealias Data = [Message]
 
-    private func makeData(type: [CloseMessagesViewModel.Message.Status]) -> Data {
+    private func makeData(type: [MessageStatus]) -> Data {
         return type.map {
-            Message(
-                id: "",
+            var message = Message(
+                userId: nil,
                 content: "",
-                location: .init(latitude: "", longitude: ""),
-                status: $0
+                image: nil,
+                location: Location(lat: "", lon: "")
             )
+            message.status = $0
+            return message
         }
     }
 
