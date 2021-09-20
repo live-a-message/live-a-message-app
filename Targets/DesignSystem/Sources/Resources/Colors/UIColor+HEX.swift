@@ -1,30 +1,12 @@
 //
-//  Colors.swift
+//  UIColor+HEX.swift
 //  LiveAMessage
 //
-//  Created by Fernando de Lucas da Silva Gomes on 14/09/21.
+//  Created by Vinicius Mesquita on 20/09/21.
 //  Copyright © 2021 LiveAMessage. All rights reserved.
 //
 
 import UIKit
-
-public class Colors: UIColor {
-  public convenience init(red: Int, green: Int, blue: Int) {
-      self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-  }
-
-  /// the default red color
-  public static var mainRed: UIColor {
-    return UIColor { (traitCollection) -> UIColor in
-              return traitCollection.userInterfaceStyle == .dark ? UIColor(hex: "ED6E7E") : UIColor(hex: "F85F71")
-      }
-  }
-
-  /// the secondary  red color used for pop-up label over label in mainred components
-  public static var shadowRed: UIColor {
-    return UIColor(hex: "FDD2D7")
-  }
-}
 
 extension UIColor {
 
@@ -47,12 +29,34 @@ extension UIColor {
     }
 
     func toHexString() -> String {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
+        var r: CGFloat = .zero
+        var g: CGFloat = .zero
+        var b: CGFloat = .zero
+        var a: CGFloat = .zero
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format: "#%06x", rgb)
+    }
+}
+
+extension UIColor {
+
+    /// Function that provides a color for each style.
+    /// - Parameters:
+    ///   - light: Color provided to light mode
+    ///   - dark: Color provided to dark mode
+    /// - Returns: The especific color dependent on userInterfaceStyle.
+    class func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor {
+                switch $0.userInterfaceStyle {
+                case .dark:
+                    return dark
+                default:
+                    return light
+                }
+            }
+        }
+        return light
     }
 }
