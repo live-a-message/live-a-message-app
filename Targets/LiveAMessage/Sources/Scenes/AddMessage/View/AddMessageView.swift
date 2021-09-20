@@ -11,8 +11,9 @@ import DesignSystem
 import TinyConstraints
 
 class AddMessageView: UIView, ViewCode {
-    var cancelAction: (() -> ())?
-    var saveAction: ((String) -> ())?
+    var cancelAction: (() -> Void)?
+    var saveAction: ((String) -> Void)?
+
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
@@ -71,11 +72,11 @@ class AddMessageView: UIView, ViewCode {
     func setKeyboardView(height: CGFloat) {
         textView.bottom(to: self, offset: -height)
     }
-    
+
     @objc func saveButtonAction() {
         saveAction?(textView.text)
     }
-  
+
     @objc func cancelButtonAction() {
         cancelAction?()
     }

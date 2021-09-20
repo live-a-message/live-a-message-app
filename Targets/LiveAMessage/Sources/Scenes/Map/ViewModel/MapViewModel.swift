@@ -8,29 +8,70 @@
 
 import Foundation
 import Networking
+import CoreLocation
+import MapKit
 
-class MapViewModel {
-    private let messageService: MessageService
-    private (set) var closeMessages: [Message] = []
+class MapViewModel: NSObject, MapViewModelProtocol {
 
-    init(messageService: MessageService = LocalMessageService()) {
-        self.messageService = messageService
-        loadMessages()
+  lazy var locationManager: CLLocationManager = {
+    let locationManager = CLLocationManager()
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.distanceFilter = kCLDistanceFilterNone
+    return locationManager
+  }()
+
+  var currentLocation = CLLocation() {
+    didSet {
+      didUpdatedLocation(for: self.currentLocation)
     }
+  }
+  weak var mapView: MapView?
+  let localService = LocalMessageService()
+  var messages: [Message] = []
+  var radius: Double = 300
 
+  override init() {
+    super.init()
+    self.locationManager.delegate = self
+    self.locationManager.requestWhenInUseAuthorization()
+    self.locationManager.startUpdatingLocation()
+  }
+
+  func getMessages() {
+    localService.fetchMessages { result in
+      switch result {
+      case .success(let messages):
+        self.messages = messages
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
+  }
+
+  func didUpdatedLocation(for location: CLLocation) {
+    self.getMessages()
+    self.messages.forEach {
+      let location = $0.location
+      let anotation = MKPointAnnotation()
+      anotation.coordinate.latitude = Double(location.lat) ?? 0
+      anotation.coordinate.longitude = Double(location.lon) ?? 0
+      self.mapView?.addAnnotation(anotation)
+    }
+  }
 }
 
-extension MapViewModel {
-    func loadMessages() {
-        let emptyLocation = Location(lat: "", lon: "")
-        messageService.fetchMessages(location: emptyLocation, radius: 0) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let messagesArray):
-                self.closeMessages = messagesArray
-            case .failure(let error):
-                print("Could not load messages from file", error)
-            }
-        }
-    }
+extension MapViewModel: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.first {
+      let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000)
+      self.mapView?.setRegion(coordinateRegion, animated: true)
+      self.currentLocation = location
+    }}
+
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print(error.localizedDescription)
+  }
 }

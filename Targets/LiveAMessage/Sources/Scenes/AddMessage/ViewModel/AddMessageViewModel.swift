@@ -18,7 +18,7 @@ protocol AddMessageViewModelProtocol: AnyObject {
 
 class AddMessageViewModel: AddMessageViewModelProtocol {
     var messageService: MessageService = LocalMessageService()
-    
+
     func saveMessage(
         with content: String,
         image: String?
@@ -29,8 +29,8 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
             image: image,
             location: Location(lat: "", lon: "")
         )
-        
-        messageService.addMessage(message: message) { result in }
+
+        messageService.addMessage(message: message) { _ in }
     }
 
 }

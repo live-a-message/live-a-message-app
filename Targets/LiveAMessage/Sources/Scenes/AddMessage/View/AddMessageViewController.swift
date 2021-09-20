@@ -12,16 +12,16 @@ class AddMessageViewController: UIViewController {
 
     private weak var viewModel: AddMessageViewModelProtocol?
     private lazy var messageView = AddMessageView()
-    
+
     init(viewModel: AddMessageViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+  
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)

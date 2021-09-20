@@ -56,7 +56,7 @@ class MapHeaderView: UIView, ViewCode {
         rightButton.right(to: self, offset: -ButtonInsets.border.rawValue)
         rightButton.width(ButtonInsets.width.rawValue)
         rightButton.aspectRatio(1)
-        
+
         leftButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
         leftButton.left(to: self, offset: ButtonInsets.border.rawValue)
         leftButton.width(ButtonInsets.width.rawValue)
