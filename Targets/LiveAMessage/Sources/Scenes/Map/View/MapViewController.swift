@@ -13,30 +13,26 @@ class MapViewController: UIViewController {
 
     let viewModel = MapViewModel()
 
-    let headerView = MapHeaderView()
-
-    let mapView = MapView()
+    let mainView = MainMapView()
 
     override func viewDidLoad() {
         view.backgroundColor = .white
-        self.mapView.bind(viewModel: viewModel)
+        self.mainView.bind(viewModel: viewModel)
         buildHierarchy()
         setupConstraints()
         configureViews()
     }
 
     func buildHierarchy() {
-        view.addSubview(mapView)
-        view.addSubview(headerView)
+        view.addSubview(mainView)
     }
     func setupConstraints() {
-        mapView.setupConstraints()
-        headerView.setupConstraints()
+        mainView.setupConstraints()
     }
 
     func configureViews() {
-        headerView.rightButtonAction = addMessage
-        headerView.leftButtonAction = showCloseMessages
+      mainView.headerView.rightButtonAction = addMessage
+      mainView.headerView.leftButtonAction = showCloseMessages
     }
 }
 

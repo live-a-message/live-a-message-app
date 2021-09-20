@@ -27,12 +27,8 @@ class MapView: MKMapView {
     self.isZoomEnabled = true
     self.tintColor = Colors.mainRed
     self.showsUserLocation = true
-    self.translatesAutoresizingMaskIntoConstraints = false
-  }
-
-  func bind(viewModel: MapViewModel) {
     self.delegate = self
-    viewModel.mapView = self
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
 
   func setupConstraints() {
