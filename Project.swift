@@ -23,7 +23,8 @@ let targets = [
         infoPlist: .extendingDefault(with: infoPlist),
         sources: ["Targets/LiveAMessage/Sources/**"],
         resources: [
-            "Targets/LiveAMessage/Resources/**"
+            "Targets/LiveAMessage/Resources/**",
+            "Targets/LiveAMessage/Assets.xcassets/**"
         ],
         actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [

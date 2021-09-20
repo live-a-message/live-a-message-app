@@ -21,19 +21,23 @@ class MapHeaderView: UIView, ViewCode {
 
     lazy var rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(.add, for: .normal)
-        button.tintColor = Colors.mainRed
+        button.setImage(UIImage(systemName: "plus.rectangle.fill"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.tintColor = Colors.mainRed
         button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         return button
     }()
 
     lazy var leftButton: UIButton = {
         let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.tintColor = Colors.mainRed
-        button.setTitleColor(Colors.mainRed, for: .normal)
+        button.setImage(UIImage(systemName: "envelope.badge.fill"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.tintColor = Colors.mainRed
         button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
-        button.backgroundColor = Colors.mainRed
         return button
     }()
 
