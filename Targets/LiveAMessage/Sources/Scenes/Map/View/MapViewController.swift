@@ -39,6 +39,10 @@ class MapViewController: UIViewController {
 extension MapViewController {
     func addMessage() {
         let controller = AddMessageViewController(viewModel: AddMessageViewModel())
+        self.viewModel.notificateChange()
+        controller.handleDismiss = {
+          self.viewModel.didUpdatedLocation()
+        }
         controller.modalPresentationStyle = .formSheet
         present(controller, animated: true, completion: nil)
     }

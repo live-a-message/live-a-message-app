@@ -25,7 +25,7 @@ class MapHeaderView: UIView, ViewCode {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = Colors.mainRed
+        button.imageView?.tintColor = AKColor.mainRed
         button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         return button
     }()
@@ -36,7 +36,7 @@ class MapHeaderView: UIView, ViewCode {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = Colors.mainRed
+        button.imageView?.tintColor = AKColor.mainRed
         button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
         return button
     }()

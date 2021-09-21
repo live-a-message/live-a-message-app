@@ -22,7 +22,7 @@ class CloseMessageTableViewCell: UITableViewCell {
 
     func setup(viewModel: CloseMessageCellViewModel) {
         self.selectionStyle = .none
-        self.tintColor = Colors.mainRed
+        self.tintColor = AKColor.mainRed
         self.imageView?.image = UIImage(systemName: "envelope")
         self.imageView?.layer.cornerRadius = 8
         self.imageView?.clipsToBounds = true

@@ -7,13 +7,18 @@
 //
 
 import Foundation
-
+import CoreLocation
 public struct Location: Codable {
-    public let lat: String
-    public let lon: String
+    public let lat: Double
+    public let lon: Double
 
-    public init(lat: String, lon: String) {
+    public init(lat: Double, lon: Double) {
         self.lat = lat
         self.lon = lon
     }
+
+  public init(from coordinate: CLLocationCoordinate2D) {
+    self.lat = coordinate.latitude
+    self.lon = coordinate.longitude
+  }
 }

@@ -21,7 +21,7 @@ class CloseMessagesView: UIView {
     lazy var closeButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem()
         barButtonItem.image = UIImage(systemName: "xmark")
-        barButtonItem.tintColor = Colors.mainRed
+        barButtonItem.tintColor = AKColor.mainRed
         return barButtonItem
     }()
 

@@ -10,18 +10,19 @@ import UIKit
 
 class AddMessageViewController: UIViewController {
 
-    private weak var viewModel: AddMessageViewModelProtocol?
+    var handleDismiss : (() -> Void)?
+    private let viewModel: AddMessageViewModelProtocol
     private lazy var messageView = AddMessageView()
 
     init(viewModel: AddMessageViewModelProtocol) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
-  
+
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)
@@ -39,11 +40,13 @@ class AddMessageViewController: UIViewController {
     }
 
     private func save(_ message: String) {
-        viewModel?.saveMessage(
+        viewModel.saveMessage(
             with: message,
             image: ""
         )
-        dismiss(animated: true, completion: nil)
+      dismiss(animated: true) {
+        self.handleDismiss?()
+      }
     }
 
     private func setKeyboardObserver() {
