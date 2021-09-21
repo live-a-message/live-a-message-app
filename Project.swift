@@ -7,10 +7,12 @@ let infoPlist: [String: InfoPlist.Value] = [
     "CFBundleDocumentTypes": [
         [
             "CFBundleTypeName": "MKDirectionsRequest",
+            "LSHandlerRank": "Alternate",
             "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
         ]
     ],
-  "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location"
+    "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location",
+    "LSSupportsOpeningDocumentsInPlace": "YES"
 ]
 
 let targets = [
