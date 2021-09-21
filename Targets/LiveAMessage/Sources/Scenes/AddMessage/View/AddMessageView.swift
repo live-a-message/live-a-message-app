@@ -8,7 +8,6 @@
 
 import UIKit
 import DesignSystem
-import TinyConstraints
 
 class AddMessageView: UIView, ViewCode {
     var cancelAction: (() -> Void)?

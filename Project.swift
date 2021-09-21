@@ -67,6 +67,9 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
+        resources: [
+            "Targets/DesignSystem/Resources/Assets.xcassets/**"
+        ],
         dependencies: [
             .package(product: "TinyConstraints")
         ]
