@@ -15,10 +15,10 @@ let infoPlist: [String: InfoPlist.Value] = [
 
 let targets = [
     Target(
-        name: "LiveAMessage",
+        name: "Akee",
         platform: .iOS,
         product: .app,
-        bundleId: "io.tuist.LiveAMessage",
+        bundleId: "io.tuist.Akee",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: infoPlist),
         sources: ["Targets/LiveAMessage/Sources/**"],
@@ -32,10 +32,10 @@ let targets = [
         ]
     ),
     Target(
-        name: "LiveAMessageTests",
+        name: "AkeeTests",
         platform: .iOS,
         product: .unitTests,
-        bundleId: "io.tuist.LiveAMessageTests",
+        bundleId: "io.tuist.AkeeTests",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
@@ -77,8 +77,8 @@ let packages: [Package] = [
 ]
 
 let project = Project(
-    name: "LiveAMessage",
-    organizationName: "LiveAMessage",
+    name: "Akee",
+    organizationName: "Akee",
     packages: packages,
     targets: targets
 )
