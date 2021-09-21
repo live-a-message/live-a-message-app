@@ -22,7 +22,8 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 
   var currentLocation = CLLocation() {
     didSet {
-      didUpdatedLocation(for: self.currentLocation)
+      didUpdatedLocation()
+      notificateChange()
     }
   }
   weak var mapView: MapView?
@@ -48,16 +49,21 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     }
   }
 
-  func didUpdatedLocation(for location: CLLocation) {
+  func didUpdatedLocation() {
     self.getMessages()
     self.messages.forEach {
       let location = $0.location
       let anotation = MKPointAnnotation()
-      anotation.coordinate.latitude = Double(location.lat) ?? 0
-      anotation.coordinate.longitude = Double(location.lon) ?? 0
+      anotation.coordinate.latitude = location.lat
+      anotation.coordinate.longitude = location.lon
       self.mapView?.addAnnotation(anotation)
     }
   }
+
+  func notificateChange() {
+    NotificationCenter.default.post(name: .updateLocation, object: self.currentLocation)
+  }
+
 }
 
 extension MapViewModel: CLLocationManagerDelegate {
@@ -68,6 +74,7 @@ extension MapViewModel: CLLocationManagerDelegate {
             latitudinalMeters: 1000,
             longitudinalMeters: 1000)
       self.mapView?.setRegion(coordinateRegion, animated: true)
+      print(location.coordinate)
       self.currentLocation = location
     }}
 

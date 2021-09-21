@@ -25,7 +25,7 @@ class MapHeaderView: UIView, ViewCode {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = Colors.mainRed
+        button.imageView?.tintColor = AKColor.mainRed
         button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         return button
     }()
@@ -36,7 +36,7 @@ class MapHeaderView: UIView, ViewCode {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = Colors.mainRed
+        button.imageView?.tintColor = AKColor.mainRed
         button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
         return button
     }()
@@ -59,14 +59,16 @@ class MapHeaderView: UIView, ViewCode {
         rightButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
         rightButton.right(to: self, offset: -ButtonInsets.border.rawValue)
         rightButton.width(ButtonInsets.width.rawValue)
+        rightButton.height(ButtonInsets.width.rawValue)
         rightButton.aspectRatio(1)
 
         leftButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
         leftButton.left(to: self, offset: ButtonInsets.border.rawValue)
         leftButton.width(ButtonInsets.width.rawValue)
+        leftButton.height(ButtonInsets.width.rawValue)
         leftButton.aspectRatio(1)
 
-        height(64)
+        height(100)
         edgesToSuperview(excluding: .bottom)
     }
 

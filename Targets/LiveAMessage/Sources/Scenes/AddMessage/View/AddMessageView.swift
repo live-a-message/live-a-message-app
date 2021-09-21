@@ -17,7 +17,7 @@ class AddMessageView: UIView, ViewCode {
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(Colors.mainRed, for: .normal)
+        button.setTitleColor(AKColor.mainRed, for: .normal)
         button.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         return button
     }()
@@ -25,7 +25,7 @@ class AddMessageView: UIView, ViewCode {
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Post", for: .normal)
-        button.setTitleColor(Colors.mainRed, for: .normal)
+        button.setTitleColor(AKColor.mainRed, for: .normal)
         button.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
         return button
     }()

@@ -12,7 +12,7 @@ public class LocalMessageService: MessageService {
     public init() {}
 
     // MARK: Public Interface
-    public func fetchMessages(location: Location = Location(lat: "", lon: ""), radius: Double = 0, completion: ((Result<[Message], MessageServiceError>) -> Void)) {
+    public func fetchMessages(location: Location = Location(lat: 0, lon: 0), radius: Double = 0, completion: ((Result<[Message], MessageServiceError>) -> Void)) {
         guard let jsonData = try? Data(contentsOf: getFilePath()) else {
             completion(.success([]))
             return

@@ -39,7 +39,7 @@ class CloseMessagesViewController: UIViewController {
     private func setupCloseAction() {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.barTintColor = .systemBackground
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.leftBarButtonItem = mainView.closeButton
         mainView.closeButton.target = self

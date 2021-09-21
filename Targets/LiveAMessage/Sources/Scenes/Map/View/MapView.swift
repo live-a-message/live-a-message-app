@@ -25,14 +25,10 @@ class MapView: MKMapView {
   func configure() {
     self.isZoomEnabled = true
     self.isZoomEnabled = true
-    self.tintColor = Colors.mainRed
+    self.tintColor = AKColor.mainRed
     self.showsUserLocation = true
-    self.translatesAutoresizingMaskIntoConstraints = false
-  }
-
-  func bind(viewModel: MapViewModel) {
     self.delegate = self
-    viewModel.mapView = self
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
 
   func setupConstraints() {
@@ -43,7 +39,7 @@ class MapView: MKMapView {
 extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
-        circleRenderer.fillColor = Colors.mainRed
+        circleRenderer.fillColor = AKColor.mainRed
         circleRenderer.alpha = 0.08
         return circleRenderer
     }
