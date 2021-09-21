@@ -44,7 +44,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
       case .success(let messages):
         self.messages = messages
       case .failure(let error):
-        print(error.localizedDescription)
+        NSLog(error.localizedDescription, "error")
       }
     }
   }
@@ -67,18 +67,18 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 }
 
 extension MapViewModel: CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    if let location = locations.first {
-      let coordinateRegion = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: 1000,
-            longitudinalMeters: 1000)
-      self.mapView?.setRegion(coordinateRegion, animated: true)
-      print(location.coordinate)
-      self.currentLocation = location
-    }}
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let coordinateRegion = MKCoordinateRegion(
+                center: location.coordinate,
+                latitudinalMeters: 1000,
+                longitudinalMeters: 1000)
+            self.mapView?.setRegion(coordinateRegion, animated: true)
+            self.currentLocation = location
+        }
+    }
 
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print(error.localizedDescription)
-  }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+    }
 }

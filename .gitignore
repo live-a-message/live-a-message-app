@@ -131,8 +131,8 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-LiveAMessage.xcodeproj/
-LiveAMessage.xcworkspace/
+*.xcodeproj/
+*.xcworkspace/
 Derived/InfoPlists/DesignSystem.plist
 Derived/InfoPlists/LiveAMessage.plist
 Derived/InfoPlists/Networking.plist
