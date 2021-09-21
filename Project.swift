@@ -7,10 +7,12 @@ let infoPlist: [String: InfoPlist.Value] = [
     "CFBundleDocumentTypes": [
         [
             "CFBundleTypeName": "MKDirectionsRequest",
+            "LSHandlerRank": "Alternate",
             "LSItemContentTypes": ["com.apple.maps.directionsrequest"]
         ]
     ],
-  "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location"
+    "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location",
+    "LSSupportsOpeningDocumentsInPlace": "YES"
 ]
 
 let targets = [
@@ -18,7 +20,7 @@ let targets = [
         name: "Akee",
         platform: .iOS,
         product: .app,
-        bundleId: "com.Akee.AkeeApp",
+        bundleId: "com.Akee.Akee",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: infoPlist),
         sources: ["Targets/LiveAMessage/Sources/**"],
@@ -37,7 +39,7 @@ let targets = [
         name: "AkeeTests",
         platform: .iOS,
         product: .unitTests,
-        bundleId: "io.tuist.AkeeTests",
+        bundleId: "com.Akee.AkeeTests",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
@@ -49,7 +51,7 @@ let targets = [
         name: "Networking",
         platform: .iOS,
         product: .framework,
-        bundleId: "io.tuist.Networking",
+        bundleId: "com.Akee.Networking",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/Networking/**"],
@@ -61,7 +63,7 @@ let targets = [
         name: "DesignSystem",
         platform: .iOS,
         product: .framework,
-        bundleId: "io.tuist.DesignSystem",
+        bundleId: "com.Akee.DesignSystem",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
