@@ -18,7 +18,7 @@ let targets = [
         name: "Akee",
         platform: .iOS,
         product: .app,
-        bundleId: "io.tuist.Akee",
+        bundleId: "com.Akee.AkeeApp",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: infoPlist),
         sources: ["Targets/LiveAMessage/Sources/**"],
@@ -28,7 +28,9 @@ let targets = [
         ],
         actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
-            .package(product: "TinyConstraints")
+            .package(product: "TinyConstraints"),
+            .target(name: "Networking"),
+            .target(name: "DesignSystem")
         ]
     ),
     Target(

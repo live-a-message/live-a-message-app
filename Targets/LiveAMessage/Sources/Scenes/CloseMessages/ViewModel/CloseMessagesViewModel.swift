@@ -44,7 +44,6 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
         var section = [CloseMessageCellViewModel]()
         messages.forEach { section.append(CloseMessageCellViewModel(message: $0)) }
         sectionTitles.append(title)
-        print(title)
         sections.append(section)
     }
 
