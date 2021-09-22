@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TinyConstraints
 
 public class AKButton: UIButton {
 
@@ -21,8 +20,8 @@ public class AKButton: UIButton {
     }
 
     func setup(with style: AKButtonParamater = AKButtonStyle.default, icon: ButtonIcon?) {
-        if let height = style.height { self.height(height) }
-        if let width = style.width { self.width(width) }
+        if let height = style.height { self.heightAnchor.constraint(equalToConstant: height).isActive = true }
+        if let width = style.width {  self.widthAnchor.constraint(equalToConstant: width).isActive = true }
         self.backgroundColor    = style.backgroundColor
         self.titleLabel?.font   = style.font
         self.alpha              = style.alpha
