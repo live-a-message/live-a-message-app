@@ -6,7 +6,7 @@
 //  Copyright © 2021 LiveAMessage. All rights reserved.
 //
 
-@testable import LiveAMessage
+@testable import Akee
 import XCTest
 import Networking
 
@@ -38,7 +38,7 @@ extension CloseMessageViewModelTests {
                 userId: nil,
                 content: "",
                 image: nil,
-                location: Location(lat: "", lon: "")
+                location: Location(lat: .zero, lon: .zero)
             )
             message.status = $0
             return message

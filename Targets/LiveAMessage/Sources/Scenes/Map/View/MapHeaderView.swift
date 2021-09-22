@@ -9,34 +9,19 @@
 import UIKit
 import DesignSystem
 
-enum ButtonInsets: CGFloat {
-    case border = 16
-    case width = 36
-}
-
 class MapHeaderView: UIView, ViewCode {
 
     var rightButtonAction: (() -> Void)?
     var leftButtonAction: (() -> Void)?
 
-    lazy var rightButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "plus.rectangle.fill"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = AKColor.mainRed
+    lazy var rightButton: AKButton = {
+        let button = AKButton(style: AKButtonStyle.icon32, icon: ButtonIcon(normal: .add))
         button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         return button
     }()
 
-    lazy var leftButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "envelope.badge.fill"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = AKColor.mainRed
+    lazy var leftButton: AKButton = {
+        let button = AKButton(style: AKButtonStyle.icon32, icon: ButtonIcon(normal: .envelope))
         button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
         return button
     }()
@@ -56,20 +41,15 @@ class MapHeaderView: UIView, ViewCode {
     }
 
     func setupConstraints() {
-        rightButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
-        rightButton.right(to: self, offset: -ButtonInsets.border.rawValue)
-        rightButton.width(ButtonInsets.width.rawValue)
-        rightButton.height(ButtonInsets.width.rawValue)
-        rightButton.aspectRatio(1)
+        rightButton.topToSuperview(offset: AKSpacing.small.value)
+        rightButton.bottomToSuperview(offset: -AKSpacing.small.value)
+        rightButton.rightToSuperview(offset: -AKSpacing.small.value)
 
-        leftButton.topToSuperview(offset: ButtonInsets.border.rawValue, usingSafeArea: true)
-        leftButton.left(to: self, offset: ButtonInsets.border.rawValue)
-        leftButton.width(ButtonInsets.width.rawValue)
-        leftButton.height(ButtonInsets.width.rawValue)
-        leftButton.aspectRatio(1)
+        leftButton.topToSuperview(offset: AKSpacing.small.value)
+        leftButton.bottomToSuperview(offset: -AKSpacing.small.value)
+        leftButton.leftToSuperview(offset: AKSpacing.small.value)
 
-        height(100)
-        edgesToSuperview(excluding: .bottom)
+        edgesToSuperview(excluding: .bottom, usingSafeArea: true)
     }
 
     func configureViews() {

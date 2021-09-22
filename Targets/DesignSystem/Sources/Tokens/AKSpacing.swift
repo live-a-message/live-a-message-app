@@ -14,14 +14,23 @@ public struct AKSpacing: Equatable {
 
     public let value: CGFloat
 
+    /// value: 4.00
     public static let xxxSmall = AKSpacing(value: Value.xxxSmall.rawValue)
+    /// value: 8.00
     public static let xxSmall  = AKSpacing(value: Value.xxSmall.rawValue)
+    /// value: 12.00
     public static let xSmall   = AKSpacing(value: Value.xSmall.rawValue)
+    /// value: 16.00
     public static let small    = AKSpacing(value: Value.large.rawValue)
+    /// value: 24.00
     public static let medium   = AKSpacing(value: Value.medium.rawValue)
+    /// value: 32.00
     public static let large    = AKSpacing(value: Value.large.rawValue)
+    /// value: 40.00
     public static let xLarge   = AKSpacing(value: Value.xLarge.rawValue)
+    /// value: 48.00
     public static let xxLarge  = AKSpacing(value: Value.xxLarge.rawValue)
+    /// value: 64.00
     public static let xxxLarge = AKSpacing(value: Value.xxxLarge.rawValue)
 
     private enum Value: CGFloat, CaseIterable {

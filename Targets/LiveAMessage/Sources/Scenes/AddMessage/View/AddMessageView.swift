@@ -8,7 +8,6 @@
 
 import UIKit
 import DesignSystem
-import TinyConstraints
 
 class AddMessageView: UIView, ViewCode {
     var cancelAction: (() -> Void)?
@@ -53,12 +52,12 @@ class AddMessageView: UIView, ViewCode {
     }
 
     func setupConstraints() {
-        cancelButton.top(to: self, offset: 24)
-        cancelButton.left(to: self, offset: 24)
-        saveButton.top(to: self, offset: 24)
-        saveButton.right(to: self, offset: -24)
-        textView.edgesToSuperview(excluding: .top, insets: .horizontal(16))
-        textView.topToBottom(of: cancelButton, offset: 16)
+        cancelButton.top(to: self, offset: AKSpacing.medium.value)
+        cancelButton.left(to: self, offset: AKSpacing.medium.value)
+        saveButton.top(to: self, offset: AKSpacing.medium.value)
+        saveButton.right(to: self, offset: -AKSpacing.medium.value)
+        textView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
+        textView.topToBottom(of: cancelButton, offset: AKSpacing.small.value)
     }
 
     func configureViews() {

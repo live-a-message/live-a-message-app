@@ -43,9 +43,7 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
-        dependencies: [
-            .package(product: "TinyConstraints")
-        ]
+        dependencies: [ ]
     ),
     Target(
         name: "Networking",
@@ -67,9 +65,10 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
-        dependencies: [
-            .package(product: "TinyConstraints")
-        ]
+        resources: [
+            "Targets/DesignSystem/Resources/Assets.xcassets/**"
+        ],
+        dependencies: [ ]
     )
 ]
 
