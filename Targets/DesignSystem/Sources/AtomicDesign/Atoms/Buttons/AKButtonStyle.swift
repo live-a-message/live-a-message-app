@@ -22,7 +22,7 @@ public struct AKButtonStyle {
 
     public static let icon32 = AKButtonParamater(
         height: 32.0,
-        width: 36.0,
+        width: 40.0,
         clipToBounds: true
     )
 }
