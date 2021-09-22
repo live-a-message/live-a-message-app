@@ -27,3 +27,18 @@ extension UIButton {
         self.setBackgroundImage(image(withColor: color), for: state)
     }
 }
+
+
+extension UIButton {
+
+    func setIcon(imageIcon: ButtonIcon) {
+        if let highlighted = imageIcon.highlighted?.rawValue {
+            self.setImage(UIImage(systemName: highlighted), for: .highlighted)
+        }
+        if let normal = imageIcon.normal?.rawValue {
+            self.setImage(UIImage(systemName: normal), for: .normal)
+
+        }
+    }
+    
+}
