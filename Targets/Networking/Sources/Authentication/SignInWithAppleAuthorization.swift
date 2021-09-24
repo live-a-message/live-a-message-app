@@ -22,7 +22,7 @@ public class SignInWithAppleAuthorization: NSObject, AutheticationService {
 extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
 
     public func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+                                        didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as?
             ASAuthorizationAppleIDCredential {
             let identifier = appleIDCredential.user

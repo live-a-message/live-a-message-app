@@ -98,11 +98,11 @@ public class AKScrollViewContainer: UIView {
         }
     }
 
-    func addArrangedSubview(_ view: UIView) {
+    public func addArrangedSubview(_ view: UIView) {
         self.stackView.addArrangedSubview(view)
     }
 
-    func setCustomSpacing(_ spacing: CGFloat, after view: UIView) {
+    public func setCustomSpacing(_ spacing: CGFloat, after view: UIView) {
         self.stackView.setCustomSpacing(spacing, after: view)
     }
 
