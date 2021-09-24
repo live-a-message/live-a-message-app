@@ -70,8 +70,6 @@ class AddMessageView: UIView, ViewCode {
 
     func setKeyboardView(height: CGFloat) {
         textView.bottom(to: self, offset: -height)
-        
-        AKLabel(style: AKLabelStyle.body1)
     }
 
     @objc func saveButtonAction() {
