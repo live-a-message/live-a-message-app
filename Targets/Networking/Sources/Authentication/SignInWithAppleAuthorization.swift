@@ -8,8 +8,8 @@
 
 import AuthenticationServices
 
-class SignInWithAppleAuthorization: NSObject, AutheticationService {
-    func authenticate() {
+public class SignInWithAppleAuthorization: NSObject, AutheticationService {
+    public func authenticate() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -21,19 +21,20 @@ class SignInWithAppleAuthorization: NSObject, AutheticationService {
 
 extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
 
-    func authorizationController(controller: ASAuthorizationController,
+    public func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as?
             ASAuthorizationAppleIDCredential {
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
+            let identifier = appleIDCredential.user
+            let name = appleIDCredential.fullName?.givenName
             let email = appleIDCredential.email
-            print("User id is \(userIdentifier) \n Full Name is \(String(describing: fullName)) \n Email id is \(String(describing: email))")
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(name, forKey: "firstName")
+            UserDefaults.standard.set(identifier, forKey: "identifier")
         }
     }
 
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithError error: Error) {
-        print(error)
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error.localizedDescription)
     }
 }

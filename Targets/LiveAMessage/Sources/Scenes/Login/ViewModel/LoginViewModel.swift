@@ -6,7 +6,7 @@
 //  Copyright © 2021 Akee. All rights reserved.
 //
 
-import AuthenticationServices
+import Networking
 
 protocol LoginViewModelProtocol {
     func authenticate()

@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AutheticationService: NSObject {
+public protocol AutheticationService: NSObject {
     func authenticate()
 }
