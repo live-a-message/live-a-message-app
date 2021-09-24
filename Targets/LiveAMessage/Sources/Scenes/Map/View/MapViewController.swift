@@ -15,6 +15,8 @@ class MapViewController: UIViewController {
 
     let mainView = MainMapView()
 
+    weak var coordinator: Coordinator?
+
     override func viewDidLoad() {
         view.backgroundColor = .white
         self.mainView.bind(viewModel: viewModel)
@@ -38,22 +40,10 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     func addMessage() {
-        let controller = AddMessageViewController(viewModel: AddMessageViewModel())
-        self.viewModel.notificateChange()
-        controller.handleDismiss = {
-          self.viewModel.didUpdatedLocation()
-        }
-        controller.modalPresentationStyle = .formSheet
-        present(controller, animated: true, completion: nil)
+        coordinator?.showAddMessage()
     }
 
     func showCloseMessages() {
-        let closeMessagesViewModel = CloseMessagesViewModel(messages: viewModel.messages)
-
-        let controller = CloseMessagesViewController(viewModel: closeMessagesViewModel)
-        let navController = UINavigationController(rootViewController: controller)
-
-        navController.modalPresentationStyle = .overFullScreen
-        present(navController, animated: true)
+        coordinator?.showCloseMessages()
     }
 }

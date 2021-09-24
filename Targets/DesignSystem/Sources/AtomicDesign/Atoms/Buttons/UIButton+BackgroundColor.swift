@@ -28,7 +28,6 @@ extension UIButton {
     }
 }
 
-
 extension UIButton {
 
     func setIcon(imageIcon: ButtonIcon) {
@@ -40,5 +39,4 @@ extension UIButton {
 
         }
     }
-    
 }

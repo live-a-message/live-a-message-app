@@ -10,9 +10,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = MapViewController()
-        viewController.view.backgroundColor = .white
-        window?.rootViewController = viewController
+        let coordinator = MainCoordinator()
+        coordinator.start()
+        window?.rootViewController = coordinator.rootViewController
         window?.makeKeyAndVisible()
 
         return true
