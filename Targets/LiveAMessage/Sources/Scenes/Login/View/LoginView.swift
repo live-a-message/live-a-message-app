@@ -15,27 +15,17 @@ class LoginView: UIView, ViewCode {
 
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "map_dark")
+        imageView.image = AkeeAsset.mapDark.image
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.adjustsFontForContentSizeCategory = true
-        return label
+    lazy var titleLabel: AKLabel = {
+        AKLabel(style: AKLabelStyle.title1)
     }()
 
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .body)
-        label.adjustsFontForContentSizeCategory = true
-        return label
+    lazy var descriptionLabel: AKLabel = {
+        AKLabel(style: AKLabelStyle.body1)
     }()
 
     lazy var authButton: ASAuthorizationAppleIDButton = {
@@ -52,7 +42,7 @@ class LoginView: UIView, ViewCode {
         container.stackView.layoutMargins = UIEdgeInsets(
             top: AKSpacing.xxxLarge.value,
             left: AKSpacing.medium.value,
-            bottom: AKSpacing.xxxLarge.value,
+            bottom: AKSpacing.xxxLarge.value * 2,
             right: AKSpacing.medium.value
         )
         return container
