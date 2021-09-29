@@ -8,30 +8,30 @@
 
 import UIKit
 
-struct AKLabelStyle {
-    static let body1 = AKLabelParamater(
+public struct AKLabelStyle {
+    static public let body1 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .body),
         textSize: .body,
         fontColor: .black
     )
-    static let title1 = AKLabelParamater(
+    static public let title1 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title1),
         textSize: .title1,
         fontColor: .black
     )
-    static let title2 = AKLabelParamater(
+    static public let title2 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title2),
         textSize: .title2,
         fontColor: .black
     )
-    static let title3 = AKLabelParamater(
+    static public let title3 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title3),
         textSize: .title3,
         fontColor: .black
     )
 }
 
-struct AKLabelParamater {
+public struct AKLabelParamater {
     var font: UIFont?
     var textSize: AKFontSize
     var numberOfLines: Int = 0

@@ -9,18 +9,18 @@
 import UIKit
 
 /// Structs where you can add reusable spacing pattern
-/// Example: AKFontSize.body.value will add your font size
+/// Example: ```AKFontSize.body.value // will add your font size```
 public struct AKFontSize: Equatable {
 
     public let value: CGFloat
 
-    /// value: 16.0
+    /// value: 17.00
     public static let body = AKFontSize(value: Value.body.rawValue)
-    /// value: 24.0
+    /// value: 28.00
     public static let title1 = AKFontSize(value: Value.title1.rawValue)
-    /// value: 12.00
+    /// value: 22.00
     public static let title2 = AKFontSize(value: Value.title2.rawValue)
-    /// value: 16.00
+    /// value: 20.00
     public static let title3 = AKFontSize(value: Value.title3.rawValue)
 
     private enum Value: CGFloat, CaseIterable {
