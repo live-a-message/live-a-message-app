@@ -11,7 +11,7 @@ import UIKit
 import Networking
 
 protocol Coordinator: AnyObject {
-    func start()
+    func start(window: UIWindow?)
     func showLogin()
     func showLogout()
     func showMap()
@@ -20,28 +20,43 @@ protocol Coordinator: AnyObject {
 }
 
 class MainCoordinator: Coordinator {
-    let authService = SignInWithAppleAuthorization()
+    private let authService = SignInWithAppleAuthorization()
+    private let messagesService = CloudKitMessagesService()
 
-    lazy var mapViewController = MapViewController()
+    private let mapViewController: MapViewController
+    private let loginViewController: LoginViewController
+    private let rootViewController: UINavigationController
 
-    lazy var loginViewController: LoginViewController = {
+    private var window: UIWindow?
+
+    init() {
         let viewModel = LoginViewModel(service: authService)
-        return LoginViewController(viewModel: viewModel)
-    }()
 
-    var rootViewController: UIViewController?
+        rootViewController = UINavigationController()
+        loginViewController = LoginViewController(viewModel: viewModel)
+        mapViewController = MapViewController()
 
-    func start() {
+        configureControllers()
+    }
+
+    private func configureControllers() {
+        rootViewController.navigationBar.isHidden = true
+        mapViewController.coordinator = self
+    }
+
+    func start(window: UIWindow?) {
+        self.window = window
         if isUserLoggedIn() {
-            rootViewController = mapViewController
-            mapViewController.coordinator = self
+            rootViewController.setViewControllers([mapViewController], animated: false)
         } else {
-            // show login
+            rootViewController.setViewControllers([loginViewController], animated: false)
         }
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
     }
 
     func showLogin() {
-
+        rootViewController.setViewControllers([loginViewController], animated: true)
     }
 
     func showLogout() {
@@ -49,13 +64,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showMap() {
-        if let rootViewController = rootViewController as? MapViewController {
-            rootViewController.dismiss(animated: true)
-        }
-
-//        if let rootViewController = rootViewController as? SignInViewController {
-//            rootViewController = MapViewController()
-//        }
+        rootViewController.setViewControllers([mapViewController], animated: true)
     }
 
     func showCloseMessages() {
@@ -65,7 +74,7 @@ class MainCoordinator: Coordinator {
         let navController = UINavigationController(rootViewController: controller)
 
         navController.modalPresentationStyle = .overFullScreen
-        mapViewController.present(navController, animated: true)
+        rootViewController.present(navController, animated: true)
     }
 
     func showAddMessage() {
@@ -75,11 +84,10 @@ class MainCoordinator: Coordinator {
             self.mapViewController.viewModel.didUpdatedLocation()
         }
         controller.modalPresentationStyle = .formSheet
-        mapViewController.present(controller, animated: true)
+        rootViewController.present(controller, animated: true)
     }
 
     private func isUserLoggedIn() -> Bool {
-        
         return true
     }
 }

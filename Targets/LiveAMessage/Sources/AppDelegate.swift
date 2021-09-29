@@ -3,6 +3,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let coordinator = MainCoordinator()
     var window: UIWindow?
 
     func application(
@@ -10,10 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let coordinator = MainCoordinator()
-        coordinator.start()
-        window?.rootViewController = coordinator.rootViewController
-        window?.makeKeyAndVisible()
+        coordinator.start(window: window)
 
         return true
     }
