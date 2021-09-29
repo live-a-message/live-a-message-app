@@ -15,19 +15,19 @@ public protocol MessageService: AnyObject {
     ///     - location: the current location of the user
     ///     - radius: the search radius
     ///     - completion: the result of fetching messages
-    func fetchMessages(location: Location, radius: Double, completion: ((Result<[Message], MessageServiceError>) -> Void))
+    func fetchMessages(location: Location, radius: Double, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void))
 
     /// Adds a message to the given location.
     /// - Parameters:
     ///     - message: message to be saved
     ///     - completion: the result of saving a message
-    func addMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void))
+    func addMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void))
 
     /// Removes a message from the database.
     /// - Parameters:
     ///     - message: message to be deleted
     ///     - completion: the result of deleting a message
-    func deleteMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void))
+    func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void))
 }
 
 public enum MessageServiceError: Error {

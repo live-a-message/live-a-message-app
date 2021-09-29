@@ -12,7 +12,7 @@ public class LocalMessageService: MessageService {
     public init() {}
 
     // MARK: Public Interface
-    public func fetchMessages(location: Location = Location(lat: 0, lon: 0), radius: Double = 0, completion: ((Result<[Message], MessageServiceError>) -> Void)) {
+    public func fetchMessages(location: Location = Location(lat: 0, lon: 0), radius: Double = 0, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
         guard let jsonData = try? Data(contentsOf: getFilePath()) else {
             completion(.success([]))
             return
@@ -26,13 +26,13 @@ public class LocalMessageService: MessageService {
         completion(.success(messageArray))
     }
 
-    public func addMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)) {
+    public func addMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
         if FileManager.default.fileExists(atPath: getFilePath().path) {
             fetchMessages { result in
                 switch result {
                 case .success(var messages):
                     messages.append(message)
-                    writeMessageArrayToFile(messages, completion: completion)
+                    self.writeMessageArrayToFile(messages, completion: completion)
                 case .failure(_):
                     completion(.failure(.failedToRead))
                 }
@@ -42,12 +42,12 @@ public class LocalMessageService: MessageService {
         }
     }
 
-    public func deleteMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)) {
+    public func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
         fetchMessages { result in
             switch result {
             case .success(var messages):
                 messages.removeAll(where: { $0.id == message.id })
-                writeMessageArrayToFile(messages, completion: completion)
+                self.writeMessageArrayToFile(messages, completion: completion)
             case .failure(_):
                 completion(.failure(.failedToRead))
             }

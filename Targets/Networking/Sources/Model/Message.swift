@@ -17,12 +17,12 @@ public struct Message: Codable, Equatable {
     public var content: String
     public var image: String?
 
-    public init(userId: String?, content: String, image: String?, location: Location) {
+    public init(id: String = UUID().uuidString, userId: String?, content: String, image: String?, location: Location) {
         self.userId = userId
         self.content = content
         self.image = image
         self.location = location
-        self.id = UUID().uuidString
+        self.id = id
         self.status = .unread
     }
 
