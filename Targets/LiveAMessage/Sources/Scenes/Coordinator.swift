@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Networking
 
 protocol Coordinator: AnyObject {
     func start()
@@ -19,7 +20,15 @@ protocol Coordinator: AnyObject {
 }
 
 class MainCoordinator: Coordinator {
-    let mapViewController = MapViewController()
+    let authService = SignInWithAppleAuthorization()
+
+    lazy var mapViewController = MapViewController()
+
+    lazy var loginViewController: LoginViewController = {
+        let viewModel = LoginViewModel(service: authService)
+        return LoginViewController(viewModel: viewModel)
+    }()
+
     var rootViewController: UIViewController?
 
     func start() {
@@ -70,8 +79,7 @@ class MainCoordinator: Coordinator {
     }
 
     private func isUserLoggedIn() -> Bool {
-        // check for loggedIn status in keychain maybe.
-        // for now the user is always logged in
+        
         return true
     }
 }
