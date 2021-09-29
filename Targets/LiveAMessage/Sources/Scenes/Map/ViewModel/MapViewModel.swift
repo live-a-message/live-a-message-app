@@ -27,7 +27,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     }
   }
   weak var mapView: MapView?
-  let localService = LocalMessageService()
+  let localService = CloudKitMessagesService()
   var messages: [Message] = []
   var radius: Double = 300
 

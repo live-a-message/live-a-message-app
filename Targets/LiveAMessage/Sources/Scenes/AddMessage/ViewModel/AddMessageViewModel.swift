@@ -19,7 +19,7 @@ protocol AddMessageViewModelProtocol: AnyObject {
 }
 
 class AddMessageViewModel: AddMessageViewModelProtocol {
-    var messageService: MessageService = LocalMessageService()
+    var messageService: MessageService = CloudKitMessagesService()
     var currentLocation: CLLocation?
 
     func saveMessage(

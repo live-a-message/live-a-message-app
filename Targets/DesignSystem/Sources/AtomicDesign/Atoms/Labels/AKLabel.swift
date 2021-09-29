@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AKLabel: UILabel {
+public class AKLabel: UILabel {
 
-    init(style: AKLabelParamater) {
+    public init(style: AKLabelParamater) {
         super.init(frame: .zero)
         setup(style: style)
         setupAcessibility()
@@ -33,4 +33,3 @@ class AKLabel: UILabel {
         self.textAlignment = style.textAlignment
     }
 }
-
