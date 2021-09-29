@@ -13,7 +13,7 @@ public class CloudKitMessagesService: MessageService {
     private let container = CKContainer.default()
     private let recordName = "Messages"
     private let zoneId = CKRecordZone.default().zoneID
-    private lazy var database = container.privateCloudDatabase
+    private lazy var database = container.publicCloudDatabase
 
     public init() {}
 
