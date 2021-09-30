@@ -12,6 +12,7 @@ import Networking
 
 protocol CloseMessagesViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var sections: [[CloseMessageCellViewModel]] { get set }
+    var coordinator: Coordinator? { get set }
     func setupCells(messages: [Message])
 }
 
@@ -19,6 +20,7 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
 
     var sections = [[CloseMessageCellViewModel]]()
     var sectionTitles = [SectionTitle]()
+    weak var coordinator: Coordinator?
 
     init(messages: [Message] = []) {
         super.init()
@@ -67,6 +69,11 @@ extension CloseMessagesViewModel: UITableViewDelegate, UITableViewDataSource {
         ) as? CloseMessageTableViewCell else { return UITableViewCell() }
         cell.setup(viewModel: cellViewModel)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = sections[indexPath.section][indexPath.row].message
+        coordinator?.showMessageDetails(with: message)
     }
 }
 
