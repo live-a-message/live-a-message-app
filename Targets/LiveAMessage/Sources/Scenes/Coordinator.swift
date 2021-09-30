@@ -17,6 +17,7 @@ protocol Coordinator: AnyObject {
     func showMap()
     func showCloseMessages()
     func showAddMessage()
+    func showMessageDetails(with message: Message)
 }
 
 class MainCoordinator: Coordinator {
@@ -26,6 +27,8 @@ class MainCoordinator: Coordinator {
     private let mapViewController: MapViewController
     private let rootViewController: UINavigationController
 
+    
+    private var closeMessagesController: CloseMessagesViewController?
     private var window: UIWindow?
 
     init() {
@@ -68,9 +71,9 @@ class MainCoordinator: Coordinator {
 
     func showCloseMessages() {
         let closeMessagesViewModel = CloseMessagesViewModel(messages: mapViewController.viewModel.messages)
-
-        let controller = CloseMessagesViewController(viewModel: closeMessagesViewModel)
-        let navController = UINavigationController(rootViewController: controller)
+        closeMessagesViewModel.coordinator = self
+        closeMessagesController = CloseMessagesViewController(viewModel: closeMessagesViewModel)
+        let navController = UINavigationController(rootViewController: closeMessagesController!)
 
         navController.modalPresentationStyle = .overFullScreen
         rootViewController.present(navController, animated: true)
@@ -84,6 +87,13 @@ class MainCoordinator: Coordinator {
         }
         controller.modalPresentationStyle = .formSheet
         rootViewController.present(controller, animated: true)
+    }
+    
+    func showMessageDetails(with message: Message) {
+        let detailsMessageViewModel = MessageDetailsViewModel(message: message)
+        let detailsViewController = MessageDetailsViewController(viewModel: detailsMessageViewModel)
+        
+        closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
     }
 
     private func isUserLoggedIn() -> Bool {
