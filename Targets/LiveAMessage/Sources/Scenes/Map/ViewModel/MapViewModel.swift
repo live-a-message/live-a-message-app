@@ -28,7 +28,11 @@ class MapViewModel: NSObject, MapViewModelProtocol {
   }
   weak var mapView: MapView?
   let localService = CloudKitMessagesService()
-  var messages: [Message] = []
+  var messages: [Message] = [] {
+    didSet {
+      addNearPins()
+    }
+  }
   var radius: Double = 300
 
   override init() {
@@ -51,6 +55,10 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 
   func didUpdatedLocation() {
     self.getMessages()
+    addNearPins()
+  }
+
+  func addNearPins() {
     self.messages.forEach {
       let location = $0.location
       let anotation = MKPointAnnotation()
