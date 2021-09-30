@@ -28,7 +28,7 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
     ) {
       guard let coordinate = self.currentLocation?.coordinate else { return }
         let message = Message(
-            userId: "",
+            userId: UserData.shared.id,
             content: content,
             image: image,
           location: Location(from: coordinate)

@@ -24,7 +24,7 @@ public class CloudKitMessagesService: MessageService {
         var messages = [Message]()
 
         operation.recordFetchedBlock = { record in
-            guard let message = self.decode(record: record) else {
+            guard let message = try? CKMessage(record).message else {
                 completion(.failure(.failedToDecode))
                 return
             }
@@ -44,7 +44,7 @@ public class CloudKitMessagesService: MessageService {
     }
 
     public func addMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
-        let record = self.encode(message: message)
+        let record = CKMessage.encode(message)
         database.save(record) { record, error in
             guard error == nil else {
                 completion(.failure(.networkError))
@@ -59,7 +59,7 @@ public class CloudKitMessagesService: MessageService {
     }
 
     public func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
-        let record = encode(message: message)
+        let record = CKMessage.encode(message)
         database.delete(withRecordID: record.recordID) { recordId, error in
             guard error == nil else {
                 completion(.failure(.networkError))
