@@ -7,15 +7,36 @@
 //
 
 import UIKit
+import DesignSystem
 
-class MessageDetailsView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class MessageDetailsView: UIView, ViewCode {
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        return tableView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureViews()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func buildHierarchy() {
+        addSubview(tableView)
+    }
+    
+    func setupConstraints() {
+        tableView.edgesToSuperview()
+    }
+    
+    func configureViews() {
+        buildHierarchy()
+        setupConstraints()
+    }
 }

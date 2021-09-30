@@ -7,18 +7,48 @@
 //
 
 import UIKit
+import DesignSystem
 
-class MessageDetailTableViewCell: UITableViewCell {
+class MessageDetailTableViewCell: UITableViewCell, ViewCode {
+    
+    lazy var titleLabel: AKLabel = {
+        let label = AKLabel(style: AKLabelStyle.title2)
+        label.textAlignment = .left
+        return label
+    }()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    lazy var messageLabel: AKLabel = {
+        let label = AKLabel(style: AKLabelStyle.body1)
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        return label
+    }()
+    
+    func fill(message: String) {
+        configureViews()
+        messageLabel.text = message
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func buildHierarchy() {
+        addSubview(titleLabel)
+        addSubview(messageLabel)
+    }
 
-        // Configure the view for the selected state
+    func setupConstraints() {
+        let corner = AKSpacing.medium.value
+        let top = AKSpacing.xLarge.value
+        titleLabel.top(to: self, offset: corner)
+        titleLabel.left(to: self, offset: corner)
+        titleLabel.right(to: self, offset: -corner)
+        messageLabel.top(to: titleLabel, offset: top)
+        messageLabel.left(to: self, offset: corner)
+        messageLabel.right(to: self, offset: -corner)
+        messageLabel.bottom(to: self, offset: -corner)
+    }
+
+    func configureViews() {
+        buildHierarchy()
+        setupConstraints()
     }
 
 }
