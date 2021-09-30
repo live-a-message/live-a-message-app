@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Networking
 
 class TermsViewController: UIViewController {
 
@@ -22,6 +23,7 @@ class TermsViewController: UIViewController {
     }
 
     @objc func didTapConfirmButton() {
+        UserData.shared.set(value: true, key: .agreeWithTerms)
         dismiss(animated: true)
     }
 }
