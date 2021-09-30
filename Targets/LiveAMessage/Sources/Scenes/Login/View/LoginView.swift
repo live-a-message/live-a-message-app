@@ -50,6 +50,7 @@ class LoginView: UIView, ViewCode {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        self.backgroundColor = .systemBackground
         buildHierarchy()
         setupConstraints()
         configureViews()

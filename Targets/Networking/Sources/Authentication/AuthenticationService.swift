@@ -9,5 +9,6 @@
 import Foundation
 
 public protocol AutheticationService: NSObject {
+    var delegate: SignInWithAppleAuthorizationDelegate? { get set }
     func authenticate()
 }

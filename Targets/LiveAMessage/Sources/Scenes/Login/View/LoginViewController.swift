@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Networking
 
 class LoginViewController: UIViewController {
 
     let mainView = LoginView()
     var viewModel: LoginViewModelProtocol?
+    weak var coordinator: Coordinator?
 
-    init(viewModel: LoginViewModelProtocol) {
+    init(viewModel: LoginViewModelProtocol, coordinator: Coordinator) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -34,5 +37,16 @@ class LoginViewController: UIViewController {
 
     @objc func didTapAuthButton() {
         viewModel?.authenticate()
+    }
+}
+
+extension LoginViewController: SignInWithAppleAuthorizationDelegate {
+
+    func didFinishWithError(_ error: Error) {
+        print(error.localizedDescription)
+    }
+
+    func didFinishFetching() {
+        coordinator?.showMap()
     }
 }

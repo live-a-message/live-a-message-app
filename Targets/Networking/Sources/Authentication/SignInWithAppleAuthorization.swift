@@ -9,9 +9,15 @@
 import AuthenticationServices
 import CloudKit
 
+public protocol SignInWithAppleAuthorizationDelegate: AnyObject {
+    func didFinishFetching()
+    func didFinishWithError(_ error: Error)
+}
+
 public class SignInWithAppleAuthorization: NSObject, AutheticationService {
 
     private let service: UserService
+    weak public var delegate: SignInWithAppleAuthorizationDelegate?
 
     public init(service: UserService = CloudKitUserService()) {
         self.service = service
@@ -44,7 +50,7 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
     }
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print(error.localizedDescription)
+        self.delegate?.didFinishWithError(error)
     }
 
     private func fetch(identifier: String) {
@@ -54,8 +60,9 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
                 UserDefaults.standard.setValue(user.email, forKey: "email")
                 UserDefaults.standard.setValue(user.name, forKey: "name")
                 UserDefaults.standard.setValue(user.id, forKey: "userId")
+                self.delegate?.didFinishFetching()
             case .failure(let error):
-                print(error.localizedDescription)
+                self.delegate?.didFinishWithError(error)
             }
         })
     }
@@ -63,10 +70,10 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
     private func save(user: User) {
         service.save(user: user, completion: { result in
             switch result {
-            case .success(let success):
-                print(success)
+            case .success(_):
+                self.delegate?.didFinishFetching()
             case .failure(let error):
-                print(error.localizedDescription)
+                self.delegate?.didFinishWithError(error)
             }
         })
     }

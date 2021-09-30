@@ -24,16 +24,13 @@ class MainCoordinator: Coordinator {
     private let messagesService = CloudKitMessagesService()
 
     private let mapViewController: MapViewController
-    private let loginViewController: LoginViewController
     private let rootViewController: UINavigationController
 
     private var window: UIWindow?
 
     init() {
-        let viewModel = LoginViewModel(service: authService)
 
         rootViewController = UINavigationController()
-        loginViewController = LoginViewController(viewModel: viewModel)
         mapViewController = MapViewController()
 
         configureControllers()
@@ -49,6 +46,9 @@ class MainCoordinator: Coordinator {
         if isUserLoggedIn() {
             rootViewController.setViewControllers([mapViewController], animated: false)
         } else {
+            let viewModel = LoginViewModel(service: authService)
+            let loginViewController = LoginViewController(viewModel: viewModel, coordinator: self)
+            authService.delegate = loginViewController
             rootViewController.setViewControllers([loginViewController], animated: false)
         }
         window?.rootViewController = rootViewController
@@ -56,7 +56,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showLogin() {
-        rootViewController.setViewControllers([loginViewController], animated: true)
+
     }
 
     func showLogout() {
@@ -88,6 +88,6 @@ class MainCoordinator: Coordinator {
     }
 
     private func isUserLoggedIn() -> Bool {
-        return true
+        return false
     }
 }
