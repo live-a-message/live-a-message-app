@@ -57,9 +57,7 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
         service.fetch(identifier: identifier, completion: { result in
             switch result {
             case .success(let user):
-                UserDefaults.standard.setValue(user.email, forKey: "email")
-                UserDefaults.standard.setValue(user.name, forKey: "name")
-                UserDefaults.standard.setValue(user.id, forKey: "userId")
+                UserData.shared.save(user: user)
                 self.delegate?.didFinishFetching()
             case .failure(let error):
                 self.delegate?.didFinishWithError(error)

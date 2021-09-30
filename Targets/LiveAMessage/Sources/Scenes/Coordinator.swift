@@ -22,7 +22,7 @@ protocol Coordinator: AnyObject {
 class MainCoordinator: Coordinator {
     private let authService = SignInWithAppleAuthorization()
     private let messagesService = CloudKitMessagesService()
-
+    private let loginViewController: LoginViewController
     private let mapViewController: MapViewController
     private let rootViewController: UINavigationController
 
@@ -32,13 +32,15 @@ class MainCoordinator: Coordinator {
 
         rootViewController = UINavigationController()
         mapViewController = MapViewController()
-
+        loginViewController = LoginViewController(viewModel: LoginViewModel(service: authService))
         configureControllers()
     }
 
     private func configureControllers() {
         rootViewController.navigationBar.isHidden = true
         mapViewController.coordinator = self
+        loginViewController.coordinator = self
+        authService.delegate = loginViewController
     }
 
     func start(window: UIWindow?) {
@@ -46,9 +48,6 @@ class MainCoordinator: Coordinator {
         if isUserLoggedIn() {
             rootViewController.setViewControllers([mapViewController], animated: false)
         } else {
-            let viewModel = LoginViewModel(service: authService)
-            let loginViewController = LoginViewController(viewModel: viewModel, coordinator: self)
-            authService.delegate = loginViewController
             rootViewController.setViewControllers([loginViewController], animated: false)
         }
         window?.rootViewController = rootViewController
@@ -88,6 +87,6 @@ class MainCoordinator: Coordinator {
     }
 
     private func isUserLoggedIn() -> Bool {
-        return false
+        return UserData.shared.isLoggedIn
     }
 }

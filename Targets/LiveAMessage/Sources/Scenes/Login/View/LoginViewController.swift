@@ -15,9 +15,8 @@ class LoginViewController: UIViewController {
     var viewModel: LoginViewModelProtocol?
     weak var coordinator: Coordinator?
 
-    init(viewModel: LoginViewModelProtocol, coordinator: Coordinator) {
+    init(viewModel: LoginViewModelProtocol) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
