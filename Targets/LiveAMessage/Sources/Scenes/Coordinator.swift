@@ -46,9 +46,9 @@ class MainCoordinator: Coordinator {
     func start(window: UIWindow?) {
         self.window = window
         if isUserLoggedIn() {
-            rootViewController.setViewControllers([mapViewController], animated: false)
+            rootViewController.setViewControllers([TermsViewController()], animated: false)
         } else {
-            rootViewController.setViewControllers([loginViewController], animated: false)
+            rootViewController.setViewControllers([TermsViewController()], animated: false)
         }
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
