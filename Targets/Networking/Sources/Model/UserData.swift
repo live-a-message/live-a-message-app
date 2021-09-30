@@ -20,7 +20,7 @@ public class UserData {
     public var id: String? {
         defaults.string(forKey: Keys.id.rawValue)
     }
-    
+
     public var name: String? {
         defaults.string(forKey: Keys.name.rawValue)
     }
@@ -42,10 +42,10 @@ public class UserData {
 extension UserData {
 
     enum Keys: String {
-        case isLoggedIn = "isLoggedIn"
-        case email      = "email"
-        case name       = "name"
-        case id         = "id"
+        case isLoggedIn
+        case email
+        case name
+        case id
     }
 
 }
