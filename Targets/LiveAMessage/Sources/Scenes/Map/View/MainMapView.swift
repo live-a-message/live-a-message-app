@@ -7,40 +7,50 @@
 //
 
 import UIKit
+import MapKit
 import DesignSystem
 
 class MainMapView: UIView, ViewCode {
 
-  let mapView = MapView()
+    var didTapPin: ((MKAnnotation?) -> ())? {
+        didSet {
+            mapView.didTapPin = didTapPin
+        }
+    }
 
-  let headerView = MapHeaderView()
+    let mapView = MapView()
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    buildHierarchy()
-    configureViews()
-  }
+    let headerView = MapHeaderView()
 
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        buildHierarchy()
+        configureViews()
+    }
 
-  func buildHierarchy() {
-    self.addSubview(mapView)
-    self.addSubview(headerView)
-  }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-  func setupConstraints() {
-    self.edgesToSuperview()
-  }
+    func buildHierarchy() {
+        self.addSubview(mapView)
+        self.addSubview(headerView)
+    }
 
-  func configureViews() {
-    mapView.setupConstraints()
-    headerView.setupConstraints()
-  }
+    func setupConstraints() {
+        self.edgesToSuperview()
+    }
 
-  func bind(viewModel: MapViewModel) {
-    viewModel.mapView = self.mapView
-  }
+    func configureViews() {
+        mapView.setupConstraints()
+        headerView.setupConstraints()
+    }
 
+    func bind(viewModel: MapViewModel) {
+        viewModel.mapView = self.mapView
+    }
+
+    func didTapPinMessage(_ annotation: MKAnnotation?) {
+        didTapPin?(annotation)
+    }
 }

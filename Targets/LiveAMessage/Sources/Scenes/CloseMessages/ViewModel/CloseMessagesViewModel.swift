@@ -73,7 +73,7 @@ extension CloseMessagesViewModel: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = sections[indexPath.section][indexPath.row].message
-        coordinator?.showMessageDetails(with: message)
+        coordinator?.showMessageDetails(with: message, fromPin: false)
     }
 }
 
