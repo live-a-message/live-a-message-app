@@ -19,12 +19,8 @@ class ReportViewModel {
     }
 
     func reportUser(completion: @escaping ((Bool) -> Void)) {
-        guard let reportedUserId = message.userId,
-              let userId = UserData.shared.id else {
-            print(UserServiceError.userNotFound)
-            completion(false)
-            return
-        }
+        let reportedUserId = message.userId
+        let userId = UserData.shared.id
 
         let report = Report(
             userId: userId,
@@ -44,13 +40,7 @@ class ReportViewModel {
     }
 
     func blockUser(completion: @escaping ((Bool) -> Void)) {
-        guard let userId = message.userId else {
-            print(UserServiceError.userNotFound)
-            completion(false)
-            return
-        }
-
-        service.block(userId: userId) { result in
+        service.block(userId: message.userId) { result in
             switch result {
             case .success:
                 completion(true)

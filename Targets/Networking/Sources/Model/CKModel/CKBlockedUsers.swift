@@ -9,7 +9,7 @@
 import CloudKit
 
 protocol Blockable {
-    var userId: String  { get }
+    var userId: String { get }
     var users: [String] { get }
 }
 
@@ -26,10 +26,10 @@ public class CKBlockedUsers: Blockable {
         self.users = users
     }
 
-    public static func encode(_ report: BlockedUsers) -> CKRecord {
-        let record = CKRecord(recordType: "BlockedUsers")
-        record["userId"] = report.userId
-        record["users"] = report.users
+    public static func encode(_ blocked: BlockedUsers) -> CKRecord {
+        let record = CKRecord(recordType: "BlockedUsers", recordID: CKRecord.ID(recordName: blocked.userId))
+        record["userId"] = blocked.userId
+        record["users"] = blocked.users
         return record
     }
 

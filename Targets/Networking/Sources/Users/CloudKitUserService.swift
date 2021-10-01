@@ -72,12 +72,16 @@ public class CloudKitUserService: UserService {
     }
 
     public func block(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
-        fetchBlockedUsers(userId: userId) { result in
+        fetchBlockedUsers { result in
             switch result {
-            case .success(let blockedUsers):
-                var updatedBlockedUsers = blockedUsers
-                updatedBlockedUsers.users.append(userId)
-                self.saveBlockedUsers(blocked: updatedBlockedUsers) { result in
+            case .success(let record):
+                guard var blockedUsers = try? CKBlockedUsers(record).users else {
+                    completion(.failure(.failedToDecode))
+                    return
+                }
+                blockedUsers.append(userId)
+                record["users"] = blockedUsers
+                self.updateBlockedUsers(record: record) { result in
                     switch result {
                     case .success(_):
                     completion(.success(true))
@@ -91,19 +95,16 @@ public class CloudKitUserService: UserService {
         }
     }
 
-    public func fetchBlockedUsers(userId: String, completion: @escaping ((Result<BlockedUsers, UserServiceError>) -> Void)) {
-        let predicate = NSPredicate(format: "userId == %@", userId)
+    public func fetchBlockedUsers(completion: @escaping ((Result<CKRecord, UserServiceError>) -> Void)) {
+        let meId = UserData.shared.id
+        let predicate = NSPredicate(format: "userId == %@", meId)
         let query = CKQuery(recordType: "BlockedUsers", predicate: predicate)
         let operation = CKQueryOperation(query: query)
         var isBlockedUsersEmpty = true
 
         operation.recordFetchedBlock = { record in
-            guard let blockedUsers = try? CKBlockedUsers(record).blockedUsers else {
-                completion(.failure(.failedToDecode))
-                return
-            }
             isBlockedUsersEmpty = false
-            completion(.success(blockedUsers))
+            completion(.success(record))
         }
 
         operation.queryCompletionBlock = { _, error in
@@ -112,7 +113,8 @@ public class CloudKitUserService: UserService {
                 return
             }
             if isBlockedUsersEmpty {
-                completion(.success(BlockedUsers(userId: userId, users: [])))
+                let record = CKBlockedUsers.encode(.init(userId: meId, users: []))
+                completion(.success(record))
             }
         }
 
@@ -120,9 +122,10 @@ public class CloudKitUserService: UserService {
         database.add(operation)
     }
 
-    public func saveBlockedUsers(blocked: BlockedUsers, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
-        let record = CKBlockedUsers.encode(blocked)
-        database.save(record) { record, error in
+    public func updateBlockedUsers(record: CKRecord, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
+        let operation = CKModifyRecordsOperation()
+        operation.recordsToSave = [record]
+        operation.modifyRecordsCompletionBlock = { record, _, error in
             guard error == nil else {
                 completion(.failure(.failedToRead))
                 return
@@ -131,7 +134,13 @@ public class CloudKitUserService: UserService {
                 completion(.failure(.failedToRead))
                 return
             }
+            completion(.success(true))
         }
-        completion(.success(true))
+
+        operation.completionBlock = {
+            completion(.success(true))
+        }
+
+        database.add(operation)
     }
 }

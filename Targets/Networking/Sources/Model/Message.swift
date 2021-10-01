@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Message: Codable, Equatable {
-    public let userId: String?
+    public let userId: String
     public let location: Location
     public let id: String
 
@@ -19,7 +19,7 @@ public struct Message: Codable, Equatable {
 
     public init(
         id: String = UUID().uuidString,
-        userId: String?,
+        userId: String,
         content: String,
         image: String?,
         location: Location,

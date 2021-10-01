@@ -9,7 +9,7 @@
 import CloudKit
 
 protocol Reportable {
-    var userId: String  { get }
+    var userId: String { get }
     var content: String { get }
     var reportedUserId: String { get }
 }

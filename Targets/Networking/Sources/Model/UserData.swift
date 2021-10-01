@@ -21,8 +21,8 @@ public class UserData {
         defaults.bool(forKey: Key.agreeWithTerms.rawValue)
     }
 
-    public var id: String? {
-        defaults.string(forKey: Key.id.rawValue)
+    public var id: String {
+        defaults.string(forKey: Key.id.rawValue) ?? "DEBUG"
     }
 
     public var name: String? {
@@ -48,7 +48,7 @@ public class UserData {
 }
 
 extension UserData {
- 
+
     public enum Key: String {
         case isLoggedIn
         case email
