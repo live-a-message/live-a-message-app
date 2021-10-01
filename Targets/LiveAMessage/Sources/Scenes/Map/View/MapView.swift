@@ -26,7 +26,6 @@ class MapView: MKMapView {
 
     func configure() {
         self.isZoomEnabled = true
-        self.isZoomEnabled = true
         self.tintColor = AKColor.mainRed
         self.showsUserLocation = true
         self.delegate = self
