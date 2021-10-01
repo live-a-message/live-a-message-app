@@ -12,22 +12,22 @@ public struct AKLabelStyle {
     static public let body1 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .body),
         textSize: .body,
-        fontColor: .black
+        fontColor: AKColor.mainFontColor
     )
     static public let title1 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title1),
         textSize: .title1,
-        fontColor: .black
+        fontColor: AKColor.mainFontColor
     )
     static public let title2 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title2),
         textSize: .title2,
-        fontColor: .black
+        fontColor: AKColor.mainFontColor
     )
     static public let title3 = AKLabelParamater(
         font: UIFont.preferredFont(forTextStyle: .title3),
         textSize: .title3,
-        fontColor: .black
+        fontColor: AKColor.mainFontColor
     )
 }
 

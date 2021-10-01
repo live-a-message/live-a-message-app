@@ -8,6 +8,7 @@
 
 import UIKit
 import DesignSystem
+import Networking
 
 class MapViewController: UIViewController {
 
@@ -23,6 +24,13 @@ class MapViewController: UIViewController {
         buildHierarchy()
         setupConstraints()
         configureViews()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if UserData.shared.agreeWithTerms == false {
+            present(TermsViewController(), animated: true)
+        }
     }
 
     func buildHierarchy() {
