@@ -12,7 +12,7 @@ import DesignSystem
 class MessageDetailsViewController: UIViewController {
 
     var viewModel: MessageDetailsViewModelProtocol?
-    
+
     init(viewModel: MessageDetailsViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
@@ -21,7 +21,7 @@ class MessageDetailsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func loadView() {
         let messageView = MessageDetailsView()
         messageView.tableView.delegate = viewModel
