@@ -13,64 +13,68 @@ import MapKit
 
 class MapViewModel: NSObject, MapViewModelProtocol {
 
-  lazy var locationManager: CLLocationManager = {
-    let locationManager = CLLocationManager()
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    locationManager.distanceFilter = kCLDistanceFilterNone
-    return locationManager
-  }()
+    lazy var annotations = [MKPointAnnotation : Message]()
 
-  var currentLocation = CLLocation() {
-    didSet {
-      didUpdatedLocation()
-      notificateChange()
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        return locationManager
+    }()
+
+    var currentLocation = CLLocation() {
+        didSet {
+            didUpdatedLocation()
+            notificateChange()
+        }
     }
-  }
-  weak var mapView: MapView?
-  let localService = CloudKitMessagesService()
-  var messages: [Message] = [] {
-    didSet {
-      addNearPins()
+    weak var mapView: MapView?
+    let localService = CloudKitMessagesService()
+    var messages: [Message] = [] {
+        didSet {
+            addNearPins()
+        }
     }
-  }
-  var radius: Double = 300
+    var radius: Double = 300
 
-  override init() {
-    super.init()
-    self.locationManager.delegate = self
-    self.locationManager.requestWhenInUseAuthorization()
-    self.locationManager.startUpdatingLocation()
-  }
-
-  func getMessages() {
-    localService.fetchMessages { result in
-      switch result {
-      case .success(let messages):
-        self.messages = messages
-      case .failure(let error):
-        NSLog(error.localizedDescription, "error")
-      }
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
-  }
 
-  func didUpdatedLocation() {
-    self.getMessages()
-    addNearPins()
-  }
-
-  func addNearPins() {
-    self.messages.forEach {
-      let location = $0.location
-      let anotation = MKPointAnnotation()
-      anotation.coordinate.latitude = location.lat
-      anotation.coordinate.longitude = location.lon
-      self.mapView?.addAnnotation(anotation)
+    func getMessages() {
+        localService.fetchMessages { result in
+            switch result {
+            case .success(let messages):
+                self.messages = messages
+            case .failure(let error):
+                NSLog(error.localizedDescription, "error")
+            }
+        }
     }
-  }
 
-  func notificateChange() {
-    NotificationCenter.default.post(name: .updateLocation, object: self.currentLocation)
-  }
+    func didUpdatedLocation() {
+        self.getMessages()
+        addNearPins()
+    }
+
+    func addNearPins() {
+        self.messages.forEach {
+            let location = $0.location
+            let anotation = MKPointAnnotation()
+            anotation.coordinate.latitude = location.lat
+            anotation.coordinate.longitude = location.lon
+
+            annotations[anotation] = $0
+            self.mapView?.addAnnotation(anotation)
+        }
+    }
+
+    func notificateChange() {
+        NotificationCenter.default.post(name: .updateLocation, object: self.currentLocation)
+    }
 
 }
 

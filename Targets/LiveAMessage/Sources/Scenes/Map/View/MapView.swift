@@ -14,26 +14,27 @@ import Networking
 
 class MapView: MKMapView {
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    configure()
-  }
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+    var didTapPin: ((MKAnnotation?) -> ())?
 
-  func configure() {
-    self.isZoomEnabled = true
-    self.isZoomEnabled = true
-    self.tintColor = AKColor.mainRed
-    self.showsUserLocation = true
-    self.delegate = self
-    self.translatesAutoresizingMaskIntoConstraints = false
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-  func setupConstraints() {
-    self.edgesToSuperview()
-  }
+    func configure() {
+        self.isZoomEnabled = true
+        self.tintColor = AKColor.mainRed
+        self.showsUserLocation = true
+        self.delegate = self
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func setupConstraints() {
+        self.edgesToSuperview()
+    }
 }
 
 extension MapView: MKMapViewDelegate {
@@ -55,5 +56,9 @@ extension MapView: MKMapViewDelegate {
             annotationView!.annotation = annotation
         }
         return annotationView
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        didTapPin?(view.annotation)
     }
 }
