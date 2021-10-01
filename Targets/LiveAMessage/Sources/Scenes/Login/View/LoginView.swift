@@ -29,7 +29,11 @@ class LoginView: UIView, ViewCode {
     }()
 
     lazy var authButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton()
+        let style = UIScreen.main.traitCollection.userInterfaceStyle
+        let button = ASAuthorizationAppleIDButton(
+            authorizationButtonType: .default,
+            authorizationButtonStyle: style == .dark ? .white : .black
+        )
         button.height(48)
         return button
     }()
@@ -48,9 +52,15 @@ class LoginView: UIView, ViewCode {
         return container
     }()
 
+    override func layoutSubviews() {
+        let style = UIScreen.main.traitCollection.userInterfaceStyle
+        authButton.overrideUserInterfaceStyle = style
+        super.layoutSubviews()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = AKColor.mainBackgroundColor
         buildHierarchy()
         setupConstraints()
         configureViews()
