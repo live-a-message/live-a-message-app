@@ -19,6 +19,11 @@ public class AKColor: UIColor {
     public static var shadowRed: UIColor {
         return UIColor(hex: "FDD2D7")
     }
+    
+    /// the secondary  red color used for pop-up label over label in mainred components
+    public static var darkRed: UIColor {
+        return UIColor(hex: "EB5C6E")
+    }
 
     /// main fonts color used in any default font style
     public static var mainFontColor: UIColor {
