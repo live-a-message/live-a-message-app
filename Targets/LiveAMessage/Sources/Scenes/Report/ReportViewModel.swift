@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import Networking
+
+class ReportViewModel {
+    private let message: Message
+
+    init(message: Message) {
+        self.message = message
+    }
+}

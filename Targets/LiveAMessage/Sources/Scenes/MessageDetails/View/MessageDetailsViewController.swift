@@ -12,12 +12,13 @@ import DesignSystem
 class MessageDetailsViewController: UIViewController {
 
     var viewModel: MessageDetailsViewModelProtocol?
+    weak var coordinator: Coordinator?
 
     init(viewModel: MessageDetailsViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -30,10 +31,15 @@ class MessageDetailsViewController: UIViewController {
         messageView.tableView.register(MessageDetailTableViewCell.self, forCellReuseIdentifier: "MessageCell")
         view = messageView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Report", style: .plain, target: self, action: #selector(showReportMenu))
     }
 
+    @objc private func showReportMenu() {
+        guard let message = viewModel?.message else { return }
+        coordinator?.showReportMenu(with: message, on: self)
+    }
 }

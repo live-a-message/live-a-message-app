@@ -18,6 +18,7 @@ protocol Coordinator: AnyObject {
     func showCloseMessages()
     func showAddMessage()
     func showMessageDetails(with message: Message)
+    func showReportMenu(with message: Message, on viewController: UIViewController)
 }
 
 class MainCoordinator: Coordinator {
@@ -91,7 +92,14 @@ class MainCoordinator: Coordinator {
     func showMessageDetails(with message: Message) {
         let detailsMessageViewModel = MessageDetailsViewModel(message: message)
         let detailsViewController = MessageDetailsViewController(viewModel: detailsMessageViewModel)
+        detailsViewController.coordinator = self
         closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
+
+    func showReportMenu(with message: Message, on viewController: UIViewController) {
+        let reportViewModel = ReportViewModel(message: message)
+        let reportView = ReportView(viewModel: reportViewModel)
+        reportView.showReportMenu(on: viewController)
     }
 
     private func isUserLoggedIn() -> Bool {
