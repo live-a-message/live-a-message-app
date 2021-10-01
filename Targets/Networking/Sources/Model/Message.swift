@@ -17,13 +17,20 @@ public struct Message: Codable, Equatable {
     public var content: String
     public var image: String?
 
-    public init(id: String = UUID().uuidString, userId: String?, content: String, image: String?, location: Location) {
+    public init(
+        id: String = UUID().uuidString,
+        userId: String?,
+        content: String,
+        image: String?,
+        location: Location,
+        status: MessageStatus = .unread
+    ) {
         self.userId = userId
         self.content = content
         self.image = image
         self.location = location
         self.id = id
-        self.status = .unread
+        self.status = status
     }
 
     public static func == (lhs: Message, rhs: Message) -> Bool {

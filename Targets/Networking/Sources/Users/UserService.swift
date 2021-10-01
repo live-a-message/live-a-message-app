@@ -19,6 +19,16 @@ public protocol UserService: AnyObject {
     ///     - user: the following user to be saved
     ///     - completion: the result of saving user
     func save(user: User, completion: @escaping ((Result<Bool, UserServiceError>) -> Void))
+    /// Save user to user defaults when starts log-in
+    /// - Parameters:
+    ///     - userId: the following user to be reported
+    ///     - completion: the result of saving user
+    func report(report: Report, completion: @escaping ((Result<Bool, UserServiceError>) -> Void))
+    /// Save user to user defaults when starts log-in
+    /// - Parameters:
+    ///     - userId: the following user to be blocked
+    ///     - completion: the result of saving user
+    func block(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void))
 }
 
 public enum UserServiceError: Error {

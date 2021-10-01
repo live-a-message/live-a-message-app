@@ -18,7 +18,7 @@ public class CKUser {
         guard let name = record["content"] as? String,
               let email = record["id"] as? String,
               let id = record["userId"] as? String
-              else { throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "")) }
+        else { throw CKError.decodingError }
         self.name = name
         self.id = id
         self.email = email
