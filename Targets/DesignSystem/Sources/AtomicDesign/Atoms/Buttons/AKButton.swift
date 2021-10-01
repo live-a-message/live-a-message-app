@@ -10,6 +10,9 @@ import UIKit
 
 public class AKButton: UIButton {
 
+    private var height: CGFloat?
+    private var width: CGFloat?
+
     public init(style: AKButtonParamater, icon: ButtonIcon? = nil) {
         super.init(frame: .zero)
         setup(with: style, icon: icon)
@@ -19,9 +22,19 @@ public class AKButton: UIButton {
         super.init(coder: coder)
     }
 
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+         if let height = height {
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+         }
+         if let width = width {
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+         }
+    }
+
     func setup(with style: AKButtonParamater = AKButtonStyle.default, icon: ButtonIcon?) {
-        // if let height = style.height { self.heightAnchor.constraint(equalToConstant: height).isActive = true }
-        // if let width = style.width {  self.widthAnchor.constraint(equalToConstant: width).isActive = true }
+        self.height             = style.height
+        self.width              = style.width
         self.backgroundColor    = style.backgroundColor
         self.titleLabel?.font   = style.font
         self.alpha              = style.alpha

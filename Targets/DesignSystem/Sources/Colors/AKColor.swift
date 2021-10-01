@@ -25,4 +25,14 @@ public class AKColor: UIColor {
         return UIColor(hex: "EB5C6E")
     }
 
+    /// main fonts color used in any default font style
+    public static var mainFontColor: UIColor {
+        return UIColor.dynamicColor(light: UIColor(hex: "000000"), dark: UIColor(hex: "FFFFFF"))
+    }
+
+    /// background color for the app
+    public static var mainBackgroundColor: UIColor {
+        return UIColor.dynamicColor(light: UIColor(hex: "FFFFFF"), dark: UIColor(hex: "000000"))
+    }
+
 }

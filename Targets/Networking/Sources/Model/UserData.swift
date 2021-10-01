@@ -48,7 +48,7 @@ public class UserData {
 }
 
 extension UserData {
-
+ 
     public enum Key: String {
         case isLoggedIn
         case email
