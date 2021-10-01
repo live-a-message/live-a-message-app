@@ -24,6 +24,7 @@ protocol Coordinator: AnyObject {
 class MainCoordinator: Coordinator {
     private let authService = SignInWithAppleAuthorization()
     private let messagesService = CloudKitMessagesService()
+    private let userService = CloudKitUserService()
     private let loginViewController: LoginViewController
     private let mapViewController: MapViewController
     private let rootViewController: UINavigationController
@@ -32,7 +33,6 @@ class MainCoordinator: Coordinator {
     private var window: UIWindow?
 
     init() {
-
         rootViewController = UINavigationController()
         mapViewController = MapViewController()
         loginViewController = LoginViewController(viewModel: LoginViewModel(service: authService))
@@ -97,7 +97,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showReportMenu(with message: Message, on viewController: UIViewController) {
-        let reportViewModel = ReportViewModel(message: message)
+        let reportViewModel = ReportViewModel(message: message, service: userService)
         let reportView = ReportView(viewModel: reportViewModel)
         reportView.showReportMenu(on: viewController)
     }

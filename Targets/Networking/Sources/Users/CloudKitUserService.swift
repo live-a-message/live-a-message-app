@@ -81,15 +81,12 @@ public class CloudKitUserService: UserService {
                     switch result {
                     case .success(_):
                     completion(.success(true))
-                    break
                     case .failure(let error):
                     completion(.failure(error))
-                    break
                     }
                 }
             case .failure(let error):
                 completion(.failure(error))
-                break
             }
         }
     }
@@ -98,12 +95,14 @@ public class CloudKitUserService: UserService {
         let predicate = NSPredicate(format: "userId == %@", userId)
         let query = CKQuery(recordType: "BlockedUsers", predicate: predicate)
         let operation = CKQueryOperation(query: query)
+        var isBlockedUsersEmpty = true
 
         operation.recordFetchedBlock = { record in
             guard let blockedUsers = try? CKBlockedUsers(record).blockedUsers else {
                 completion(.failure(.failedToDecode))
                 return
             }
+            isBlockedUsersEmpty = false
             completion(.success(blockedUsers))
         }
 
@@ -111,6 +110,9 @@ public class CloudKitUserService: UserService {
             guard error == nil else {
                 completion(.failure(.networkError))
                 return
+            }
+            if isBlockedUsersEmpty {
+                completion(.success(BlockedUsers(userId: userId, users: [])))
             }
         }
 

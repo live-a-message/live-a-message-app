@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 class ReportView {
     private let viewModel: ReportViewModel
@@ -19,11 +20,11 @@ class ReportView {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Report", style: .default) { _ in
-            print("User click report button")
+            self.reportUser(viewController: viewController)
         })
 
         alert.addAction(UIAlertAction(title: "Block user", style: .destructive) { _ in
-            print("User click block button")
+            self.blockUser(viewController: viewController)
         })
 
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { _ in
@@ -31,5 +32,19 @@ class ReportView {
         })
 
         viewController.present(alert, animated: true)
+    }
+
+    private func reportUser(viewController: UIViewController) {
+        AKLoadingView.shared.startLoading(on: viewController)
+        viewModel.reportUser { didSucceed in
+            AKLoadingView.shared.stopLoading(didSucceed: didSucceed)
+        }
+    }
+
+    private func blockUser(viewController: UIViewController) {
+        AKLoadingView.shared.startLoading(on: viewController)
+        viewModel.blockUser { didSucceed in
+            AKLoadingView.shared.stopLoading(didSucceed: didSucceed)
+        }
     }
 }

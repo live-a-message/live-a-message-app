@@ -12,4 +12,10 @@ public struct Report: Reportable {
     var userId: String
     var reportedUserId: String
     var content: String
+
+    public init(userId: String, reportedUserId: String, content: String) {
+        self.userId = userId
+        self.reportedUserId = reportedUserId
+        self.content = content
+    }
 }
