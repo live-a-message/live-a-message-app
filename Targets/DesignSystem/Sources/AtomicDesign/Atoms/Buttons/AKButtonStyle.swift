@@ -11,11 +11,10 @@ import UIKit
 public struct AKButtonStyle {
     public static let `default` = AKButtonParamater(
         height: 64.0,
-        highlightedColor: .white,
-        backgroundColor: .systemRed,
-        borderColor: UIColor.black.cgColor,
-        borderWidth: 6.0,
-        cornerRadius: 0.0,
+        highlightedColor: AKColor.darkRed,
+        backgroundColor: AKColor.mainRed,
+        borderWidth: 0.0,
+        cornerRadius: 6.0,
         font: UIFont.boldSystemFont(ofSize: 24),
         clipToBounds: true
     )

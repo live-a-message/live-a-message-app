@@ -27,7 +27,6 @@ class MainCoordinator: Coordinator {
     private let mapViewController: MapViewController
     private let rootViewController: UINavigationController
 
-    
     private var closeMessagesController: CloseMessagesViewController?
     private var window: UIWindow?
 
@@ -88,11 +87,10 @@ class MainCoordinator: Coordinator {
         controller.modalPresentationStyle = .formSheet
         rootViewController.present(controller, animated: true)
     }
-    
+
     func showMessageDetails(with message: Message) {
         let detailsMessageViewModel = MessageDetailsViewModel(message: message)
         let detailsViewController = MessageDetailsViewController(viewModel: detailsMessageViewModel)
-        
         closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
     }
 
