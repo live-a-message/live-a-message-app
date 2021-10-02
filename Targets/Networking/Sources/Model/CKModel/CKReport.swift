@@ -31,7 +31,7 @@ public class CKReport: Reportable {
     }
 
     public static func encode(_ report: Report) -> CKRecord {
-        let record = CKRecord(recordType: "Report")
+        let record = CKRecord(recordType: CKRecordType.Report.rawValue)
         record["content"] = report.content
         record["userId"] = report.userId
         record["reportedUserId"] = report.reportedUserId

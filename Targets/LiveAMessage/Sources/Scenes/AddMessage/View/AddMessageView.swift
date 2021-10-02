@@ -62,7 +62,8 @@ class AddMessageView: UIView, ViewCode {
 
     func configureViews() {
         textView.becomeFirstResponder()
-        backgroundColor = .white
+        backgroundColor = AKColor.mainBackgroundColor
+        textView.backgroundColor = AKColor.mainBackgroundColor
         textView.isScrollEnabled = true
         textView.tintColor = .red
         textView.font = .systemFont(ofSize: 14)

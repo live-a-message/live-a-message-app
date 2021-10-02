@@ -35,7 +35,7 @@ public class CKMessage {
     }
 
     public static func encode(_ message: Message) -> CKRecord {
-        let record = CKRecord(recordType: "Messages")
+        let record = CKRecord(recordType: CKRecordType.Messages.rawValue)
         record["content"] = message.content
         record["id"] = message.id
         record["userId"] = message.userId

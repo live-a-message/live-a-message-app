@@ -17,6 +17,7 @@ public class CKBlockedUsers: Blockable {
 
     private(set) var userId: String
     private(set) var users: [String]
+    private(set) var recordID: CKRecord.ID
 
     public init(_ record: CKRecord) throws {
         guard let userId = record["userId"] as? String,
@@ -24,10 +25,11 @@ public class CKBlockedUsers: Blockable {
         else { throw CKError.decodingError }
         self.userId = userId
         self.users = users
+        self.recordID = record.recordID
     }
 
     public static func encode(_ blocked: BlockedUsers) -> CKRecord {
-        let record = CKRecord(recordType: "BlockedUsers", recordID: CKRecord.ID(recordName: blocked.userId))
+        let record = CKRecord(recordType: CKRecordType.BlockedUsers.rawValue)
         record["userId"] = blocked.userId
         record["users"] = blocked.users
         return record

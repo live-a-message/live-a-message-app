@@ -11,7 +11,6 @@ import CloudKit
 public class CloudKitUserService: UserService {
 
     private let container = CKContainer.default()
-    private let recordName = "Users"
     private let zoneId = CKRecordZone.default().zoneID
     private lazy var database = container.publicCloudDatabase
 
@@ -19,7 +18,7 @@ public class CloudKitUserService: UserService {
 
     public func fetch(identifier: String, completion: @escaping ((Result<User, UserServiceError>) -> Void)) {
         let predicate = NSPredicate(format: "id == %@", identifier)
-        let query = CKQuery(recordType: recordName, predicate: predicate)
+        let query = CKQuery(recordType: CKRecordType.UsersInfo.rawValue, predicate: predicate)
         let operation = CKQueryOperation(query: query)
 
         operation.recordFetchedBlock = { record in
@@ -98,7 +97,7 @@ public class CloudKitUserService: UserService {
     public func fetchBlockedUsers(completion: @escaping ((Result<CKRecord, UserServiceError>) -> Void)) {
         let meId = UserData.shared.id
         let predicate = NSPredicate(format: "userId == %@", meId)
-        let query = CKQuery(recordType: "BlockedUsers", predicate: predicate)
+        let query = CKQuery(recordType: CKRecordType.BlockedUsers.rawValue, predicate: predicate)
         let operation = CKQueryOperation(query: query)
         var isBlockedUsersEmpty = true
 

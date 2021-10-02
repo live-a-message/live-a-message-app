@@ -55,6 +55,7 @@ extension UserData {
         case name
         case id
         case agreeWithTerms
+        case recordID
     }
 
 }
