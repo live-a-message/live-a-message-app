@@ -13,4 +13,5 @@ enum CKRecordType: String {
     case BlockedUsers
     case Messages
     case Report
+    case Terms
 }

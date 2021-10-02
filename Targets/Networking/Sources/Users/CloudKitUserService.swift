@@ -54,6 +54,7 @@ public class CloudKitUserService: UserService {
         }
         completion(.success(true))
     }
+    // MARK: - Report
 
     public func report(report: Report, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
         let record = CKReport.encode(report)
@@ -70,6 +71,8 @@ public class CloudKitUserService: UserService {
         completion(.success(true))
     }
 
+    // MARK: - BlockedUsers
+
     public func block(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
         fetchBlockedUsers { result in
             switch result {
@@ -80,6 +83,7 @@ public class CloudKitUserService: UserService {
                 }
                 blockedUsers.append(userId)
                 record["users"] = blockedUsers
+                UserData.shared.set(value: blockedUsers, key: .blockedIDs)
                 self.updateBlockedUsers(record: record) { result in
                     switch result {
                     case .success(_):
@@ -141,5 +145,23 @@ public class CloudKitUserService: UserService {
         }
 
         database.add(operation)
+    }
+    
+    // MARK: - Terms
+
+    public func fetchTerms(completion: @escaping ((Result<Terms, UserServiceError>) -> Void)) {
+        let recordName = "B1605002-215E-5A75-4828-812A776D6B5A"
+        database.fetch(withRecordID: CKRecord.ID(recordName: recordName)) { record, error in
+            guard error == nil else {
+                completion(.failure(.failedToRead))
+                return
+            }
+            guard let record = record,
+                  let terms = try? CKTerms(record).terms else {
+                completion(.failure(.failedToRead))
+                return
+            }
+            completion(.success(terms))
+        }
     }
 }

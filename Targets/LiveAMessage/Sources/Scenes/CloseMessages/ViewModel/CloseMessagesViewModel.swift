@@ -28,8 +28,11 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
     }
 
     func setupCells(messages: [Message]) {
-        let unreaded = messages.filter { $0.status == .read }
-        let readead = messages.filter { $0.status == .unread }
+        let filteredMessages = messages.filter {
+            !UserData.shared.blockedIDs.contains($0.userId)
+        }
+        let unreaded = filteredMessages.filter { $0.status == .read }
+        let readead = filteredMessages.filter { $0.status == .unread }
 
         addSection(
             title: .read,

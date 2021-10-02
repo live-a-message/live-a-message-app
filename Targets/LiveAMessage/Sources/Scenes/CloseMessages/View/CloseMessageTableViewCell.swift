@@ -23,10 +23,10 @@ class CloseMessageTableViewCell: UITableViewCell {
     func setup(viewModel: CloseMessageCellViewModel) {
         self.selectionStyle = .none
         self.tintColor = AKColor.mainRed
-        self.imageView?.image = UIImage(systemName: "envelope")
+        self.imageView?.image = UIImage(systemName: IconNamed.envelope.rawValue)
         self.imageView?.layer.cornerRadius = 8
         self.imageView?.clipsToBounds = true
-        self.textLabel?.text = "LiveMe"
+        self.textLabel?.text = viewModel.title
         self.detailTextLabel?.text = viewModel.message.content
     }
 }

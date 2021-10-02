@@ -16,6 +16,7 @@ protocol TableViewCell {
 class CloseMessageCellViewModel: TableViewCell {
     lazy var identifier: String = String(describing: type(of: self))
     var message: Message
+    let title = "Akee Message"
 
     init(message: Message) {
         self.message = message

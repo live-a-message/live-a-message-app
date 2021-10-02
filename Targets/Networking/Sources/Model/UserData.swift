@@ -33,6 +33,10 @@ public class UserData {
         defaults.string(forKey: Key.email.rawValue)
     }
 
+    public var blockedIDs: [String] {
+        defaults.stringArray(forKey: Key.blockedIDs.rawValue) ?? []
+    }
+
     private init() { }
 
     public func save(user: User) {
@@ -56,6 +60,7 @@ extension UserData {
         case id
         case agreeWithTerms
         case recordID
+        case blockedIDs
     }
 
 }

@@ -29,6 +29,10 @@ public protocol UserService: AnyObject {
     ///     - userId: the following user to be blocked
     ///     - completion: the result of saving user
     func block(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void))
+    /// Get the terms of user.
+    /// - Parameters:
+    ///     - completion: the result of saving user
+    func fetchTerms(completion: @escaping ((Result<Terms, UserServiceError>) -> Void))
 }
 
 public enum UserServiceError: Error {
