@@ -15,39 +15,46 @@ public class CKMessage {
     private(set) var content: String
     private(set) var image: String?
     private(set) var location: CLLocation
+    private(set) var status: String?
 
     public init(_ record: CKRecord) throws {
         let image = record["image"] as? String
         guard let content = record["content"] as? String,
               let id = record["id"] as? String,
               let userId = record["userId"] as? String,
-              let clLocation = record["location"] as? CLLocation
-        else { throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "")) }
+              let clLocation = record["location"] as? CLLocation,
+              let status = record["status"] as? String
+        else { throw CKError.decodingError }
 
         self.content = content
         self.id = id
         self.location = clLocation
         self.userId = userId
         self.image = image
+        self.status = status
     }
 
     public static func encode(_ message: Message) -> CKRecord {
-        let record = CKRecord(recordType: "Messages")
+        let record = CKRecord(recordType: CKRecordType.Messages.rawValue)
         record["content"] = message.content
         record["id"] = message.id
         record["userId"] = message.userId
         record["image"] = message.image
         record["location"] = CLLocation(latitude: message.location.lat, longitude: message.location.lon)
+        record["status"] = message.status.rawValue
         return record
     }
 
     var message: Message {
-        Message(
+        let status = MessageStatus(rawValue: status ?? MessageStatus.read.rawValue)
+        let message = Message(
             id: id,
             userId: userId,
             content: content,
             image: image,
-            location: .init(from: location.coordinate)
+            location: .init(from: location.coordinate),
+            status: status ?? .unread
         )
+        return message
     }
 }

@@ -40,11 +40,11 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
         if let appleIDCredential = authorization.credential as?
             ASAuthorizationAppleIDCredential {
             let identifier = appleIDCredential.user
-            if let name = appleIDCredential.fullName?.givenName,
-               let email = appleIDCredential.email {
-                save(user: User(name: name, id: identifier, email: email))
+            if let name = appleIDCredential.fullName?.givenName {
+                let email = appleIDCredential.email
+                save(user: User(name: name, id: identifier, email: email ?? ""))
             } else {
-               fetch(identifier: identifier)
+                fetch(identifier: identifier)
             }
         }
     }
@@ -69,6 +69,7 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
         service.save(user: user, completion: { result in
             switch result {
             case .success(_):
+                UserData.shared.save(user: user)
                 self.delegate?.didFinishFetching()
             case .failure(let error):
                 self.delegate?.didFinishWithError(error)
