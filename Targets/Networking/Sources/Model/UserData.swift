@@ -21,8 +21,8 @@ public class UserData {
         defaults.bool(forKey: Key.agreeWithTerms.rawValue)
     }
 
-    public var id: String? {
-        defaults.string(forKey: Key.id.rawValue)
+    public var id: String {
+        defaults.string(forKey: Key.id.rawValue) ?? "DEBUG"
     }
 
     public var name: String? {
@@ -31,6 +31,10 @@ public class UserData {
 
     public var email: String? {
         defaults.string(forKey: Key.email.rawValue)
+    }
+
+    public var blockedIDs: [String] {
+        defaults.stringArray(forKey: Key.blockedIDs.rawValue) ?? []
     }
 
     private init() { }
@@ -48,13 +52,15 @@ public class UserData {
 }
 
 extension UserData {
- 
+
     public enum Key: String {
         case isLoggedIn
         case email
         case name
         case id
         case agreeWithTerms
+        case recordID
+        case blockedIDs
     }
 
 }

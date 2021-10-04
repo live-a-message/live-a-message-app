@@ -15,17 +15,17 @@ public class CKUser {
     private(set) var email: String
 
     public init(_ record: CKRecord) throws {
-        guard let name = record["content"] as? String,
-              let email = record["id"] as? String,
-              let id = record["userId"] as? String
-              else { throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "")) }
+        guard let name = record["name"] as? String,
+              let email = record["email"] as? String,
+              let id = record["id"] as? String
+        else { throw CKError.decodingError }
         self.name = name
         self.id = id
         self.email = email
     }
 
     public static func encode(_ user: User) -> CKRecord {
-        let record = CKRecord(recordType: "Users", recordID: CKRecord.ID(recordName: user.id))
+        let record = CKRecord(recordType: CKRecordType.UsersInfo.rawValue, recordID: CKRecord.ID(recordName: user.id))
         record["name"] = user.name
         record["email"] = user.email
         record["id"] = user.id

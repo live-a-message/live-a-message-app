@@ -8,6 +8,7 @@
 
 import UIKit
 import DesignSystem
+import Networking
 
 class AddMessageViewController: UIViewController {
 
@@ -41,6 +42,10 @@ class AddMessageViewController: UIViewController {
     }
 
     private func save(_ message: String) {
+        guard UserData.shared.agreeWithTerms else {
+            present(TermsViewController(), animated: true)
+            return
+        }
         viewModel.saveMessage(
             with: message,
             image: ""

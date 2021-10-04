@@ -90,9 +90,8 @@ class LoginView: UIView, ViewCode {
     func configureViews() {
         titleLabel.text = "Sign In"
         descriptionLabel.text = """
-            Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.Etiam eget ligula eu lectus
-            lobortis condimentum. Aliquam nonummy auctor massa.
+            Login to host messages and
+            share memory with other users
             """
     }
 

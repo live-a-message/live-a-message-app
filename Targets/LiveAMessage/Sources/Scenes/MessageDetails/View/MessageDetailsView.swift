@@ -10,31 +10,31 @@ import UIKit
 import DesignSystem
 
 class MessageDetailsView: UIView, ViewCode {
-    
+
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         return tableView
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func buildHierarchy() {
         addSubview(tableView)
     }
-    
+
     func setupConstraints() {
         tableView.edgesToSuperview()
     }
-    
+
     func configureViews() {
         buildHierarchy()
         setupConstraints()
