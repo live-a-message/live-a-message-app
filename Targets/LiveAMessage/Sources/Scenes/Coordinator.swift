@@ -99,8 +99,8 @@ class MainCoordinator: Coordinator {
 
         if fromPin {
             let detailsNavigation = UINavigationController(rootViewController: detailsViewController)
-            detailsNavigation.modalTransitionStyle = .crossDissolve
             detailsNavigation.modalPresentationStyle = .overFullScreen
+            detailsViewController.setCloseButton()
             rootViewController.present(detailsNavigation, animated: true, completion: nil)
         } else {
             closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)

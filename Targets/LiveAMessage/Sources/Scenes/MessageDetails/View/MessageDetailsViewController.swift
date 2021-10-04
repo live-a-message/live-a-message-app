@@ -38,8 +38,16 @@ class MessageDetailsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Report", style: .plain, target: self, action: #selector(showReportMenu))
     }
 
+    func setCloseButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(close))
+    }
+
     @objc private func showReportMenu() {
         guard let message = viewModel?.message else { return }
         coordinator?.showReportMenu(with: message, on: self)
+    }
+
+    @objc private func close() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
