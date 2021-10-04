@@ -17,7 +17,7 @@ protocol Coordinator: AnyObject {
     func showMap()
     func showCloseMessages()
     func showAddMessage()
-    func showMessageDetails(with message: Message)
+    func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
 }
 
@@ -89,11 +89,21 @@ class MainCoordinator: Coordinator {
         rootViewController.present(controller, animated: true)
     }
 
-    func showMessageDetails(with message: Message) {
+    func showMessageDetails(
+        with message: Message,
+        fromPin: Bool
+    ) {
         let detailsMessageViewModel = MessageDetailsViewModel(message: message)
         let detailsViewController = MessageDetailsViewController(viewModel: detailsMessageViewModel)
         detailsViewController.coordinator = self
-        closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
+
+        detailsViewController.modalTransitionStyle = .crossDissolve
+        detailsViewController.modalPresentationStyle = .overFullScreen
+        if fromPin {
+            rootViewController.present(detailsViewController, animated: true, completion: nil)
+        } else {
+            closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
+        }
     }
 
     func showReportMenu(with message: Message, on viewController: UIViewController) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 import DesignSystem
 import Networking
 
@@ -41,8 +42,9 @@ class MapViewController: UIViewController {
     }
 
     func configureViews() {
-      mainView.headerView.rightButtonAction = addMessage
-      mainView.headerView.leftButtonAction = showCloseMessages
+        mainView.headerView.rightButtonAction = addMessage
+        mainView.headerView.leftButtonAction = showCloseMessages
+        mainView.didTapPin = didTapMessagePin(_:)
     }
 }
 
@@ -53,5 +55,12 @@ extension MapViewController {
 
     func showCloseMessages() {
         coordinator?.showCloseMessages()
+    }
+
+    func didTapMessagePin(_ annotation: MKAnnotation?) {
+        guard let pointAnnotation = annotation as? MKPointAnnotation,
+              let message = viewModel.annotations[pointAnnotation] else { return }
+
+        coordinator?.showMessageDetails(with: message, fromPin: true)
     }
 }
