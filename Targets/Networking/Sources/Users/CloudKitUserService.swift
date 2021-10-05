@@ -150,7 +150,7 @@ public class CloudKitUserService: UserService {
     // MARK: - Terms
 
     public func fetchTerms(completion: @escaping ((Result<Terms, UserServiceError>) -> Void)) {
-        let recordName = Language.locale().rawValue
+        let recordName = "Terms-" + Language.locale().rawValue
         database.fetch(withRecordID: CKRecord.ID(recordName: recordName)) { record, error in
             guard error == nil else {
                 completion(.failure(.failedToRead))
