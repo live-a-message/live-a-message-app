@@ -29,7 +29,7 @@ class CloseMessagesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Close Messages"
+        self.title = AkeeStrings.navTitleCloseMessages
         if let viewModel = viewModel {
             mainView.bind(viewModel: viewModel)
         }
