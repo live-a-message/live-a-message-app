@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Akee
+
+  Created by Vinicius Mesquita on 05/10/21.
+  Copyright © 2021 Akee. All rights reserved.
+*/
+
+// Strings from `AddMessage` scene.
+"btn_cancel" = "取消";
+"btn_post" = "邮政";
+
+// Strings from `CloseMessages` scene.
+"navTitle_close_messages" = "关闭消息";
+
+// Strings from `Login` scene
+"lbl_title_sign_in" = "登入";
+"lbl_description_sign_in" = "登录到主机消息和\n与其他用户共享内存";

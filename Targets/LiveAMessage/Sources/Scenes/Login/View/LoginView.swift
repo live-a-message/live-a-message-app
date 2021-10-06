@@ -88,11 +88,8 @@ class LoginView: UIView, ViewCode {
     }
 
     func configureViews() {
-        titleLabel.text = "Sign In"
-        descriptionLabel.text = """
-            Login to host messages and
-            share memory with other users
-            """
+        titleLabel.text = AkeeStrings.lblTitleSignIn
+        descriptionLabel.text = AkeeStrings.lblDescriptionSignIn
     }
 
 }

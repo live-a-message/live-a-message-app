@@ -146,11 +146,11 @@ public class CloudKitUserService: UserService {
 
         database.add(operation)
     }
-    
+
     // MARK: - Terms
 
     public func fetchTerms(completion: @escaping ((Result<Terms, UserServiceError>) -> Void)) {
-        let recordName = "B1605002-215E-5A75-4828-812A776D6B5A"
+        let recordName = "Terms-" + Language.locale().rawValue
         database.fetch(withRecordID: CKRecord.ID(recordName: recordName)) { record, error in
             guard error == nil else {
                 completion(.failure(.failedToRead))
