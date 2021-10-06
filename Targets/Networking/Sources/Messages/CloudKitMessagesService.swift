@@ -17,9 +17,17 @@ public class CloudKitMessagesService: MessageService {
 
     public init() {}
 
-    public func fetchMessages(location: Location = .init(lat: .zero, lon: .zero), radius: Double = .zero, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
-        let predicate = NSPredicate(value: true)
+    public func fetchMessages(location: Location, radius: Double = .greatestFiniteMagnitude, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
+        let currentLocation = CLLocation(latitude: location.lat, longitude: location.lon)
+        let predicate = NSPredicate(
+            format: "distanceToLocation:fromLocation:(location, %@) < %f",
+            currentLocation,
+            NSNumber(value: radius)
+        )
         let query = CKQuery(recordType: recordName, predicate: predicate)
+        let sortDescription = CKLocationSortDescriptor(key: "location", relativeLocation: currentLocation)
+        query.sortDescriptors = [sortDescription]
+
         let operation = CKQueryOperation(query: query)
         var messages = [Message]()
 
@@ -71,5 +79,25 @@ public class CloudKitMessagesService: MessageService {
             }
             completion(.success(true))
         }
+    }
+    
+    private func perform(query: CKQuery, completion: @escaping ((Result<[CKRecord], MessageServiceError>) -> Void)) {
+        let operation = CKQueryOperation(query: query)
+        var records: [CKRecord] = []
+
+        operation.recordFetchedBlock = { record in
+            records.append(record)
+        }
+
+        operation.queryCompletionBlock = { _, error in
+            guard error == nil else {
+                completion(.failure(.networkError))
+                return
+            }
+            completion(.success(records))
+        }
+
+        operation.qualityOfService = .utility
+        database.add(operation)
     }
 }

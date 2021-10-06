@@ -19,15 +19,15 @@ class ReportView {
     func showReportMenu(on viewController: UIViewController) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Report", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnReport, style: .default) { _ in
             self.reportUser(viewController: viewController)
         })
 
-        alert.addAction(UIAlertAction(title: "Block user", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnBlockUser, style: .destructive) { _ in
             self.blockUser(viewController: viewController)
         })
 
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnDismiss, style: .cancel) { _ in
             print("User click dismiss button")
         })
 

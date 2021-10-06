@@ -9,6 +9,9 @@
 // Strings from `AddMessage` scene.
 "btn_cancel" = "取消";
 "btn_post" = "邮政";
+"btn_report" = "报告";
+"btn_blockUser" = "阻止用户";
+"btn_dismiss" = "解雇";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "关闭消息";

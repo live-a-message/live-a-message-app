@@ -35,7 +35,7 @@ extension CloseMessageViewModelTests {
     private func makeData(type: [MessageStatus]) -> Data {
         return type.map {
             var message = Message(
-                userId: nil,
+                userId: "DEBUG",
                 content: "",
                 image: nil,
                 location: Location(lat: .zero, lon: .zero)

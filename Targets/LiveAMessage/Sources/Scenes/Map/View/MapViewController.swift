@@ -25,6 +25,12 @@ class MapViewController: UIViewController {
         buildHierarchy()
         setupConstraints()
         configureViews()
+
+        let coordinateRegion = MKCoordinateRegion(
+            center: viewModel.currentLocation.coordinate,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000)
+        self.mainView.mapView.setRegion(coordinateRegion, animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +51,11 @@ class MapViewController: UIViewController {
         mainView.headerView.rightButtonAction = addMessage
         mainView.headerView.leftButtonAction = showCloseMessages
         mainView.didTapPin = didTapMessagePin(_:)
+        let circle = MKCircle(
+            center: viewModel.currentLocation.coordinate,
+            radius: viewModel.radius
+        )
+        mainView.mapView.addOverlay(circle)
     }
 }
 

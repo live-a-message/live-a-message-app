@@ -13,7 +13,7 @@ import MapKit
 
 class MapViewModel: NSObject, MapViewModelProtocol {
 
-    lazy var annotations = [MKPointAnnotation : Message]()
+    lazy var annotations = [MKPointAnnotation: Message]()
 
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -28,6 +28,19 @@ class MapViewModel: NSObject, MapViewModelProtocol {
             notificateChange()
         }
     }
+    var radius: Double = 300
+
+    lazy var region: CLCircularRegion = {
+      let region = CLCircularRegion(
+        center: currentLocation.coordinate,
+        radius: radius,
+        identifier: UserData.shared.id
+      )
+      region.notifyOnEntry = true
+      region.notifyOnExit = !region.notifyOnEntry
+      return region
+    }()
+
     weak var mapView: MapView?
     let localService = CloudKitMessagesService()
     var messages: [Message] = [] {
@@ -35,7 +48,6 @@ class MapViewModel: NSObject, MapViewModelProtocol {
             addNearPins()
         }
     }
-    var radius: Double = 300
 
     override init() {
         super.init()
@@ -45,7 +57,8 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     }
 
     func getMessages() {
-        localService.fetchMessages { result in
+        let location = Location(from: currentLocation.coordinate)
+        localService.fetchMessages(location: location) { result in
             switch result {
             case .success(let messages):
                 self.messages = messages
@@ -81,16 +94,24 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 extension MapViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let coordinateRegion = MKCoordinateRegion(
-                center: location.coordinate,
-                latitudinalMeters: 1000,
-                longitudinalMeters: 1000)
-            self.mapView?.setRegion(coordinateRegion, animated: true)
-            self.currentLocation = location
+            let shouldUpdateCurrentLocation = currentLocation.distance(from: location) > radius
+            if shouldUpdateCurrentLocation {
+                self.currentLocation = location
+            }
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        guard let circularRegion = region as? CLCircularRegion else { return }
+        self.handleCircularRegion(circularRegion)
+    }
 
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        guard let circularRegion = region as? CLCircularRegion else { return }
+        self.handleCircularRegion(circularRegion)
+    }
+
+    func handleCircularRegion(_ region: CLCircularRegion) {
+        print("Geofence triggered!")
     }
 }

@@ -9,6 +9,9 @@
 // Strings from `AddMessage` scene.
 "btn_cancel" = "Cancel";
 "btn_post" = "Post";
+"btn_report" = "Report";
+"btn_blockUser" = "Block User";
+"btn_dismiss" = "Dismiss";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Close Messages";
