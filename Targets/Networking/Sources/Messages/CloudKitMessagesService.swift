@@ -80,24 +80,4 @@ public class CloudKitMessagesService: MessageService {
             completion(.success(true))
         }
     }
-    
-    private func perform(query: CKQuery, completion: @escaping ((Result<[CKRecord], MessageServiceError>) -> Void)) {
-        let operation = CKQueryOperation(query: query)
-        var records: [CKRecord] = []
-
-        operation.recordFetchedBlock = { record in
-            records.append(record)
-        }
-
-        operation.queryCompletionBlock = { _, error in
-            guard error == nil else {
-                completion(.failure(.networkError))
-                return
-            }
-            completion(.success(records))
-        }
-
-        operation.qualityOfService = .utility
-        database.add(operation)
-    }
 }
