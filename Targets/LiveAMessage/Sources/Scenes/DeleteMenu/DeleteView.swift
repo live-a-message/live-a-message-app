@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Networking
 import DesignSystem
 
 class DeleteView {
     private let viewModel: DeleteViewModel
+    var popScreen: ((Message) -> Void)?
 
     init(viewModel: DeleteViewModel) {
         self.viewModel = viewModel
@@ -34,6 +36,9 @@ class DeleteView {
         AKLoadingView.shared.startLoading(on: viewController)
         viewModel.delete { didSucceed in
             AKLoadingView.shared.stopLoading(didSucceed: didSucceed)
+            if didSucceed {
+                self.popScreen?(self.viewModel.message)
+            }
         }
     }
 }

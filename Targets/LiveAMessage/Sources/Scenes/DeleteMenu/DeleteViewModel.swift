@@ -10,7 +10,7 @@ import Foundation
 import Networking
 
 class DeleteViewModel {
-    private let message: Message
+    let message: Message
     private let service: MessageService
 
     init(message: Message, service: MessageService) {

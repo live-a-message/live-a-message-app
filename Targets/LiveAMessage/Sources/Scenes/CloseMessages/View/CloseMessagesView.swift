@@ -47,6 +47,10 @@ class CloseMessagesView: UIView {
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
     }
+
+    func reloadData() {
+        tableView.reloadData()
+    }
 }
 
 extension CloseMessagesView: ViewCode {
