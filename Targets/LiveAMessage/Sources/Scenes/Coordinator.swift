@@ -19,6 +19,7 @@ protocol Coordinator: AnyObject {
     func showAddMessage()
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
+    func showDeleteMenu(with message: Message, on viewController: UIViewController)
 }
 
 class MainCoordinator: Coordinator {
@@ -111,6 +112,12 @@ class MainCoordinator: Coordinator {
         let reportViewModel = ReportViewModel(message: message, service: userService)
         let reportView = ReportView(viewModel: reportViewModel)
         reportView.showReportMenu(on: viewController)
+    }
+
+    func showDeleteMenu(with message: Message, on viewController: UIViewController) {
+        let deleteViewModel = DeleteViewModel(message: message, service: messagesService)
+        let deleteView = DeleteView(viewModel: deleteViewModel)
+        deleteView.showDeleteMenu(on: viewController)
     }
 
     private func isUserLoggedIn() -> Bool {
