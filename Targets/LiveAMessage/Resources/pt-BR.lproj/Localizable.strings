@@ -15,6 +15,7 @@
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Mensagens Próximas";
+"lbl_titleMessage_close_messages" = "Mensagem Akee";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";
