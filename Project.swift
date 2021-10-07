@@ -31,6 +31,7 @@ let targets = [
         entitlements: "Akee.entitlements",
         actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
+            .package(product: "Lottie"),
             .package(product: "TinyConstraints"),
             .target(name: "Networking"),
             .target(name: "DesignSystem")
@@ -77,6 +78,10 @@ let packages: [Package] = [
     .remote(
         url: "https://github.com/roberthein/TinyConstraints",
         requirement: .exact(Version(4, 0, 2))
+    ),
+    .remote(
+        url: "https://github.com/airbnb/lottie-ios.git",
+        requirement: .exact(Version(3, 2, 2))
     )
 ]
 

@@ -22,6 +22,7 @@ protocol Coordinator: AnyObject {
 }
 
 class MainCoordinator: Coordinator {
+    private let onboardingViewController = OnboardingPageViewController()
     private let authService = SignInWithAppleAuthorization()
     private let messagesService = CloudKitMessagesService()
     private let userService = CloudKitUserService()
@@ -51,7 +52,7 @@ class MainCoordinator: Coordinator {
         if isUserLoggedIn() {
             rootViewController.setViewControllers([mapViewController], animated: false)
         } else {
-            rootViewController.setViewControllers([loginViewController], animated: false)
+            rootViewController.setViewControllers([onboardingViewController], animated: false)
         }
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
@@ -115,7 +116,7 @@ class MainCoordinator: Coordinator {
 
     private func isUserLoggedIn() -> Bool {
         #if DEBUG
-            return true
+            return false
         #else
             return UserData.shared.isLoggedIn
         #endif
