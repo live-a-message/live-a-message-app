@@ -17,7 +17,7 @@ public class CloudKitMessagesService: MessageService {
 
     public init() {}
 
-    public func fetchMessages(location: Location, radius: Double = .greatestFiniteMagnitude, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
+    public func fetchMessages(location: Location, radius: Double, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
         let currentLocation = CLLocation(latitude: location.lat, longitude: location.lon)
         let predicate = NSPredicate(
             format: "distanceToLocation:fromLocation:(location, %@) < %f",
