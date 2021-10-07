@@ -12,7 +12,7 @@ import DesignSystem
 
 class MainMapView: UIView, ViewCode {
 
-    var didTapPin: ((MKAnnotation?) -> ())? {
+    var didTapPin: ((MKAnnotation?) -> Void)? {
         didSet {
             mapView.didTapPin = didTapPin
         }

@@ -14,14 +14,20 @@ import Foundation
 public enum AkeeStrings {
   /// Cancel
   public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
+  /// Delete
+  public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
   /// Post
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
+  /// Report
+  public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
   /// Login to host messages and\n share memory with other users
   public static let lblDescriptionSignIn = AkeeStrings.tr("Localizable", "lbl_description_sign_in")
   /// Sign In
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Pull to refresh messages
+  public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

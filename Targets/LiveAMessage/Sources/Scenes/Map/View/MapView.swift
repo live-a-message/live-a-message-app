@@ -14,7 +14,7 @@ import Networking
 
 class MapView: MKMapView {
 
-    var didTapPin: ((MKAnnotation?) -> ())?
+    var didTapPin: ((MKAnnotation?) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -36,9 +36,9 @@ class MessageDetailsViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
         if viewModel.canDelete {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(showDeleteMenu))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnDelete, style: .plain, target: self, action: #selector(showDeleteMenu))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Report", style: .plain, target: self, action: #selector(showReportMenu))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnReport, style: .plain, target: self, action: #selector(showReportMenu))
         }
     }
 

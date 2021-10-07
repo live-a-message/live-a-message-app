@@ -12,7 +12,12 @@
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "关闭消息";
+"refresh_close_messages" = "拉动刷新";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";
 "lbl_description_sign_in" = "登录到主机消息和\n与其他用户共享内存";
+
+// Strings from 'MessageDetails' scene
+"btn_delete" = "删除";
+"btn_report" = "报告";

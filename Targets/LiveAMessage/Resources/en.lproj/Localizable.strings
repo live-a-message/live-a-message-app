@@ -12,7 +12,13 @@
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Close Messages";
+"refresh_close_messages" = "Pull to refresh messages";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";
 "lbl_description_sign_in" = "Login to host messages and\n share memory with other users";
+
+// Strings from 'MessageDetails' scene
+"btn_delete" = "Delete";
+"btn_report" = "Report";
+

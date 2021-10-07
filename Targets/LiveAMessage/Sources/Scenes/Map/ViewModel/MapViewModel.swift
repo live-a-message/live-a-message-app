@@ -13,7 +13,7 @@ import MapKit
 
 class MapViewModel: NSObject, MapViewModelProtocol {
 
-    lazy var annotations = [MKPointAnnotation : Message]()
+    lazy var annotations = [MKPointAnnotation: Message]()
 
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
