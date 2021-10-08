@@ -11,6 +11,9 @@ jobs:
     steps:
      # Step to run automated tests
     - uses: actions/checkout@v1
+    - name: Bundle Install
+      run: bundle install
+      
     - name: Generate project
       run: |
          curl -L -o ./tuist.zip https://github.com/tuist/tuist/releases/download/1.39.1/tuist.zip
