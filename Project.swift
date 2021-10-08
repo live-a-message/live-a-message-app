@@ -44,7 +44,9 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
-        dependencies: [ ]
+        dependencies: [
+            .target(name: "Akee")
+        ]
     ),
     Target(
         name: "Networking",
