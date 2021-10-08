@@ -13,30 +13,30 @@ import Networking
 
 class MapViewController: UIViewController {
 
-    let viewModel = MapViewModel()
-
+    let viewModel: MapViewModelProtocol
     let mainView = MainMapView()
-
     weak var coordinator: Coordinator?
 
+    init(viewModel: MapViewModelProtocol = MapViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
-        view.backgroundColor = .white
-        self.mainView.bind(viewModel: viewModel)
         buildHierarchy()
         setupConstraints()
         configureViews()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if UserData.shared.agreeWithTerms == false {
-            present(TermsViewController(), animated: true)
-        }
+        mainView.bind(viewModel: viewModel)
     }
 
     func buildHierarchy() {
         view.addSubview(mainView)
     }
+
     func setupConstraints() {
         mainView.setupConstraints()
     }
@@ -46,6 +46,7 @@ class MapViewController: UIViewController {
         mainView.headerView.leftButtonAction = showCloseMessages
         mainView.didTapPin = didTapMessagePin(_:)
     }
+
 }
 
 extension MapViewController {

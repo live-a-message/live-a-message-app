@@ -17,9 +17,17 @@ public class CloudKitMessagesService: MessageService {
 
     public init() {}
 
-    public func fetchMessages(location: Location = .init(lat: .zero, lon: .zero), radius: Double = .zero, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
-        let predicate = NSPredicate(value: true)
+    public func fetchMessages(location: Location, radius: Double, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
+        let currentLocation = CLLocation(latitude: location.lat, longitude: location.lon)
+        let predicate = NSPredicate(
+            format: "distanceToLocation:fromLocation:(location, %@) < %f",
+            currentLocation,
+            NSNumber(value: radius)
+        )
         let query = CKQuery(recordType: recordName, predicate: predicate)
+        let sortDescription = CKLocationSortDescriptor(key: "location", relativeLocation: currentLocation)
+        query.sortDescriptors = [sortDescription]
+
         let operation = CKQueryOperation(query: query)
         var messages = [Message]()
 

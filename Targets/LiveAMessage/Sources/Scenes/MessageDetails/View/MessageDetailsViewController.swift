@@ -35,7 +35,7 @@ class MessageDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Report", style: .plain, target: self, action: #selector(showReportMenu))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnReport, style: .plain, target: self, action: #selector(showReportMenu))
     }
 
     func setCloseButton() {

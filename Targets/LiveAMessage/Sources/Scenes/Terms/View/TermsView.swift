@@ -18,6 +18,8 @@ class TermsView: UIView, ViewCode {
         AKLabel(style: AKLabelStyle.title2)
     }()
 
+    lazy var loadingIndicator = AKLoadingIndicator(frame: .zero)
+
     lazy var descriptionLabel: AKLabel = {
         let label = AKLabel(style: AKLabelStyle.body1)
         label.textAlignment = .justified
@@ -66,10 +68,12 @@ class TermsView: UIView, ViewCode {
         container.addArrangedSubview(titleLabel)
         container.addArrangedSubview(descriptionLabel)
         container.addSubview(confirmButton)
+        container.addSubview(loadingIndicator)
     }
 
     func setupConstraints() {
         container.edgesToSuperview(usingSafeArea: true)
+        loadingIndicator.center(in: self)
 
         confirmButton.leadingToSuperview(offset: AKSpacing.medium.value)
         confirmButton.trailingToSuperview(offset: AKSpacing.medium.value)
