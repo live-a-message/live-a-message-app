@@ -21,4 +21,5 @@
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";
 "btn_report" = "Report";
+"btn_block_user" = "Block user";
 

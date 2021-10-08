@@ -21,11 +21,11 @@ class DeleteView {
     func showDeleteMenu(on viewController: UIViewController) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Delete message", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnDelete, style: .destructive) { _ in
             self.deleteMessage(viewController: viewController)
         })
 
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnCancel, style: .cancel) { _ in
             print("User click dismiss button")
         })
 

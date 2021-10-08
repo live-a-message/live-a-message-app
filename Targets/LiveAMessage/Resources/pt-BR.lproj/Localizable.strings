@@ -21,3 +21,4 @@
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Apagar";
 "btn_report" = "Reportar";
+"btn_block_user" = "Bloquear usuário";
