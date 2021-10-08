@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DesignSystem
 import Networking
 
 class CloseMessagesViewController: UIViewController {
@@ -47,6 +48,7 @@ class CloseMessagesViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setDefaultAppearance(color: AKColor.mainBackgroundColor)
         self.navigationItem.leftBarButtonItem = mainView.closeButton
         mainView.closeButton.target = self
         mainView.closeButton.action = #selector(dismissView)
