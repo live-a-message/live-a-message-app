@@ -9,10 +9,14 @@
 // Strings from `AddMessage` scene.
 "btn_cancel" = "Cancel";
 "btn_post" = "Post";
+"btn_report" = "Report";
+"btn_blockUser" = "Block User";
+"btn_dismiss" = "Dismiss";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Close Messages";
 "refresh_close_messages" = "Pull to refresh messages";
+"lbl_titleMessage_close_messages" = "Akee Message";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";

@@ -83,9 +83,13 @@ class MainCoordinator: Coordinator {
 
     func showAddMessage() {
         let controller = AddMessageViewController(viewModel: AddMessageViewModel())
-        mapViewController.viewModel.notificateChange()
+        mapViewController.viewModel.postNotificationUpdateLocation()
         controller.handleDismiss = {
-            self.mapViewController.viewModel.didUpdatedLocation()
+            self.mapViewController.viewModel.fetchMessages()
+        }
+
+        controller.viewModel.didSaveMessage = { [weak self] message in
+            self?.mapViewController.viewModel.addPin(message)
         }
         controller.modalPresentationStyle = .formSheet
         rootViewController.present(controller, animated: true)

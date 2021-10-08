@@ -46,7 +46,7 @@ class MainMapView: UIView, ViewCode {
         headerView.setupConstraints()
     }
 
-    func bind(viewModel: MapViewModel) {
+    func bind(viewModel: MapViewModelProtocol) {
         viewModel.mapView = self.mapView
     }
 

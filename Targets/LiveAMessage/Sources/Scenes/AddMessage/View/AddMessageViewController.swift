@@ -13,7 +13,7 @@ import Networking
 class AddMessageViewController: UIViewController {
 
     var handleDismiss : (() -> Void)?
-    private let viewModel: AddMessageViewModelProtocol
+    let viewModel: AddMessageViewModelProtocol
     private lazy var messageView = AddMessageView()
 
     init(viewModel: AddMessageViewModelProtocol) {
