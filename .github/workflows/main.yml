@@ -27,7 +27,7 @@ jobs:
     - name: Set up Fastlane
       run: bundle install
   
-      - name: Generate project
+    - name: Generate project
       run: tuist generate
   
     - name: Update Fastlane
