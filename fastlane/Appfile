@@ -1,0 +1,11 @@
+# The bundle identifier of your app
+app_identifier("com.Akee.Akee") 
+
+# Your Apple email address
+apple_id ENV["APPLE_ID"]
+
+# Developer Portal Team ID
+team_id ENV["TEAM_ID"]
+
+ # App Store Connect Team ID
+itc_team_id ENV["ITC_TEAM_ID"]
