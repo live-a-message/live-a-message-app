@@ -10,7 +10,7 @@ import UIKit
 import DesignSystem
 
 class MessageDetailTableViewCell: UITableViewCell, ViewCode {
-    
+
     lazy var titleLabel: AKLabel = {
         let label = AKLabel(style: AKLabelStyle.title2)
         label.textAlignment = .left
@@ -23,7 +23,7 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         label.textAlignment = .left
         return label
     }()
-    
+
     func fill(message: String) {
         configureViews()
         messageLabel.text = message

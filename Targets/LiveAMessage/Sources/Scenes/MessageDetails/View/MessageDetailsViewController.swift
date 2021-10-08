@@ -11,16 +11,16 @@ import DesignSystem
 
 class MessageDetailsViewController: UIViewController {
 
-    var viewModel: MessageDetailsViewModelProtocol?
+    var viewModel: MessageDetailsViewModelProtocol
     weak var coordinator: Coordinator?
 
     init(viewModel: MessageDetailsViewModelProtocol) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
 
     override func loadView() {
@@ -35,7 +35,11 @@ class MessageDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnReport, style: .plain, target: self, action: #selector(showReportMenu))
+        if viewModel.canDelete {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnDelete, style: .plain, target: self, action: #selector(showDeleteMenu))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnReport, style: .plain, target: self, action: #selector(showReportMenu))
+        }
     }
 
     func setCloseButton() {
@@ -43,8 +47,13 @@ class MessageDetailsViewController: UIViewController {
     }
 
     @objc private func showReportMenu() {
-        guard let message = viewModel?.message else { return }
+        let message = viewModel.message
         coordinator?.showReportMenu(with: message, on: self)
+    }
+
+    @objc private func showDeleteMenu() {
+        let message = viewModel.message
+        coordinator?.showDeleteMenu(with: message, on: self)
     }
 
     @objc private func close() {

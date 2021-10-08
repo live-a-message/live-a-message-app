@@ -27,7 +27,7 @@ class ReportView {
             self.blockUser(viewController: viewController)
         })
 
-        alert.addAction(UIAlertAction(title: AkeeStrings.btnDismiss, style: .cancel) { _ in
+        alert.addAction(UIAlertAction(title: AkeeStrings.btnCancel, style: .cancel) { _ in
             print("User click dismiss button")
         })
 

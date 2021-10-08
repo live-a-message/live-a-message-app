@@ -16,6 +16,8 @@ public enum AkeeStrings {
   public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_blockUser")
   /// Cancel
   public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
+  /// Delete
+  public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
   /// Dismiss
   public static let btnDismiss = AkeeStrings.tr("Localizable", "btn_dismiss")
   /// Post
@@ -30,6 +32,8 @@ public enum AkeeStrings {
   public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Pull to refresh messages
+  public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

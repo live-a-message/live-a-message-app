@@ -19,6 +19,7 @@ protocol Coordinator: AnyObject {
     func showAddMessage()
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
+    func showDeleteMenu(with message: Message, on viewController: UIViewController)
 }
 
 class MainCoordinator: Coordinator {
@@ -30,6 +31,7 @@ class MainCoordinator: Coordinator {
     private let rootViewController: UINavigationController
 
     private var closeMessagesController: CloseMessagesViewController?
+    private var closeMessagesViewModel: CloseMessagesViewModel?
     private var window: UIWindow?
 
     init() {
@@ -70,9 +72,9 @@ class MainCoordinator: Coordinator {
     }
 
     func showCloseMessages() {
-        let closeMessagesViewModel = CloseMessagesViewModel(messages: mapViewController.viewModel.messages)
-        closeMessagesViewModel.coordinator = self
-        closeMessagesController = CloseMessagesViewController(viewModel: closeMessagesViewModel)
+        closeMessagesViewModel = CloseMessagesViewModel(messages: mapViewController.viewModel.messages)
+        closeMessagesViewModel?.coordinator = self
+        closeMessagesController = CloseMessagesViewController(viewModel: closeMessagesViewModel!)
         let navController = UINavigationController(rootViewController: closeMessagesController!)
 
         navController.modalPresentationStyle = .overFullScreen
@@ -115,6 +117,21 @@ class MainCoordinator: Coordinator {
         let reportViewModel = ReportViewModel(message: message, service: userService)
         let reportView = ReportView(viewModel: reportViewModel)
         reportView.showReportMenu(on: viewController)
+    }
+
+    func showDeleteMenu(with message: Message, on viewController: UIViewController) {
+        let deleteViewModel = DeleteViewModel(message: message, service: messagesService)
+        let deleteView = DeleteView(viewModel: deleteViewModel)
+        deleteView.popScreen = popMessageDetailsAndRemove
+        deleteView.showDeleteMenu(on: viewController)
+    }
+
+    private func popMessageDetailsAndRemove(message: Message) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let updatedMessages = self.mapViewController.viewModel.messages.filter({ $0.id != message.id })
+            self.closeMessagesViewModel?.setupCells(messages: updatedMessages)
+            self.closeMessagesController?.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     private func isUserLoggedIn() -> Bool {

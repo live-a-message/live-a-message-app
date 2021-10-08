@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Networking
 
 class CloseMessagesViewController: UIViewController {
 
@@ -34,6 +35,11 @@ class CloseMessagesViewController: UIViewController {
             mainView.bind(viewModel: viewModel)
         }
         setupCloseAction()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainView.reloadData()
     }
 
     private func setupCloseAction() {
