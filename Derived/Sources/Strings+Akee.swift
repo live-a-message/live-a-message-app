@@ -12,16 +12,12 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
-  /// Block user
-  public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_block_user")
-  /// Cancel
-  public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
-  /// Delete
-  public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
   /// Block User
   public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_blockUser")
   /// Cancel
   public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
+  /// Delete
+  public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
   /// Dismiss
   public static let btnDismiss = AkeeStrings.tr("Localizable", "btn_dismiss")
   /// Post
