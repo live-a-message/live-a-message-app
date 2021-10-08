@@ -11,7 +11,10 @@ jobs:
     steps:
      # Step to run automated tests
     - name: Generate project
-      run: tuist generate
+      run: |
+         curl -L -o ./tuist.zip https://github.com/tuist/tuist/releases/download/1.39.1/tuist.zip
+         unzip ./tuist.zip -d .tuist-bin
+         .tuist-bin/tuist generate
 
     - uses: actions/checkout@v1
     - name: Run tests
