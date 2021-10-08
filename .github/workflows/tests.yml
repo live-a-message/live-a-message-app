@@ -10,6 +10,9 @@ jobs:
     runs-on: macOS-latest
     steps:
      # Step to run automated tests
+    - name: Generate project
+      run: tuist generate
+
     - uses: actions/checkout@v1
     - name: Run tests
       run: |
