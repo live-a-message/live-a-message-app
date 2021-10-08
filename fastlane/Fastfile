@@ -93,7 +93,7 @@ platform :ios do
       scheme: ENV["SCHEME"],
       clean: true,
       code_coverage: true,
-      only_testing: [ENV["TESTS_DIRECTORY"]],
+      only_testing: [ENV["TESTS_DIRECTORY"]]
     )
   end
 end
