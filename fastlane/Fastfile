@@ -90,6 +90,7 @@ platform :ios do
     update_project_provisioning(
       xcodeproj: ENV["XCODEPROJ"],
       profile: ENV["sigh_com.Akee.Akee_appstore_profile-path"],
+      target_filter: ".*Akee.*"
       code_signing_identity: "iPhone Distribution"
     )
     update_project_team(
