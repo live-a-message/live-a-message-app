@@ -25,7 +25,7 @@ platform :ios do
       )
     end
     match(type: "appstore", readonly: true)
-
+    select_developer_team
     build_app(
       workspace: ENV["WORKSPACE"],
       scheme: ENV["SCHEME"],
@@ -84,6 +84,18 @@ platform :ios do
     match(type: "adhoc", force_for_new_devices: true)
     match(type: "appstore")
   end
+
+  lane :select_developer_team do
+    disable_automatic_code_signing
+    update_project_provisioning(
+      xcodeproj: ENV["XCODEPROJ"],
+      profile: sigh_com.Akee.Akee_appstore_profile-path,
+      code_signing_identity: "iPhone Distribution"
+    )
+    update_project_team(
+      path: ENV["XCODEPROJ"],
+      teamid: options[:team_id]
+    )
 
   lane :tests do
     # sh "xcrun simctl create iPhone-11-14-4 'iPhone 11' com.apple.CoreSimulator.SimRuntime.iOS-14-4"
