@@ -67,7 +67,6 @@ platform :ios do
   desc "Increment Build Number"
   lane :inc do
     increment_build_number({
-      xcodeproj: ENV["XCODEPROJ"],
       build_number: latest_testflight_build_number + 1,
     })
   end
