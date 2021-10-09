@@ -87,7 +87,7 @@ platform :ios do
   end
 
   lane :tests do
-    sh "xcrun simctl create iPhone-11-14-4 'iPhone 11' com.apple.CoreSimulator.SimRuntime.iOS-14-4"
+    # sh "xcrun simctl create iPhone-11-14-4 'iPhone 11' com.apple.CoreSimulator.SimRuntime.iOS-14-4"
     scan(
       scheme: ENV["SCHEME"],
       clean: true,
