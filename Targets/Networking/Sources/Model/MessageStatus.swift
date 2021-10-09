@@ -11,12 +11,4 @@ import Foundation
 public enum MessageStatus: String, Codable {
     case read
     case unread
-
-    public init(rawValue: String?) {
-        guard let rawValue = rawValue else {
-            self = .unread
-            return
-        }
-        self = MessageStatus(rawValue: rawValue) ?? .unread
-    }
 }
