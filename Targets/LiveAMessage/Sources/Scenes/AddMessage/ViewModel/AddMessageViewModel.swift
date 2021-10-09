@@ -22,7 +22,6 @@ protocol AddMessageViewModelProtocol: AnyObject {
 class AddMessageViewModel: AddMessageViewModelProtocol {
     var messageService: MessageService = CloudKitMessagesService()
     var currentLocation: CLLocation?
-    
     var didSaveMessage: ((Message) -> Void)?
 
     func saveMessage(

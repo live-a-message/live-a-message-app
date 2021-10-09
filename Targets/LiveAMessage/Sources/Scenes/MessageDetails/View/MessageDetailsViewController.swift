@@ -36,14 +36,32 @@ class MessageDetailsViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
         if viewModel.canDelete {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnDelete, style: .plain, target: self, action: #selector(showDeleteMenu))
+            let barButtonItem = UIBarButtonItem(
+                title: AkeeStrings.btnDelete,
+                style: .plain,
+                target: self,
+                action: #selector(showDeleteMenu)
+            )
+            navigationItem.rightBarButtonItem = barButtonItem
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: AkeeStrings.btnReport, style: .plain, target: self, action: #selector(showReportMenu))
+            let barButtonItem = UIBarButtonItem(
+                title: AkeeStrings.btnReport,
+                style: .plain,
+                target: self,
+                action: #selector(showReportMenu)
+            )
+            navigationItem.rightBarButtonItem = barButtonItem
         }
     }
 
     func setCloseButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(close))
+        let leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: IconNamed.close.rawValue),
+            style: .plain,
+            target: self,
+            action: #selector(close)
+        )
+        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 
     @objc private func showReportMenu() {

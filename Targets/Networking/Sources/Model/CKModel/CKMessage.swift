@@ -49,14 +49,14 @@ public class CKMessage {
     }
 
     var message: Message {
-        let status = MessageStatus(rawValue: status ?? MessageStatus.read.rawValue)
+        let status = MessageStatus(rawValue: status)
         let message = Message(
             id: id,
             userId: userId,
             content: content,
             image: image,
             location: .init(from: location.coordinate),
-            status: status ?? .unread
+            status: status
         )
         return message
     }

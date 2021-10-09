@@ -115,7 +115,7 @@ extension MapViewModel: CLLocationManagerDelegate {
         if let location = locations.first {
             // draw circle
             drawOverlayCircle(location: location)
-            
+
             let coordinateRegion = MKCoordinateRegion(
                 center: location.coordinate,
                 latitudinalMeters: 1000,

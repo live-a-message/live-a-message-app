@@ -29,7 +29,7 @@ class CloseMessagesView: UIView {
 
     lazy var closeButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem()
-        barButtonItem.image = UIImage(systemName: "xmark")
+        barButtonItem.image = UIImage(systemName: IconNamed.close.rawValue)
         barButtonItem.tintColor = AKColor.mainRed
         return barButtonItem
     }()
