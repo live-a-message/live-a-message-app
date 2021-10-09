@@ -22,8 +22,8 @@ jobs:
          
     - name: Clear derived data
       run: |
-        fastlane run clear_derived_data
+        bundle exec fastlane run clear_derived_data
 
     - name: Run tests
       run: |
-        fastlane tests --verbose
+        bundle exec fastlane tests --verbose
