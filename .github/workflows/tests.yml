@@ -19,6 +19,10 @@ jobs:
          curl -L -o ./tuist.zip https://github.com/tuist/tuist/releases/download/1.39.1/tuist.zip
          unzip ./tuist.zip -d .tuist-bin
          .tuist-bin/tuist generate
+         
+    - name: Clear derived data
+      run: |
+        fastlane run clear_derived_data
 
     - name: Run tests
       run: |
