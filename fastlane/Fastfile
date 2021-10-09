@@ -94,7 +94,7 @@ platform :ios do
     )
     update_project_team(
       path: ENV["XCODEPROJ"],
-      teamid: options[:team_id]
+      teamid: ENV["team_id"]
     )
   end
 
