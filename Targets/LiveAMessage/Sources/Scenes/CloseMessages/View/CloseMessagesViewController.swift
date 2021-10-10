@@ -13,10 +13,12 @@ class CloseMessagesViewController: UIViewController {
 
     let mainView = CloseMessagesView()
     var viewModel: CloseMessagesViewModelProtocol?
+    var coordinator: Coordinator?
 
-    init(viewModel: CloseMessagesViewModelProtocol) {
+    init(coordinator: Coordinator, viewModel: CloseMessagesViewModelProtocol) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        self.coordinator = coordinator
     }
 
     @available(*, unavailable)
@@ -31,10 +33,16 @@ class CloseMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = AkeeStrings.navTitleCloseMessages
-        if let viewModel = viewModel {
-            mainView.bind(viewModel: viewModel)
+
+        mainView.tableView.bind(sections: viewModel?.sections ?? [])
+
+        mainView.tableView.didSelectRowAt = { [weak self] item in
+            self?.coordinator?.showMessageDetails(with: item.message, fromPin: false)
         }
+
+        setupNavigationController()
         setupCloseAction()
+        setupRefreshControl()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -42,17 +50,38 @@ class CloseMessagesViewController: UIViewController {
         mainView.reloadData()
     }
 
+    private func setupRefreshControl() {
+        mainView.refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+
     private func setupCloseAction() {
+        mainView.closeButton.target = self
+        mainView.closeButton.action = #selector(dismissView)
+    }
+
+    private func setupNavigationController() {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.leftBarButtonItem = mainView.closeButton
-        mainView.closeButton.target = self
-        mainView.closeButton.action = #selector(dismissView)
     }
 
     @objc private func dismissView() {
         dismiss(animated: true)
+    }
+
+    @objc private func refresh() {
+        viewModel?.service
+            .fetchMessages(location: Location.currentLocation, radius: 300, completion: { result in
+                switch result {
+                case .success(let messages):
+                    self.viewModel?.setupCells(messages: messages)
+                    self.mainView.tableView.bind(sections: self.viewModel?.sections ?? [])
+                case .failure(_):
+                    print("errorHandlerNotImplemented:")
+                }
+        })
+        mainView.tableView.reloadData()
     }
 }

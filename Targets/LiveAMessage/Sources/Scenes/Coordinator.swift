@@ -73,8 +73,7 @@ class MainCoordinator: Coordinator {
 
     func showCloseMessages() {
         closeMessagesViewModel = CloseMessagesViewModel(messages: mapViewController.viewModel.messages)
-        closeMessagesViewModel?.coordinator = self
-        closeMessagesController = CloseMessagesViewController(viewModel: closeMessagesViewModel!)
+        closeMessagesController = CloseMessagesViewController(coordinator: self, viewModel: closeMessagesViewModel!)
         let navController = UINavigationController(rootViewController: closeMessagesController!)
 
         navController.modalPresentationStyle = .overFullScreen

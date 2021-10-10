@@ -8,8 +8,8 @@
 
 import UIKit
 
-public struct AKButtonStyle {
-    public static let `default` = AKButtonParamater(
+extension AKButtonStyle {
+    public static let `default` = AKButtonStyle(
         height: 64.0,
         highlightedColor: AKColor.darkRed,
         backgroundColor: AKColor.mainRed,
@@ -19,14 +19,14 @@ public struct AKButtonStyle {
         clipToBounds: true
     )
 
-    public static let icon32 = AKButtonParamater(
+    public static let icon32 = AKButtonStyle(
         height: 32.0,
         width: 40.0,
         clipToBounds: true
     )
 }
 
-public struct AKButtonParamater {
+public struct AKButtonStyle {
     var height: CGFloat?
     var width: CGFloat?
     var highlightedColor: UIColor = .clear

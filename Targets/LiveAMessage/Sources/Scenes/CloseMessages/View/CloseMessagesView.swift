@@ -15,13 +15,11 @@ class CloseMessagesView: UIView {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: AkeeStrings.refreshCloseMessages)
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-
         return refreshControl
     }()
 
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
+    lazy var tableView: AKTableView<CloseMessageCellViewModel, CloseMessageTableViewCell> = {
+        let tableView = AKTableView<CloseMessageCellViewModel, CloseMessageTableViewCell>()
         tableView.tableFooterView = UIView()
         tableView.refreshControl = refreshControl
         return tableView
@@ -41,20 +39,6 @@ class CloseMessagesView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    func bind(viewModel: CloseMessagesViewModelProtocol) {
-        for section in viewModel.sections {
-            for cell in section {
-                tableView.register(
-                    CloseMessageTableViewCell.self,
-                    forCellReuseIdentifier: cell.identifier
-                )
-            }
-        }
-
-        tableView.delegate = viewModel
-        tableView.dataSource = viewModel
     }
 
     func reloadData() {

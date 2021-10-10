@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+
 public struct Location: Codable {
     public let lat: Double
     public let lon: Double
@@ -17,8 +18,10 @@ public struct Location: Codable {
         self.lon = lon
     }
 
-  public init(from coordinate: CLLocationCoordinate2D) {
-    self.lat = coordinate.latitude
-    self.lon = coordinate.longitude
-  }
+    public init(from coordinate: CLLocationCoordinate2D) {
+        self.lat = coordinate.latitude
+        self.lon = coordinate.longitude
+    }
+
+    public static let currentLocation = Location(from: CLLocation().coordinate)
 }
