@@ -10,7 +10,6 @@ import DesignSystem
 import Networking
 
 class CloseMessageCellViewModel: TableViewCellViewModel {
-    lazy var identifier: String = String(describing: type(of: self))
     var message: Message
     let title = AkeeStrings.lblTitleMessageCloseMessages
 

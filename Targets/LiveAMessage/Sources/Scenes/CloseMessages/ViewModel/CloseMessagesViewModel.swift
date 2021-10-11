@@ -14,6 +14,7 @@ protocol CloseMessagesViewModelProtocol {
     var sections: [[CloseMessageCellViewModel]] { get set }
     var sectionsTitle: [CloseMessagesViewModel.SectionTitle] { get set }
     var service: MessageService { get }
+    var currentLocation: Location { get }
     func setupCells(messages: [Message])
 }
 
@@ -21,10 +22,12 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
 
     var sections = [[CloseMessageCellViewModel]]()
     var sectionsTitle = [SectionTitle]()
+    let currentLocation: Location
 
     let service: MessageService = CloudKitMessagesService()
 
-    init(messages: [Message] = []) {
+    init(messages: [Message] = [], currentLocation: Location) {
+        self.currentLocation = currentLocation
         super.init()
         setupCells(messages: messages)
     }

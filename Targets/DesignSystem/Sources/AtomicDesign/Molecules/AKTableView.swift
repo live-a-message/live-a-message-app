@@ -8,12 +8,11 @@
 
 import UIKit
 
-public protocol TableViewCellViewModel {
-    var identifier: String { get }
-}
+public protocol TableViewCellViewModel { }
 
 public protocol TableViewCell: UITableViewCell {
     associatedtype ViewModel: TableViewCellViewModel
+    static var identifier: String { get }
     func setup(viewModel: ViewModel)
 }
 /// AKTableView é uma table view genérica que recebe essencialmente 2 parametros completamente customizaveis
@@ -37,11 +36,7 @@ public class AKTableView<Item: TableViewCellViewModel,
     /// `bind(sections:)` é usada para configurar tudo que será usado na tableView, delegates e dataSources
     /// é uma maneira de inicializar tudo sem ser pelo o próprio init.
     public func bind(sections: [Section]) {
-        for section in sections {
-            section.map({ $0.identifier }).forEach { identifier in
-                register(Cell.self, forCellReuseIdentifier: identifier)
-            }
-        }
+        register(Cell.self, forCellReuseIdentifier: Cell.identifier)
         delegate = self
         dataSource = self
         self.sections = sections
@@ -66,7 +61,7 @@ public class AKTableView<Item: TableViewCellViewModel,
         let cells = sections[indexPath.section]
         guard let viewModel = cells[indexPath.row] as? Cell.ViewModel,
               let cell = tableView.dequeueReusableCell(
-                withIdentifier: viewModel.identifier,
+                withIdentifier: Cell.identifier,
                 for: indexPath
               ) as? Cell else { return UITableViewCell() }
         cell.setup(viewModel: viewModel)

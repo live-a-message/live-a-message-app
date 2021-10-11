@@ -72,7 +72,10 @@ class MainCoordinator: Coordinator {
     }
 
     func showCloseMessages() {
-        closeMessagesViewModel = CloseMessagesViewModel(messages: mapViewController.viewModel.messages)
+        let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
+        closeMessagesViewModel = CloseMessagesViewModel(
+            messages: mapViewController.viewModel.messages,
+            currentLocation: location)
         closeMessagesController = CloseMessagesViewController(coordinator: self, viewModel: closeMessagesViewModel!)
         let navController = UINavigationController(rootViewController: closeMessagesController!)
 

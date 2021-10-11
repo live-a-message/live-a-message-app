@@ -42,12 +42,7 @@ class CloseMessagesView: UIView {
     }
 
     func reloadData() {
-        tableView.reloadData()
-    }
-
-    @objc private func refresh() {
-        reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.33) {
             self.refreshControl.endRefreshing()
         }
     }

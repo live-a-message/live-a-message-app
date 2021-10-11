@@ -23,5 +23,4 @@ public struct Location: Codable {
         self.lon = coordinate.longitude
     }
 
-    public static let currentLocation = Location(from: CLLocation().coordinate)
 }

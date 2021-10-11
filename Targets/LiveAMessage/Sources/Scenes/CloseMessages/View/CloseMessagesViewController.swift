@@ -73,15 +73,15 @@ class CloseMessagesViewController: UIViewController {
 
     @objc private func refresh() {
         viewModel?.service
-            .fetchMessages(location: Location.currentLocation, radius: 300, completion: { result in
+            .fetchMessages(location: viewModel?.currentLocation ?? .currentLocation, radius: 300, completion: { result in
                 switch result {
                 case .success(let messages):
                     self.viewModel?.setupCells(messages: messages)
-                    self.mainView.tableView.bind(sections: self.viewModel?.sections ?? [])
+                    self.mainView.tableView.sections = self.viewModel?.sections ?? []
+                    self.mainView.reloadData()
                 case .failure(_):
                     print("errorHandlerNotImplemented:")
                 }
         })
-        mainView.tableView.reloadData()
     }
 }
