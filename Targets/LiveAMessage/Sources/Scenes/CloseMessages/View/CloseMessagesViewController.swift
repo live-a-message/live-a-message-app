@@ -72,8 +72,9 @@ class CloseMessagesViewController: UIViewController {
     }
 
     @objc private func refresh() {
+        guard let location = viewModel?.currentLocation else { return }
         viewModel?.service
-            .fetchMessages(location: viewModel?.currentLocation ?? .currentLocation, radius: 300, completion: { result in
+            .fetchMessages(location: location, radius: 300, completion: { result in
                 switch result {
                 case .success(let messages):
                     self.viewModel?.setupCells(messages: messages)
