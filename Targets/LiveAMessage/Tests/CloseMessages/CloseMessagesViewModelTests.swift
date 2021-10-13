@@ -46,7 +46,7 @@ extension CloseMessageViewModelTests {
     }
 
     private func makeSut() -> Sut {
-        let viewModel = CloseMessagesViewModel()
+        let viewModel = CloseMessagesViewModel(currentLocation: .init(lat: 12312, lon: 231231))
         return viewModel
     }
 }
