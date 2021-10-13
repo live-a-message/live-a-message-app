@@ -45,6 +45,7 @@ public class AKButton: UIButton {
         self.contentHorizontalAlignment = style.contentHorizontalAlignment
         self.contentVerticalAlignment   = style.contentVerticalAlignment
         self.imageView?.tintColor       = icon?.tintColor
+        self.titleLabel?.textAlignment  = style.textAlignment
 
         self.setBackgroundColor(style.backgroundColor, for: .normal)
         self.setBackgroundColor(style.highlightedColor, for: .highlighted)

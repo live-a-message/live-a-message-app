@@ -16,7 +16,8 @@ extension AKButtonStyle {
         borderWidth: 0.0,
         cornerRadius: 6.0,
         font: UIFont.boldSystemFont(ofSize: 24),
-        clipToBounds: true
+        clipToBounds: true,
+        textAlignment: .center
     )
 
     public static let icon32 = AKButtonStyle(
@@ -40,6 +41,7 @@ public struct AKButtonStyle {
     var contentMode: UIView.ContentMode = .scaleAspectFit
     var contentVerticalAlignment: UIControl.ContentVerticalAlignment = .fill
     var contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .fill
+    var textAlignment: NSTextAlignment = .natural
 }
 
 public struct ButtonIcon {
