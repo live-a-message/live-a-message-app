@@ -6,15 +6,10 @@
 //  Copyright © 2021 LiveAMessage. All rights reserved.
 //
 
-import Foundation
+import DesignSystem
 import Networking
 
-protocol TableViewCell {
-    var identifier: String { get }
-}
-
-class CloseMessageCellViewModel: TableViewCell {
-    lazy var identifier: String = String(describing: type(of: self))
+class CloseMessageCellViewModel: TableViewCellViewModel {
     var message: Message
     let title = AkeeStrings.lblTitleMessageCloseMessages
 

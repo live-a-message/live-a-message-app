@@ -9,7 +9,9 @@
 import UIKit
 import DesignSystem
 
-class CloseMessageTableViewCell: UITableViewCell {
+class CloseMessageTableViewCell: UITableViewCell, TableViewCell {
+    typealias ViewModel = CloseMessageCellViewModel
+    static var identifier: String = String(describing: type(of: CloseMessageTableViewCell.self))
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
