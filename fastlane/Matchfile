@@ -1,0 +1,2 @@
+git_url("git@github.com:live-a-message/certificates.git")
+git_branch "certificates"
