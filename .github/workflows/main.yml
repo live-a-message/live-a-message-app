@@ -3,7 +3,7 @@ name: iOS Deploy
 on:
   workflow_dispatch:
   push:
-   branches: [ main ]
+   branches: [ develop ]
 
 jobs:
   build:

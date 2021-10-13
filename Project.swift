@@ -3,6 +3,8 @@ import ProjectDescriptionHelpers
 
 let infoPlist: [String: InfoPlist.Value] = [
     "UILaunchScreen": [:],
+    "CFBundleShortVersionString": "1.1",
+    "CFBundleVersion": "1.0",
     "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
     "CFBundleDocumentTypes": [
         [
