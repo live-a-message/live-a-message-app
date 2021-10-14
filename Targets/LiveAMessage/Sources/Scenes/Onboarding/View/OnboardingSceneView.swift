@@ -18,7 +18,6 @@ class OnboardingSceneView: UIView, ViewCode {
         let view = AnimationView()
         view.loopMode = .loop
         view.contentMode = .scaleAspectFit
-
         return view
     }()
 
@@ -35,8 +34,7 @@ class OnboardingSceneView: UIView, ViewCode {
     }()
 
     lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = AKColor.mainRed
+        let button = AKButton(style: AKButtonStyle.default)
         button.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         return button
     }()

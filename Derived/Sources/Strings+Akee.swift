@@ -34,8 +34,6 @@ public enum AkeeStrings {
   public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
-  /// Pull to refresh messages
-  public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
   /// Write message at any place and share your feelings.
   public static let onboardingDescription1 = AkeeStrings.tr("Localizable", "onboarding_description_1")
   /// Read people messages whenever you want.
@@ -48,6 +46,8 @@ public enum AkeeStrings {
   public static let onboardingTitle2 = AkeeStrings.tr("Localizable", "onboarding_title_2")
   /// All over the World
   public static let onboardingTitle3 = AkeeStrings.tr("Localizable", "onboarding_title_3")
+  /// Pull to refresh messages
+  public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
