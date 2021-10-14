@@ -42,7 +42,7 @@ public class CKMessage {
         record["content"] = message.content
         record["id"] = message.id
         record["userId"] = message.userId
-        record["image"] = message.image
+        record["image"] = encodeImage(message.image)
         record["location"] = CLLocation(latitude: message.location.lat, longitude: message.location.lon)
         record["status"] = message.status.rawValue
         return record
@@ -57,10 +57,20 @@ public class CKMessage {
             id: id,
             userId: userId,
             content: content,
-            image: image,
+            image: try? Data(contentsOf: image?.fileURL!),
             location: .init(from: location.coordinate),
             status: messageStatus
         )
         return message
+    }
+  
+    public static func encodeImage(_ data: Data?) -> CKAsset?{
+      guard let unWrapppedData = data else {
+        return nil
+      }
+      guard let folder = FileHelper.sharedHelper.saveFile(unWrapppedData, as: "imageTemp.png", in: .ephemeral) else {
+        return nil
+      }
+      return CKAsset(fileURL: folder)
     }
 }

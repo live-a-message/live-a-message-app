@@ -15,13 +15,13 @@ public struct Message: Codable, Equatable {
 
     public var status: MessageStatus
     public var content: String
-    public var image: String?
+    public var image: Data?
 
     public init(
         id: String = UUID().uuidString,
         userId: String,
         content: String,
-        image: String?,
+        image: Data?,
         location: Location,
         status: MessageStatus = .unread
     ) {

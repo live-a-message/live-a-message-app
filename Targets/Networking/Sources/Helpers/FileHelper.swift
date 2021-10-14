@@ -10,6 +10,8 @@ import Foundation
 
 class FileHelper {
   
+  private (set) var shared = FileHelper()
+  
   private var mainPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
   
   func saveFile(_ file: Data, as name: String, in directory: Directory) throws -> URL {
