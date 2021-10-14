@@ -51,6 +51,9 @@ extension MapView: MKMapViewDelegate {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            let image = AkeeAsset.markerFill.image.withRenderingMode(.alwaysTemplate)
+            annotationView?.image = image
+            annotationView?.tintColor = AKColor.mainRed
             annotationView!.canShowCallout = true
         } else {
             annotationView!.annotation = annotation
