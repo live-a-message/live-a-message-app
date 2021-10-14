@@ -13,12 +13,12 @@ public class CKMessage {
     private(set) var id: String
     private(set) var userId: String
     private(set) var content: String
-    private(set) var image: String?
+    private(set) var image: CKAsset?
     private(set) var location: CLLocation
     private(set) var status: String?
 
     public init(_ record: CKRecord) throws {
-        let image = record["image"] as? String
+        let image = record["image"] as? CKAsset
         guard let content = record["content"] as? String,
               let id = record["id"] as? String,
               let userId = record["userId"] as? String,
