@@ -20,6 +20,8 @@ public enum AkeeStrings {
   public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
   /// Dismiss
   public static let btnDismiss = AkeeStrings.tr("Localizable", "btn_dismiss")
+  /// Next
+  public static let btnNext = AkeeStrings.tr("Localizable", "btn_next")
   /// Post
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
   /// Report
@@ -32,6 +34,18 @@ public enum AkeeStrings {
   public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Write message at any place and share your feelings.
+  public static let onboardingDescription1 = AkeeStrings.tr("Localizable", "onboarding_description_1")
+  /// Read people messages whenever you want.
+  public static let onboardingDescription2 = AkeeStrings.tr("Localizable", "onboarding_description_2")
+  /// Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.
+  public static let onboardingDescription3 = AkeeStrings.tr("Localizable", "onboarding_description_3")
+  /// Wherever you go
+  public static let onboardingTitle1 = AkeeStrings.tr("Localizable", "onboarding_title_1")
+  /// Whenever you want
+  public static let onboardingTitle2 = AkeeStrings.tr("Localizable", "onboarding_title_2")
+  /// All over the World
+  public static let onboardingTitle3 = AkeeStrings.tr("Localizable", "onboarding_title_3")
   /// Pull to refresh messages
   public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
 }
