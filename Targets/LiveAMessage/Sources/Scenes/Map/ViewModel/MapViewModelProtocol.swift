@@ -7,5 +7,19 @@
 //
 
 import MapKit
+import Networking
 
-protocol MapViewModelProtocol { }
+protocol MapViewModelProtocol: NSObject {
+    var didChangeLocation: (() -> Void)? { get set }
+    var locationManager: CLLocationManager { get }
+    var currentLocation: CLLocation { get set }
+    var annotations: [MKPointAnnotation: Message] { get }
+    var messages: [Message] { get }
+    var radius: Double { get }
+
+    var mapView: MapView? { get set }
+
+    func fetchMessages()
+    func postNotificationUpdateLocation()
+    func addPin(_ message: Message)
+}

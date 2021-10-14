@@ -35,7 +35,10 @@ public class CKMessage {
     }
 
     public static func encode(_ message: Message) -> CKRecord {
-        let record = CKRecord(recordType: CKRecordType.Messages.rawValue)
+        let record = CKRecord(
+            recordType: CKRecordType.Messages.rawValue,
+            recordID: CKRecord.ID(recordName: message.id)
+        )
         record["content"] = message.content
         record["id"] = message.id
         record["userId"] = message.userId
@@ -46,14 +49,17 @@ public class CKMessage {
     }
 
     var message: Message {
-        let status = MessageStatus(rawValue: status ?? MessageStatus.read.rawValue)
+        var messageStatus: MessageStatus = .unread
+        if let status = status {
+            messageStatus = MessageStatus(rawValue: status) ?? .unread
+        }
         let message = Message(
             id: id,
             userId: userId,
             content: content,
             image: image,
             location: .init(from: location.coordinate),
-            status: status ?? .unread
+            status: messageStatus
         )
         return message
     }

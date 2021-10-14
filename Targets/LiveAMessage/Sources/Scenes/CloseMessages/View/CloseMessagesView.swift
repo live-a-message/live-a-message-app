@@ -12,15 +12,22 @@ import TinyConstraints
 
 class CloseMessagesView: UIView {
 
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: AkeeStrings.refreshCloseMessages)
+        return refreshControl
+    }()
+
+    lazy var tableView: AKTableView<CloseMessageCellViewModel, CloseMessageTableViewCell> = {
+        let tableView = AKTableView<CloseMessageCellViewModel, CloseMessageTableViewCell>()
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
         return tableView
     }()
 
     lazy var closeButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem()
-        barButtonItem.image = UIImage(systemName: "xmark")
+        barButtonItem.image = UIImage(systemName: IconNamed.close.rawValue)
         barButtonItem.tintColor = AKColor.mainRed
         return barButtonItem
     }()
@@ -34,18 +41,10 @@ class CloseMessagesView: UIView {
         super.init(coder: coder)
     }
 
-    func bind(viewModel: CloseMessagesViewModelProtocol) {
-        for section in viewModel.sections {
-            for cell in section {
-                tableView.register(
-                    CloseMessageTableViewCell.self,
-                    forCellReuseIdentifier: cell.identifier
-                )
-            }
+    func reloadData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.33) {
+            self.refreshControl.endRefreshing()
         }
-
-        tableView.delegate = viewModel
-        tableView.dataSource = viewModel
     }
 }
 

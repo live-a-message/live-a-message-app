@@ -10,7 +10,7 @@ import UIKit
 
 public class AKLabel: UILabel {
 
-    public init(style: AKLabelParamater) {
+    public init(style: AKLabelStyle) {
         super.init(frame: .zero)
         setup(style: style)
         setupAcessibility()
@@ -26,7 +26,7 @@ public class AKLabel: UILabel {
         self.isAccessibilityElement = true
     }
 
-    func setup(style: AKLabelParamater = AKLabelStyle.body1) {
+    func setup(style: AKLabelStyle = AKLabelStyle.body1) {
         self.font          = style.font?.withSize(style.textSize.value)
         self.textColor     = style.fontColor
         self.numberOfLines = style.numberOfLines

@@ -12,6 +12,7 @@ import Foundation
 
 protocol AddMessageViewModelProtocol: AnyObject {
     var messageService: MessageService { get }
+    var didSaveMessage: ((Message) -> Void)? { get set }
     func saveMessage(
         with content: String,
         image: String?
@@ -21,6 +22,7 @@ protocol AddMessageViewModelProtocol: AnyObject {
 class AddMessageViewModel: AddMessageViewModelProtocol {
     var messageService: MessageService = CloudKitMessagesService()
     var currentLocation: CLLocation?
+    var didSaveMessage: ((Message) -> Void)?
 
     func saveMessage(
         with content: String,
@@ -34,7 +36,15 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
           location: Location(from: coordinate)
         )
 
-        messageService.addMessage(message: message) { _ in }
+        messageService.addMessage(message: message) { result in
+            switch result {
+            case .success(_ ):
+                self.didSaveMessage?(message)
+            case .failure(_ ):
+                print("didFinishWithErrors.")
+            }
+        }
+
     }
 
   init() {

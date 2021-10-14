@@ -12,18 +12,30 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
+  /// Block User
+  public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_blockUser")
   /// Cancel
   public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
+  /// Delete
+  public static let btnDelete = AkeeStrings.tr("Localizable", "btn_delete")
+  /// Dismiss
+  public static let btnDismiss = AkeeStrings.tr("Localizable", "btn_dismiss")
   /// Next
   public static let btnNext = AkeeStrings.tr("Localizable", "btn_next")
   /// Post
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
+  /// Report
+  public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
   /// Login to host messages and\n share memory with other users
   public static let lblDescriptionSignIn = AkeeStrings.tr("Localizable", "lbl_description_sign_in")
   /// Sign In
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
+  /// Akee Message
+  public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Pull to refresh messages
+  public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
   /// Write message at any place and share your feelings.
   public static let onboardingDescription1 = AkeeStrings.tr("Localizable", "onboarding_description_1")
   /// Read people messages whenever you want.

@@ -11,16 +11,16 @@ import DesignSystem
 
 class MessageDetailsViewController: UIViewController {
 
-    var viewModel: MessageDetailsViewModelProtocol?
+    var viewModel: MessageDetailsViewModelProtocol
     weak var coordinator: Coordinator?
 
     init(viewModel: MessageDetailsViewModelProtocol) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
 
     override func loadView() {
@@ -35,16 +35,43 @@ class MessageDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Report", style: .plain, target: self, action: #selector(showReportMenu))
+        if viewModel.canDelete {
+            let barButtonItem = UIBarButtonItem(
+                title: AkeeStrings.btnDelete,
+                style: .plain,
+                target: self,
+                action: #selector(showDeleteMenu)
+            )
+            navigationItem.rightBarButtonItem = barButtonItem
+        } else {
+            let barButtonItem = UIBarButtonItem(
+                title: AkeeStrings.btnReport,
+                style: .plain,
+                target: self,
+                action: #selector(showReportMenu)
+            )
+            navigationItem.rightBarButtonItem = barButtonItem
+        }
     }
 
     func setCloseButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(close))
+        let leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: IconNamed.close.rawValue),
+            style: .plain,
+            target: self,
+            action: #selector(close)
+        )
+        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 
     @objc private func showReportMenu() {
-        guard let message = viewModel?.message else { return }
+        let message = viewModel.message
         coordinator?.showReportMenu(with: message, on: self)
+    }
+
+    @objc private func showDeleteMenu() {
+        let message = viewModel.message
+        coordinator?.showDeleteMenu(with: message, on: self)
     }
 
     @objc private func close() {

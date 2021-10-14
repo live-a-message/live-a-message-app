@@ -13,7 +13,7 @@ public class AKButton: UIButton {
     private var height: CGFloat?
     private var width: CGFloat?
 
-    public init(style: AKButtonParamater, icon: ButtonIcon? = nil) {
+    public init(style: AKButtonStyle, icon: ButtonIcon? = nil) {
         super.init(frame: .zero)
         setup(with: style, icon: icon)
     }
@@ -32,7 +32,7 @@ public class AKButton: UIButton {
          }
     }
 
-    func setup(with style: AKButtonParamater = AKButtonStyle.default, icon: ButtonIcon?) {
+    func setup(with style: AKButtonStyle = AKButtonStyle.default, icon: ButtonIcon?) {
         self.height             = style.height
         self.width              = style.width
         self.backgroundColor    = style.backgroundColor
@@ -45,6 +45,7 @@ public class AKButton: UIButton {
         self.contentHorizontalAlignment = style.contentHorizontalAlignment
         self.contentVerticalAlignment   = style.contentVerticalAlignment
         self.imageView?.tintColor       = icon?.tintColor
+        self.titleLabel?.textAlignment  = style.textAlignment
 
         self.setBackgroundColor(style.backgroundColor, for: .normal)
         self.setBackgroundColor(style.highlightedColor, for: .highlighted)

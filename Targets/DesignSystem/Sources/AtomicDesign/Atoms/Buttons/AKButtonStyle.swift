@@ -8,25 +8,26 @@
 
 import UIKit
 
-public struct AKButtonStyle {
-    public static let `default` = AKButtonParamater(
+extension AKButtonStyle {
+    public static let `default` = AKButtonStyle(
         height: 64.0,
         highlightedColor: AKColor.darkRed,
         backgroundColor: AKColor.mainRed,
         borderWidth: 0.0,
         cornerRadius: 6.0,
         font: UIFont.boldSystemFont(ofSize: 24),
-        clipToBounds: true
+        clipToBounds: true,
+        textAlignment: .center
     )
 
-    public static let icon32 = AKButtonParamater(
+    public static let icon32 = AKButtonStyle(
         height: 32.0,
         width: 40.0,
         clipToBounds: true
     )
 }
 
-public struct AKButtonParamater {
+public struct AKButtonStyle {
     var height: CGFloat?
     var width: CGFloat?
     var highlightedColor: UIColor = .clear
@@ -40,6 +41,7 @@ public struct AKButtonParamater {
     var contentMode: UIView.ContentMode = .scaleAspectFit
     var contentVerticalAlignment: UIControl.ContentVerticalAlignment = .fill
     var contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .fill
+    var textAlignment: NSTextAlignment = .natural
 }
 
 public struct ButtonIcon {

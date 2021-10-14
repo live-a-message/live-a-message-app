@@ -3,6 +3,8 @@ import ProjectDescriptionHelpers
 
 let infoPlist: [String: InfoPlist.Value] = [
     "UILaunchScreen": [:],
+    "CFBundleShortVersionString": "1.1",
+    "CFBundleVersion": "1.0",
     "MKDirectionsApplicationSupportedModes": ["MKDirectionsModePedestrian"],
     "CFBundleDocumentTypes": [
         [
@@ -45,7 +47,9 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/LiveAMessage/Tests/**"],
-        dependencies: [ ]
+        dependencies: [
+            .target(name: "Akee")
+        ]
     ),
     Target(
         name: "Networking",
