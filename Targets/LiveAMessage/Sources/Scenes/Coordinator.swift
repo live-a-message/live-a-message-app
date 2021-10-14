@@ -22,12 +22,12 @@ protocol Coordinator: AnyObject {
 }
 
 class MainCoordinator: Coordinator {
-    private let onboardingViewController = OnboardingPageViewController()
     private let authService = SignInWithAppleAuthorization()
     private let messagesService = CloudKitMessagesService()
     private let userService = CloudKitUserService()
     private let loginViewController: LoginViewController
     private let mapViewController: MapViewController
+    private let onboardingViewController = OnboardingPageViewController()
     private let rootViewController: UINavigationController
 
     private var closeMessagesController: CloseMessagesViewController?
@@ -44,6 +44,7 @@ class MainCoordinator: Coordinator {
         rootViewController.navigationBar.isHidden = true
         mapViewController.coordinator = self
         loginViewController.coordinator = self
+        onboardingViewController.coordinator = self
         authService.delegate = loginViewController
     }
 

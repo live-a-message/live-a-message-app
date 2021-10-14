@@ -24,7 +24,7 @@ class OnboardingSceneViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        sceneView.animationView.play()
+//        sceneView.animationView.play()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -39,6 +39,8 @@ class OnboardingSceneViewController: UIViewController {
         sceneView.animationView.animation = .named(viewModel.animationName)
         sceneView.titleLabel.text = viewModel.title
         sceneView.descriptionLabel.text = viewModel.description
+        sceneView.nextButton.setTitle(viewModel.buttonTitle, for: .normal)
+        sceneView.nextButtonAction = viewModel.buttonAction
     }
 
     required init?(coder: NSCoder) {

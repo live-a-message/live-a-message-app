@@ -11,34 +11,41 @@ import DesignSystem
 
 class OnboardingPageViewController: UIPageViewController {
 
+    weak var coordinator: Coordinator?
+
     var scenes: [OnboardingSceneViewController] {
         [
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "texting",
-                    title: "Wherever you are",
+                    title: "Wherever you go",
                     description: "Write message at any place and share your feelings.",
                     identifier: "First",
-                    buttonTitle: "Next"
+                    buttonTitle: "Next",
+                    buttonAction: nextPage
                 )),
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "message_notification",
-                    title: "Wherever you go",
+                    title: "Whenever you want",
                     description: "Read people messages wherever you go.",
                     identifier: "Second",
-                    buttonTitle: "Next"
+                    buttonTitle: "Next",
+                    buttonAction: nextPage
                 )),
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "world_messages",
                     title: "All over the World",
-                    description: "Start your jorney, and go look for messages everywhere.",
+                    description: "Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.",
                     identifier: "Third",
-                    buttonTitle: "Sign In"
+                    buttonTitle: AkeeStrings.lblTitleSignIn,
+                    buttonAction: routeToSignIn
                 ))
         ]
     }
+
+    var currentControllerIndex = 0
 
     override init(
         transitionStyle style: UIPageViewController.TransitionStyle,
@@ -58,7 +65,7 @@ class OnboardingPageViewController: UIPageViewController {
         view.backgroundColor = .systemBackground
     }
 
-    func setupPageView() {
+    private func setupPageView() {
         delegate = self
         dataSource = self
         setViewControllers(
@@ -72,6 +79,21 @@ class OnboardingPageViewController: UIPageViewController {
 
     }
 
+    private func nextPage() {
+        if currentControllerIndex <= scenes.count {
+            currentControllerIndex += 1
+        }
+        setViewControllers(
+            [scenes[currentControllerIndex]],
+            direction: .forward,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    private func routeToSignIn() {
+        coordinator?.showLogin()
+    }
 }
 
 extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -80,8 +102,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageView
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        let vc = pageViewController.children.first as? OnboardingSceneViewController
-        return scenes.indices.filter { scenes[$0].viewModel?.identifier == vc?.viewModel?.identifier }[0]
+        currentControllerIndex
     }
 
     func pageViewController(
@@ -98,11 +119,15 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageView
         getViewController(for: viewController, isNextController: true)
     }
 
-    func getViewController(for vc: UIViewController, isNextController: Bool) -> UIViewController? {
+    func getViewController(
+        for vc: UIViewController,
+        isNextController: Bool
+    ) -> UIViewController? {
         guard let vc = vc as? OnboardingSceneViewController else { return nil }
         var index: Int = 0
 
         index = scenes.indices.filter { scenes[$0].viewModel?.identifier == vc.viewModel?.identifier }[0]
+        currentControllerIndex = index
 
         isNextController ? (index += 1) : (index -= 1)
         if isNextController {

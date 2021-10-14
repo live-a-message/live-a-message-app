@@ -12,6 +12,8 @@ import DesignSystem
 
 class OnboardingSceneView: UIView, ViewCode {
 
+    var nextButtonAction: (() -> ())?
+
     lazy var animationView: AnimationView = {
         let view = AnimationView()
         view.loopMode = .loop
@@ -34,6 +36,8 @@ class OnboardingSceneView: UIView, ViewCode {
 
     lazy var nextButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = AKColor.mainRed
+        button.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         return button
     }()
 
@@ -50,6 +54,7 @@ class OnboardingSceneView: UIView, ViewCode {
         addSubview(animationView)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
+        addSubview(nextButton)
     }
 
     func setupConstraints() {
@@ -63,11 +68,19 @@ class OnboardingSceneView: UIView, ViewCode {
         descriptionLabel.topToBottom(of: titleLabel, offset: AKSpacing.xSmall.value)
         descriptionLabel.leftToSuperview(offset: AKSpacing.small.value)
         descriptionLabel.rightToSuperview(offset: -AKSpacing.small.value)
-
+        nextButton.centerXToSuperview()
+        nextButton.height(AKSpacing.xxxLarge.value)
+        nextButton.leftToSuperview(offset: AKSpacing.xxxLarge.value)
+        nextButton.rightToSuperview(offset: -AKSpacing.xxxLarge.value)
+        nextButton.bottomToSuperview(offset: -AKSpacing.xxxLarge.value)
     }
 
     func configureViews() {
         buildHierarchy()
         setupConstraints()
+    }
+
+    @objc func didTapNextButton() {
+        nextButtonAction?()
     }
 }
