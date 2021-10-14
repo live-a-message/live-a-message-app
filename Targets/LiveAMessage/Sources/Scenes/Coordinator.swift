@@ -117,7 +117,7 @@ class MainCoordinator: Coordinator {
 
     private func isUserLoggedIn() -> Bool {
         #if DEBUG
-            return false
+            return true
         #else
             return UserData.shared.isLoggedIn
         #endif
