@@ -18,8 +18,8 @@ class OnboardingPageViewController: UIPageViewController {
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "texting",
-                    title: "Wherever you go",
-                    description: "Write message at any place and share your feelings.",
+                    title: AkeeStrings.onboardingTitle1,
+                    description: AkeeStrings.onboardingDescription1,
                     identifier: "First",
                     buttonTitle: "Next",
                     buttonAction: nextPage
@@ -27,8 +27,8 @@ class OnboardingPageViewController: UIPageViewController {
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "message_notification",
-                    title: "Whenever you want",
-                    description: "Read people messages wherever you go.",
+                    title: AkeeStrings.onboardingTitle2,
+                    description: AkeeStrings.onboardingDescription2,
                     identifier: "Second",
                     buttonTitle: "Next",
                     buttonAction: nextPage
@@ -36,8 +36,8 @@ class OnboardingPageViewController: UIPageViewController {
             OnboardingSceneViewController(
                 viewModel: .init(
                     animationName: "world_messages",
-                    title: "All over the World",
-                    description: "Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.",
+                    title: AkeeStrings.onboardingTitle3,
+                    description: AkeeStrings.onboardingDescription3,
                     identifier: "Third",
                     buttonTitle: AkeeStrings.lblTitleSignIn,
                     buttonAction: routeToSignIn
@@ -80,9 +80,8 @@ class OnboardingPageViewController: UIPageViewController {
     }
 
     private func nextPage() {
-        if currentControllerIndex <= scenes.count {
-            currentControllerIndex += 1
-        }
+        guard currentControllerIndex <= scenes.count else { return }
+        currentControllerIndex += 1
         setViewControllers(
             [scenes[currentControllerIndex]],
             direction: .forward,

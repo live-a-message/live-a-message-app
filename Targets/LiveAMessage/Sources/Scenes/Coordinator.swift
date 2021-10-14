@@ -60,7 +60,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showLogin() {
-
+        rootViewController.pushViewController(loginViewController, animated: true)
     }
 
     func showLogout() {

@@ -14,6 +14,8 @@ import Foundation
 public enum AkeeStrings {
   /// Cancel
   public static let btnCancel = AkeeStrings.tr("Localizable", "btn_cancel")
+  /// Next
+  public static let btnNext = AkeeStrings.tr("Localizable", "btn_next")
   /// Post
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
   /// Login to host messages and\n share memory with other users
@@ -22,6 +24,18 @@ public enum AkeeStrings {
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
   /// Close Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Write message at any place and share your feelings.
+  public static let onboardingDescription1 = AkeeStrings.tr("Localizable", "onboarding_description_1")
+  /// Read people messages whenever you want.
+  public static let onboardingDescription2 = AkeeStrings.tr("Localizable", "onboarding_description_2")
+  /// Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.
+  public static let onboardingDescription3 = AkeeStrings.tr("Localizable", "onboarding_description_3")
+  /// Wherever you go
+  public static let onboardingTitle1 = AkeeStrings.tr("Localizable", "onboarding_title_1")
+  /// Whenever you want
+  public static let onboardingTitle2 = AkeeStrings.tr("Localizable", "onboarding_title_2")
+  /// All over the World
+  public static let onboardingTitle3 = AkeeStrings.tr("Localizable", "onboarding_title_3")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

@@ -24,7 +24,7 @@ class OnboardingSceneViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        sceneView.animationView.play()
+        sceneView.animationView.play()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
