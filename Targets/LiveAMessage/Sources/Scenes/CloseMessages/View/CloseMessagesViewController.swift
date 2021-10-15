@@ -44,6 +44,9 @@ class CloseMessagesViewController: UIViewController {
         setupNavigationController()
         setupCloseAction()
         setupRefreshControl()
+        if viewModel?.sections.isEmpty ?? false {
+            refresh()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -84,7 +87,7 @@ class CloseMessagesViewController: UIViewController {
                     self.mainView.tableView.sections = self.viewModel?.sections ?? []
                     self.mainView.reloadData()
                 case .failure(_):
-                    print("errorHandlerNotImplemented:")
+                    NSLog("Error handler not implemented:", "error")
                 }
         })
     }

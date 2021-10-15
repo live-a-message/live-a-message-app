@@ -28,6 +28,10 @@
 "btn_delete" = "Delete";
 "btn_report" = "Report";
 
+// Strings from notifications
+"title_notif_close_message" = "You found new messages";
+"body_notif_close_message" = "Check what people are sharing over here!";
+
 // String from `Onboarding` scene
 "btn_next" = "Next";
 "onboarding_title_1" = "Wherever you go";

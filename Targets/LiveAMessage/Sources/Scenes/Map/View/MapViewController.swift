@@ -33,6 +33,11 @@ class MapViewController: UIViewController {
         mainView.bind(viewModel: viewModel)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MessageNotificationManager.shared.requestAuthorization()
+    }
+
     func buildHierarchy() {
         view.addSubview(mainView)
     }
