@@ -10,6 +10,7 @@ import Foundation
 import UserNotifications
 import DesignSystem
 import UIKit
+import CloudKit
 
 class MessageNotificationManager {
     // Singleton
@@ -28,6 +29,9 @@ class MessageNotificationManager {
 
             if didAllow {
                 print("Allowed notifications.")
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
             }
         }
     }
@@ -65,6 +69,36 @@ class MessageNotificationManager {
         notificationCenter.add(request) { error in
             if error != nil {
                 print("Error adding notification request.")
+            }
+        }
+    }
+
+    func subscribeForRemoteNotifications() {
+        let subscription = CKQuerySubscription(
+            recordType: "Notifications",
+            predicate: NSPredicate(format: "TRUEPREDICATE"),
+            options: .firesOnRecordCreation
+        )
+
+        let info = CKSubscription.NotificationInfo()
+
+        info.titleLocalizationKey = "%1$@"
+        info.titleLocalizationArgs = ["title"]
+
+        info.alertLocalizationKey = "%1$@"
+        info.alertLocalizationArgs = ["content"]
+
+        info.shouldBadge = true
+
+        info.soundName = "default"
+
+        subscription.notificationInfo = info
+
+        CKContainer.default().publicCloudDatabase.save(subscription) { _, error in
+            if error == nil {
+                print("Succefully subscribed to push notifications.")
+            } else {
+                print("Error: Failed to subscribe to push notifications.")
             }
         }
     }
