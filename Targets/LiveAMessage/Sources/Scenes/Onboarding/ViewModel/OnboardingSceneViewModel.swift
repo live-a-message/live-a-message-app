@@ -14,5 +14,5 @@ struct OnboardingSceneViewModel {
     var description: String
     var identifier: String
     var buttonTitle: String
-    var buttonAction: () -> ()
+    var buttonAction: () -> Void
 }

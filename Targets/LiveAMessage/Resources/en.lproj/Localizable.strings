@@ -17,6 +17,8 @@
 "navTitle_close_messages" = "Close Messages";
 "refresh_close_messages" = "Pull to refresh messages";
 "lbl_titleMessage_close_messages" = "Akee Message";
+"section_read_close_messages" = "Read Messages";
+"section_unread_close_messages" = "Unread Messages";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";

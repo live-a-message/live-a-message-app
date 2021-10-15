@@ -54,6 +54,10 @@ public class LocalMessageService: MessageService {
         }
     }
 
+    public func modifyMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)?) {
+
+    }
+
     // MARK: Helpers
     private func getFilePath() -> URL {
         getDocumentsDirectory().appendingPathComponent("localMessages.json")

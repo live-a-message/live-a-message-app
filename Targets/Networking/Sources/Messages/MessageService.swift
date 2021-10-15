@@ -28,6 +28,12 @@ public protocol MessageService: AnyObject {
     ///     - message: message to be deleted
     ///     - completion: the result of deleting a message
     func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void))
+
+    /// Modify a message property
+    /// - Parameters:
+    ///     - id: id from the message to be modified
+    ///     - completion: the result of modify a message
+    func modifyMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)?)
 }
 
 public enum MessageServiceError: Error {

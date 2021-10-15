@@ -30,8 +30,7 @@ struct AKFont {
 
     init(fontName: String, bundle: Bundle = .main) {
         if let url = bundle.url(forResource: fontName, withExtension: "plist"),
-           let data = try? Data(contentsOf: url)
-        {
+           let data = try? Data(contentsOf: url) {
             let decoder = PropertyListDecoder()
             styleDictionary = try? decoder.decode(StyleDictionary.self, from: data)
         }
@@ -45,7 +44,6 @@ struct AKFont {
         else {
             return UIFont.preferredFont(forTextStyle: textStyle)
         }
-        
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
         return fontMetrics.scaledFont(for: font)
     }

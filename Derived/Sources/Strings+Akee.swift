@@ -50,8 +50,13 @@ public enum AkeeStrings {
   public static let onboardingTitle3 = AkeeStrings.tr("Localizable", "onboarding_title_3")
   /// Pull to refresh messages
   public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
+  /// Read Messages
+  public static let sectionReadCloseMessages = AkeeStrings.tr("Localizable", "section_read_close_messages")
+  /// Unread Messages
+  public static let sectionUnreadCloseMessages = AkeeStrings.tr("Localizable", "section_unread_close_messages")
   /// You found new messages
   public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
+
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

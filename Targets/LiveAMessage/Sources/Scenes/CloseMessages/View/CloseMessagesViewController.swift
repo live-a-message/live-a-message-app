@@ -34,7 +34,7 @@ class CloseMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = AkeeStrings.navTitleCloseMessages
-
+        mainView.tableView.sectionsTitle = viewModel?.sectionsTitle.map({ $0.title })
         mainView.tableView.bind(sections: viewModel?.sections ?? [])
 
         mainView.tableView.didSelectRowAt = { [weak self] item in
@@ -83,6 +83,7 @@ class CloseMessagesViewController: UIViewController {
                 switch result {
                 case .success(let messages):
                     self.viewModel?.setupCells(messages: messages)
+                    self.mainView.tableView.sectionsTitle = self.viewModel?.sectionsTitle.map({ $0.title })
                     self.mainView.tableView.sections = self.viewModel?.sections ?? []
                     self.mainView.reloadData()
                 case .failure(_):

@@ -35,6 +35,7 @@ class MessageDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = AKColor.mainRed
+        viewModel.readMessage()
         if viewModel.canDelete {
             let barButtonItem = UIBarButtonItem(
                 title: AkeeStrings.btnDelete,

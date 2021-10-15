@@ -17,6 +17,9 @@
 "navTitle_close_messages" = "Mensagens Próximas";
 "refresh_close_messages" = "Puxe para atualizar";
 "lbl_titleMessage_close_messages" = "Mensagem Akee";
+"section_read_close_messages" = "Mensagens lidas";
+"section_unread_close_messages" = "Mensagens não lidas";
+
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";
