@@ -19,7 +19,6 @@
 public enum AkeeAsset {
   public static let mapDark = AkeeImages(name: "map_dark")
   public static let marker = AkeeImages(name: "marker")
-  public static let markerFill = AkeeImages(name: "marker_fill")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
