@@ -12,6 +12,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
+  /// Check what people are sharing over here!
+  public static let bodyNotifCloseMessage = AkeeStrings.tr("Localizable", "body_notif_close_message")
   /// Block User
   public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_blockUser")
   /// Cancel
@@ -34,6 +36,8 @@ public enum AkeeStrings {
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
   /// Pull to refresh messages
   public static let refreshCloseMessages = AkeeStrings.tr("Localizable", "refresh_close_messages")
+  /// You found new messages
+  public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

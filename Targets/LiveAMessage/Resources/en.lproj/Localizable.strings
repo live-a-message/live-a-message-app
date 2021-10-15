@@ -25,3 +25,8 @@
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";
 "btn_report" = "Report";
+
+// Strings from notifications
+"title_notif_close_message" = "You found new messages";
+"body_notif_close_message" = "Check what people are sharing over here!";
+
