@@ -17,6 +17,8 @@
 "navTitle_close_messages" = "关闭消息";
 "refresh_close_messages" = "拉动刷新";
 "lbl_titleMessage_close_messages" = "信息 Akee";
+"section_read_close_messages" = "已读消息";
+"section_unread_close_messages" = "未读消息";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";

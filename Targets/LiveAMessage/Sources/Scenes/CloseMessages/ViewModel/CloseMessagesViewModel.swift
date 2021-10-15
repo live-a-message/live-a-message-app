@@ -64,5 +64,12 @@ extension CloseMessagesViewModel {
     enum SectionTitle: String {
         case read
         case unread
+
+        var title: String {
+            switch self {
+            case .read: return AkeeStrings.sectionReadCloseMessages
+            case .unread: return AkeeStrings.sectionUnreadCloseMessages
+            }
+        }
     }
 }

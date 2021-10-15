@@ -12,7 +12,7 @@ import DesignSystem
 
 class OnboardingSceneView: UIView, ViewCode {
 
-    var nextButtonAction: (() -> ())?
+    var nextButtonAction: (() -> Void)?
 
     lazy var animationView: AnimationView = {
         let view = AnimationView()
