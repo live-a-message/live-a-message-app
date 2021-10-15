@@ -26,6 +26,9 @@
 "btn_delete" = "Apagar";
 "btn_report" = "Reportar";
 
+// Strings from notifications
+"title_notif_close_message" = "Você encontrou novas mensagens";
+"body_notif_close_message" = "Veja o que as pessoas estão compartilhando por aqui!";
 // String from `Onboarding` scene
 "btn_next" = "Próximo";
 "onboarding_title_1" = "Para onde quer que vá";

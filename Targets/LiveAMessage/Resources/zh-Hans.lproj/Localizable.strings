@@ -26,6 +26,9 @@
 "btn_delete" = "删除";
 "btn_report" = "报告";
 
+// Strings from notifications
+"title_notif_close_message" = "你有新消息";
+"body_notif_close_message" = "看看他们在分享什么!";
 // String from `Onboarding` scene
 "btn_next" = "下一页";
 "onboarding_title_1" = "无论你去哪里";

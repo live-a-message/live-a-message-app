@@ -44,6 +44,9 @@ class CloseMessagesViewController: UIViewController {
         setupNavigationController()
         setupCloseAction()
         setupRefreshControl()
+        if viewModel?.sections.isEmpty ?? false {
+            refresh()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

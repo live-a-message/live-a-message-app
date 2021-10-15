@@ -22,6 +22,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     var messages: [Message] = [] {
         didSet {
             addNearPins()
+            checkForUnreadMessages()
         }
     }
 
@@ -76,6 +77,18 @@ class MapViewModel: NSObject, MapViewModelProtocol {
             case .failure(let error):
                 NSLog(error.localizedDescription, "error")
             }
+        }
+    }
+
+    public func checkForUnreadMessages() {
+        let counter = messages.filter({ $0.status == .unread }).count
+
+        if counter > 0 {
+            MessageNotificationManager.shared.createNotification(
+                title: AkeeStrings.titleNotifCloseMessage,
+                body: AkeeStrings.bodyNotifCloseMessage,
+                badgeNumber: counter
+            )
         }
     }
 
