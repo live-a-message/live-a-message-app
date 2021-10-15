@@ -17,7 +17,6 @@ protocol MessageDetailsViewModelProtocol: UITableViewDelegate, UITableViewDataSo
 
 class MessageDetailsViewModel: NSObject, MessageDetailsViewModelProtocol {
     var message: Message
-    let service: MessageService = CloudKitMessagesService()
 
     var canDelete: Bool {
         message.userId == UserData.shared.id
@@ -28,8 +27,7 @@ class MessageDetailsViewModel: NSObject, MessageDetailsViewModelProtocol {
     }
 
     func readMessage() {
-        message.status = .read
-        service.modifyMessage(message: message, completion: nil)
+        UserData.shared.readMessages.append(message.id)
     }
 }
 

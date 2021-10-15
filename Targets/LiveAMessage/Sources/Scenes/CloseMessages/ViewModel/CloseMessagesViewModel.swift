@@ -37,8 +37,9 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
         let filteredMessages = messages.filter {
             !UserData.shared.blockedIDs.contains($0.userId)
         }
-        let read = filteredMessages.filter { $0.status == .read }
-        let unread = filteredMessages.filter { $0.status == .unread }
+        let readMessages = UserData.shared.readMessages
+        let read = filteredMessages.filter { readMessages.contains($0.id) }
+        let unread = filteredMessages.filter { !readMessages.contains($0.id) }
 
         addSection(
             title: .read,
