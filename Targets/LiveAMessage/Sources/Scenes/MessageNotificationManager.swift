@@ -14,7 +14,7 @@ import CloudKit
 
 class MessageNotificationManager {
     // Singleton
-    static var shared = MessageNotificationManager()
+    static let shared = MessageNotificationManager()
 
     private let notificationCenter = UNUserNotificationCenter.current()
     private let options: UNAuthorizationOptions = [.alert, .badge]
