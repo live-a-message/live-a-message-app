@@ -30,3 +30,11 @@
 "title_notif_close_message" = "You found new messages";
 "body_notif_close_message" = "Check what people are sharing over here!";
 
+// String from `Onboarding` scene
+"btn_next" = "Next";
+"onboarding_title_1" = "Wherever you go";
+"onboarding_description_1" = "Write message at any place and share your feelings.";
+"onboarding_title_2" = "Whenever you want";
+"onboarding_description_2" = "Read people messages whenever you want.";
+"onboarding_title_3" = "All over the World";
+"onboarding_description_3" = "Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.";

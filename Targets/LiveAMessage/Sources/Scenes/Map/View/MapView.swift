@@ -14,6 +14,14 @@ import Networking
 
 class MapView: MKMapView {
 
+    let mapCamera: MKMapCamera = {
+        let camera = MKMapCamera()
+        camera.pitch = 45
+        camera.altitude = 500
+        camera.heading = 45
+        return camera
+    }()
+
     var didTapPin: ((MKAnnotation?) -> Void)?
 
     override init(frame: CGRect) {
@@ -25,6 +33,7 @@ class MapView: MKMapView {
     }
 
     func configure() {
+        self.camera = mapCamera
         self.isZoomEnabled = true
         self.tintColor = AKColor.mainRed
         self.showsUserLocation = true

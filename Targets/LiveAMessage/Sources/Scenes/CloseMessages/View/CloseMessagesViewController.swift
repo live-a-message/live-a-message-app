@@ -86,7 +86,7 @@ class CloseMessagesViewController: UIViewController {
                     self.mainView.tableView.sections = self.viewModel?.sections ?? []
                     self.mainView.reloadData()
                 case .failure(_):
-                    print("errorHandlerNotImplemented:")
+                    NSLog("Error handler not implemented:", "error")
                 }
         })
     }
