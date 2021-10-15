@@ -70,7 +70,9 @@ class MainCoordinator: Coordinator {
     }
 
     func showMap() {
-        rootViewController.setViewControllers([mapViewController], animated: true)
+        DispatchQueue.main.async {
+            self.rootViewController.setViewControllers([self.mapViewController], animated: true)
+        }
     }
 
     func showCloseMessages() {
