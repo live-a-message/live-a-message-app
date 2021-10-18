@@ -15,7 +15,7 @@ protocol AddMessageViewModelProtocol: AnyObject {
     var didSaveMessage: ((Message) -> Void)? { get set }
     func saveMessage(
         with content: String,
-        image: String?
+        image: Data?
     )
 }
 
@@ -26,7 +26,7 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
 
     func saveMessage(
         with content: String,
-        image: String?
+        image: Data?
     ) {
       guard let coordinate = self.currentLocation?.coordinate else { return }
         let message = Message(
@@ -40,8 +40,8 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
             switch result {
             case .success(_ ):
                 self.didSaveMessage?(message)
-            case .failure(_ ):
-                print("didFinishWithErrors.")
+            case .failure( let error):
+                print(error)
             }
         }
 

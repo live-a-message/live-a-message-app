@@ -9,18 +9,18 @@
 import Foundation
 
 class FileHelper {
-  
-  private (set) var shared = FileHelper()
-  
+
+  static let sharedHelper = FileHelper()
+
   private var mainPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-  
+
   func saveFile(_ file: Data, as name: String, in directory: Directory) throws -> URL {
     guard let folder = try? getDirectory(for: directory) else {
       throw LocalFileError.CouldNotGetFolder
     }
-    
+
     let fileURL: URL = folder.appendingPathComponent(name)
-    
+
     do {
       try file.write(to: fileURL)
       return fileURL
@@ -30,19 +30,19 @@ class FileHelper {
   }
 
   private func getDirectory(for directory: Directory) throws -> URL {
-    switch directory{
+    switch directory {
     case .ephemeral:
       return try FileManager.default.url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: mainPath, create: false)
     case .permanent:
       return mainPath
     }
   }
-  
-  enum Directory{
+
+  enum Directory {
     case ephemeral, permanent
   }
 
-  enum LocalFileError: Error{
+  enum LocalFileError: Error {
     case CouldNotGetFolder, CouldNotSaveFile
   }
 }

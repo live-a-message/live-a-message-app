@@ -67,6 +67,20 @@ class AddMessageView: UIView, ViewCode {
         textView.isScrollEnabled = true
         textView.tintColor = .red
         textView.font = .systemFont(ofSize: 14)
+        let toolBar = AKToolBar()
+        let buttonnn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(saveButtonAction))
+        toolBar.setItems([buttonnn], animated: false)
+//        toolBar.barStyle = .default
+//        toolBar.sizeToFit()
+
+//        let toolbar = AKToolBar()
+//        let buttoonn = AKButton(style: .default, icon: ButtonIcon(normal: .add))
+//        buttoonn.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
+//        buttoonn.translatesAutoresizingMaskIntoConstraints = false
+//        toolbar.set(for: [buttoonn])
+
+        textView.inputAccessoryView = toolBar
+//        buttoonn.edgesToSuperview()
     }
 
     func setKeyboardView(height: CGFloat) {

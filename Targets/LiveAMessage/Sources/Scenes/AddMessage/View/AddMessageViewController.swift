@@ -48,7 +48,7 @@ class AddMessageViewController: UIViewController {
         }
         viewModel.saveMessage(
             with: message,
-            image: ""
+            image: UIImage(named: "AppIcon")?.pngData()
         )
       dismiss(animated: true) {
         self.handleDismiss?()

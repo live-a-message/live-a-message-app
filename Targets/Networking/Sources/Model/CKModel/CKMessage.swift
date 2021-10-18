@@ -57,18 +57,19 @@ public class CKMessage {
             id: id,
             userId: userId,
             content: content,
-            image: try? Data(contentsOf: image?.fileURL!),
+            image: try? Data(contentsOf: image!.fileURL!),
             location: .init(from: location.coordinate),
             status: messageStatus
         )
         return message
     }
-  
-    public static func encodeImage(_ data: Data?) -> CKAsset?{
+
+    public static func encodeImage(_ data: Data?) -> CKAsset? {
       guard let unWrapppedData = data else {
         return nil
       }
-      guard let folder = FileHelper.sharedHelper.saveFile(unWrapppedData, as: "imageTemp.png", in: .ephemeral) else {
+
+      guard let folder = try? FileHelper.sharedHelper.saveFile(unWrapppedData, as: "imageTemp.png", in: .ephemeral) else {
         return nil
       }
       return CKAsset(fileURL: folder)
