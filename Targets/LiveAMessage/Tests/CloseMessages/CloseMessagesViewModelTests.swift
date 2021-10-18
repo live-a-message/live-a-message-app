@@ -33,14 +33,16 @@ extension CloseMessageViewModelTests {
     typealias Data = [Message]
 
     private func makeData(type: [MessageStatus]) -> Data {
-        return type.map {
-            var message = Message(
+        return type.map { type in
+            let message = Message(
                 userId: "DEBUG",
                 content: "",
                 image: nil,
                 location: Location(lat: .zero, lon: .zero)
             )
-            message.status = $0
+            if type == .read {
+                UserData.shared.readMessages.append(message.id)
+            }
             return message
         }
     }
