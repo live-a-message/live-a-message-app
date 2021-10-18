@@ -15,6 +15,7 @@ class AddMessageViewController: UIViewController {
     var handleDismiss : (() -> Void)?
     let viewModel: AddMessageViewModelProtocol
     private lazy var messageView = AddMessageView()
+    lazy var picker = UIImagePickerController()
 
     init(viewModel: AddMessageViewModelProtocol) {
         self.viewModel = viewModel
@@ -28,11 +29,13 @@ class AddMessageViewController: UIViewController {
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)
+        messageView.cameraAction = tooglePicker
         view = messageView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.picker.delegate = self
         self.view.backgroundColor = AKColor.mainBackgroundColor
         setKeyboardObserver()
     }
@@ -72,4 +75,23 @@ class AddMessageViewController: UIViewController {
         }
     }
 
+    @objc func tooglePicker() {
+        self.picker.allowsEditing = false
+        self.picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+
+}
+
+extension AddMessageViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                let attach = NSTextAttachment(image: image)
+                attach.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+                let attString = NSAttributedString(attachment: attach)
+                self.messageView.textView.textStorage.insert(attString,
+                                                             at: self.messageView.textView.selectedRange.location)
+        }
+        dismiss(animated: true, completion: nil)
+    }
 }

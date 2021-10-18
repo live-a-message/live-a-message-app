@@ -65,5 +65,5 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
 }
 
 extension Notification.Name {
-  static let updateLocation = Notification.Name(rawValue: "presentGame")
+  static let updateLocation = Notification.Name(rawValue: "updateLocation")
 }

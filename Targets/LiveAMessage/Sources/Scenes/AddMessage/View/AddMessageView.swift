@@ -12,6 +12,7 @@ import DesignSystem
 class AddMessageView: UIView, ViewCode {
     var cancelAction: (() -> Void)?
     var saveAction: ((String) -> Void)?
+    var cameraAction: (() -> Void)?
 
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -32,6 +33,13 @@ class AddMessageView: UIView, ViewCode {
     lazy var textView: UITextView = {
         let textView = UITextView()
         return textView
+    }()
+
+    lazy var toolBar: AKToolBar = {
+        let toolBar = AKToolBar()
+        let addButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(cameraButtonAction))
+        toolBar.setItems([addButton], animated: false)
+        return toolBar
     }()
 
     override init(frame: CGRect) {
@@ -67,20 +75,7 @@ class AddMessageView: UIView, ViewCode {
         textView.isScrollEnabled = true
         textView.tintColor = .red
         textView.font = .systemFont(ofSize: 14)
-        let toolBar = AKToolBar()
-        let buttonnn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(saveButtonAction))
-        toolBar.setItems([buttonnn], animated: false)
-//        toolBar.barStyle = .default
-//        toolBar.sizeToFit()
-
-//        let toolbar = AKToolBar()
-//        let buttoonn = AKButton(style: .default, icon: ButtonIcon(normal: .add))
-//        buttoonn.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
-//        buttoonn.translatesAutoresizingMaskIntoConstraints = false
-//        toolbar.set(for: [buttoonn])
-
         textView.inputAccessoryView = toolBar
-//        buttoonn.edgesToSuperview()
     }
 
     func setKeyboardView(height: CGFloat) {
@@ -93,5 +88,9 @@ class AddMessageView: UIView, ViewCode {
 
     @objc func cancelButtonAction() {
         cancelAction?()
+    }
+
+    @objc func cameraButtonAction() {
+        cameraAction?()
     }
 }
