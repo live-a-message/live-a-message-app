@@ -33,7 +33,7 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
     }
 
     func setupCells(messages: [Message]) {
-        sections = [[CloseMessageCellViewModel]]()
+        sections = [[]]
         let filteredMessages = messages.filter {
             !UserData.shared.blockedIDs.contains($0.userId)
         }

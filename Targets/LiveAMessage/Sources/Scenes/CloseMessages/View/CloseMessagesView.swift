@@ -22,6 +22,12 @@ class CloseMessagesView: UIView {
         let tableView = AKTableView<CloseMessageCellViewModel, CloseMessageTableViewCell>()
         tableView.tableFooterView = UIView()
         tableView.refreshControl = refreshControl
+        tableView.emptyStateView = AKEmptyState(
+            style: .withImageAndTitle(
+                AkeeAsset.mapDark.image,
+                "Nenhuma mensagem por aqui!"
+            )
+        )
         return tableView
     }()
 
