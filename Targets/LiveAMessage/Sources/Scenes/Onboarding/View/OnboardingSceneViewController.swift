@@ -20,23 +20,23 @@ class OnboardingSceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        sceneView.animationView.loopMode = .loop
+        sceneView.animationView.backgroundBehavior = .pauseAndRestore
+        sceneView.animationView.animation = .named(viewModel!.animationName)
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         sceneView.animationView.play()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         sceneView.animationView.stop()
-
     }
+
 
     init(viewModel: OnboardingSceneViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-        sceneView.animationView.animation = .named(viewModel.animationName)
         sceneView.titleLabel.text = viewModel.title
         sceneView.descriptionLabel.text = viewModel.description
         sceneView.nextButton.setTitle(viewModel.buttonTitle, for: .normal)
