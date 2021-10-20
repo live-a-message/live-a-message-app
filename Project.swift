@@ -74,7 +74,10 @@ let targets = [
         resources: [
             "Targets/DesignSystem/Resources/Assets.xcassets/**"
         ],
-        dependencies: [ ]
+        dependencies: [
+            .package(product: "Lottie"),
+            .package(product: "TinyConstraints")
+        ]
     )
 ]
 

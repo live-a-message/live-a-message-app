@@ -8,9 +8,9 @@
 
 import UIKit
 import Lottie
-import DesignSystem
+import TinyConstraints
 
-class AKAnimationView: UIView, ViewCode {
+public class AKAnimationView: UIView, ViewCode {
 
     static let instance = AKAnimationView()
 
@@ -34,7 +34,7 @@ class AKAnimationView: UIView, ViewCode {
         super.init(coder: coder)
     }
 
-    class func animateAboveAll(with animation: String) {
+    public class func animateAboveAll(with animation: String) {
         instance.animationView.animation = .named(animation)
         instance.animateFadeIn()
         UIApplication.shared.delegate?.window??.addSubview(instance)
@@ -49,15 +49,15 @@ class AKAnimationView: UIView, ViewCode {
         }
     }
 
-    func buildHierarchy() {
+    public func buildHierarchy() {
         addSubview(animationView)
     }
 
-    func setupConstraints() {
+    public func setupConstraints() {
         animationView.edgesToSuperview()
     }
 
-    func configureViews() {
+    public func configureViews() {
         buildHierarchy()
         setupConstraints()
     }
