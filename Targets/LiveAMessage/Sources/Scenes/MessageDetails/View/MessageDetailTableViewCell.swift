@@ -24,7 +24,7 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         return label
     }()
 
-    lazy var image: UIImageView = {
+    lazy var messageImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
@@ -37,13 +37,13 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         guard let data = image else {
             return
         }
-        self.image.image = UIImage(data: data)
+        self.messageImage.image = UIImage(data: data)
     }
 
     func buildHierarchy() {
         addSubview(titleLabel)
         addSubview(messageLabel)
-        addSubview(image)
+        addSubview(messageImage)
     }
 
     func setupConstraints() {
@@ -55,10 +55,10 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         messageLabel.top(to: titleLabel, offset: top)
         messageLabel.left(to: self, offset: corner)
         messageLabel.right(to: self, offset: -corner)
-        image.topToBottom(of: messageLabel, offset: AKSpacing.small.value)
-        image.left(to: self, offset: corner)
-        image.right(to: self, offset: -corner)
-        image.height(400)
+        messageImage.topToBottom(of: messageLabel, offset: AKSpacing.small.value)
+        messageImage.left(to: self, offset: corner)
+        messageImage.right(to: self, offset: -corner)
+        messageImage.height(400)
     }
 
     func configureViews() {
