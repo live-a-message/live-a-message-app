@@ -80,4 +80,28 @@ public class CloudKitMessagesService: MessageService {
             completion(.success(true))
         }
     }
+
+    public func modifyMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)?) {
+        let record = CKMessage.encode(message)
+        let operation = CKModifyRecordsOperation()
+        operation.recordsToSave = [record]
+        operation.savePolicy = .allKeys
+        operation.modifyRecordsCompletionBlock = { record, _, error in
+            guard error == nil else {
+                completion?(.failure(.failedToRead))
+                return
+            }
+            guard record != nil else {
+                completion?(.failure(.failedToRead))
+                return
+            }
+            completion?(.success(true))
+        }
+
+        operation.completionBlock = {
+            completion?(.success(true))
+        }
+
+        database.add(operation)
+    }
 }

@@ -22,6 +22,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     var messages: [Message] = [] {
         didSet {
             addNearPins()
+            checkForUnreadMessages()
         }
     }
 
@@ -79,6 +80,18 @@ class MapViewModel: NSObject, MapViewModelProtocol {
         }
     }
 
+    public func checkForUnreadMessages() {
+        let counter = messages.filter({ $0.status == .unread }).count
+
+        if counter > 0 {
+            MessageNotificationManager.shared.createNotification(
+                title: AkeeStrings.titleNotifCloseMessage,
+                body: AkeeStrings.bodyNotifCloseMessage,
+                badgeNumber: counter
+            )
+        }
+    }
+
     private func addNearPins() {
         self.messages.forEach({ addPin($0) })
     }
@@ -113,32 +126,12 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 extension MapViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            // draw circle
-            drawOverlayCircle(location: location)
-
-            let coordinateRegion = MKCoordinateRegion(
-                center: location.coordinate,
-                latitudinalMeters: 1000,
-                longitudinalMeters: 1000)
-            self.mapView?.setRegion(coordinateRegion, animated: true)
+            self.drawOverlayCircle(location: location)
+            self.mapView?.camera.centerCoordinate = location.coordinate
             let shouldUpdateCurrentLocation = currentLocation.distance(from: location) > radius
             if shouldUpdateCurrentLocation {
                 self.currentLocation = location
             }
         }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        guard let circularRegion = region as? CLCircularRegion else { return }
-        self.handleCircularRegion(circularRegion)
-    }
-
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        guard let circularRegion = region as? CLCircularRegion else { return }
-        self.handleCircularRegion(circularRegion)
-    }
-
-    func handleCircularRegion(_ region: CLCircularRegion) {
-        print("Geofence triggered!")
     }
 }

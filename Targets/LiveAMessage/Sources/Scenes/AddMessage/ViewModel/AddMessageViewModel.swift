@@ -42,8 +42,8 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
             switch result {
             case .success(_ ):
                 self.didSaveMessage?(message)
-            case .failure( let error):
-                print(error)
+            case .failure(let error):
+                NSLog(error.localizedDescription, "error")
             }
         }
 

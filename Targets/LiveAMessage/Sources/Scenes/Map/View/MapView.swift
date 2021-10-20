@@ -14,6 +14,14 @@ import Networking
 
 class MapView: MKMapView {
 
+    let mapCamera: MKMapCamera = {
+        let camera = MKMapCamera()
+        camera.pitch = 45
+        camera.altitude = 500
+        camera.heading = 45
+        return camera
+    }()
+
     var didTapPin: ((MKAnnotation?) -> Void)?
 
     override init(frame: CGRect) {
@@ -25,6 +33,7 @@ class MapView: MKMapView {
     }
 
     func configure() {
+        self.camera = mapCamera
         self.isZoomEnabled = true
         self.tintColor = AKColor.mainRed
         self.showsUserLocation = true
@@ -51,9 +60,11 @@ extension MapView: MKMapViewDelegate {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
+            let image = AkeeAsset.marker.image
+            annotationView?.image = image
+            annotationView?.canShowCallout = true
         } else {
-            annotationView!.annotation = annotation
+            annotationView?.annotation = annotation
         }
         return annotationView
     }

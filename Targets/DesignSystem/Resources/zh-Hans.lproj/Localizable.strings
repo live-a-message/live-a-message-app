@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Akee
+
+  Created by Vinicius Mesquita on 20/10/21.
+  Copyright © 2021 Akee. All rights reserved.
+*/
+
+"lbl_generic_emptyState" = "这边没消息!";

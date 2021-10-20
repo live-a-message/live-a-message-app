@@ -17,6 +17,8 @@
 "navTitle_close_messages" = "Close Messages";
 "refresh_close_messages" = "Pull to refresh messages";
 "lbl_titleMessage_close_messages" = "Akee Message";
+"section_read_close_messages" = "Read Messages";
+"section_unread_close_messages" = "Unread Messages";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";
@@ -25,3 +27,16 @@
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";
 "btn_report" = "Report";
+
+// Strings from notifications
+"title_notif_close_message" = "You found new messages";
+"body_notif_close_message" = "Check what people are sharing over here!";
+
+// String from `Onboarding` scene
+"btn_next" = "Next";
+"onboarding_title_1" = "Wherever you go";
+"onboarding_description_1" = "Write message at any place and share your feelings.";
+"onboarding_title_2" = "Whenever you want";
+"onboarding_description_2" = "Read people messages whenever you want.";
+"onboarding_title_3" = "All over the World";
+"onboarding_description_3" = "Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.";
