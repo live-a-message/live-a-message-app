@@ -43,7 +43,8 @@ extension CloseMessageViewModelTests {
                 userId: "DEBUG",
                 content: "",
                 image: nil,
-                location: Location(lat: .zero, lon: .zero)
+                location: Location(lat: .zero, lon: .zero),
+                imageAsset: nil
             )
             if type == .read {
                 UserData.shared.readMessages.append(message.id)
