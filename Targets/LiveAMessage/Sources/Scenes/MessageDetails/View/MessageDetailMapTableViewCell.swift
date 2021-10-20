@@ -15,7 +15,7 @@ class MessageDetailMapTableViewCell: UITableViewCell, ViewCode {
 
     lazy var mapView: MapView = {
         let view = MapView()
-        view.isUserInteractionEnabled = false
+        view.isZoomEnabled = true
         return view
     }()
 

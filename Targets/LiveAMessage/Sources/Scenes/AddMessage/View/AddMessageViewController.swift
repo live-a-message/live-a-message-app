@@ -52,6 +52,7 @@ class AddMessageViewController: UIViewController {
         )
       dismiss(animated: true) {
         self.handleDismiss?()
+        AKAnimationView.animateAboveAll(with: "send_message")
       }
     }
 
