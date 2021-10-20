@@ -34,7 +34,21 @@ public class UserData {
     }
 
     public var blockedIDs: [String] {
-        defaults.stringArray(forKey: Key.blockedIDs.rawValue) ?? []
+        get {
+            defaults.stringArray(forKey: Key.blockedIDs.rawValue) ?? []
+        }
+        set {
+            set(value: newValue, key: .blockedIDs)
+        }
+    }
+
+    public var readMessages: [String] {
+        get {
+            defaults.stringArray(forKey: Key.readMessages.rawValue) ?? []
+        }
+        set {
+            set(value: newValue, key: .readMessages)
+        }
     }
 
     private init() { }
@@ -61,6 +75,7 @@ extension UserData {
         case agreeWithTerms
         case recordID
         case blockedIDs
+        case readMessages
     }
 
 }

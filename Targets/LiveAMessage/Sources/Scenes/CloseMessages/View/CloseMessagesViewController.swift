@@ -12,19 +12,18 @@ import Networking
 
 class CloseMessagesViewController: UIViewController {
 
-    let mainView = CloseMessagesView()
-    var viewModel: CloseMessagesViewModelProtocol?
+    private let mainView = CloseMessagesView()
+    private let viewModel: CloseMessagesViewModelProtocol
     var coordinator: Coordinator?
 
     init(coordinator: Coordinator, viewModel: CloseMessagesViewModelProtocol) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
     }
 
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func loadView() {
@@ -34,8 +33,8 @@ class CloseMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = AkeeStrings.navTitleCloseMessages
-
-        mainView.tableView.bind(sections: viewModel?.sections ?? [])
+        mainView.tableView.sectionsTitle = viewModel.sectionsTitle.map({ $0.title })
+        mainView.tableView.bind(sections: viewModel.sections)
 
         mainView.tableView.didSelectRowAt = { [weak self] item in
             self?.coordinator?.showMessageDetails(with: item.message, fromPin: false)
@@ -44,6 +43,9 @@ class CloseMessagesViewController: UIViewController {
         setupNavigationController()
         setupCloseAction()
         setupRefreshControl()
+        if viewModel.sections.isEmpty {
+            refresh()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -74,16 +76,17 @@ class CloseMessagesViewController: UIViewController {
     }
 
     @objc private func refresh() {
-        guard let location = viewModel?.currentLocation else { return }
-        viewModel?.service
+        let location = viewModel.currentLocation
+        viewModel.service
             .fetchMessages(location: location, radius: 300, completion: { result in
                 switch result {
                 case .success(let messages):
-                    self.viewModel?.setupCells(messages: messages)
-                    self.mainView.tableView.sections = self.viewModel?.sections ?? []
+                    self.viewModel.setupCells(messages: messages)
+                    self.mainView.tableView.sections = self.viewModel.sections
+                    self.mainView.tableView.sectionsTitle = self.viewModel.sectionsTitle.map({ $0.title })
                     self.mainView.reloadData()
                 case .failure(_):
-                    print("errorHandlerNotImplemented:")
+                    NSLog("Error handler not implemented:", "error")
                 }
         })
     }

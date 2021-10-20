@@ -17,6 +17,9 @@
 "navTitle_close_messages" = "Mensagens Próximas";
 "refresh_close_messages" = "Puxe para atualizar";
 "lbl_titleMessage_close_messages" = "Mensagem Akee";
+"section_read_close_messages" = "Mensagens lidas";
+"section_unread_close_messages" = "Mensagens não lidas";
+
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";
@@ -25,3 +28,15 @@
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Apagar";
 "btn_report" = "Reportar";
+
+// Strings from notifications
+"title_notif_close_message" = "Você encontrou novas mensagens";
+"body_notif_close_message" = "Veja o que as pessoas estão compartilhando por aqui!";
+// String from `Onboarding` scene
+"btn_next" = "Próximo";
+"onboarding_title_1" = "Para onde quer que vá";
+"onboarding_description_1" = "Escreva uma mensagem em qualquer lugar e compartilhe os seus sentimentos.";
+"onboarding_title_2" = "Sempre que quiser";
+"onboarding_description_2" = "Leia as mensagens das pessoas sempre que quiser.";
+"onboarding_title_3" = "Em todo o mundo";
+"onboarding_description_3" = "Os seus momentos serão partilhados com o mundo a partir do presente para que esse momento que viveu seja para sempre parte do mundo.";

@@ -12,10 +12,11 @@ import Networking
 protocol MessageDetailsViewModelProtocol: UITableViewDelegate, UITableViewDataSource {
     var message: Message { get }
     var canDelete: Bool { get }
+    func readMessage()
 }
 
 class MessageDetailsViewModel: NSObject, MessageDetailsViewModelProtocol {
-    let message: Message
+    var message: Message
 
     var canDelete: Bool {
         message.userId == UserData.shared.id
@@ -23,6 +24,10 @@ class MessageDetailsViewModel: NSObject, MessageDetailsViewModelProtocol {
 
     init(message: Message) {
         self.message = message
+    }
+
+    func readMessage() {
+        UserData.shared.readMessages.append(message.id)
     }
 }
 

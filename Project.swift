@@ -33,7 +33,6 @@ let targets = [
         entitlements: "Akee.entitlements",
         actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
-            .package(product: "TinyConstraints"),
             .target(name: "Networking"),
             .target(name: "DesignSystem")
         ]
@@ -71,9 +70,13 @@ let targets = [
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
         resources: [
-            "Targets/DesignSystem/Resources/Assets.xcassets/**"
+            "Targets/DesignSystem/Resources/Assets.xcassets/**",
+            "Targets/DesignSystem/Resources/**"
         ],
-        dependencies: [ ]
+        dependencies: [
+            TargetDependency.package(product: "Lottie"),
+            TargetDependency.package(product: "TinyConstraints")
+        ]
     )
 ]
 
@@ -81,6 +84,10 @@ let packages: [Package] = [
     .remote(
         url: "https://github.com/roberthein/TinyConstraints",
         requirement: .exact(Version(4, 0, 2))
+    ),
+    .remote(
+        url: "https://github.com/airbnb/lottie-ios.git",
+        requirement: .exact(Version(3, 2, 2))
     )
 ]
 

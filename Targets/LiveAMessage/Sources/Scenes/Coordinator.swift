@@ -28,6 +28,7 @@ class MainCoordinator: Coordinator {
     private let userService = CloudKitUserService()
     private let loginViewController: LoginViewController
     private let mapViewController: MapViewController
+    private let onboardingViewController = OnboardingPageViewController()
     private let rootViewController: UINavigationController
 
     private var closeMessagesController: CloseMessagesViewController?
@@ -45,6 +46,7 @@ class MainCoordinator: Coordinator {
         rootViewController.navigationBar.isHidden = true
         mapViewController.coordinator = self
         loginViewController.coordinator = self
+        onboardingViewController.coordinator = self
         authService.delegate = loginViewController
     }
 
@@ -53,14 +55,14 @@ class MainCoordinator: Coordinator {
         if isUserLoggedIn() {
             rootViewController.setViewControllers([mapViewController], animated: false)
         } else {
-            rootViewController.setViewControllers([loginViewController], animated: false)
+            rootViewController.setViewControllers([onboardingViewController], animated: false)
         }
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
 
     func showLogin() {
-
+        rootViewController.pushViewController(loginViewController, animated: true)
     }
 
     func showLogout() {
@@ -68,7 +70,9 @@ class MainCoordinator: Coordinator {
     }
 
     func showMap() {
-        rootViewController.setViewControllers([mapViewController], animated: true)
+        DispatchQueue.main.async {
+            self.rootViewController.setViewControllers([self.mapViewController], animated: true)
+        }
     }
 
     func showCloseMessages() {

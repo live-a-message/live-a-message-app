@@ -46,6 +46,11 @@ Download keys
 fastlane ios create_keys
 ```
 Create keys for new developers
+### ios select_developer_team
+```
+fastlane ios select_developer_team
+```
+
 ### ios tests
 ```
 fastlane ios tests
