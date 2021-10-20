@@ -19,7 +19,7 @@ public class AKEmptyState: UIView {
         return imageView
     }()
 
-    lazy var titleLabel: AKLabel = { AKLabel(style: .body1) }()
+    lazy var titleLabel: AKLabel = { AKLabel(style: .title3) }()
 
     public init(style: Style) {
         self.style = style
@@ -53,7 +53,7 @@ extension AKEmptyState: ViewCode {
         let spacing = AKSpacing.medium.value
         let imageSize = CGSize(width: 264, height: 264)
         NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -imageSize.height / 2),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -imageSize.height / 3),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             imageView.heightAnchor.constraint(equalToConstant: imageSize.height),
@@ -68,8 +68,8 @@ extension AKEmptyState: ViewCode {
         backgroundColor = AKColor.mainBackgroundColor
         switch style {
         case .generic:
-            imageView.image = UIImage(named: "ic_close")
-            titleLabel.text = "Nenhuma mensagem por aqui!"
+            imageView.image = DesignSystemAsset.floatingEmptyState.image
+            titleLabel.text = DesignSystemStrings.lblGenericEmptyState
         case .withImage(let image):
             imageView.image = image
         case .withText(let title):
