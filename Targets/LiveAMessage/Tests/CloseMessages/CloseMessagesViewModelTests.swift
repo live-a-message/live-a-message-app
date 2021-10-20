@@ -12,18 +12,23 @@ import Networking
 
 final class CloseMessageViewModelTests: XCTestCase {
 
+    override func setUp() {
+        UserData.shared.blockedIDs = []
+        UserData.shared.readMessages = []
+    }
+
     func test_addSectionRead_oneSection() {
         let sut = makeSut()
         let data = makeData(type: [.read, .read, .read])
         sut.setupCells(messages: data)
-        XCTAssertEqual(sut.sections.count, 1)
+        XCTAssertEqual(sut.sections.count, 2)
     }
 
     func test_addSectionRead_TwoSections() {
         let sut = makeSut()
         let data = makeData(type: [.read, .unread])
         sut.setupCells(messages: data)
-        XCTAssertEqual(sut.sections.count, 2)
+        XCTAssertEqual(sut.sections.count, 3)
     }
 }
 
