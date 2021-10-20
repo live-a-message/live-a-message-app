@@ -72,7 +72,8 @@ let targets = [
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
         resources: [
-            "Targets/DesignSystem/Resources/Assets.xcassets/**"
+            "Targets/DesignSystem/Resources/Assets.xcassets/**",
+            "Targets/DesignSystem/Resources/**"
         ],
         dependencies: [ ]
     )

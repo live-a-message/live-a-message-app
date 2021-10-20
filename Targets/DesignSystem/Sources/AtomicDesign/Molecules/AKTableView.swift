@@ -26,6 +26,7 @@ public class AKTableView<Item: TableViewCellViewModel,
     }
 
     public var sectionsTitle: [String]?
+    public var emptyStateView: UIView?
 
     public var didSelectRowAt: ((Item) -> Void)?
 
@@ -75,7 +76,24 @@ public class AKTableView<Item: TableViewCellViewModel,
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sectionsTitle = sectionsTitle else { return nil }
-        return sectionsTitle[section]
+        guard sectionsTitle.count > .zero && section > 0 else { return nil }
+        return sectionsTitle[section - 1]
+    }
+
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let firstSection = sections.first else { return nil }
+        if sections.count == 1 && firstSection.isEmpty {
+            return emptyStateView
+        }
+        return nil
+    }
+
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let firstSection = sections.first else { return .zero }
+        if sections.count == 1 && firstSection.isEmpty {
+            return frame.height
+        }
+        return .zero
     }
 
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
