@@ -9,6 +9,7 @@
 import Networking
 import CoreLocation
 import Foundation
+import DesignSystem
 
 protocol AddMessageViewModelProtocol: AnyObject {
     var messageService: MessageService { get }
@@ -32,8 +33,9 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
         let message = Message(
             userId: UserData.shared.id,
             content: content,
-            image: image,
-          location: Location(from: coordinate)
+            image: nil,
+            location: Location(from: coordinate),
+            imageAsset: image
         )
 
         messageService.addMessage(message: message) { result in

@@ -42,6 +42,12 @@ class AddMessageView: UIView, ViewCode {
         return toolBar
     }()
 
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildHierarchy()
@@ -57,6 +63,7 @@ class AddMessageView: UIView, ViewCode {
         addSubview(cancelButton)
         addSubview(saveButton)
         addSubview(textView)
+        addSubview(imageView)
     }
 
     func setupConstraints() {
@@ -66,6 +73,8 @@ class AddMessageView: UIView, ViewCode {
         saveButton.right(to: self, offset: -AKSpacing.medium.value)
         textView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
         textView.topToBottom(of: cancelButton, offset: AKSpacing.small.value)
+        imageView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
+        imageView.topToBottom(of: textView)
     }
 
     func configureViews() {
@@ -92,5 +101,16 @@ class AddMessageView: UIView, ViewCode {
 
     @objc func cameraButtonAction() {
         cameraAction?()
+    }
+
+}
+
+extension AddMessageView {
+    public var imageData: Data? {
+        return self.imageView.image?.pngData()
+    }
+
+    func setImage(_ image: UIImage?) {
+        self.imageView.image = image
     }
 }

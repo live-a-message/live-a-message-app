@@ -51,7 +51,7 @@ class AddMessageViewController: UIViewController {
         }
         viewModel.saveMessage(
             with: message,
-            image: UIImage(named: "AppIcon")?.pngData()
+            image: self.messageView.imageData
         )
       dismiss(animated: true) {
         self.handleDismiss?()
@@ -86,11 +86,7 @@ class AddMessageViewController: UIViewController {
 extension AddMessageViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                let attach = NSTextAttachment(image: image)
-                attach.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
-                let attString = NSAttributedString(attachment: attach)
-                self.messageView.textView.textStorage.insert(attString,
-                                                             at: self.messageView.textView.selectedRange.location)
+            self.messageView.setImage(image)
         }
         dismiss(animated: true, completion: nil)
     }
