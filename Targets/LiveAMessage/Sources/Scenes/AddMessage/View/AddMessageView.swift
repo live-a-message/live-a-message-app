@@ -14,6 +14,10 @@ class AddMessageView: UIView, ViewCode {
     var saveAction: ((String) -> Void)?
     var cameraAction: (() -> Void)?
 
+    let keyManager = KeyBoardManager()
+
+    private var textBottomAnchor: NSLayoutConstraint?
+
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle(AkeeStrings.btnCancel, for: .normal)
@@ -32,6 +36,7 @@ class AddMessageView: UIView, ViewCode {
 
     lazy var textView: UITextView = {
         let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
@@ -53,6 +58,7 @@ class AddMessageView: UIView, ViewCode {
         buildHierarchy()
         setupConstraints()
         configureViews()
+        keyboarHandle()
     }
 
     required init?(coder: NSCoder) {
@@ -74,9 +80,12 @@ class AddMessageView: UIView, ViewCode {
         textView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
         textView.topToBottom(of: cancelButton, offset: AKSpacing.small.value)
         imageView.leading(to: textView)
+        imageView.bottom(to: textView)
         imageView.width(60)
         imageView.height(60)
-        imageView.bottom(to: textView)
+
+        textBottomAnchor = textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        textBottomAnchor?.isActive = true
     }
 
     func configureViews() {
@@ -89,10 +98,6 @@ class AddMessageView: UIView, ViewCode {
         textView.inputAccessoryView = toolBar
     }
 
-    func setKeyboardView(height: CGFloat) {
-        textView.bottom(to: self, offset: -height)
-    }
-
     @objc func saveButtonAction() {
         saveAction?(textView.text)
     }
@@ -103,6 +108,24 @@ class AddMessageView: UIView, ViewCode {
 
     @objc func cameraButtonAction() {
         cameraAction?()
+    }
+
+    public func keyboarHandle() {
+       keyManager.keyboardWillChangeFrame = { [unowned self] isHiding, newHeight, animationDuration, animationCurve in
+
+           self.layoutIfNeeded()
+           self.textBottomAnchor?.isActive = false
+           if isHiding {
+                self.textBottomAnchor?.constant = 0
+                self.textBottomAnchor?.isActive = true
+           } else {
+                self.textBottomAnchor?.constant = -newHeight
+                self.textBottomAnchor?.isActive = true
+           }
+           UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: { [weak self] in
+                self?.layoutIfNeeded()
+           })
+       }
     }
 
 }

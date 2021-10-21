@@ -37,7 +37,6 @@ class AddMessageViewController: UIViewController {
         super.viewDidLoad()
         self.picker.delegate = self
         self.view.backgroundColor = AKColor.mainBackgroundColor
-        setKeyboardObserver()
     }
 
     private func cancel() {
@@ -57,23 +56,6 @@ class AddMessageViewController: UIViewController {
         self.handleDismiss?()
         AKAnimationView.animateAboveAll(with: "send_message")
       }
-    }
-
-    private func setKeyboardObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-    }
-
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            messageView.setKeyboardView(height: keyboardHeight)
-        }
     }
 
     @objc func tooglePicker() {
