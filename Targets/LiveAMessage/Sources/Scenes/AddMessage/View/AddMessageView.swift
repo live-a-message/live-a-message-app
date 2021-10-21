@@ -42,8 +42,8 @@ class AddMessageView: UIView, ViewCode {
         return toolBar
     }()
 
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
+    lazy var imageView: AKImageDisplay = {
+        let imageView = AKImageDisplay(with: 60)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -73,8 +73,10 @@ class AddMessageView: UIView, ViewCode {
         saveButton.right(to: self, offset: -AKSpacing.medium.value)
         textView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
         textView.topToBottom(of: cancelButton, offset: AKSpacing.small.value)
-        imageView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
-        imageView.topToBottom(of: textView)
+        imageView.leading(to: textView)
+        imageView.width(60)
+        imageView.height(60)
+        imageView.bottom(to: textView)
     }
 
     func configureViews() {
