@@ -33,7 +33,6 @@ class OnboardingSceneViewController: UIViewController {
         sceneView.animationView.stop()
     }
 
-
     init(viewModel: OnboardingSceneViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel

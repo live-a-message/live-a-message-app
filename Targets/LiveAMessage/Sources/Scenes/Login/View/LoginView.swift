@@ -27,6 +27,12 @@ class LoginView: UIView, ViewCode {
     lazy var descriptionLabel: AKLabel = {
         AKLabel(style: AKLabelStyle.body1)
     }()
+    
+    lazy var readTheTermsLabel: AKLabel = {
+        AKLabel(style: AKLabelStyle.body1)
+    }()
+
+    lazy var checkboxView: AKCheckboxView = { AKCheckboxView() }()
 
     lazy var authButton: ASAuthorizationAppleIDButton = {
         let style = UIScreen.main.traitCollection.userInterfaceStyle
@@ -34,6 +40,7 @@ class LoginView: UIView, ViewCode {
             authorizationButtonType: .default,
             authorizationButtonStyle: style == .dark ? .white : .black
         )
+        button.isHidden = true
         button.height(48)
         return button
     }()
@@ -76,6 +83,8 @@ class LoginView: UIView, ViewCode {
         container.addArrangedSubview(imageView)
         container.addArrangedSubview(titleLabel)
         container.addArrangedSubview(descriptionLabel)
+        container.addArrangedSubview(readTheTermsLabel)
+        container.addArrangedSubview(checkboxView)
         container.addSubview(authButton)
     }
 
@@ -90,6 +99,7 @@ class LoginView: UIView, ViewCode {
     func configureViews() {
         titleLabel.text = AkeeStrings.lblTitleSignIn
         descriptionLabel.text = AkeeStrings.lblDescriptionSignIn
+        checkboxView.titleButton.setTitle("Accept the terms of service", for: .normal)
     }
 
 }
