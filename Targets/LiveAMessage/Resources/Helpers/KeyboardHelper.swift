@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class KeyBoardManager {
+open class KeyboardHelper {
 
     private var screenBounds: CGRect {
         return UIScreen.main.bounds

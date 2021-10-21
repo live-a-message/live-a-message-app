@@ -14,7 +14,7 @@ class AddMessageView: UIView, ViewCode {
     var saveAction: ((String) -> Void)?
     var cameraAction: (() -> Void)?
 
-    let keyManager = KeyBoardManager()
+    let keyHelper = KeyboardHelper()
 
     private var textBottomAnchor: NSLayoutConstraint?
 
@@ -111,7 +111,7 @@ class AddMessageView: UIView, ViewCode {
     }
 
     public func keyboarHandle() {
-       keyManager.keyboardWillChangeFrame = { [unowned self] isHiding, newHeight, animationDuration, animationCurve in
+       keyHelper.keyboardWillChangeFrame = { [unowned self] isHiding, newHeight, animationDuration, animationCurve in
 
            self.layoutIfNeeded()
            self.textBottomAnchor?.isActive = false
