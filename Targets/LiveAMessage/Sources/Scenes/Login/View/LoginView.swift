@@ -27,7 +27,7 @@ class LoginView: UIView, ViewCode {
     lazy var descriptionLabel: AKLabel = {
         AKLabel(style: AKLabelStyle.body1)
     }()
-    
+
     lazy var readTheTermsLabel: AKLabel = {
         AKLabel(style: AKLabelStyle.body1)
     }()
