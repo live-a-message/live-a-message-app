@@ -12,6 +12,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
+  /// Do you really want do logout?
+  public static let alertLogoutMessage = AkeeStrings.tr("Localizable", "alert_logout_message")
   /// Check what people are sharing over here!
   public static let bodyNotifCloseMessage = AkeeStrings.tr("Localizable", "body_notif_close_message")
   /// Block User
@@ -30,12 +32,20 @@ public enum AkeeStrings {
   public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
   /// Login to host messages and\n share memory with other users
   public static let lblDescriptionSignIn = AkeeStrings.tr("Localizable", "lbl_description_sign_in")
+  /// Logout
+  public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
   /// Sign In
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
   /// Akee Message
   public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
   /// Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
+  /// Map
+  public static let navTitleMap = AkeeStrings.tr("Localizable", "navTitle_map")
+  /// Profile
+  public static let navTitleProfile = AkeeStrings.tr("Localizable", "navTitle_profile")
+  /// No
+  public static let no = AkeeStrings.tr("Localizable", "no")
   /// Write message at any place and share your feelings.
   public static let onboardingDescription1 = AkeeStrings.tr("Localizable", "onboarding_description_1")
   /// Read people messages whenever you want.
@@ -56,6 +66,8 @@ public enum AkeeStrings {
   public static let sectionUnreadCloseMessages = AkeeStrings.tr("Localizable", "section_unread_close_messages")
   /// You found new messages
   public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
+  /// Yes
+  public static let yes = AkeeStrings.tr("Localizable", "yes")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

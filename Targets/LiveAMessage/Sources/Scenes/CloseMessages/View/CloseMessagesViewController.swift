@@ -41,7 +41,6 @@ class CloseMessagesViewController: UIViewController {
         }
 
         setupNavigationController()
-        setupCloseAction()
         setupRefreshControl()
         if viewModel.sections.isEmpty {
             refresh()
@@ -57,18 +56,12 @@ class CloseMessagesViewController: UIViewController {
         mainView.refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 
-    private func setupCloseAction() {
-        mainView.closeButton.target = self
-        mainView.closeButton.action = #selector(dismissView)
-    }
-
     private func setupNavigationController() {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setDefaultAppearance(color: AKColor.mainBackgroundColor)
-        self.navigationItem.leftBarButtonItem = mainView.closeButton
     }
 
     @objc private func dismissView() {

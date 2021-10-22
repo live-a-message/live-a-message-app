@@ -26,13 +26,6 @@ class CloseMessagesView: UIView {
         return tableView
     }()
 
-    lazy var closeButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem()
-        barButtonItem.image = UIImage(systemName: IconNamed.close.rawValue)
-        barButtonItem.tintColor = AKColor.mainRed
-        return barButtonItem
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureViews()

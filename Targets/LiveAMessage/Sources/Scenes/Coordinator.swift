@@ -137,6 +137,18 @@ class MainCoordinator: Coordinator {
     }
 
     func doLogoff() {
+        let alertModel = AlertModel(
+            title: AkeeStrings.lblLogout,
+            message: AkeeStrings.alertLogoutMessage,
+            firstButton: AkeeStrings.yes,
+            firstAction: finishLogoff,
+            secondButton: AkeeStrings.no,
+            secondAction: nil
+        )
+        profileViewController.showAlert(model: alertModel)
+    }
+
+    private func finishLogoff() {
         authService.clearCredentials()
         loginViewController.modalPresentationStyle = .fullScreen
         tabBarController.present(loginViewController, animated: true)
@@ -165,13 +177,13 @@ class MainCoordinator: Coordinator {
         closeMessagesViewModel = CloseMessagesViewModel(messages: [], currentLocation: location)
         closeMessagesController = CloseMessagesViewController(coordinator: self, viewModel: closeMessagesViewModel!)
 
-        let mapItem = UITabBarItem(title: "Map",
+        let mapItem = UITabBarItem(title: AkeeStrings.navTitleMap,
                                    image: UIImage(systemName: IconNamed.map.rawValue),
                                    selectedImage: UIImage(systemName: IconNamed.mapFill.rawValue))
         let closeItem = UITabBarItem(title: AkeeStrings.navTitleCloseMessages,
                                      image: UIImage(systemName: IconNamed.envelope.rawValue),
                                      selectedImage: UIImage(systemName: IconNamed.envelopeFill.rawValue))
-        let profileItem = UITabBarItem(title: "Profile",
+        let profileItem = UITabBarItem(title: AkeeStrings.navTitleProfile,
                                      image: UIImage(systemName: IconNamed.person.rawValue),
                                      selectedImage: UIImage(systemName: IconNamed.personFill.rawValue))
 

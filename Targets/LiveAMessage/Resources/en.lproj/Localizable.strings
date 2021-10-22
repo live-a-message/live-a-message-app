@@ -23,6 +23,11 @@
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";
 "lbl_description_sign_in" = "Login to host messages and\n share memory with other users";
+"navTitle_profile" = "Profile";
+"lbl_logout" = "Logout";
+"alert_logout_message" = "Do you really want do logout?";
+"yes" = "Yes";
+"no" = "No";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";
@@ -40,3 +45,6 @@
 "onboarding_description_2" = "Read people messages whenever you want.";
 "onboarding_title_3" = "All over the World";
 "onboarding_description_3" = "Your moments will be shared with the world from the present and the future so that moment that you lived will be forever part of the world.";
+
+// String from map
+"navTitle_map" = "Map";

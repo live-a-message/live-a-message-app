@@ -13,7 +13,7 @@ import TinyConstraints
 class ProfileView: UIView, ViewCode {
     private let logOffButton: AKButton = {
         let button = AKButton(style: AKButtonStyle.default)
-        button.setTitle("Logout", for: .normal)
+        button.setTitle(AkeeStrings.lblLogout, for: .normal)
         button.addTarget(self, action: #selector(didTapLogoff), for: .touchUpInside)
         return button
     }()
