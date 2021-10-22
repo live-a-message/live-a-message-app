@@ -12,6 +12,7 @@ public class AKLabel: UILabel {
 
     public init(style: AKLabelStyle) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         setup(style: style)
         setupAcessibility()
     }

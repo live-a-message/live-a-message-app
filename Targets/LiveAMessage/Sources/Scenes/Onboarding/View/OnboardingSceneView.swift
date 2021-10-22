@@ -14,9 +14,8 @@ class OnboardingSceneView: UIView, ViewCode {
 
     var nextButtonAction: (() -> Void)?
 
-    lazy var animationView: AnimationView = {
+    var animationView: AnimationView = {
         let view = AnimationView()
-        view.loopMode = .loop
         view.contentMode = .scaleAspectFit
         return view
     }()

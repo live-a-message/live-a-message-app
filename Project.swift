@@ -33,8 +33,6 @@ let targets = [
         entitlements: "Akee.entitlements",
         actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
-            .package(product: "Lottie"),
-            .package(product: "TinyConstraints"),
             .target(name: "Networking"),
             .target(name: "DesignSystem")
         ]
@@ -72,9 +70,13 @@ let targets = [
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/DesignSystem/**"],
         resources: [
-            "Targets/DesignSystem/Resources/Assets.xcassets/**"
+            "Targets/DesignSystem/Resources/Assets.xcassets/**",
+            "Targets/DesignSystem/Resources/**"
         ],
-        dependencies: [ ]
+        dependencies: [
+            TargetDependency.package(product: "Lottie"),
+            TargetDependency.package(product: "TinyConstraints")
+        ]
     )
 ]
 
