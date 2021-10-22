@@ -16,6 +16,7 @@ public struct Message: Codable, Equatable {
     public var status: MessageStatus
     public var content: String
     public var image: String?
+    public var imageAsset: Data?
 
     public init(
         id: String = UUID().uuidString,
@@ -23,6 +24,7 @@ public struct Message: Codable, Equatable {
         content: String,
         image: String?,
         location: Location,
+        imageAsset: Data?,
         status: MessageStatus = .unread
     ) {
         self.userId = userId
@@ -31,6 +33,7 @@ public struct Message: Codable, Equatable {
         self.location = location
         self.id = id
         self.status = status
+        self.imageAsset = imageAsset
     }
 
     public static func == (lhs: Message, rhs: Message) -> Bool {

@@ -16,6 +16,7 @@ public class CKMessage {
     private(set) var image: String?
     private(set) var location: CLLocation
     private(set) var status: String?
+    private(set) var imageAsset: CKAsset?
 
     public init(_ record: CKRecord) throws {
         let image = record["image"] as? String
@@ -23,7 +24,8 @@ public class CKMessage {
               let id = record["id"] as? String,
               let userId = record["userId"] as? String,
               let clLocation = record["location"] as? CLLocation,
-              let status = record["status"] as? String
+              let status = record["status"] as? String,
+              let imageAsset = record["imageAsset"] as? CKAsset
         else { throw CKError.decodingError }
 
         self.content = content
@@ -32,6 +34,7 @@ public class CKMessage {
         self.userId = userId
         self.image = image
         self.status = status
+        self.imageAsset = imageAsset
     }
 
     public static func encode(_ message: Message) -> CKRecord {
@@ -43,6 +46,7 @@ public class CKMessage {
         record["id"] = message.id
         record["userId"] = message.userId
         record["image"] = message.image
+        record["imageAsset"] = encodeImage(message.imageAsset)
         record["location"] = CLLocation(latitude: message.location.lat, longitude: message.location.lon)
         record["status"] = message.status.rawValue
         return record
@@ -59,8 +63,30 @@ public class CKMessage {
             content: content,
             image: image,
             location: .init(from: location.coordinate),
+            imageAsset: CKMessage.decodeImage(imageAsset),
             status: messageStatus
         )
         return message
+    }
+
+    public static func encodeImage(_ data: Data?) -> CKAsset? {
+        guard let unwrapppedData = data else {
+            return nil
+        }
+        guard let folder = try? FileHelper.sharedHelper.saveFile(unwrapppedData, as: "imageTemp.png", in: .ephemeral) else {
+            return nil
+        }
+        return CKAsset(fileURL: folder)
+    }
+
+    public static func decodeImage(_ asset: CKAsset?) -> Data? {
+        guard let unwrapppedAsset = asset else {
+            return nil
+        }
+
+        guard let folder = unwrapppedAsset.fileURL else {
+            return nil
+        }
+        return try? Data(contentsOf: folder)
     }
 }

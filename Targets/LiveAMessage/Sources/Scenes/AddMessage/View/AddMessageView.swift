@@ -12,6 +12,11 @@ import DesignSystem
 class AddMessageView: UIView, ViewCode {
     var cancelAction: (() -> Void)?
     var saveAction: ((String) -> Void)?
+    var cameraAction: (() -> Void)?
+
+    let keyHelper = KeyboardHelper()
+
+    private var textBottomAnchor: NSLayoutConstraint?
 
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -31,7 +36,21 @@ class AddMessageView: UIView, ViewCode {
 
     lazy var textView: UITextView = {
         let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+
+    lazy var toolBar: AKToolBar = {
+        let toolBar = AKToolBar()
+        let addButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(cameraButtonAction))
+        toolBar.setItems([addButton], animated: false)
+        return toolBar
+    }()
+
+    lazy var imageView: AKImageDisplay = {
+        let imageView = AKImageDisplay(with: 60)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     override init(frame: CGRect) {
@@ -39,6 +58,7 @@ class AddMessageView: UIView, ViewCode {
         buildHierarchy()
         setupConstraints()
         configureViews()
+        keyboarHandle()
     }
 
     required init?(coder: NSCoder) {
@@ -49,6 +69,7 @@ class AddMessageView: UIView, ViewCode {
         addSubview(cancelButton)
         addSubview(saveButton)
         addSubview(textView)
+        addSubview(imageView)
     }
 
     func setupConstraints() {
@@ -58,6 +79,13 @@ class AddMessageView: UIView, ViewCode {
         saveButton.right(to: self, offset: -AKSpacing.medium.value)
         textView.edgesToSuperview(excluding: .top, insets: .horizontal(AKSpacing.small.value))
         textView.topToBottom(of: cancelButton, offset: AKSpacing.small.value)
+        imageView.leading(to: textView)
+        imageView.bottom(to: textView)
+        imageView.width(60)
+        imageView.height(60)
+
+        textBottomAnchor = textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        textBottomAnchor?.isActive = true
     }
 
     func configureViews() {
@@ -67,10 +95,7 @@ class AddMessageView: UIView, ViewCode {
         textView.isScrollEnabled = true
         textView.tintColor = .red
         textView.font = .systemFont(ofSize: 14)
-    }
-
-    func setKeyboardView(height: CGFloat) {
-        textView.bottom(to: self, offset: -height)
+        textView.inputAccessoryView = toolBar
     }
 
     @objc func saveButtonAction() {
@@ -79,5 +104,38 @@ class AddMessageView: UIView, ViewCode {
 
     @objc func cancelButtonAction() {
         cancelAction?()
+    }
+
+    @objc func cameraButtonAction() {
+        cameraAction?()
+    }
+
+    public func keyboarHandle() {
+       keyHelper.keyboardWillChangeFrame = { [unowned self] isHiding, newHeight, animationDuration, animationCurve in
+
+           self.layoutIfNeeded()
+           self.textBottomAnchor?.isActive = false
+           if isHiding {
+                self.textBottomAnchor?.constant = 0
+                self.textBottomAnchor?.isActive = true
+           } else {
+                self.textBottomAnchor?.constant = -newHeight
+                self.textBottomAnchor?.isActive = true
+           }
+           UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: { [weak self] in
+                self?.layoutIfNeeded()
+           })
+       }
+    }
+
+}
+
+extension AddMessageView {
+    public var imageData: Data? {
+        return self.imageView.image?.pngData()
+    }
+
+    func setImage(_ image: UIImage?) {
+        self.imageView.image = image
     }
 }

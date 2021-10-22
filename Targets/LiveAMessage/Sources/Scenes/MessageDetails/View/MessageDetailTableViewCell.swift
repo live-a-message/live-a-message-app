@@ -24,14 +24,26 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         return label
     }()
 
-    func fill(message: String) {
+    lazy var messageImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
+    func fill(with content: String, and image: Data?) {
         configureViews()
-        messageLabel.text = message
+        messageLabel.text = content
+        guard let data = image else {
+            return
+        }
+        self.messageImage.image = UIImage(data: data)
     }
 
     func buildHierarchy() {
         addSubview(titleLabel)
         addSubview(messageLabel)
+        addSubview(messageImage)
     }
 
     func setupConstraints() {
@@ -43,12 +55,20 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         messageLabel.top(to: titleLabel, offset: top)
         messageLabel.left(to: self, offset: corner)
         messageLabel.right(to: self, offset: -corner)
-        messageLabel.bottom(to: self, offset: -corner)
+        messageImage.topToBottom(of: messageLabel, offset: AKSpacing.small.value)
+        messageImage.left(to: self, offset: corner)
+        messageImage.right(to: self, offset: -corner)
+        messageImage.height(400)
     }
 
     func configureViews() {
         buildHierarchy()
         setupConstraints()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.messageLabel.sizeToFit()
     }
 
 }

@@ -15,6 +15,7 @@ class AddMessageViewController: UIViewController {
     var handleDismiss : (() -> Void)?
     let viewModel: AddMessageViewModelProtocol
     private lazy var messageView = AddMessageView()
+    lazy var picker = UIImagePickerController()
 
     init(viewModel: AddMessageViewModelProtocol) {
         self.viewModel = viewModel
@@ -28,13 +29,14 @@ class AddMessageViewController: UIViewController {
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)
+        messageView.cameraAction = tooglePicker
         view = messageView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.picker.delegate = self
         self.view.backgroundColor = AKColor.mainBackgroundColor
-        setKeyboardObserver()
     }
 
     private func cancel() {
@@ -48,7 +50,7 @@ class AddMessageViewController: UIViewController {
         }
         viewModel.saveMessage(
             with: message,
-            image: ""
+            image: self.messageView.imageData
         )
       dismiss(animated: true) {
         self.handleDismiss?()
@@ -56,21 +58,19 @@ class AddMessageViewController: UIViewController {
       }
     }
 
-    private func setKeyboardObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+    @objc func tooglePicker() {
+        self.picker.allowsEditing = false
+        self.picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
 
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            messageView.setKeyboardView(height: keyboardHeight)
+}
+
+extension AddMessageViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.messageView.setImage(image)
         }
+        dismiss(animated: true, completion: nil)
     }
-
 }
