@@ -49,6 +49,15 @@ public class UserData {
     public func set(value: Any, key: Key) {
         defaults.setValue(value, forKey: key.rawValue)
     }
+
+    public func clear() {
+        set(value: false, key: Key.isLoggedIn)
+        set(value: false, key: Key.agreeWithTerms)
+        defaults.setValue(nil, forKey: Key.id.rawValue)
+        defaults.setValue(nil, forKey: Key.name.rawValue)
+        defaults.setValue(nil, forKey: Key.email.rawValue)
+        defaults.setValue(nil, forKey: Key.blockedIDs.rawValue)
+    }
 }
 
 extension UserData {

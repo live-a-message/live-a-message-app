@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
         setupConstraints()
         configureViews()
         mainView.bind(viewModel: viewModel)
+        viewModel.coordinator = coordinator
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -48,7 +49,6 @@ class MapViewController: UIViewController {
 
     func configureViews() {
         mainView.headerView.rightButtonAction = addMessage
-        mainView.headerView.leftButtonAction = showCloseMessages
         mainView.didTapPin = didTapMessagePin(_:)
     }
 
@@ -57,10 +57,6 @@ class MapViewController: UIViewController {
 extension MapViewController {
     func addMessage() {
         coordinator?.showAddMessage()
-    }
-
-    func showCloseMessages() {
-        coordinator?.showCloseMessages()
     }
 
     func didTapMessagePin(_ annotation: MKAnnotation?) {

@@ -31,6 +31,10 @@ public class SignInWithAppleAuthorization: NSObject, AutheticationService {
         authorizationController.delegate = self
         authorizationController.performRequests()
     }
+
+    public func clearCredentials() {
+        UserData.shared.clear()
+    }
 }
 
 extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {

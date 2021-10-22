@@ -14,7 +14,7 @@
 "btn_dismiss" = "Dismiss";
 
 // Strings from `CloseMessages` scene.
-"navTitle_close_messages" = "Close Messages";
+"navTitle_close_messages" = "Messages";
 "refresh_close_messages" = "Pull to refresh messages";
 "lbl_titleMessage_close_messages" = "Akee Message";
 "section_read_close_messages" = "Read Messages";

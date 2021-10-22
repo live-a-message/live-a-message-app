@@ -9,17 +9,19 @@
 import Foundation
 import UIKit
 import Networking
+import DesignSystem
 
 protocol Coordinator: AnyObject {
     func start(window: UIWindow?)
     func showLogin()
     func showLogout()
     func showMap()
-    func showCloseMessages()
     func showAddMessage()
+    func didFetchMessages(messages: [Message])
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
+    func doLogoff()
 }
 
 class MainCoordinator: Coordinator {
@@ -27,43 +29,47 @@ class MainCoordinator: Coordinator {
     private let messagesService = CloudKitMessagesService()
     private let userService = CloudKitUserService()
     private let loginViewController: LoginViewController
+    private let profileViewController = ProfileViewController()
     private let mapViewController: MapViewController
     private let onboardingViewController = OnboardingPageViewController()
-    private let rootViewController: UINavigationController
+    private let tabBarController: UITabBarController
 
     private var closeMessagesController: CloseMessagesViewController?
     private var closeMessagesViewModel: CloseMessagesViewModel?
     private var window: UIWindow?
 
     init() {
-        rootViewController = UINavigationController()
         mapViewController = MapViewController()
         loginViewController = LoginViewController(viewModel: LoginViewModel(service: authService))
+        tabBarController = UITabBarController()
         configureControllers()
+        configureTabBar()
     }
 
     private func configureControllers() {
-        rootViewController.navigationBar.isHidden = true
         mapViewController.coordinator = self
         loginViewController.coordinator = self
         onboardingViewController.coordinator = self
+        profileViewController.coordinator = self
         authService.delegate = loginViewController
     }
 
     func start(window: UIWindow?) {
         self.window = window
-        if isUserLoggedIn() {
-            rootViewController.setViewControllers([mapViewController], animated: false)
-        } else {
-            rootViewController.setViewControllers([onboardingViewController], animated: false)
+        if !isUserLoggedIn() {
+            let navigation = UINavigationController(rootViewController: onboardingViewController)
+            navigation.modalPresentationStyle = .fullScreen
+            mapViewController.present(navigation, animated: false)
         }
-        window?.rootViewController = rootViewController
+
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 
     func showLogin() {
-        rootViewController.pushViewController(loginViewController, animated: true)
-    }
+        let navigation = UINavigationController(rootViewController: onboardingViewController)
+        navigation.modalPresentationStyle = .fullScreen
+        mapViewController.present(navigation, animated: false)    }
 
     func showLogout() {
 
@@ -71,20 +77,9 @@ class MainCoordinator: Coordinator {
 
     func showMap() {
         DispatchQueue.main.async {
-            self.rootViewController.setViewControllers([self.mapViewController], animated: true)
+            self.mapViewController.dismiss(animated: true)
+            self.tabBarController.selectedIndex = 0
         }
-    }
-
-    func showCloseMessages() {
-        let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
-        closeMessagesViewModel = CloseMessagesViewModel(
-            messages: mapViewController.viewModel.messages,
-            currentLocation: location)
-        closeMessagesController = CloseMessagesViewController(coordinator: self, viewModel: closeMessagesViewModel!)
-        let navController = UINavigationController(rootViewController: closeMessagesController!)
-
-        navController.modalPresentationStyle = .overFullScreen
-        rootViewController.present(navController, animated: true)
     }
 
     func showAddMessage() {
@@ -98,7 +93,7 @@ class MainCoordinator: Coordinator {
             self?.mapViewController.viewModel.addPin(message)
         }
         controller.modalPresentationStyle = .formSheet
-        rootViewController.present(controller, animated: true)
+        mapViewController.present(controller, animated: true)
     }
 
     func showMessageDetails(
@@ -113,7 +108,7 @@ class MainCoordinator: Coordinator {
             let detailsNavigation = UINavigationController(rootViewController: detailsViewController)
             detailsNavigation.modalPresentationStyle = .overFullScreen
             detailsViewController.setCloseButton()
-            rootViewController.present(detailsNavigation, animated: true, completion: nil)
+            mapViewController.present(detailsNavigation, animated: true, completion: nil)
         } else {
             closeMessagesController?.navigationController?.pushViewController(detailsViewController, animated: true)
         }
@@ -132,6 +127,20 @@ class MainCoordinator: Coordinator {
         deleteView.showDeleteMenu(on: viewController)
     }
 
+    func didFetchMessages(messages: [Message]) {
+        closeMessagesController?.viewModel?.setupCells(messages: messages)
+        let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
+        closeMessagesViewModel?.currentLocation = location
+    }
+
+    func doLogoff() {
+        authService.clearCredentials()
+        loginViewController.modalPresentationStyle = .fullScreen
+        tabBarController.present(loginViewController, animated: true)
+    }
+
+    // MARK: Helpers
+
     private func popMessageDetailsAndRemove(message: Message) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let updatedMessages = self.mapViewController.viewModel.messages.filter({ $0.id != message.id })
@@ -146,5 +155,30 @@ class MainCoordinator: Coordinator {
         #else
             return UserData.shared.isLoggedIn
         #endif
+    }
+
+    private func configureTabBar() {
+        let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
+        closeMessagesViewModel = CloseMessagesViewModel(messages: [], currentLocation: location)
+        closeMessagesController = CloseMessagesViewController(coordinator: self, viewModel: closeMessagesViewModel!)
+
+        let mapItem = UITabBarItem(title: "Map",
+                                   image: UIImage(systemName: IconNamed.map.rawValue),
+                                   selectedImage: UIImage(systemName: IconNamed.mapFill.rawValue))
+        let closeItem = UITabBarItem(title: AkeeStrings.navTitleCloseMessages,
+                                     image: UIImage(systemName: IconNamed.envelope.rawValue),
+                                     selectedImage: UIImage(systemName: IconNamed.envelopeFill.rawValue))
+        let profileItem = UITabBarItem(title: "Profile",
+                                     image: UIImage(systemName: IconNamed.person.rawValue),
+                                     selectedImage: UIImage(systemName: IconNamed.personFill.rawValue))
+
+        closeMessagesController!.tabBarItem = closeItem
+        mapViewController.tabBarItem = mapItem
+        profileViewController.tabBarItem = profileItem
+        tabBarController.viewControllers = [mapViewController,
+                                            UINavigationController(rootViewController: closeMessagesController!),
+                                            profileViewController]
+        tabBarController.selectedIndex = 0
+        tabBarController.customizeTabBarLayout()
     }
 }

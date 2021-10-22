@@ -14,7 +14,7 @@
 "btn_dismiss" = "Fechar";
 
 // Strings from `CloseMessages` scene.
-"navTitle_close_messages" = "Mensagens Próximas";
+"navTitle_close_messages" = "Mensagens";
 "refresh_close_messages" = "Puxe para atualizar";
 "lbl_titleMessage_close_messages" = "Mensagem Akee";
 "section_read_close_messages" = "Mensagens lidas";

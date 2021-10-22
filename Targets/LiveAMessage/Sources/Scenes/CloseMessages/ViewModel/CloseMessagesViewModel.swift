@@ -22,7 +22,7 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
 
     var sections = [[CloseMessageCellViewModel]]()
     var sectionsTitle = [SectionTitle]()
-    let currentLocation: Location
+    var currentLocation: Location
 
     let service: MessageService = CloudKitMessagesService()
 
