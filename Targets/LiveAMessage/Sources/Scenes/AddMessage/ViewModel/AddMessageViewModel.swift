@@ -9,13 +9,14 @@
 import Networking
 import CoreLocation
 import Foundation
+import DesignSystem
 
 protocol AddMessageViewModelProtocol: AnyObject {
     var messageService: MessageService { get }
     var didSaveMessage: ((Message) -> Void)? { get set }
     func saveMessage(
         with content: String,
-        image: String?
+        image: Data?
     )
 }
 
@@ -26,14 +27,15 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
 
     func saveMessage(
         with content: String,
-        image: String?
+        image: Data?
     ) {
       guard let coordinate = self.currentLocation?.coordinate else { return }
         let message = Message(
             userId: UserData.shared.id,
             content: content,
-            image: image,
-          location: Location(from: coordinate)
+            image: nil,
+            location: Location(from: coordinate),
+            imageAsset: image
         )
 
         messageService.addMessage(message: message) { result in
@@ -65,5 +67,5 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
 }
 
 extension Notification.Name {
-  static let updateLocation = Notification.Name(rawValue: "presentGame")
+  static let updateLocation = Notification.Name(rawValue: "updateLocation")
 }

@@ -48,7 +48,7 @@ extension MessageDetailsViewModel: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageDetailTableViewCell else {
                 return UITableViewCell()
             }
-            cell.fill(message: message.content)
+            cell.fill(with: message.content, and: message.imageAsset)
             return cell
         }
     }

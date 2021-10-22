@@ -46,9 +46,18 @@ public class AKButton: UIButton {
         self.contentVerticalAlignment   = style.contentVerticalAlignment
         self.imageView?.tintColor       = icon?.tintColor
         self.titleLabel?.textAlignment  = style.textAlignment
+        self.setTitleColor(style.titleColor, for: .normal)
+        self.titleLabel?.isAccessibilityElement = true
+        self.titleLabel?.adjustsFontForContentSizeCategory = true
 
         self.setBackgroundColor(style.backgroundColor, for: .normal)
         self.setBackgroundColor(style.highlightedColor, for: .highlighted)
+        self.setCheckboxConfig(style)
         if let icon = icon { self.setIcon(imageIcon: icon) }
+    }
+
+    func setCheckboxConfig(_ style: AKButtonStyle) {
+        guard style.isCheckbox else { return }
+        self.setBackgroundColor(style.highlightedColor, for: .selected)
     }
 }

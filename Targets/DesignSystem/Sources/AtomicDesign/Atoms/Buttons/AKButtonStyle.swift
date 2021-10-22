@@ -25,6 +25,28 @@ extension AKButtonStyle {
         width: 40.0,
         clipToBounds: true
     )
+
+    public static let checkbox = AKButtonStyle(
+        height: 24.0,
+        width: 24.0,
+        highlightedColor: AKColor.mainRed,
+        backgroundColor: AKColor.mainBackgroundColor,
+        borderColor: AKColor.mainRed.cgColor,
+        borderWidth: 3,
+        cornerRadius: 6,
+        clipToBounds: true,
+        isCheckbox: true
+    )
+
+    public static let text = AKButtonStyle(
+        font: UIFont.preferredFont(forTextStyle: .body),
+        clipToBounds: true,
+        contentMode: .left,
+        contentVerticalAlignment: .fill,
+        contentHorizontalAlignment: .fill,
+        textAlignment: .center,
+        titleColor: AKColor.mainRed
+    )
 }
 
 public struct AKButtonStyle {
@@ -39,9 +61,11 @@ public struct AKButtonStyle {
     var font: UIFont?
     let clipToBounds: Bool
     var contentMode: UIView.ContentMode = .scaleAspectFit
-    var contentVerticalAlignment: UIControl.ContentVerticalAlignment = .fill
-    var contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .fill
-    var textAlignment: NSTextAlignment = .natural
+    var contentVerticalAlignment: UIControl.ContentVerticalAlignment = .center
+    var contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .center
+    var textAlignment: NSTextAlignment = .center
+    var titleColor: UIColor = .white
+    var isCheckbox: Bool = false
 }
 
 public struct ButtonIcon {
