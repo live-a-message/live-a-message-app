@@ -17,6 +17,7 @@ protocol Coordinator: AnyObject {
     func showMap()
     func showCloseMessages()
     func showAddMessage()
+    func showTermsOfService()
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
@@ -138,6 +139,15 @@ class MainCoordinator: Coordinator {
             self.closeMessagesViewModel?.setupCells(messages: updatedMessages)
             self.closeMessagesController?.navigationController?.popToRootViewController(animated: true)
         }
+    }
+
+    func showTermsOfService() {
+        let controller = TermsViewController()
+        controller.didAcceptTerms = {
+            self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
+            self.loginViewController.mainView.authButton.isHidden = false
+        }
+        rootViewController.present(controller, animated: true)
     }
 
     private func isUserLoggedIn() -> Bool {

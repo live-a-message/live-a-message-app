@@ -15,6 +15,7 @@ class TermsViewController: UIViewController {
     private let mainView = TermsView()
     private let service: UserService = CloudKitUserService()
     private var firstLoad: Bool = true
+    public var didAcceptTerms: (() -> Void)?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -47,6 +48,6 @@ class TermsViewController: UIViewController {
 
     @objc func didTapConfirmButton() {
         UserData.shared.set(value: true, key: .agreeWithTerms)
-        dismiss(animated: true)
+        dismiss(animated: true, completion: didAcceptTerms)
     }
 }

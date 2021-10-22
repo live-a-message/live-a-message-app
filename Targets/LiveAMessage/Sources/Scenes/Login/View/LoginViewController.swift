@@ -32,10 +32,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.authButton.addTarget(self, action: #selector(didTapAuthButton), for: .touchUpInside)
+        mainView.checkboxView.checkboxButton.addTarget(self, action: #selector(didTapTermsButton), for: .touchUpInside)
+        mainView.checkboxView.titleButton.addTarget(self, action: #selector(didTapTermsButton), for: .touchUpInside)
     }
 
     @objc func didTapAuthButton() {
         viewModel?.authenticate()
+    }
+
+    @objc func didTapTermsButton() {
+        coordinator?.showTermsOfService()
     }
 }
 
