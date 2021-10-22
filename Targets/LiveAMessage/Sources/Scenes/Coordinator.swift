@@ -59,17 +59,19 @@ class MainCoordinator: Coordinator {
         if !isUserLoggedIn() {
             let navigation = UINavigationController(rootViewController: onboardingViewController)
             navigation.modalPresentationStyle = .fullScreen
-            mapViewController.present(navigation, animated: false)
+            window?.rootViewController = navigation
+            window?.makeKeyAndVisible()
+        } else {
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
         }
-
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
     }
 
     func showLogin() {
-        let navigation = UINavigationController(rootViewController: onboardingViewController)
+        let navigation = UINavigationController(rootViewController: loginViewController)
         navigation.modalPresentationStyle = .fullScreen
-        mapViewController.present(navigation, animated: false)    }
+        window?.rootViewController?.present(navigation, animated: true)
+    }
 
     func showLogout() {
 
@@ -77,6 +79,7 @@ class MainCoordinator: Coordinator {
 
     func showMap() {
         DispatchQueue.main.async {
+            self.window?.rootViewController = self.tabBarController
             self.mapViewController.dismiss(animated: true)
             self.tabBarController.selectedIndex = 0
         }
@@ -128,7 +131,7 @@ class MainCoordinator: Coordinator {
     }
 
     func didFetchMessages(messages: [Message]) {
-        closeMessagesController?.viewModel?.setupCells(messages: messages)
+        closeMessagesController?.viewModel.setupCells(messages: messages)
         let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
         closeMessagesViewModel?.currentLocation = location
     }

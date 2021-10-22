@@ -12,7 +12,7 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum DesignSystemStrings {
-  /// Nenhuma novidade por aqui!
+  /// Any data around here!
   public static let lblGenericEmptyState = DesignSystemStrings.tr("Localizable", "lbl_generic_emptyState")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

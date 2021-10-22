@@ -13,7 +13,7 @@ import Networking
 class CloseMessagesViewController: UIViewController {
 
     private let mainView = CloseMessagesView()
-    private let viewModel: CloseMessagesViewModelProtocol
+    let viewModel: CloseMessagesViewModelProtocol
     var coordinator: Coordinator?
 
     init(coordinator: Coordinator, viewModel: CloseMessagesViewModelProtocol) {
