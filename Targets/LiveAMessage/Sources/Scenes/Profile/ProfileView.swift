@@ -49,6 +49,5 @@ class ProfileView: UIView, ViewCode {
     @objc
     private func didTapLogoff() {
         logoffClosure?()
-        print("Saiu")
     }
 }
