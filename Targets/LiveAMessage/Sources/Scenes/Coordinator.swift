@@ -171,7 +171,7 @@ class MainCoordinator: Coordinator {
             self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
             self.loginViewController.mainView.authButton.isHidden = false
         }
-        rootViewController.present(controller, animated: true)
+        tabBarController.present(controller, animated: true)
     }
 
     private func isUserLoggedIn() -> Bool {
