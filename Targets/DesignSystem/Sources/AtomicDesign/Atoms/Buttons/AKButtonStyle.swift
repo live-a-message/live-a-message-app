@@ -81,7 +81,12 @@ public struct ButtonIcon {
 }
 
 public enum IconNamed: String {
-    case envelope = "envelope.badge.fill"
+    case envelope = "envelope.badge"
+    case envelopeFill = "envelope.badge.fill"
     case add = "plus.rectangle.fill"
     case close = "xmark"
+    case map = "map"
+    case mapFill = "map.fill"
+    case person = "person"
+    case personFill = "person.fill"
 }

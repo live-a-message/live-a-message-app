@@ -10,6 +10,7 @@ import MapKit
 import Networking
 
 protocol MapViewModelProtocol: NSObject {
+    var coordinator: Coordinator? { get set }
     var didChangeLocation: (() -> Void)? { get set }
     var locationManager: CLLocationManager { get }
     var currentLocation: CLLocation { get set }

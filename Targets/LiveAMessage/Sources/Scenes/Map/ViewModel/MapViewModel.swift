@@ -58,6 +58,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
 
     let service: MessageService
     weak var mapView: MapView?
+    weak var coordinator: Coordinator?
 
     public init(service: MessageService = CloudKitMessagesService()) {
         self.service = service
@@ -74,6 +75,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
             switch result {
             case .success(let messages):
                 self.messages = messages
+                self.coordinator?.didFetchMessages(messages: messages)
             case .failure(let error):
                 NSLog(error.localizedDescription, "error")
             }

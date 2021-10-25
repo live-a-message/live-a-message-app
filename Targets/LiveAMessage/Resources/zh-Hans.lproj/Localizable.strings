@@ -23,6 +23,11 @@
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";
 "lbl_description_sign_in" = "登录到主机消息和\n与其他用户共享内存";
+"navTitle_profile" = "删除";
+"lbl_logout" = "登出";
+"alert_logout_message" = "你真的要退出吗";
+"yes" = "是的";
+"no" = "在";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "删除";
@@ -39,3 +44,6 @@
 "onboarding_description_2" = "只要你想，随时都可以阅读别人的信息。";
 "onboarding_title_3" = "在全世界范围内";
 "onboarding_description_3" = "你的时刻将与世界分享，从现在到未来，所以你生活的那一刻将永远成为世界的一部分。";
+
+// String from map
+"navTitle_map" = "地图";
