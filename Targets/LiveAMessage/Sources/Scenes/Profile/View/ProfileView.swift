@@ -20,6 +20,8 @@ class ProfileView: UIView, ViewCode {
 
     lazy var tableView: AKTableView<ProfileCellViewModel, ProfileCellView> = {
         let tableView = AKTableView<ProfileCellViewModel, ProfileCellView>(frame: .zero, style: .grouped)
+        tableView.tableHeaderView = AKEmptyState(style: .generic)
+        tableView.heightForHeaderView = .zero
         return tableView
     }()
 
