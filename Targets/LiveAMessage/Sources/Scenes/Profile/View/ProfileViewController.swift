@@ -10,8 +10,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
+    private let viewModel: ProfileViewModelProtocol = ProfileViewModel()
 
     weak var coordinator: Coordinator?
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView.tableView.bind(sections: viewModel.sections)
+        contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
+    }
 
     override func loadView() {
         contentView.logoffClosure = doLogoff
@@ -20,5 +26,12 @@ class ProfileViewController: UIViewController {
 
     private func doLogoff() {
         coordinator?.doLogoff()
+    }
+
+    private func route(with type: ProfileItemType) {
+        switch type {
+        case .termsOfService:
+            self.coordinator?.showTermsOfService()
+        }
     }
 }
