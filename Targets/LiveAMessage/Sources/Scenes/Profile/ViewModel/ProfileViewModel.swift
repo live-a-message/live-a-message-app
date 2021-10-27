@@ -23,5 +23,8 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     init() {
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
         sections.append(firstSection)
+        sections.append(contentsOf: Array(repeating: [], count: 6))
+        let lastSection = [ProfileCellViewModel(model: ProfileModel(type: .logout))]
+        sections.append(lastSection)
     }
 }
