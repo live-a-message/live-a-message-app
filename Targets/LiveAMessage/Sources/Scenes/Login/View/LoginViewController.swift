@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     }
 
     @objc func didTapTermsButton() {
-        coordinator?.showTermsOfService()
+        coordinator?.showTermsOfService(.present)
     }
 }
 
