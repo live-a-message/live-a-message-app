@@ -149,6 +149,17 @@ class MainCoordinator: Coordinator {
         profileViewController.showAlert(model: alertModel)
     }
 
+    func showTermsOfService() {
+        let controller = TermsViewController()
+        controller.didAcceptTerms = {
+            self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
+            self.loginViewController.mainView.authButton.isHidden = false
+        }
+        let root = window?.rootViewController
+        let presenter = root?.presentedViewController == nil ? root : root?.presentedViewController
+        presenter?.present(controller, animated: true)
+    }
+
     private func finishLogoff() {
         authService.clearCredentials()
         loginViewController.modalPresentationStyle = .fullScreen
@@ -163,15 +174,6 @@ class MainCoordinator: Coordinator {
             self.closeMessagesViewModel?.setupCells(messages: updatedMessages)
             self.closeMessagesController?.navigationController?.popToRootViewController(animated: true)
         }
-    }
-
-    func showTermsOfService() {
-        let controller = TermsViewController()
-        controller.didAcceptTerms = {
-            self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
-            self.loginViewController.mainView.authButton.isHidden = false
-        }
-        tabBarController.present(controller, animated: true)
     }
 
     private func isUserLoggedIn() -> Bool {

@@ -46,7 +46,12 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
             let identifier = appleIDCredential.user
             if let name = appleIDCredential.fullName?.givenName {
                 let email = appleIDCredential.email
-                save(user: User(name: name, id: identifier, email: email ?? ""))
+                save(user: User(
+                    name: name + " " + (appleIDCredential.fullName?.familyName ?? ""),
+                    id: identifier,
+                    email: email ?? ""
+                    )
+                )
             } else {
                 fetch(identifier: identifier)
             }
