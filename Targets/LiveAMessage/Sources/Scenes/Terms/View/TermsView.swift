@@ -31,6 +31,7 @@ class TermsView: UIView, ViewCode {
         button.setTitle("Agree", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = AKColor.shadowRed
+        button.isHidden = UserData.shared.agreeWithTerms
         button.isEnabled = false
         return button
     }()

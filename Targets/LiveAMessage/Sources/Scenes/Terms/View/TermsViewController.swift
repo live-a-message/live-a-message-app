@@ -27,6 +27,7 @@ class TermsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = AKColor.mainRed
         mainView.confirmButton.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
     }
 

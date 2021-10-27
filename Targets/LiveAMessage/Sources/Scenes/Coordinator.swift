@@ -18,7 +18,7 @@ protocol Coordinator: AnyObject {
     func showMap()
     func showAddMessage()
     func didFetchMessages(messages: [Message])
-    func showTermsOfService()
+    func showTermsOfService(_ using: MainCoordinator.PresentMode)
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
@@ -165,13 +165,18 @@ class MainCoordinator: Coordinator {
         }
     }
 
-    func showTermsOfService() {
+    func showTermsOfService(_ mode: PresentMode = .present) {
         let controller = TermsViewController()
         controller.didAcceptTerms = {
             self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
             self.loginViewController.mainView.authButton.isHidden = false
         }
-        tabBarController.present(controller, animated: true)
+        switch mode {
+        case .present:
+            tabBarController.present(controller, animated: true)
+        case .push(let nav):
+            nav.pushViewController(controller, animated: true)
+        }
     }
 
     private func isUserLoggedIn() -> Bool {
@@ -202,8 +207,13 @@ class MainCoordinator: Coordinator {
         profileViewController.tabBarItem = profileItem
         tabBarController.viewControllers = [mapViewController,
                                             UINavigationController(rootViewController: closeMessagesController!),
-                                            profileViewController]
+                                            UINavigationController(rootViewController: profileViewController)]
         tabBarController.selectedIndex = 0
         tabBarController.customizeTabBarLayout()
+    }
+
+    enum PresentMode {
+        case push(nav: UINavigationController)
+        case present
     }
 }

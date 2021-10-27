@@ -31,7 +31,8 @@ class ProfileViewController: UIViewController {
     private func route(with type: ProfileItemType) {
         switch type {
         case .termsOfService:
-            self.coordinator?.showTermsOfService()
+            guard let nav = navigationController else { return }
+            self.coordinator?.showTermsOfService(.push(nav: nav))
         }
     }
 }
