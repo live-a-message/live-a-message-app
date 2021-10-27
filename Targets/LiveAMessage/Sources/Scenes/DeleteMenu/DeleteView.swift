@@ -9,6 +9,7 @@
 import UIKit
 import Networking
 import DesignSystem
+import OSLog
 
 class DeleteView {
     private let viewModel: DeleteViewModel
@@ -26,7 +27,7 @@ class DeleteView {
         })
 
         alert.addAction(UIAlertAction(title: AkeeStrings.btnCancel, style: .cancel) { _ in
-            print("User click dismiss button")
+            os_log("User click dismiss button on delete menu")
         })
 
         viewController.present(alert, animated: true)

@@ -8,6 +8,7 @@
 
 import Foundation
 import Networking
+import OSLog
 
 class ReportViewModel {
     private let message: Message
@@ -34,6 +35,7 @@ class ReportViewModel {
                 completion(true)
             case .failure(let error):
                 print(error)
+                os_log("Error: Report request failed")
                 completion(false)
             }
         }
@@ -46,6 +48,7 @@ class ReportViewModel {
                 completion(true)
             case .failure(let error):
                 print(error)
+                os_log("Error: Block user report failed")
                 completion(false)
             }
         }

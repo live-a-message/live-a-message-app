@@ -8,6 +8,7 @@
 
 import UIKit
 import Networking
+import OSLog
 
 class LoginViewController: UIViewController {
 
@@ -48,7 +49,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController: SignInWithAppleAuthorizationDelegate {
 
     func didFinishWithError(_ error: Error) {
-        print(error.localizedDescription)
+        os_log("Error: Failed to signIn")
     }
 
     func didFinishFetching() {

@@ -8,6 +8,7 @@
 
 import Foundation
 import Networking
+import OSLog
 
 class DeleteViewModel {
     let message: Message
@@ -25,6 +26,7 @@ class DeleteViewModel {
                 completion(true)
             case .failure(let error):
                 print(error)
+                os_log("Error: Delete message request failed")
                 completion(false)
             }
         }
