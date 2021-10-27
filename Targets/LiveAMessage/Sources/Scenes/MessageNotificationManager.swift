@@ -11,6 +11,7 @@ import UserNotifications
 import DesignSystem
 import UIKit
 import CloudKit
+import OSLog
 
 class MessageNotificationManager {
     // Singleton
@@ -24,11 +25,11 @@ class MessageNotificationManager {
     func requestAuthorization() {
         notificationCenter.requestAuthorization(options: options) { didAllow, error in
             if error != nil {
-                print("Error requesting authorization.")
+                os_log("Error requesting authorization.")
             }
 
             if didAllow {
-                print("Allowed notifications.")
+                os_log("Allowed notifications.")
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
@@ -68,7 +69,7 @@ class MessageNotificationManager {
     private func scheduleRequest(request: UNNotificationRequest) {
         notificationCenter.add(request) { error in
             if error != nil {
-                print("Error adding notification request.")
+                os_log("Error adding notification request.")
             }
         }
     }
@@ -96,9 +97,9 @@ class MessageNotificationManager {
 
         CKContainer.default().publicCloudDatabase.save(subscription) { _, error in
             if error == nil {
-                print("Succefully subscribed to push notifications.")
+                os_log("Succefully subscribed to push notifications.")
             } else {
-                print("Error: Failed to subscribe to push notifications.")
+                os_log("Error: Failed to subscribe to push notifications.")
             }
         }
     }

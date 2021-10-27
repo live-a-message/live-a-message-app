@@ -8,6 +8,7 @@
 
 import UIKit
 import DesignSystem
+import OSLog
 
 class ReportView {
     private let viewModel: ReportViewModel
@@ -28,7 +29,7 @@ class ReportView {
         })
 
         alert.addAction(UIAlertAction(title: AkeeStrings.btnCancel, style: .cancel) { _ in
-            print("User click dismiss button")
+            os_log("User click dismiss button on report menu")
         })
 
         viewController.present(alert, animated: true)
