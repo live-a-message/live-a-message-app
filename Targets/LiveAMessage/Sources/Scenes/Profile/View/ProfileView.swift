@@ -18,6 +18,13 @@ class ProfileView: UIView, ViewCode {
         return button
     }()
 
+    lazy var tableView: AKTableView<ProfileCellViewModel, ProfileCellView> = {
+        let tableView = AKTableView<ProfileCellViewModel, ProfileCellView>(frame: .zero, style: .grouped)
+        tableView.tableHeaderView = AKEmptyState(style: .generic)
+        tableView.heightForHeaderView = .zero
+        return tableView
+    }()
+
     var logoffClosure: (() -> Void)?
 
     override init(frame: CGRect) {
@@ -32,10 +39,12 @@ class ProfileView: UIView, ViewCode {
     }
 
     func buildHierarchy() {
+        addSubview(tableView)
         addSubview(logOffButton)
     }
 
     func setupConstraints() {
+        tableView.edgesToSuperview()
         logOffButton.centerXToSuperview()
         logOffButton.bottomToSuperview(offset: -AKSpacing.medium.value, usingSafeArea: true)
         logOffButton.leftToSuperview(offset: AKSpacing.medium.value)

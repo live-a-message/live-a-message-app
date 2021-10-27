@@ -28,6 +28,17 @@ public class AKTableView<Item: TableViewCellViewModel,
     public var sectionsTitle: [String]?
     public var emptyStateView: UIView?
 
+    // Use essa variavel para rapidamente atualizar o header da tableViews
+    public var heightForHeaderView: CGFloat? {
+        didSet {
+            let size = CGSize(
+                width: frame.width,
+                height: CGFloat(heightForHeaderView ?? .zero)
+            )
+            tableHeaderView?.frame.size = size
+        }
+    }
+
     public var didSelectRowAt: ((Item) -> Void)?
 
     public override init(frame: CGRect, style: UITableView.Style) {
