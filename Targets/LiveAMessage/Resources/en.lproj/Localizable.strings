@@ -20,6 +20,11 @@
 "section_read_close_messages" = "Read Messages";
 "section_unread_close_messages" = "Unread Messages";
 
+// Strings from `Profile` scene
+"lbl_termsOfService_profile" = "Terms Of Service";
+"navTitle_profile" = "Profile";
+"lbl_logout_profile" = "Logout";
+
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";
 "lbl_description_sign_in" = "Login to host messages and\n share memory with other users";

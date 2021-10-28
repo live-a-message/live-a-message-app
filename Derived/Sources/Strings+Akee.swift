@@ -34,6 +34,10 @@ public enum AkeeStrings {
   public static let lblDescriptionSignIn = AkeeStrings.tr("Localizable", "lbl_description_sign_in")
   /// Logout
   public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
+  /// Logout
+  public static let lblLogoutProfile = AkeeStrings.tr("Localizable", "lbl_logout_profile")
+  /// Terms Of Service
+  public static let lblTermsOfServiceProfile = AkeeStrings.tr("Localizable", "lbl_termsOfService_profile")
   /// Sign In
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
   /// Akee Message

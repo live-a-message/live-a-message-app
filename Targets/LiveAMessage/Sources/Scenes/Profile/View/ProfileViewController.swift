@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         contentView.tableView.bind(sections: viewModel.sections)
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
+        navigationController?.title = AkeeStrings.navTitleProfile
     }
 
     override func loadView() {

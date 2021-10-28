@@ -12,7 +12,7 @@ struct ProfileCellViewModel: TableViewCellViewModel {
     private let model: ProfileModel
 
     var title: String {
-        model.type.rawValue
+        model.type.localized
     }
 
     var type: ProfileItemType {

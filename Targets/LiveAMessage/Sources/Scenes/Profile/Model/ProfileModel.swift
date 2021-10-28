@@ -8,9 +8,18 @@
 
 import Foundation
 
-enum ProfileItemType: String {
-    case termsOfService = "Terms Of Service"
-    case logout = "Logout"
+enum ProfileItemType {
+    case termsOfService
+    case logout
+
+    var localized: String {
+        switch self {
+        case .termsOfService:
+            return AkeeStrings.lblTermsOfServiceProfile
+        case .logout:
+            return AkeeStrings.lblLogoutProfile
+        }
+    }
 }
 
 struct ProfileModel {

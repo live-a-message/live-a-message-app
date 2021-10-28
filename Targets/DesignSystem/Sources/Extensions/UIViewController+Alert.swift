@@ -11,8 +11,8 @@ import UIKit
 public struct AlertModel {
     let title: String
     let message: String
-    let firstButton: String
-    let firstAction: (() -> Void)
+    let firstButton: String?
+    let firstAction: (() -> Void)?
     let secondButton: String?
     let secondAction: (() -> Void)?
 
@@ -20,7 +20,7 @@ public struct AlertModel {
         title: String,
         message: String,
         firstButton: String,
-        firstAction: @escaping (() -> Void),
+        firstAction: (() -> Void)? = nil,
         secondButton: String? = nil,
         secondAction: (() -> Void)? = nil
     ) {
@@ -43,7 +43,7 @@ extension UIViewController {
         )
 
         let firstAction = UIAlertAction(title: model.firstButton, style: .default) { _ in
-            model.firstAction()
+            model.firstAction?()
         }
 
         alertController.addAction(firstAction)
