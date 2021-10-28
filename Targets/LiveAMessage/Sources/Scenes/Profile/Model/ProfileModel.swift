@@ -10,6 +10,7 @@ import Foundation
 
 enum ProfileItemType: String {
     case termsOfService = "Terms Of Service"
+    case logout = "Logout"
 }
 
 struct ProfileModel {

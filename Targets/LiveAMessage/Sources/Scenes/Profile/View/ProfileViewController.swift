@@ -20,7 +20,6 @@ class ProfileViewController: UIViewController {
     }
 
     override func loadView() {
-        contentView.logoffClosure = doLogoff
         view = contentView
     }
 
@@ -33,6 +32,8 @@ class ProfileViewController: UIViewController {
         case .termsOfService:
             guard let nav = navigationController else { return }
             self.coordinator?.showTermsOfService(.push(nav: nav))
+        case .logout:
+            self.coordinator?.doLogoff()
         }
     }
 }

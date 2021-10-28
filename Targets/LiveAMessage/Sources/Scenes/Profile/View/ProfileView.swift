@@ -11,20 +11,12 @@ import DesignSystem
 import TinyConstraints
 
 class ProfileView: UIView, ViewCode {
-    private let logOffButton: AKButton = {
-        let button = AKButton(style: AKButtonStyle.default)
-        button.setTitle(AkeeStrings.lblLogout, for: .normal)
-        button.addTarget(self, action: #selector(didTapLogoff), for: .touchUpInside)
-        return button
-    }()
-
     lazy var tableView: AKTableView<ProfileCellViewModel, ProfileCellView> = {
         let tableView = AKTableView<ProfileCellViewModel, ProfileCellView>(frame: .zero, style: .grouped)
-        tableView.heightForHeaderView = .zero
+        tableView.tableHeaderView = UserProfileInfoView()
+        tableView.heightForHeaderView = AKSpacing.xxxLarge.value + (2 * AKSpacing.small.value)
         return tableView
     }()
-
-    var logoffClosure: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,23 +31,13 @@ class ProfileView: UIView, ViewCode {
 
     func buildHierarchy() {
         addSubview(tableView)
-        addSubview(logOffButton)
     }
 
     func setupConstraints() {
         tableView.edgesToSuperview()
-        logOffButton.centerXToSuperview()
-        logOffButton.bottomToSuperview(offset: -AKSpacing.medium.value, usingSafeArea: true)
-        logOffButton.leftToSuperview(offset: AKSpacing.medium.value)
-        logOffButton.rightToSuperview(offset: -AKSpacing.medium.value)
     }
 
     func configureViews() {
         backgroundColor = AKColor.mainBackgroundColor
-    }
-
-    @objc
-    private func didTapLogoff() {
-        logoffClosure?()
     }
 }
