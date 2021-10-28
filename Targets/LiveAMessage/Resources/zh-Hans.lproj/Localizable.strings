@@ -20,6 +20,11 @@
 "section_read_close_messages" = "已读消息";
 "section_unread_close_messages" = "未读消息";
 
+// Strings from `Profile` scene
+"lbl_termsOfService_profile" = "服务条款";
+"navTitle_profile" = "轮廓";
+"lbl_logout_profile" = "出去";
+
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";
 "lbl_description_sign_in" = "登录到主机消息和\n与其他用户共享内存";

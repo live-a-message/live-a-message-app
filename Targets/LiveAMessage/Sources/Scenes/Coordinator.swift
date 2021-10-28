@@ -141,10 +141,10 @@ class MainCoordinator: Coordinator {
         let alertModel = AlertModel(
             title: AkeeStrings.lblLogout,
             message: AkeeStrings.alertLogoutMessage,
-            firstButton: AkeeStrings.yes,
-            firstAction: finishLogoff,
-            secondButton: AkeeStrings.no,
-            secondAction: nil
+            firstButton: AkeeStrings.no,
+            firstAction: nil,
+            secondButton: AkeeStrings.yes,
+            secondAction: finishLogoff
         )
         profileViewController.showAlert(model: alertModel)
     }
@@ -173,7 +173,7 @@ class MainCoordinator: Coordinator {
         }
         switch mode {
         case .present:
-            tabBarController.present(controller, animated: true)
+            loginViewController.present(controller, animated: true)
         case .push(let nav):
             nav.pushViewController(controller, animated: true)
         }

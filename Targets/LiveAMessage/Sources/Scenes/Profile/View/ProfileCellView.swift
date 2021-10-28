@@ -27,5 +27,11 @@ class ProfileCellView: UITableViewCell, TableViewCell {
 
     func setup(viewModel: ProfileCellViewModel) {
         self.textLabel?.text = viewModel.title
+
+        if viewModel.type == .logout {
+            self.accessoryType = .none
+            self.textLabel?.textColor = AKColor.red
+            self.textLabel?.textAlignment = .center
+        }
     }
 }

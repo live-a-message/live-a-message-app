@@ -20,6 +20,10 @@
 "section_read_close_messages" = "Mensagens lidas";
 "section_unread_close_messages" = "Mensagens não lidas";
 
+// Strings from `Profile` scene
+"lbl_termsOfService_profile" = "Termos de Serviço";
+"navTitle_profile" = "Perfil";
+"lbl_logout_profile" = "Sair";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";
