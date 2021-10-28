@@ -78,8 +78,11 @@ class CloseMessagesViewController: UIViewController {
                     self.mainView.tableView.sections = self.viewModel.sections
                     self.mainView.tableView.sectionsTitle = self.viewModel.sectionsTitle.map({ $0.title })
                     self.mainView.reloadData()
-                case .failure(_):
-                    NSLog("Error handler not implemented:", "error")
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.showAlert(model: AlertModel.genericError(with: error.message))
+                    }
+
                 }
         })
     }

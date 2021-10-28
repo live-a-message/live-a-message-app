@@ -31,6 +31,13 @@ public struct AlertModel {
         self.secondButton = secondButton
         self.secondAction = secondAction
     }
+    
+    public static func genericError(with message: String) -> AlertModel {
+        return AlertModel(
+            title: "Something went wrong",
+            message: message,
+            firstButton: "Ok")
+    }
 }
 
 extension UIViewController {

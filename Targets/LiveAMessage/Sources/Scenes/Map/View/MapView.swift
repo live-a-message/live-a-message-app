@@ -63,6 +63,7 @@ extension MapView: MKMapViewDelegate {
             let image = AkeeAsset.marker.image
             annotationView?.image = image
             annotationView?.canShowCallout = true
+            annotationView?.isDraggable = true
         } else {
             annotationView?.annotation = annotation
         }
@@ -71,5 +72,12 @@ extension MapView: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         didTapPin?(view.annotation)
+    }
+
+    public func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let userView = mapView.view(for: mapView.userLocation)
+        userView?.isUserInteractionEnabled = false
+        userView?.isEnabled = false
+        userView?.canShowCallout = false
     }
 }

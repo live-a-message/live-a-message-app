@@ -14,6 +14,7 @@ import Networking
 class UserProfileInfoView: UIView {
     private let profilePictureImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = AkeeAsset.avatar.image
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = AKSpacing.xxxLarge.value / 2
