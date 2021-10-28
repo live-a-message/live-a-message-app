@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Akee
+
+  Created by Vinicius Mesquita on 20/10/21.
+  Copyright © 2021 Akee. All rights reserved.
+*/
+
+"error_title" = "出了些问题!";
+"error_generic" = "抱歉，我们遇到了一些问题，但很快就会解决。";
+"error_network" = "请检查您的互联网连接没消息.";

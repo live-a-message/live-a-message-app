@@ -11,20 +11,22 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
-public enum DesignSystemStrings {
-  /// Any data around here!
-  public static let lblGenericEmptyState = DesignSystemStrings.tr("Localizable", "lbl_generic_emptyState")
-  /// Okay
-  public static let ok = DesignSystemStrings.tr("Localizable", "ok")
+public enum NetworkingStrings {
+  /// Sorry, we faced some troubles but that will be fixed soon
+  public static let errorGeneric = NetworkingStrings.tr("Localizable", "error_generic")
+  /// Please, check your internet connection
+  public static let errorNetwork = NetworkingStrings.tr("Localizable", "error_network")
+  /// Something went wrong
+  public static let errorTitle = NetworkingStrings.tr("Localizable", "error_title")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-extension DesignSystemStrings {
+extension NetworkingStrings {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = DesignSystemResources.bundle.localizedString(forKey: key, value: nil, table: table)
+    let format = NetworkingResources.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

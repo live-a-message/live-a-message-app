@@ -52,8 +52,10 @@ public enum MessageServiceError: Error {
 
     public var message: String {
         switch self {
-        case .networkError: return "Please, check your internet connection"
-        default: return "Sorry, we faced some troubles that will be fixed soon"
+        case .networkError:
+            return NetworkingStrings.errorNetwork
+        default:
+            return NetworkingStrings.errorGeneric
         }
     }
 }

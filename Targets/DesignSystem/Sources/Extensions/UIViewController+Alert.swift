@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Networking
 
 public struct AlertModel {
     let title: String
@@ -31,12 +32,12 @@ public struct AlertModel {
         self.secondButton = secondButton
         self.secondAction = secondAction
     }
-    
+
     public static func genericError(with message: String) -> AlertModel {
         return AlertModel(
-            title: "Something went wrong",
+            title: NetworkingStrings.errorTitle,
             message: message,
-            firstButton: "Ok")
+            firstButton: DesignSystemStrings.ok)
     }
 }
 
