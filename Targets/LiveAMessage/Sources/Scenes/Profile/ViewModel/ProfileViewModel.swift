@@ -19,7 +19,6 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     init() {
         let items = makeItems {
             ProfileModel(type: .termsOfService)
-            ProfileModel(type: .anonymous)
         }
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
         sections.append(firstSection)
