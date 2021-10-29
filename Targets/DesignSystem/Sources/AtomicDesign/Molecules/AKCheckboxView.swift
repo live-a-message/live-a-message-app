@@ -44,7 +44,7 @@ extension AKCheckboxView: ViewCode {
             top: .zero,
             left: AKSpacing.large.value + offsetButton,
             bottom: .zero,
-            right: .zero
+            right: AKSpacing.medium.value
         )
         checkboxButton.leading(to: self, offset: offsetButton)
         checkboxButton.centerY(to: titleButton)

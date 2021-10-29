@@ -99,7 +99,7 @@ class LoginView: UIView, ViewCode {
     func configureViews() {
         titleLabel.text = AkeeStrings.lblTitleSignIn
         descriptionLabel.text = AkeeStrings.lblDescriptionSignIn
-        checkboxView.titleButton.setTitle("Accept the terms of service", for: .normal)
+        checkboxView.titleButton.setTitle(AkeeStrings.btnAcceptTermsLogin, for: .normal)
     }
 
 }

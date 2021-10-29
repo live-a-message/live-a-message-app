@@ -24,6 +24,7 @@
 "lbl_termsOfService_profile" = "Termos de Serviço";
 "navTitle_profile" = "Perfil";
 "lbl_logout_profile" = "Sair";
+"agree" = "Concordo";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";
@@ -33,6 +34,7 @@
 "alert_logout_message" = "Você realmente deseja fazer logout";
 "yes" = "Sim";
 "no" = "Não";
+"btn_accept_terms_login" = "Aceitar termos de serviço";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Apagar";

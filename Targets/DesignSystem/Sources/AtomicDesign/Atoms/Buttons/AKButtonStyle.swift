@@ -30,7 +30,6 @@ extension AKButtonStyle {
         height: 24.0,
         width: 24.0,
         highlightedColor: AKColor.mainRed,
-        backgroundColor: AKColor.mainBackgroundColor,
         borderColor: AKColor.mainRed.cgColor,
         borderWidth: 3,
         cornerRadius: 6,

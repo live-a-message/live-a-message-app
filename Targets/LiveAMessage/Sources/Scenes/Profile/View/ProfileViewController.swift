@@ -35,6 +35,8 @@ class ProfileViewController: UIViewController {
             self.coordinator?.showTermsOfService(.push(nav: nav))
         case .logout:
             self.coordinator?.doLogoff()
+        default:
+            break
         }
     }
 }

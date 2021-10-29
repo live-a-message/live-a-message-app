@@ -24,6 +24,7 @@
 "lbl_termsOfService_profile" = "服务条款";
 "navTitle_profile" = "轮廓";
 "lbl_logout_profile" = "出去";
+"agree" = "同意";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";
@@ -33,6 +34,7 @@
 "alert_logout_message" = "你真的要退出吗";
 "yes" = "是的";
 "no" = "在";
+"btn_accept_terms_login" = "接受服务条款";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "删除";
