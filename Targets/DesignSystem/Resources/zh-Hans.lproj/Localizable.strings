@@ -8,3 +8,7 @@
 
 "lbl_generic_emptyState" = "这边没消息!";
 "ok" = "Okay";
+
+"loading_working" = "Working...";
+"loading_success" = "Done!";
+"loading_failed"  = "Error when processing request!";

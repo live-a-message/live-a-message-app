@@ -33,8 +33,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.authButton.addTarget(self, action: #selector(didTapAuthButton), for: .touchUpInside)
-        mainView.checkboxView.checkboxButton.addTarget(self, action: #selector(didTapTermsButton), for: .touchUpInside)
-        mainView.checkboxView.titleButton.addTarget(self, action: #selector(didTapTermsButton), for: .touchUpInside)
+        mainView.readTheTermsLabel.delegate = self
     }
 
     @objc func didTapAuthButton() {
@@ -54,5 +53,14 @@ extension LoginViewController: SignInWithAppleAuthorizationDelegate {
 
     func didFinishFetching() {
         coordinator?.showMap()
+    }
+}
+
+extension LoginViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.absoluteString == "termsAndConditionsURL" {
+            coordinator?.showTermsOfService(.present)
+        }
+        return false
     }
 }

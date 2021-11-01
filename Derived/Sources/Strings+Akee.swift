@@ -13,7 +13,7 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
   /// Agree
-  public static let agree = AkeeStrings.tr("Localizable", "Agree")
+  public static let agree = AkeeStrings.tr("Localizable", "agree")
   /// Do you really want do logout?
   public static let alertLogoutMessage = AkeeStrings.tr("Localizable", "alert_logout_message")
   /// Check what people are sharing over here!

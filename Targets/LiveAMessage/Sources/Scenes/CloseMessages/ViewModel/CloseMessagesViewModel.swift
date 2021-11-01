@@ -15,12 +15,13 @@ protocol CloseMessagesViewModelProtocol {
     var sectionsTitle: [CloseMessagesViewModel.SectionTitle] { get set }
     var service: MessageService { get }
     var currentLocation: Location { get }
+    var didDataChange: (() -> Void)? { get set }
     func setupCells(messages: [Message])
 }
 
 class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
-
-    var sections = [[CloseMessageCellViewModel]]()
+    var didDataChange: (() -> Void)?
+    var sections = [[CloseMessageCellViewModel]]() { didSet { didDataChange?() } }
     var sectionsTitle = [SectionTitle]()
     var currentLocation: Location
 

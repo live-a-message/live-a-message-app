@@ -14,6 +14,12 @@ import Foundation
 public enum DesignSystemStrings {
   /// Any data around here!
   public static let lblGenericEmptyState = DesignSystemStrings.tr("Localizable", "lbl_generic_emptyState")
+  /// Error when processing request!
+  public static let loadingFailed = DesignSystemStrings.tr("Localizable", "loading_failed")
+  /// Done!
+  public static let loadingSuccess = DesignSystemStrings.tr("Localizable", "loading_success")
+  /// Working...
+  public static let loadingWorking = DesignSystemStrings.tr("Localizable", "loading_working")
   /// Okay
   public static let ok = DesignSystemStrings.tr("Localizable", "ok")
 }
