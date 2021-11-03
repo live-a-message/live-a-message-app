@@ -60,12 +60,12 @@ extension MapView: MKMapViewDelegate {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            let image = AkeeAsset.marker.image
-            annotationView?.image = image
             annotationView?.canShowCallout = true
         } else {
             annotationView?.annotation = annotation
         }
+        let image = AkeeAsset.marker.image
+        annotationView?.image = image
         return annotationView
     }
 
