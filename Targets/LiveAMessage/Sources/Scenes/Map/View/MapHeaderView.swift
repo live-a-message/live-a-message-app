@@ -14,7 +14,7 @@ class MapHeaderView: UIView, ViewCode {
     var rightButtonAction: (() -> Void)?
 
     lazy var rightButton: AKButton = {
-        let button = AKButton(style: AKButtonStyle.icon32, icon: ButtonIcon(normal: .add))
+        let button = AKButton(style: AKButtonStyle.minimumTappable, icon: ButtonIcon(normal: .add))
         button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         return button
     }()
