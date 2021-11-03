@@ -17,7 +17,7 @@ struct ProfileViewModel: ProfileViewModelProtocol {
     var sections: [[ProfileCellViewModel]] = []
 
     init() {
-        let items = makeItems {
+        let items: [ProfileModel] = makeItems {
             ProfileModel(type: .termsOfService)
         }
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
