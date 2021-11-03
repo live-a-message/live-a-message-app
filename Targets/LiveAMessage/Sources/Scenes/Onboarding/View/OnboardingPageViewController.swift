@@ -21,7 +21,7 @@ class OnboardingPageViewController: UIPageViewController {
                     title: AkeeStrings.onboardingTitle1,
                     description: AkeeStrings.onboardingDescription1,
                     identifier: "First",
-                    buttonTitle: "Next",
+                    buttonTitle: AkeeStrings.btnNext,
                     buttonAction: nextPage
                 )),
             OnboardingSceneViewController(
@@ -30,7 +30,7 @@ class OnboardingPageViewController: UIPageViewController {
                     title: AkeeStrings.onboardingTitle2,
                     description: AkeeStrings.onboardingDescription2,
                     identifier: "Second",
-                    buttonTitle: "Next",
+                    buttonTitle: AkeeStrings.btnNext,
                     buttonAction: nextPage
                 )),
             OnboardingSceneViewController(

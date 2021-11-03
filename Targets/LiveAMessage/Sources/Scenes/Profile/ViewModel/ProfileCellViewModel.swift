@@ -7,10 +7,10 @@
 //
 
 import DesignSystem
+import Foundation
 
-struct ProfileCellViewModel: TableViewCellViewModel {
+class ProfileCellViewModel: TableViewCellViewModel {
     private let model: ProfileModel
-
     var title: String {
         model.type.localized
     }
@@ -21,5 +21,9 @@ struct ProfileCellViewModel: TableViewCellViewModel {
 
     init(model: ProfileModel) {
         self.model = model
+    }
+
+    @objc func didTapAnonymousSwitch() {
+        print("Change")
     }
 }

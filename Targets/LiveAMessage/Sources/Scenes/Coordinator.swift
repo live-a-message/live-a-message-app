@@ -158,19 +158,19 @@ class MainCoordinator: Coordinator {
     // MARK: Helpers
 
     private func popMessageDetailsAndRemove(message: Message) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.async {
             let updatedMessages = self.mapViewController.viewModel.messages.filter({ $0.id != message.id })
             self.closeMessagesViewModel?.setupCells(messages: updatedMessages)
-            self.closeMessagesController?.navigationController?.popToRootViewController(animated: true)
+            self.closeMessagesController?.navigationController?.dismiss(animated: true, completion: {
+                self.closeMessagesController?.navigationController?.popViewController(animated: true)
+//                self.closeMessagesController?.viewModel.
+            })
         }
     }
 
     func showTermsOfService(_ mode: PresentMode = .present) {
         let controller = TermsViewController()
-        controller.didAcceptTerms = {
-            self.loginViewController.mainView.checkboxView.checkboxButton.isSelected = true
-            self.loginViewController.mainView.authButton.isHidden = false
-        }
+
         switch mode {
         case .present:
             loginViewController.present(controller, animated: true)

@@ -49,4 +49,13 @@ public enum MessageServiceError: Error {
     case failedToWrite
     /// Could not read file
     case failedToRead
+
+    public var message: String {
+        switch self {
+        case .networkError:
+            return NetworkingStrings.errorNetwork
+        default:
+            return NetworkingStrings.errorGeneric
+        }
+    }
 }

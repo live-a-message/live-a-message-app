@@ -9,9 +9,9 @@
 import UIKit
 
 public class AKLoadingView {
-    public var loadingMessage = "Working..."
-    public var successMessage = "Done!"
-    public var failureMessage = "Error when processing request!"
+    public var loadingMessage = DesignSystemStrings.loadingWorking
+    public var successMessage = DesignSystemStrings.loadingSuccess
+    public var failureMessage = DesignSystemStrings.loadingFailed
 
     let alert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
     let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -27,6 +27,7 @@ public class AKLoadingView {
     public func startLoading(on controller: UIViewController) {
         alert.message = loadingMessage
         loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = AKColor.mainRed
         loadingIndicator.style = UIActivityIndicatorView.Style.medium
         loadingIndicator.startAnimating()
 

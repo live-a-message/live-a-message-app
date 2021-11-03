@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Akee
+
+  Created by Vinicius Mesquita on 20/10/21.
+  Copyright © 2021 Akee. All rights reserved.
+*/
+
+"error_title" = "Something went wrong";
+"error_generic" = "Sorry, we faced some troubles but that will be fixed soon";
+"error_network" = "Please, check your internet connection";
+

@@ -57,6 +57,9 @@ let targets = [
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/Networking/**"],
+        resources: [
+            "Targets/Networking/Resources/**"
+        ],
         dependencies: [
 
         ]

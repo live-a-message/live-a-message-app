@@ -28,11 +28,15 @@ class LoginView: UIView, ViewCode {
         AKLabel(style: AKLabelStyle.body1)
     }()
 
-    lazy var readTheTermsLabel: AKLabel = {
-        AKLabel(style: AKLabelStyle.body1)
+    lazy var readTheTermsLabel: UITextView = {
+        let textView = UITextView(frame: .zero)
+        textView.isEditable = false
+        textView.backgroundColor = .clear
+        textView.textAlignment = .center
+        textView.isAccessibilityElement = false
+        textView.isScrollEnabled = false
+        return textView
     }()
-
-    lazy var checkboxView: AKCheckboxView = { AKCheckboxView() }()
 
     lazy var authButton: ASAuthorizationAppleIDButton = {
         let style = UIScreen.main.traitCollection.userInterfaceStyle
@@ -40,7 +44,6 @@ class LoginView: UIView, ViewCode {
             authorizationButtonType: .default,
             authorizationButtonStyle: style == .dark ? .white : .black
         )
-        button.isHidden = true
         button.height(48)
         return button
     }()
@@ -83,8 +86,7 @@ class LoginView: UIView, ViewCode {
         container.addArrangedSubview(imageView)
         container.addArrangedSubview(titleLabel)
         container.addArrangedSubview(descriptionLabel)
-        container.addArrangedSubview(readTheTermsLabel)
-        container.addArrangedSubview(checkboxView)
+        container.addSubview(readTheTermsLabel)
         container.addSubview(authButton)
     }
 
@@ -94,12 +96,45 @@ class LoginView: UIView, ViewCode {
         authButton.leadingToSuperview(offset: AKSpacing.xLarge.value)
         authButton.trailingToSuperview(offset: AKSpacing.xLarge.value)
         authButton.bottomToSuperview(offset: -AKSpacing.xxxLarge.value)
+
+        readTheTermsLabel.leadingToSuperview(offset: AKSpacing.xLarge.value)
+        readTheTermsLabel.trailingToSuperview(offset: AKSpacing.xLarge.value)
+        readTheTermsLabel.topToBottom(of: authButton, offset: AKSpacing.xxxSmall.value)
+        readTheTermsLabel.bottomToSuperview(offset: -AKSpacing.xxxSmall.value)
     }
 
     func configureViews() {
         titleLabel.text = AkeeStrings.lblTitleSignIn
         descriptionLabel.text = AkeeStrings.lblDescriptionSignIn
-        checkboxView.titleButton.setTitle("Accept the terms of service", for: .normal)
+        configureTerms(text: AkeeStrings.txtViewTermsLogin)
     }
 
+    private func configureTerms(text: String) {
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        titleParagraphStyle.alignment = .center
+
+        let attributedString = NSMutableAttributedString(
+            string: text,
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 14),
+                .foregroundColor: AKColor.mainFontColor,
+                .paragraphStyle: titleParagraphStyle
+            ]
+        )
+        var foundRange = attributedString.mutableString.range(of: AkeeStrings.lblTermsOfService)
+        attributedString.addAttribute(
+            NSAttributedString.Key.link, value: TermsValue.termsAndConditionsURL.rawValue, range: foundRange
+        )
+        foundRange = attributedString.mutableString.range(of: AkeeStrings.lblPrivacyPolicy)
+        attributedString.addAttribute(
+            NSAttributedString.Key.link, value: TermsValue.termsAndConditionsURL.rawValue, range: foundRange
+        )
+        readTheTermsLabel.attributedText = attributedString
+    }
+
+}
+
+enum TermsValue: String {
+    case termsAndConditionsURL
+    case privacyURL
 }

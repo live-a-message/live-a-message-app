@@ -28,7 +28,7 @@ class TermsView: UIView, ViewCode {
 
     lazy var confirmButton: AKButton = {
         let button = AKButton(style: AKButtonStyle.default)
-        button.setTitle("Agree", for: .normal)
+        button.setTitle(AkeeStrings.agree, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = AKColor.shadowRed
         button.isHidden = UserData.shared.agreeWithTerms

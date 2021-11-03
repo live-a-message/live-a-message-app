@@ -21,9 +21,11 @@
 "section_unread_close_messages" = "Unread Messages";
 
 // Strings from `Profile` scene
-"lbl_termsOfService_profile" = "Terms Of Service";
+"lbl_termsOfService_profile" = "Terms of Service";
 "navTitle_profile" = "Profile";
 "lbl_logout_profile" = "Logout";
+
+"agree" = "Agree";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Sign In";
@@ -33,6 +35,10 @@
 "alert_logout_message" = "Do you really want do logout?";
 "yes" = "Yes";
 "no" = "No";
+"btn_accept_terms_login" = "Accept the terms of service";
+"txtView_terms_login" = "By signing up, you agree with Akee's Terms of Service and Privacy Policy";
+"lbl_terms_of_service" = "Terms of Service";
+"lbl_privacy_policy" = "Privacy policy";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";

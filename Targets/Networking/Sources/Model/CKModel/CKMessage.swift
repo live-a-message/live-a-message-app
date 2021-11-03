@@ -20,12 +20,12 @@ public class CKMessage {
 
     public init(_ record: CKRecord) throws {
         let image = record["image"] as? String
+        let imageAsset = record["imageAsset"] as? CKAsset
         guard let content = record["content"] as? String,
               let id = record["id"] as? String,
               let userId = record["userId"] as? String,
               let clLocation = record["location"] as? CLLocation,
-              let status = record["status"] as? String,
-              let imageAsset = record["imageAsset"] as? CKAsset
+              let status = record["status"] as? String
         else { throw CKError.decodingError }
 
         self.content = content

@@ -12,10 +12,14 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum AkeeStrings {
+  /// Agree
+  public static let agree = AkeeStrings.tr("Localizable", "agree")
   /// Do you really want do logout?
   public static let alertLogoutMessage = AkeeStrings.tr("Localizable", "alert_logout_message")
   /// Check what people are sharing over here!
   public static let bodyNotifCloseMessage = AkeeStrings.tr("Localizable", "body_notif_close_message")
+  /// Accept the terms of service
+  public static let btnAcceptTermsLogin = AkeeStrings.tr("Localizable", "btn_accept_terms_login")
   /// Block User
   public static let btnBlockUser = AkeeStrings.tr("Localizable", "btn_blockUser")
   /// Cancel
@@ -36,7 +40,11 @@ public enum AkeeStrings {
   public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
   /// Logout
   public static let lblLogoutProfile = AkeeStrings.tr("Localizable", "lbl_logout_profile")
-  /// Terms Of Service
+  /// Privacy policy
+  public static let lblPrivacyPolicy = AkeeStrings.tr("Localizable", "lbl_privacy_policy")
+  /// Terms of Service
+  public static let lblTermsOfService = AkeeStrings.tr("Localizable", "lbl_terms_of_service")
+  /// Terms of Service
   public static let lblTermsOfServiceProfile = AkeeStrings.tr("Localizable", "lbl_termsOfService_profile")
   /// Sign In
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
@@ -70,6 +78,8 @@ public enum AkeeStrings {
   public static let sectionUnreadCloseMessages = AkeeStrings.tr("Localizable", "section_unread_close_messages")
   /// You found new messages
   public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
+  /// By signing up, you agree with Akee's Terms of Service and Privacy policy
+  public static let txtViewTermsLogin = AkeeStrings.tr("Localizable", "txtView_terms_login")
   /// Yes
   public static let yes = AkeeStrings.tr("Localizable", "yes")
 }

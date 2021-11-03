@@ -7,3 +7,8 @@
 */
 
 "lbl_generic_emptyState" = "Any data around here!";
+"ok" = "Okay";
+
+"loading_working" = "Working...";
+"loading_success" = "Done!";
+"loading_failed"  = "Error when processing request!";

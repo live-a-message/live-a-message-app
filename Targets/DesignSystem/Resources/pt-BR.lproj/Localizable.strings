@@ -7,3 +7,8 @@
 */
 
 "lbl_generic_emptyState" = "Nenhuma novidade por aqui!";
+"ok" = "Okay";
+
+"loading_working" = "Carregando...";
+"loading_success" = "Feito!";
+"loading_failed"  = "Ops! Algo deu errado na solicitação";
