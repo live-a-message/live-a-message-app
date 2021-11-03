@@ -40,6 +40,10 @@ public enum AkeeStrings {
   public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
   /// Logout
   public static let lblLogoutProfile = AkeeStrings.tr("Localizable", "lbl_logout_profile")
+  /// Privacy policy
+  public static let lblPrivacyPolicy = AkeeStrings.tr("Localizable", "lbl_privacy_policy")
+  /// Terms of Service
+  public static let lblTermsOfService = AkeeStrings.tr("Localizable", "lbl_terms_of_service")
   /// Terms of Service
   public static let lblTermsOfServiceProfile = AkeeStrings.tr("Localizable", "lbl_termsOfService_profile")
   /// Sign In
@@ -74,6 +78,8 @@ public enum AkeeStrings {
   public static let sectionUnreadCloseMessages = AkeeStrings.tr("Localizable", "section_unread_close_messages")
   /// You found new messages
   public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
+  /// By signing up, you agree with Akee's Terms of Service and Privacy policy
+  public static let txtViewTermsLogin = AkeeStrings.tr("Localizable", "txtView_terms_login")
   /// Yes
   public static let yes = AkeeStrings.tr("Localizable", "yes")
 }

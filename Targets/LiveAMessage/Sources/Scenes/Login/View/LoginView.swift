@@ -106,7 +106,7 @@ class LoginView: UIView, ViewCode {
     func configureViews() {
         titleLabel.text = AkeeStrings.lblTitleSignIn
         descriptionLabel.text = AkeeStrings.lblDescriptionSignIn
-        configureTerms(text: "By signing up, you agree with Akee's Terms of Service and Privacy policy")
+        configureTerms(text: AkeeStrings.txtViewTermsLogin)
     }
 
     private func configureTerms(text: String) {
@@ -121,12 +121,20 @@ class LoginView: UIView, ViewCode {
                 .paragraphStyle: titleParagraphStyle
             ]
         )
-        var foundRange = attributedString.mutableString.range(of: "Terms of Service")
-        attributedString.addAttribute(NSAttributedString.Key.link, value: "termsAndConditionsURL", range: foundRange)
-        foundRange = attributedString.mutableString.range(of: "Privacy policy")
-        attributedString.addAttribute(NSAttributedString.Key.link, value: "privacyURL", range: foundRange)
-
+        var foundRange = attributedString.mutableString.range(of: AkeeStrings.lblTermsOfService)
+        attributedString.addAttribute(
+            NSAttributedString.Key.link, value: TermsValue.termsAndConditionsURL.rawValue, range: foundRange
+        )
+        foundRange = attributedString.mutableString.range(of: AkeeStrings.lblPrivacyPolicy)
+        attributedString.addAttribute(
+            NSAttributedString.Key.link, value: TermsValue.termsAndConditionsURL.rawValue, range: foundRange
+        )
         readTheTermsLabel.attributedText = attributedString
     }
 
+}
+
+enum TermsValue: String {
+    case termsAndConditionsURL
+    case privacyURL
 }

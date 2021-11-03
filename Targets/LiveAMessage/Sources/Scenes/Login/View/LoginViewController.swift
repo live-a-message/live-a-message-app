@@ -58,7 +58,7 @@ extension LoginViewController: SignInWithAppleAuthorizationDelegate {
 
 extension LoginViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        if URL.absoluteString == "termsAndConditionsURL" {
+        if URL.absoluteString == TermsValue.termsAndConditionsURL.rawValue {
             coordinator?.showTermsOfService(.present)
         }
         return false

@@ -35,6 +35,9 @@
 "yes" = "是的";
 "no" = "在";
 "btn_accept_terms_login" = "接受服务条款";
+"txtView_terms_login" = "注册即表示您同意 Akee 的服务条款和隐私政策";
+"lbl_terms_of_service" = "服务条款";
+"lbl_privacy_policy" = "隐私政策";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "删除";
