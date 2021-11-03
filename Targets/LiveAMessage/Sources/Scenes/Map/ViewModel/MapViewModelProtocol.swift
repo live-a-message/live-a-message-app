@@ -21,6 +21,7 @@ protocol MapViewModelProtocol: NSObject {
     var mapView: MapView? { get set }
 
     func fetchMessages()
+    func removeMessages()
     func postNotificationUpdateLocation()
     func addPin(_ message: Message)
 }
