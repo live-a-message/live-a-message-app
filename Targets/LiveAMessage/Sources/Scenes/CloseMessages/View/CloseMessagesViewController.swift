@@ -74,10 +74,7 @@ class CloseMessagesViewController: UIViewController {
             .fetchMessages(location: location, radius: 300, completion: { result in
                 switch result {
                 case .success(let messages):
-                    self.viewModel.setupCells(messages: messages)
-                    self.mainView.tableView.sections = self.viewModel.sections
-                    self.mainView.tableView.sectionsTitle = self.viewModel.sectionsTitle.map({ $0.title })
-                    self.mainView.reloadData()
+                    self.updateDataSource(messages: messages)
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self.showAlert(model: AlertModel.genericError(with: error.message))
@@ -85,5 +82,12 @@ class CloseMessagesViewController: UIViewController {
 
                 }
         })
+    }
+
+    public func updateDataSource(messages: [Message]) {
+        self.viewModel.setupCells(messages: messages)
+        self.mainView.tableView.sections = self.viewModel.sections
+        self.mainView.tableView.sectionsTitle = self.viewModel.sectionsTitle.map({ $0.title })
+        self.mainView.reloadData()
     }
 }

@@ -132,7 +132,7 @@ class MainCoordinator: Coordinator {
     }
 
     func didFetchMessages(messages: [Message]) {
-        closeMessagesController?.viewModel.setupCells(messages: messages)
+        closeMessagesController?.updateDataSource(messages: messages)
         let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
         closeMessagesViewModel?.currentLocation = location
     }
@@ -163,7 +163,8 @@ class MainCoordinator: Coordinator {
             self.closeMessagesViewModel?.setupCells(messages: updatedMessages)
             self.closeMessagesController?.navigationController?.dismiss(animated: true, completion: {
                 self.closeMessagesController?.navigationController?.popViewController(animated: true)
-//                self.closeMessagesController?.viewModel.
+                self.mapViewController.viewModel.removeMessages()
+                self.mapViewController.viewModel.fetchMessages()
             })
         }
     }
