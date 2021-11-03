@@ -46,6 +46,14 @@ extension AKButtonStyle {
         textAlignment: .center,
         titleColor: AKColor.mainRed
     )
+
+    public static let minimumTappable = AKButtonStyle(
+        height: 32.0,
+        width: 44.0,
+        clipToBounds: true,
+        contentVerticalAlignment: .fill,
+        contentHorizontalAlignment: .fill
+    )
 }
 
 public struct AKButtonStyle {

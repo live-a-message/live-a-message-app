@@ -39,6 +39,7 @@ class MapView: MKMapView {
         self.showsUserLocation = true
         self.delegate = self
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.showsCompass = false
     }
 
     func setupConstraints() {
