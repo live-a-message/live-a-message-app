@@ -12,28 +12,46 @@ import CloudKit
 
 class CloudKitMessagesServiceTests: XCTestCase {
 
-    let sut = CloudKitMessagesService(container: CKMockContainer.default())
+    var container: CKMockContainer!
+    var sut: CloudKitMessagesService!
 
-    func test() throws {
-        let message = createMock()
-        let completion: ((Result<Bool, MessageServiceError>) -> Void) = { result in
-        }
-
-        sut.deleteMessage(message: message, completion: completion)
+    override func setUp() {
+        container = CKMockContainer(shouldThrowError: true)
+        sut = CloudKitMessagesService(container: container)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testDeleteMessageSuccess() throws {
+        let message = createMock()
+        let completedExpectation = expectation(description: "Completed")
+        // when
+        let completion: ((Result<Bool, MessageServiceError>) -> Void) = { result in
+            assert(result == .success(true))
+            completedExpectation.fulfill()
         }
+        // then
+        sut.deleteMessage(message: message, completion: completion)
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testDeleteMessageFailed() throws {
+        let message = createMock()
+        container = CKMockContainer(shouldThrowError: true)
+        sut = CloudKitMessagesService(container: container)
+        let completedExpectation = expectation(description: "Completed")
+
+        let completion: ((Result<Bool, MessageServiceError>) -> Void) = { result in
+            assert(result == .failure(.networkError))
+            completedExpectation.fulfill()
+        }
+        sut.deleteMessage(message: message, completion: completion)
+        waitForExpectations(timeout: 1.0)
     }
 
 }
 extension CloudKitMessagesServiceTests {
     private func createMock() -> Message {
         Message(
-            id: "",
+            id: "100",
             userId: "",
             content: "",
             image: "",
@@ -43,10 +61,3 @@ extension CloudKitMessagesServiceTests {
         )
     }
 }
-
-
-
-
-
-
-
