@@ -56,12 +56,23 @@ let targets = [
         bundleId: "com.Akee.Networking",
         deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
         infoPlist: .extendingDefault(with: [:]),
-        sources: ["Targets/Networking/**"],
+        sources: ["Targets/Networking/Sources/**"],
         resources: [
             "Targets/Networking/Resources/**"
         ],
         dependencies: [
 
+        ]
+    ),
+    Target(
+        name: "NetworkingTests",
+        platform: .iOS,
+        product: .unitTests,
+        bundleId: "com.Akee.NetworkingTests",
+        deploymentTarget: .iOS(targetVersion: "13.1", devices: [.iphone]),
+        infoPlist: .extendingDefault(with: [:]),
+        sources: ["Targets/Networking/Tests/**"],
+        dependencies: [
         ]
     ),
     Target(
