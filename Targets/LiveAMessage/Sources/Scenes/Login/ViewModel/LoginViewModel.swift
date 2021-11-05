@@ -21,6 +21,7 @@ class LoginViewModel: LoginViewModelProtocol {
     }
 
     func authenticate() {
+        UserData.shared.set(value: true, key: .agreeWithTerms)
         service.authenticate()
     }
 }
