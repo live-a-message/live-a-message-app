@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CKRecordType: String {
+public enum CKRecordType: String, CaseIterable {
     case UsersInfo
     case BlockedUsers
     case Messages

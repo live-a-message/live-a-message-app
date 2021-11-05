@@ -11,12 +11,10 @@ import Networking
 
 class CKMockContainer: CKContainerProtocol {
 
-    private init() { }
-    
     class func `default`() -> CKContainer {
         return CKContainer(identifier: "mock_identifier")
     }
 
-    var publicDatabase: CKDatabaseProtocol { CKMockDatabase() }
-    
+    private let database = CKMockDatabase()
+    var publicDatabase: CKDatabaseProtocol { database }
 }

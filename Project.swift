@@ -73,6 +73,7 @@ let targets = [
         infoPlist: .extendingDefault(with: [:]),
         sources: ["Targets/Networking/Tests/**"],
         dependencies: [
+            .target(name: "Akee")
         ]
     ),
     Target(

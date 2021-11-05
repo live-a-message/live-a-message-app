@@ -24,7 +24,7 @@ public class CKReport: Reportable {
         guard let content = record["content"] as? String,
               let userId = record["userId"] as? String,
               let reportedUserId = record["reportedUserId"] as? String
-        else { throw CKError.decodingError }
+        else { throw CKError.init(.assetFileModified) }
         self.userId = content
         self.content = userId
         self.reportedUserId = reportedUserId
