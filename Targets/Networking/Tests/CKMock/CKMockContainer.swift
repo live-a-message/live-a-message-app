@@ -11,15 +11,10 @@ import Networking
 
 class CKMockContainer: CKContainerProtocol {
 
-    var shouldThrowError: Bool
-
-    init(shouldThrowError: Bool) {
-        self.shouldThrowError = shouldThrowError
-    }
-
     class func `default`() -> CKContainer {
         return CKContainer(identifier: "mock_identifier")
     }
 
-    var publicDatabase: CKDatabaseProtocol { CKMockDatabase(shouldThrowError: shouldThrowError) }
+    private let database = CKMockDatabase()
+    var publicDatabase: CKDatabaseProtocol { database }
 }

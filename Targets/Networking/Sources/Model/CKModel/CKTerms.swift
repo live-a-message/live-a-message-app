@@ -16,7 +16,7 @@ public class CKTerms {
     public init(_ record: CKRecord) throws {
         guard let title = record["title"] as? String,
               let content = record["content"] as? String
-        else { throw CKError.decodingError }
+        else { throw CKError.init(.assetFileModified) }
         self.title = title
         self.content = content
     }

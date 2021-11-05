@@ -8,6 +8,3 @@
 
 import Foundation
 
-enum CKError: Error {
-    case decodingError
-}

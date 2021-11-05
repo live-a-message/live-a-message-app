@@ -26,7 +26,7 @@ public class CKMessage {
               let userId = record["userId"] as? String,
               let clLocation = record["location"] as? CLLocation,
               let status = record["status"] as? String
-        else { throw CKError.decodingError }
+        else { throw CKError.init(.assetFileModified) }
 
         self.content = content
         self.id = id
@@ -52,7 +52,7 @@ public class CKMessage {
         return record
     }
 
-    var message: Message {
+    public var message: Message {
         var messageStatus: MessageStatus = .unread
         if let status = status {
             messageStatus = MessageStatus(rawValue: status) ?? .unread

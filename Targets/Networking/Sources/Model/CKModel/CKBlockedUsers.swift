@@ -22,7 +22,7 @@ public class CKBlockedUsers: Blockable {
     public init(_ record: CKRecord) throws {
         guard let userId = record["userId"] as? String,
               let users = record["users"] as? [String]
-        else { throw CKError.decodingError }
+        else { throw CKError.init(.assetFileModified) }
         self.userId = userId
         self.users = users
         self.recordID = record.recordID

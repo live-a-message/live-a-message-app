@@ -11,54 +11,41 @@ import Networking
 
 class CKMockDatabase: CKDatabaseProtocol {
 
-    var shouldThrowError: Bool
-    
-    private lazy var messages = generateMockMessages(count: 100)
+    var records: [CKRecord] = [
+        CKRecord(recordType: "type", recordID: CKRecord.ID(recordName: "231324325434132"))
+    ]
 
-    init(shouldThrowError: Bool = false) {
-        self.shouldThrowError = shouldThrowError
-    }
+    init() {}
 
-    func add(_ operation: CKDatabaseOperation) {
-
-    }
+    func add(_ operation: CKDatabaseOperation) { }
 
     func delete(withRecordID recordID: CKRecord.ID, completionHandler: @escaping (CKRecord.ID?, Error?) -> Void) {
-        if shouldThrowError {
-            completionHandler(nil, CKError(.networkFailure))
+        guard let recordToDelete = records.filter({ $0.recordID.recordName == recordID.recordName }).first else {
+            completionHandler(nil, CKError(.assetFileNotFound))
             return
         }
-        completionHandler(CKRecord.ID(recordName: "message"), nil)
+        guard let index = records.firstIndex(of: recordToDelete) else {
+            completionHandler(nil, CKError(.assetFileNotFound))
+            return
+        }
+        records.remove(at: index)
+        completionHandler(recordToDelete.recordID, nil)
     }
 
     func fetch(withRecordID recordID: CKRecord.ID, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+        completionHandler(nil, CKError(.networkFailure))
     }
 
     func perform(_ query: CKQuery, inZoneWith zoneID: CKRecordZone.ID?, completionHandler: @escaping ([CKRecord]?, Error?) -> Void) {
+        completionHandler(nil, CKError(.networkFailure))
     }
 
     func save(_ record: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
-
-    }
-}
-
-extension CKMockDatabase {
-    
-    func generateMockMessages(count: Int) -> [Message] {
-        var messages = [Message]()
-        for index in 0...count {
-            messages.append(
-                Message(
-                    id: "\(index)",
-                    userId: "",
-                    content: "",
-                    image: "",
-                    location: .init(lat: 1.0, lon: 1.0),
-                    imageAsset: nil,
-                    status: .read
-                )
-            )
+        guard CKRecordType.allCases.map({ $0.rawValue }).contains(record.recordType) else {
+            completionHandler(nil, CKError(.assetFileNotFound))
+            return
         }
-        return messages
+        records.append(record)
+        completionHandler(record, nil)
     }
 }

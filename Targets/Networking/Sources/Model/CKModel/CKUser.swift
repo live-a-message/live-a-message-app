@@ -18,7 +18,7 @@ public class CKUser {
         guard let name = record["name"] as? String,
               let email = record["email"] as? String,
               let id = record["id"] as? String
-        else { throw CKError.decodingError }
+        else { throw CKError.init(.assetFileModified) }
         self.name = name
         self.id = id
         self.email = email

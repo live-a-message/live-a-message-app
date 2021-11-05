@@ -58,7 +58,7 @@ public class CloudKitMessagesService: MessageService {
         let record = CKMessage.encode(message)
         database.save(record) { record, error in
             guard error == nil else {
-                completion(.failure(.networkError))
+                completion(.failure(self.mapError(error)))
                 return
             }
             guard record != nil else {
@@ -73,7 +73,7 @@ public class CloudKitMessagesService: MessageService {
         let record = CKMessage.encode(message)
         database.delete(withRecordID: record.recordID) { recordId, error in
             guard error == nil else {
-                completion(.failure(.networkError))
+                completion(.failure(self.mapError(error)))
                 return
             }
             guard recordId != nil else {
@@ -106,5 +106,15 @@ public class CloudKitMessagesService: MessageService {
         }
 
         database.add(operation)
+    }
+
+    private func mapError(_ error: Error?) -> MessageServiceError {
+        guard let error = error as? CKError else {
+            return .networkError
+        }
+        switch error.code {
+        case .assetFileNotFound: return .messageNotFound
+        default: return .networkError
+        }
     }
 }
