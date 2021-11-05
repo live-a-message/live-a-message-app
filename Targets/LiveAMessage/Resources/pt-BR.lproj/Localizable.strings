@@ -36,7 +36,7 @@
 "no" = "Não";
 "btn_accept_terms_login" = "Aceitar termos de serviço";
 "txtView_terms_login" = "Ao se inscrever, você concorda com os Termos de Serviço e Política de Privacidade do Akee";
-"lbl_terms_of_service" = "Termos de serviço";
+"lbl_terms_of_service" = "Termos de Serviço";
 "lbl_privacy_policy" = "Política de Privacidade";
 
 // Strings from 'MessageDetails' scene
