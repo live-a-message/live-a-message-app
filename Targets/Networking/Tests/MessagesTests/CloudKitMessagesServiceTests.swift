@@ -15,7 +15,7 @@ class CloudKitMessagesServiceTests: XCTestCase {
 
     let sut = CloudKitMessagesService(container: CKMockContainer())
 
-    func testAddMessageSuccess() throws {
+    func test_addMessage_toBeSuccess() throws {
         // given
         let message = createMock(id: "231324325434132")
         // when
@@ -24,7 +24,7 @@ class CloudKitMessagesServiceTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
 
-    func testDeleteMessageSuccess() throws {
+    func test_deleteMessage_toBeSuccess() throws {
         // given
         let message = createMock(id: "231324325434132")
         // when
@@ -33,7 +33,7 @@ class CloudKitMessagesServiceTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
 
-    func testEleteMessageFailed() throws {
+    func test_deleteMessage_toBeFailed() throws {
         // given
         let message = createMock(id: "invalid")
         // when
