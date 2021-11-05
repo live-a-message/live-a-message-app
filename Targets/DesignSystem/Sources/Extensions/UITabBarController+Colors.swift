@@ -12,6 +12,25 @@ extension UITabBarController {
     public func customizeTabBarLayout() {
         if #available(iOS 15, *) {
             #if swift(>=5.5)
+            configureNewTabBarLayout()
+            #else
+            configureLegacyTabBarLayout()
+            #endif
+        } else {
+            configureLegacyTabBarLayout()
+        }
+    }
+
+    private func configureLegacyTabBarLayout() {
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: AKColor.mainRed], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: AKColor.gray], for: .normal)
+        tabBar.barTintColor = AKColor.mainBackgroundColor
+        tabBar.tintColor = AKColor.mainRed
+    }
+
+    private func configureNewTabBarLayout() {
+        if #available(iOS 15, *) {
+            #if swift(>=5.5)
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.backgroundColor = AKColor.mainBackgroundColor
             tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: AKColor.mainRed]
@@ -20,11 +39,6 @@ extension UITabBarController {
             tabBar.scrollEdgeAppearance = tabBarAppearance
             tabBar.tintColor = AKColor.mainRed
             #endif
-        } else {
-            UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: AKColor.mainRed], for: .selected)
-            UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: AKColor.gray], for: .normal)
-            tabBar.barTintColor = AKColor.mainBackgroundColor
-            tabBar.tintColor = AKColor.mainRed
         }
     }
 }
