@@ -30,7 +30,16 @@ class MockedService: MessageService {
     }
 
     func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
-        completion(.success(true))
+        let countBefore = messages.count
+        messages.removeAll { msg in
+            msg.id == message.id
+        }
+
+        if countBefore > messages.count {
+            completion(.success(true))
+        } else {
+            completion(.failure(.messageNotFound))
+        }
 
     }
 

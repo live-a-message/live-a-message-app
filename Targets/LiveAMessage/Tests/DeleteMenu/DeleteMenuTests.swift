@@ -12,39 +12,21 @@ import Networking
 
 class DeleteMenuTests: XCTestCase {
 
-    private var service: MockedMessageService!
+    private var service = MockedService.shared
     var sut: DeleteViewModel!
 
-    private class MockedMessageService: MessageService {
-        var messages: [Message] = [Message(id: "TestId",
-                                           userId: "User",
-                                           content: "Content",
-                                           image: nil,
-                                           location: Location(lat: 0.0, lon: 0.0),
-                                           imageAsset: nil,
-                                           status: .unread)]
-
-        func fetchMessages(location: Location, radius: Double, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) { }
-        func addMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) { }
-
-        func deleteMessage(message: Message, completion: @escaping ((Result<Bool, MessageServiceError>) -> Void)) {
-            messages.removeAll { $0.id == message.id }
-            if messages.isEmpty {
-                completion(.success(true))
-            } else {
-                completion(.failure(.messageNotFound))
-            }
-        }
-
-        func modifyMessage(message: Message, completion: ((Result<Bool, MessageServiceError>) -> Void)?) { }
-    }
-
     override func setUp() {
-        service = MockedMessageService()
+        service.messages = [Message(id: "TestId",
+                                   userId: "User",
+                                   content: "Content",
+                                   image: nil,
+                                   location: Location(lat: 0.0, lon: 0.0),
+                                   imageAsset: nil,
+                                   status: .unread)]
     }
 
     override func tearDown() {
-        service = nil
+        service.messages = []
     }
 
     func test_when_deleting_valid_message_should_complete_with_success() {
