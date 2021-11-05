@@ -10,12 +10,15 @@ import CloudKit
 
 public class CloudKitMessagesService: MessageService {
 
-    private let container = CKContainer.default()
+    private let container: CKContainerProtocol
     private let recordName = "Messages"
     private let zoneId = CKRecordZone.default().zoneID
-    private lazy var database = container.publicCloudDatabase
+    private let database: CKDatabaseProtocol
 
-    public init() {}
+    public init(container: CKContainerProtocol = CKContainer.default()) {
+        self.container = container
+        self.database = container.publicDatabase
+    }
 
     public func fetchMessages(location: Location, radius: Double, completion: @escaping ((Result<[Message], MessageServiceError>) -> Void)) {
         let currentLocation = CLLocation(latitude: location.lat, longitude: location.lon)
