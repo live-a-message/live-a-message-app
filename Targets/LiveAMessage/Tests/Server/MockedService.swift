@@ -35,7 +35,7 @@ class MockedService: MessageService {
             msg.id == message.id
         }
 
-        if countBefore > messages.count {
+        if countBefore >= messages.count {
             completion(.success(true))
         } else {
             completion(.failure(.messageNotFound))
