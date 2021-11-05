@@ -78,7 +78,7 @@ public enum AkeeStrings {
   public static let sectionUnreadCloseMessages = AkeeStrings.tr("Localizable", "section_unread_close_messages")
   /// You found new messages
   public static let titleNotifCloseMessage = AkeeStrings.tr("Localizable", "title_notif_close_message")
-  /// By signing up, you agree with Akee's Terms of Service and Privacy policy
+  /// By signing up, you agree with Akee's Terms of Service and Privacy Policy
   public static let txtViewTermsLogin = AkeeStrings.tr("Localizable", "txtView_terms_login")
   /// Yes
   public static let yes = AkeeStrings.tr("Localizable", "yes")
