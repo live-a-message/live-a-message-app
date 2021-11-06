@@ -104,7 +104,13 @@ platform :ios do
     scan(
       scheme: ENV["SCHEME"],
       clean: true,
-      code_coverage: true
+      code_coverage: true,
+    )
+
+    xcov(
+      workspace: ENV["WORKSPACE"],
+      scheme:  ENV["SCHEME"],
+      output_directory: "xcov_output"
     )
   end
 end
