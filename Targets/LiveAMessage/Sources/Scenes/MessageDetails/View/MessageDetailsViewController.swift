@@ -13,6 +13,8 @@ class MessageDetailsViewController: UIViewController {
 
     var viewModel: MessageDetailsViewModelProtocol
     weak var coordinator: Coordinator?
+    
+    var didCloseDetails: (() -> Void)?
 
     init(viewModel: MessageDetailsViewModelProtocol) {
         self.viewModel = viewModel
