@@ -97,7 +97,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     private func addNearPins() {
         self.messages.forEach({ addPin($0) })
     }
-    
+
     public func removeMessages() {
         if let anotations = self.mapView?.annotations {
             DispatchQueue.main.async {

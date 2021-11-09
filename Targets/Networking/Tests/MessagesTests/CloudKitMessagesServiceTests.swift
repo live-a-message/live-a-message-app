@@ -9,7 +9,7 @@
 import XCTest
 @testable import Networking
 import CloudKit
-//swiftlint:disable force_try
+// swiftlint:disable force_try
 
 class CloudKitMessagesServiceTests: XCTestCase {
 
@@ -58,7 +58,6 @@ extension CloudKitMessagesServiceTests {
         let message = try! CKMessage(record).message
         return message
     }
-
 
     private func success() throws -> ((Result<Bool, MessageServiceError>) -> Void) {
         let excpt = expectation(description: "success")
