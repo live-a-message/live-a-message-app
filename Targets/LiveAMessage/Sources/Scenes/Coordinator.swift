@@ -102,7 +102,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showStoreReview(completion: @escaping () -> Void) {
-        let review = StoreReviewController()
+        let review = StoreReviewRequester()
         review.showReviewRequest(completion: completion)
     }
 

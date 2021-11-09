@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import StoreKit
 
-final class StoreReviewController {
+final class StoreReviewRequester {
 
     let defaults = UserDefaults.standard
     let infoDictionaryKey = kCFBundleVersionKey as String
