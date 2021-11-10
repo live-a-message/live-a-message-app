@@ -70,7 +70,9 @@ extension MapView: MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        view.image = AkeeAsset.marker.image
         didTapPin?(view.annotation)
+        mapView.deselectAnnotation(view.annotation, animated: false)
     }
 
     public func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {

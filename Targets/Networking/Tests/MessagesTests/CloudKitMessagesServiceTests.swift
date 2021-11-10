@@ -9,7 +9,6 @@
 import XCTest
 @testable import Networking
 import CloudKit
-//swiftlint:disable force_try
 
 class CloudKitMessagesServiceTests: XCTestCase {
 
@@ -43,22 +42,15 @@ class CloudKitMessagesServiceTests: XCTestCase {
     }
 }
 extension CloudKitMessagesServiceTests {
-    private func createRecordSuccessMock(id: String) -> CKRecord {
-        let record = CKRecord(recordType: CKRecordType.Messages.rawValue)
-        record["id"] = id
-        record["content"] = "dsadsa"
-        record["userId"] = "23123542312"
-        record["location"] = CLLocation()
-        record["status"] = "read"
-        return record
-    }
-
     private func createMock(id: String) -> Message {
-        let record = createRecordSuccessMock(id: id)
-        let message = try! CKMessage(record).message
-        return message
+        Message(
+            id: id,
+            userId: UUID().uuidString,
+            content: "TESTE", image: nil,
+            location: .init(lat: 1.0, lon: 1.0),
+            imageAsset: nil
+        )
     }
-
 
     private func success() throws -> ((Result<Bool, MessageServiceError>) -> Void) {
         let excpt = expectation(description: "success")
