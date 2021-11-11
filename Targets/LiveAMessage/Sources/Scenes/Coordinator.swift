@@ -57,17 +57,15 @@ class MainCoordinator: Coordinator {
 
     func start(window: UIWindow?) {
         self.window = window
-        self.window?.rootViewController = ARViewController()
-        window?.makeKeyAndVisible()
-//        if !isUserLoggedIn() {
-//            let navigation = UINavigationController(rootViewController: onboardingViewController)
-//            navigation.modalPresentationStyle = .fullScreen
-//            window?.rootViewController = navigation
-//            window?.makeKeyAndVisible()
-//        } else {
-//            window?.rootViewController = tabBarController
-//            window?.makeKeyAndVisible()
-//        }
+        if !isUserLoggedIn() {
+            let navigation = UINavigationController(rootViewController: onboardingViewController)
+            navigation.modalPresentationStyle = .fullScreen
+            window?.rootViewController = navigation
+            window?.makeKeyAndVisible()
+        } else {
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
+        }
     }
 
     func showLogin() {
