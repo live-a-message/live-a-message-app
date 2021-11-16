@@ -6,9 +6,11 @@
 //  Copyright © 2021 LiveAMessage. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import DesignSystem
 import Networking
+import CoreLocation
 
 protocol CloseMessagesViewModelProtocol {
     var sections: [[CloseMessageCellViewModel]] { get set }
@@ -55,11 +57,40 @@ class CloseMessagesViewModel: NSObject, CloseMessagesViewModelProtocol {
     func addSection(title: SectionTitle, messages: [Message]) {
         guard !messages.isEmpty else { return }
         var section = [CloseMessageCellViewModel]()
-        messages.forEach { section.append(CloseMessageCellViewModel(message: $0)) }
+        messages.forEach { section.append(CloseMessageCellViewModel(message: $0,
+                                                                    title: calculateDistance(
+                                                                        from: $0.location,
+                                                                        to: self.currentLocation)
+                                                                   )) }
         sectionsTitle.append(title)
         sections.append(section)
     }
 
+    private func calculateDistance(from firstLocation: Location, to secondLocation: Location) -> String {
+        let firstCLLocation = CLLocation(latitude: firstLocation.lat, longitude: firstLocation.lon)
+        let secondCLLocation = CLLocation(latitude: secondLocation.lat, longitude: secondLocation.lon)
+        let distance = firstCLLocation.distance(from: secondCLLocation)
+
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 1
+
+        let inKilometers = Double(distance) / 1000
+        if distance < 10_000 {
+            formatter.minimumFractionDigits = 2
+            formatter.maximumFractionDigits = 2
+            formatter.maximumIntegerDigits = 1
+        } else if distance < 100_000 {
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = 1
+            formatter.maximumIntegerDigits = 2
+        } else {
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
+            formatter.maximumIntegerDigits = .max
+        }
+
+        return (formatter.string(for: inKilometers) ?? "") + " km"
+    }
 }
 
 extension CloseMessagesViewModel {

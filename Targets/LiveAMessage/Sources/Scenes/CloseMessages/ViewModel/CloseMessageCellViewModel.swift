@@ -11,9 +11,10 @@ import Networking
 
 class CloseMessageCellViewModel: TableViewCellViewModel {
     var message: Message
-    let title = AkeeStrings.lblTitleMessageCloseMessages
+    var title: String
 
-    init(message: Message) {
+    init(message: Message, title: String = "") {
         self.message = message
+        self.title = title.isEmpty ? AkeeStrings.lblTitleMessageCloseMessages : title
     }
 }
