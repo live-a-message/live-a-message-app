@@ -41,6 +41,7 @@
 "lbl_privacy_policy" = "Privacy policy";
 "lbl_allow_ar" = "Allow AR";
 
+
 // Strings from 'MessageDetails' scene
 "btn_delete" = "Delete";
 "btn_report" = "Report";

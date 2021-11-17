@@ -58,7 +58,7 @@ class MainCoordinator: Coordinator {
     func start(window: UIWindow?) {
         self.window = window
         if !isUserLoggedIn() {
-            let navigation = UINavigationController(rootViewController: onboardingViewController)
+            let navigation = AKNavigationController(rootViewController: onboardingViewController, style: .transparent)
             navigation.modalPresentationStyle = .fullScreen
             window?.rootViewController = navigation
             window?.makeKeyAndVisible()
@@ -70,7 +70,7 @@ class MainCoordinator: Coordinator {
     }
 
     func showLogin() {
-        let navigation = UINavigationController(rootViewController: loginViewController)
+        let navigation = AKNavigationController(rootViewController: loginViewController, style: .transparent)
         navigation.modalPresentationStyle = .fullScreen
         window?.rootViewController?.present(navigation, animated: true)
     }
@@ -110,7 +110,7 @@ class MainCoordinator: Coordinator {
         detailsViewController.coordinator = self
 
         if fromPin {
-            let detailsNavigation = UINavigationController(rootViewController: detailsViewController)
+            let detailsNavigation = AKNavigationController(rootViewController: detailsViewController)
             detailsNavigation.modalPresentationStyle = .overFullScreen
             detailsViewController.setCloseButton()
             mapViewController.present(detailsNavigation, animated: true, completion: nil)
@@ -208,8 +208,8 @@ class MainCoordinator: Coordinator {
         mapViewController.tabBarItem = mapItem
         profileViewController.tabBarItem = profileItem
         tabBarController.viewControllers = [mapViewController,
-                                            UINavigationController(rootViewController: closeMessagesController!),
-                                            UINavigationController(rootViewController: profileViewController)]
+                                            AKNavigationController(rootViewController: closeMessagesController!),
+                                            AKNavigationController(rootViewController: profileViewController)]
         tabBarController.selectedIndex = 0
         tabBarController.customizeTabBarLayout()
     }
