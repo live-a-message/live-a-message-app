@@ -21,7 +21,7 @@ enum ProfileItemType {
         case .logout:
             return AkeeStrings.lblLogoutProfile
         case .allowAR:
-            return AkeeStrings.lblAllowAR
+            return AkeeStrings.lblAllowAr
         case .anonymous:
             return "Ativar modo anonimo"
         }
