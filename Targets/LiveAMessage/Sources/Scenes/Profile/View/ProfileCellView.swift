@@ -39,14 +39,25 @@ class ProfileCellView: UITableViewCell, TableViewCell {
 
         if viewModel.type == .logout {
             self.accessoryType = .none
+            self.accessoryView = nil
             self.textLabel?.textColor = AKColor.red
-            self.textLabel?.textAlignment = .center
+            self.textLabel?.textAlignment = .left
+        }
+
+        if viewModel.type == .allowAR {
+            configureAnonymousCell()
+            self.switchView.isOn = Configuration.shared.allowAR
+            switchView.addTarget(
+                viewModel,
+                action: #selector(viewModel.didTapAllowSwitch),
+                for: .touchUpInside)
         }
     }
 
     func configureAnonymousCell() {
         self.switchView.tintColor = AKColor.mainRed
         self.accessoryType = .none
+        self.textLabel?.textColor = AKColor.red
         self.accessoryView = switchView
     }
 }

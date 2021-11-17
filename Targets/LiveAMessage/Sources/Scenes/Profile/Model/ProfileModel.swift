@@ -12,6 +12,7 @@ enum ProfileItemType {
     case termsOfService
     case logout
     case anonymous
+    case allowAR
 
     var localized: String {
         switch self {
@@ -19,6 +20,8 @@ enum ProfileItemType {
             return AkeeStrings.lblTermsOfServiceProfile
         case .logout:
             return AkeeStrings.lblLogoutProfile
+        case .allowAR:
+            return AkeeStrings.lblAllowAR
         case .anonymous:
             return "Ativar modo anonimo"
         }

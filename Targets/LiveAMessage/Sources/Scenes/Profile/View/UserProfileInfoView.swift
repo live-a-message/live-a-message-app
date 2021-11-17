@@ -23,12 +23,13 @@ class UserProfileInfoView: UIView {
         return imageView
     }()
 
-    private let userNameLabel: AKLabel = {
-        let label = AKLabel(style: .title2)
-        label.numberOfLines = 2
-        label.text = UserData.shared.name
-        label.textAlignment = .left
-        return label
+    let userNameLabel: UITextField = {
+        let textfield = UITextField()
+        textfield.font = .systemFont(ofSize: 22)
+        textfield.text = Configuration.shared.name
+        textfield.textAlignment = .left
+        textfield.isUserInteractionEnabled = false
+        return textfield
     }()
 
     override init(frame: CGRect) {
@@ -69,5 +70,11 @@ extension UserProfileInfoView: ViewCode {
         userNameLabel.bottom(to: profilePictureImageView, profilePictureImageView.centerYAnchor)
         userNameLabel.leadingToTrailing(of: profilePictureImageView, offset: AKSpacing.small.value)
         userNameLabel.trailingToSuperview(offset: -AKSpacing.small.value)
+    }
+}
+
+extension UserProfileInfoView {
+    func endEdit() {
+        UserData.shared.name = self.userNameLabel.text
     }
 }
