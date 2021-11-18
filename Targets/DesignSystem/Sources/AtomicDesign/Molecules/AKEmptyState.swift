@@ -45,7 +45,7 @@ public class AKEmptyState: UIView {
     }()
 
     lazy var titleLabel: AKLabel = { AKLabel(style: .title3) }()
-    lazy var descriptionLabel: AKLabel = { AKLabel(style: .title3) }()
+    lazy var descriptionLabel: AKLabel = { AKLabel(style: .body1) }()
     lazy var primaryButton: AKButton = { AKButton(style: .default) }()
 
     public init(style: Style) {
@@ -84,7 +84,7 @@ extension AKEmptyState: ViewCode {
         let imageSize = CGSize(width: 264, height: 264)
 
         imageView.centerXToSuperview()
-        imageView.topToSuperview(offset: spacing)
+        imageView.topToSuperview(offset: AKSpacing.xxxLarge.value * 2)
         imageView.size(imageSize)
 
         titleLabel.topToBottom(of: imageView, offset: spacing)
@@ -102,6 +102,7 @@ extension AKEmptyState: ViewCode {
 
     public func configureViews() {
         backgroundColor = AKColor.mainBackgroundColor
+        primaryButton.isHidden = true
         switch style {
         case .generic:
             imageView.image = DesignSystemAsset.floatingEmptyState.image
