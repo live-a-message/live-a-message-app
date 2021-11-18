@@ -94,6 +94,7 @@ public class AKTableView<Item: TableViewCellViewModel,
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let firstSection = sections.first else { return nil }
         if sections.count == 1 && firstSection.isEmpty {
+            heightForHeaderView = .zero
             return emptyStateView
         }
         return nil
