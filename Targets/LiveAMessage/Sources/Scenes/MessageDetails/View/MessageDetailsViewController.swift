@@ -76,6 +76,10 @@ class MessageDetailsViewController: UIViewController {
     }
 
     @objc private func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
+        coordinator?.showStoreReview(completion: handleDismiss)
+    }
+
+    func handleDismiss() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

@@ -22,6 +22,7 @@ protocol Coordinator: AnyObject {
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
+    func showStoreReview(completion: @escaping () -> Void)
     func doLogoff()
 }
 
@@ -98,6 +99,11 @@ class MainCoordinator: Coordinator {
         }
         controller.modalPresentationStyle = .formSheet
         mapViewController.present(controller, animated: true)
+    }
+
+    func showStoreReview(completion: @escaping () -> Void) {
+        let review = StoreReviewRequester()
+        review.showReviewRequest(completion: completion)
     }
 
     func showMessageDetails(

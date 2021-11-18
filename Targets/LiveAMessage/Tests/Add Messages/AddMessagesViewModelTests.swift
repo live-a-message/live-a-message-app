@@ -101,7 +101,7 @@ class AddMessagesViewModelTests: XCTestCase {
     }
 }
 
-extension AddMessagesViewModelTests{
+extension AddMessagesViewModelTests {
     func makeSut() -> Sut {
         let viewModel = AddMessageViewModel()
         viewModel.messageService = server
