@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import DesignSystem
 
 class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
     private let viewModel: ProfileViewModelProtocol = ProfileViewModel()
+    private var editingState: Bool = false {
+        didSet {
+            updateUI()
+        }
+    }
 
     weak var coordinator: Coordinator?
     override func viewDidLoad() {
@@ -18,6 +24,7 @@ class ProfileViewController: UIViewController {
         contentView.tableView.bind(sections: viewModel.sections)
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
         navigationController?.title = AkeeStrings.navTitleProfile
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
     }
 
     override func loadView() {
@@ -37,6 +44,35 @@ class ProfileViewController: UIViewController {
             self.coordinator?.doLogoff()
         default:
             break
+        }
+    }
+
+    @objc
+    func allowEdit() {
+        self.editingState = true
+    }
+
+    @objc
+    func disallowEdit() {
+        self.editingState = false
+        self.contentView.profileView.endEdit()
+    }
+
+    func updateUI() {
+        self.contentView.profileView.userNameLabel.isUserInteractionEnabled = editingState
+        if editingState {self.contentView.profileView.userNameLabel.becomeFirstResponder()}
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
+    }
+
+    func buildItem() -> UIBarButtonItem {
+        if editingState {
+            let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(disallowEdit))
+            button.tintColor = AKColor.red
+            return button
+        } else {
+            let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEdit))
+            button.tintColor = AKColor.red
+            return button
         }
     }
 }

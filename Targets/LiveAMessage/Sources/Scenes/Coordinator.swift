@@ -67,6 +67,7 @@ class MainCoordinator: Coordinator {
             window?.rootViewController = tabBarController
             window?.makeKeyAndVisible()
         }
+        UserData.shared.delegate = Configuration.shared
     }
 
     func showLogin() {

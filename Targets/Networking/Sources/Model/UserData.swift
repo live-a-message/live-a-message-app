@@ -8,11 +8,26 @@
 
 import Foundation
 
+public protocol UserDataDelegate: AnyObject {
+    func didValuesUpdate()
+}
+
 public class UserData {
 
     public static let shared = UserData()
     private let defaults = UserDefaults.standard
 
+    public weak var delegate: UserDataDelegate?
+
+    public var allowAR: Bool {
+        get {
+            defaults.bool(forKey: Key.allowAR.rawValue)
+        }
+        set {
+            defaults.set(newValue, forKey: Key.allowAR.rawValue)
+            delegate?.didValuesUpdate()
+        }
+    }
     public var isLoggedIn: Bool {
         defaults.bool(forKey: Key.isLoggedIn.rawValue)
     }
@@ -26,7 +41,13 @@ public class UserData {
     }
 
     public var name: String? {
-        defaults.string(forKey: Key.name.rawValue)
+        get {
+            defaults.string(forKey: Key.name.rawValue)
+        }
+        set {
+            defaults.set(newValue, forKey: Key.name.rawValue)
+            delegate?.didValuesUpdate()
+        }
     }
 
     public var email: String? {
@@ -85,6 +106,7 @@ extension UserData {
         case recordID
         case blockedIDs
         case readMessages
+        case allowAR
     }
 
 }

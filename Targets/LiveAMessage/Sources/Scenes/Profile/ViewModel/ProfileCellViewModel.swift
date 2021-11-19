@@ -7,7 +7,8 @@
 //
 
 import DesignSystem
-import Foundation
+import UIKit
+import Networking
 
 class ProfileCellViewModel: TableViewCellViewModel {
     private let model: ProfileModel
@@ -25,5 +26,9 @@ class ProfileCellViewModel: TableViewCellViewModel {
 
     @objc func didTapAnonymousSwitch() {
         print("Change")
+    }
+
+    @objc func didTapAllowSwitch(sender: UISwitch) {
+        UserData.shared.allowAR = sender.isOn
     }
 }
