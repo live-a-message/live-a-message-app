@@ -30,6 +30,11 @@ public class AKColor: UIColor {
         return UIColor.dynamicColor(light: UIColor(hex: "000000"), dark: UIColor(hex: "FFFFFF"))
     }
 
+    // body font color
+    public static var bodyFontColor: UIColor {
+        return UIColor.dynamicColor(light: UIColor(hex: "6A6A6A"), dark: UIColor(hex: "6A6A6A"))
+    }
+
     /// background color for the app
     public static var mainBackgroundColor: UIColor {
         return UIColor.dynamicColor(light: UIColor(hex: "FFFFFF"), dark: UIColor(hex: "000000"))

@@ -14,6 +14,13 @@ extension AKLabelStyle {
         textSize: .body,
         fontColor: AKColor.mainFontColor
     )
+
+    static public let body2 = AKLabelStyle(
+        font: UIFont.preferredFont(forTextStyle: .body),
+        textSize: .body,
+        fontColor: AKColor.bodyFontColor
+    )
+
     static public let title1 = AKLabelStyle(
         font: UIFont.preferredFont(forTextStyle: .title1),
         textSize: .title1,

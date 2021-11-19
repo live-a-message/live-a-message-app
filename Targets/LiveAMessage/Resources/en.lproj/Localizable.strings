@@ -24,6 +24,7 @@
 "lbl_termsOfService_profile" = "Terms of Service";
 "navTitle_profile" = "Profile";
 "lbl_logout_profile" = "Logout";
+"lbl_version" = "version"
 
 "agree" = "Agree";
 

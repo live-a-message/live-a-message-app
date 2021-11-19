@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
     private let viewModel: ProfileViewModelProtocol = ProfileViewModel()
+    private let appVersion = "version" + "2.0.0"
 
     weak var coordinator: Coordinator?
     override func viewDidLoad() {
@@ -18,6 +19,7 @@ class ProfileViewController: UIViewController {
         contentView.tableView.bind(sections: viewModel.sections)
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
         navigationController?.title = AkeeStrings.navTitleProfile
+        contentView.versionLabel.text = appVersion
     }
 
     override func loadView() {
