@@ -11,7 +11,9 @@ import DesignSystem
 
 class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
-    private var viewModel: ProfileViewModelProtocol = ProfileViewModel()
+    private let viewModel: ProfileViewModelProtocol = ProfileViewModel()
+    private let appVersion = "version" + "2.0.0"
+
 
     weak var coordinator: Coordinator?
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class ProfileViewController: UIViewController {
             title: "Iniciar Sessão")
         contentView.tableView.emptyStateView = AKEmptyState(style: .viewModel(viewModel.emptyState))
         navigationController?.title = AkeeStrings.navTitleProfile
+        contentView.versionLabel.text = appVersion
     }
 
     override func loadView() {

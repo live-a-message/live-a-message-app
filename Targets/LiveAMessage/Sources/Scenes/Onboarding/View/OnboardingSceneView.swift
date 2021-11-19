@@ -27,7 +27,7 @@ class OnboardingSceneView: UIView, ViewCode {
     }()
 
     lazy var descriptionLabel: UILabel = {
-        let label = AKLabel(style: AKLabelStyle.body1)
+        let label = AKLabel(style: AKLabelStyle.body2)
         label.numberOfLines = 0
         return label
     }()

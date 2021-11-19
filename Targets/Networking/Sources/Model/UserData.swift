@@ -29,6 +29,10 @@ public class UserData {
         defaults.string(forKey: Key.name.rawValue)
     }
 
+    public var username: String? {
+        defaults.string(forKey: Key.name.rawValue)
+    }
+
     public var email: String? {
         defaults.string(forKey: Key.email.rawValue)
     }

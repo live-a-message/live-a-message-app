@@ -18,6 +18,9 @@ class ProfileView: UIView, ViewCode {
         return tableView
     }()
 
+    lazy var footerView = UIView(frame: .init(origin: .zero, size: .init(width: frame.width, height: 254)))
+    lazy var versionLabel: AKLabel = { AKLabel(style: .body2) }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildHierarchy()
@@ -31,10 +34,15 @@ class ProfileView: UIView, ViewCode {
 
     func buildHierarchy() {
         addSubview(tableView)
+        footerView.addSubview(versionLabel)
     }
 
     func setupConstraints() {
         tableView.edgesToSuperview()
+        versionLabel.topToSuperview(offset: AKSpacing.xxxSmall.value)
+        versionLabel.bottomToSuperview()
+        versionLabel.centerXToSuperview()
+        tableView.tableFooterView = footerView
     }
 
     func configureViews() {

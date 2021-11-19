@@ -33,7 +33,7 @@ public class SignInWithAppleAuthorization: NSObject, AutheticationService {
     }
 
     public func clearCredentials() {
-        UserData.shared.clear()
+        UserData.shared.set(value: false, key: .isLoggedIn)
     }
 }
 
