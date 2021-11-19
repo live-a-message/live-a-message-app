@@ -40,7 +40,7 @@ public enum AkeeStrings {
   public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
   /// Logout
   public static let lblLogoutProfile = AkeeStrings.tr("Localizable", "lbl_logout_profile")
-  /// Privacy policy
+  /// Privacy Policy
   public static let lblPrivacyPolicy = AkeeStrings.tr("Localizable", "lbl_privacy_policy")
   /// Terms of Service
   public static let lblTermsOfService = AkeeStrings.tr("Localizable", "lbl_terms_of_service")

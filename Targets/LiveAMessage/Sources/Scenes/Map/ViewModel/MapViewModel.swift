@@ -33,7 +33,7 @@ class MapViewModel: NSObject, MapViewModelProtocol {
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.distanceFilter = .greatestFiniteMagnitude
         return locationManager
     }()
 
@@ -51,8 +51,8 @@ class MapViewModel: NSObject, MapViewModelProtocol {
         radius: radius,
         identifier: UserData.shared.id
       )
-      region.notifyOnEntry = true
-      region.notifyOnExit = !region.notifyOnEntry
+//      region.notifyOnEntry = true
+//      region.notifyOnExit = !region.notifyOnEntry
       return region
     }()
 
@@ -65,7 +65,6 @@ class MapViewModel: NSObject, MapViewModelProtocol {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
         self.fetchMessages()
     }
 
