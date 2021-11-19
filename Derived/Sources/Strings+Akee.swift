@@ -34,8 +34,6 @@ public enum AkeeStrings {
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
   /// Report
   public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
-  /// Save
-  public static let btnSave = AkeeStrings.tr("Localizable", "btn_save")
   /// Allow AR
   public static let lblAllowAr = AkeeStrings.tr("Localizable", "lbl_allow_ar")
   /// Login to host messages and\n share memory with other users

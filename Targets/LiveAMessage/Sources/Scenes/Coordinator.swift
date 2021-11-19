@@ -17,7 +17,6 @@ protocol Coordinator: AnyObject {
     func showLogout()
     func showMap()
     func showAddMessage()
-    func showIcons()
     func didFetchMessages(messages: [Message])
     func showTermsOfService(_ using: MainCoordinator.PresentMode)
     func showMessageDetails(with message: Message, fromPin: Bool)
@@ -131,13 +130,6 @@ class MainCoordinator: Coordinator {
         let deleteView = DeleteView(viewModel: deleteViewModel)
         deleteView.popScreen = popMessageDetailsAndRemove
         deleteView.showDeleteMenu(on: viewController)
-    }
-    
-    func showIcons() {
-        let controller = ShowIconController()
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = profileViewController
-        profileViewController.present(controller, animated: true)
     }
 
     func didFetchMessages(messages: [Message]) {

@@ -12,14 +12,14 @@ import TinyConstraints
 import Networking
 
 class UserProfileInfoView: UIView {
-    let profilePictureImageView: UIImageView = {
+    private let profilePictureImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = AkeeAsset.avatar.image
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = AKSpacing.xxxLarge.value / 2
         imageView.clipsToBounds = true
-        imageView.isUserInteractionEnabled = true 
+
         return imageView
     }()
 

@@ -25,9 +25,6 @@ class ProfileViewController: UIViewController {
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
         navigationController?.title = AkeeStrings.navTitleProfile
         navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(showIcons))
-        self.contentView.profileView.profilePictureImageView.addGestureRecognizer(gesture)
-        
     }
 
     override func loadView() {
@@ -60,11 +57,6 @@ class ProfileViewController: UIViewController {
         self.editingState = false
         self.contentView.profileView.endEdit()
     }
-    
-    @objc
-    func showIcons() {
-        coordinator?.showIcons()
-    }
 
     func updateUI() {
         self.contentView.profileView.userNameLabel.isUserInteractionEnabled = editingState
@@ -83,16 +75,4 @@ class ProfileViewController: UIViewController {
             return button
         }
     }
-}
-extension ProfileViewController: UIViewControllerTransitioningDelegate {
-func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-       return HalfSizePresentationController(presentedViewController: presented, presenting: presentingViewController)
-   }
-}
-
-class HalfSizePresentationController: UIPresentationController {
-   override var frameOfPresentedViewInContainerView: CGRect {
-       guard let bounds = containerView?.bounds else { return .zero }
-       return CGRect(x: 0, y: bounds.height*0.75, width: bounds.width, height: bounds.height / 4)
-   }
 }

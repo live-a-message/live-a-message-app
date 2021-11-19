@@ -24,8 +24,6 @@
 "lbl_termsOfService_profile" = "Terms of Service";
 "navTitle_profile" = "Profile";
 "lbl_logout_profile" = "Logout";
-"lbl_allow_ar" = "Allow AR";
-"lbl_save" = "Save";
 
 "agree" = "Agree";
 
@@ -41,6 +39,7 @@
 "txtView_terms_login" = "By signing up, you agree with Akee's Terms of Service and Privacy Policy";
 "lbl_terms_of_service" = "Terms of Service";
 "lbl_privacy_policy" = "Privacy policy";
+"lbl_allow_ar" = "Allow AR";
 
 
 // Strings from 'MessageDetails' scene
