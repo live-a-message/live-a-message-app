@@ -13,15 +13,18 @@ public class CKUser {
     private(set) var name: String
     private(set) var id: String
     private(set) var email: String
+    private(set) var username: String
 
     public init(_ record: CKRecord) throws {
         guard let name = record["name"] as? String,
               let email = record["email"] as? String,
-              let id = record["id"] as? String
+              let id = record["id"] as? String,
+              let username = record["username"] as? String
         else { throw CKError.init(.assetFileModified) }
         self.name = name
         self.id = id
         self.email = email
+        self.username = username
     }
 
     public static func encode(_ user: User) -> CKRecord {
@@ -29,8 +32,9 @@ public class CKUser {
         record["name"] = user.name
         record["email"] = user.email
         record["id"] = user.id
+        record["username"] = user.username
         return record
     }
 
-    var user: User { User(name: name, id: id, email: email) }
+    var user: User { User(name: name, id: id, email: email, username: username) }
 }

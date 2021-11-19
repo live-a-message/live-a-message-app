@@ -25,7 +25,10 @@
 "navTitle_profile" = "轮廓";
 "lbl_logout_profile" = "出去";
 "agree" = "同意";
-"lbl_version" = "版本"
+"lbl_version" = "版本";
+"lbl_notLoginIn_title" = "你好";
+"lbl_notLoginIn_description" = "为了能够与其他用户交互，您需要启动一个会话";
+"btn_primaryButton" = "开始会话";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "登入";

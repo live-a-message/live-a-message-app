@@ -32,6 +32,8 @@ public enum AkeeStrings {
   public static let btnNext = AkeeStrings.tr("Localizable", "btn_next")
   /// Post
   public static let btnPost = AkeeStrings.tr("Localizable", "btn_post")
+  /// Start session
+  public static let btnPrimaryButton = AkeeStrings.tr("Localizable", "btn_primaryButton")
   /// Report
   public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
   /// Login to host messages and\n share memory with other users
@@ -40,6 +42,10 @@ public enum AkeeStrings {
   public static let lblLogout = AkeeStrings.tr("Localizable", "lbl_logout")
   /// Logout
   public static let lblLogoutProfile = AkeeStrings.tr("Localizable", "lbl_logout_profile")
+  /// In order to be able to interact with other users, you need to start a session
+  public static let lblNotLoginInDescription = AkeeStrings.tr("Localizable", "lbl_notLoginIn_description")
+  /// Hi!
+  public static let lblNotLoginInTitle = AkeeStrings.tr("Localizable", "lbl_notLoginIn_title")
   /// Privacy Policy
   public static let lblPrivacyPolicy = AkeeStrings.tr("Localizable", "lbl_privacy_policy")
   /// Terms of Service
@@ -50,6 +56,8 @@ public enum AkeeStrings {
   public static let lblTitleSignIn = AkeeStrings.tr("Localizable", "lbl_title_sign_in")
   /// Akee Message
   public static let lblTitleMessageCloseMessages = AkeeStrings.tr("Localizable", "lbl_titleMessage_close_messages")
+  /// version
+  public static let lblVersion = AkeeStrings.tr("Localizable", "lbl_version")
   /// Messages
   public static let navTitleCloseMessages = AkeeStrings.tr("Localizable", "navTitle_close_messages")
   /// Map

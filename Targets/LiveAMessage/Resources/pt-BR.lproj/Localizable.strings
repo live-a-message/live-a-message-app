@@ -25,7 +25,10 @@
 "navTitle_profile" = "Perfil";
 "lbl_logout_profile" = "Sair";
 "agree" = "Concordo";
-"lbl_version" = "versão"
+"lbl_version" = "versão";
+"lbl_notLoginIn_title" = "Olá";
+"lbl_notLoginIn_description" = "Para que consiga interagir com outros usuários é preciso que inicie uma sessão";
+"btn_primaryButton" = "Iniciar Sessão";
 
 // Strings from `Login` scene
 "lbl_title_sign_in" = "Iniciar Sessão";

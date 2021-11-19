@@ -14,7 +14,7 @@ public class UserData {
     private let defaults = UserDefaults.standard
 
     public var isLoggedIn: Bool {
-        defaults.bool(forKey: Key.isLoggedIn.rawValue)
+        true
     }
 
     public var agreeWithTerms: Bool {

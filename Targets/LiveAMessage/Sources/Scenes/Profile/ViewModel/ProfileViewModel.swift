@@ -19,8 +19,8 @@ class ProfileViewModel: ProfileViewModelProtocol {
 
     var emptyState = EmptyStateViewModel(
         icon: AkeeAsset.pinzinhoEmptyState.image,
-        title: "Olá",
-        description: "Para que consiga interagir com outros usuários é preciso que inicie uma sessão"
+        title: AkeeStrings.lblNotLoginInTitle,
+        description: AkeeStrings.lblNotLoginInDescription
     )
 
     let items: [ProfileModel] = [

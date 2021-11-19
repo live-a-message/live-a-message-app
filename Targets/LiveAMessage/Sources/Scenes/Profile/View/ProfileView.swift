@@ -47,5 +47,6 @@ class ProfileView: UIView, ViewCode {
 
     func configureViews() {
         backgroundColor = AKColor.mainBackgroundColor
+        tableView.backgroundColor = .clear
     }
 }
