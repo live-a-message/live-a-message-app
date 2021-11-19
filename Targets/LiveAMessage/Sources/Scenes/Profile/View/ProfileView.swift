@@ -11,10 +11,13 @@ import DesignSystem
 import TinyConstraints
 
 class ProfileView: UIView, ViewCode {
+    let profileView = UserProfileInfoView()
+
     lazy var tableView: AKTableView<ProfileCellViewModel, ProfileCellView> = {
         let tableView = AKTableView<ProfileCellViewModel, ProfileCellView>(frame: .zero, style: .grouped)
-         tableView.tableHeaderView = UserProfileInfoView()
-         tableView.heightForHeaderView = AKSpacing.xxxLarge.value + (2 * AKSpacing.small.value)
+        tableView.tableHeaderView = UserProfileInfoView()
+        tableView.tableHeaderView = profileView
+        tableView.heightForHeaderView = AKSpacing.xxxLarge.value + (2 * AKSpacing.small.value)
         return tableView
     }()
 

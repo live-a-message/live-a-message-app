@@ -23,6 +23,7 @@ protocol Coordinator: AnyObject {
     func showMessageDetails(with message: Message, fromPin: Bool)
     func showReportMenu(with message: Message, on viewController: UIViewController)
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
+    func showStoreReview(completion: @escaping () -> Void)
     func doLogoff()
 }
 
@@ -67,6 +68,7 @@ class MainCoordinator: Coordinator {
             window?.rootViewController = tabBarController
             window?.makeKeyAndVisible()
         }
+        UserData.shared.delegate = Configuration.shared
     }
 
     func showLogin() {
@@ -104,6 +106,11 @@ class MainCoordinator: Coordinator {
         }
         controller.modalPresentationStyle = .formSheet
         mapViewController.present(controller, animated: true)
+    }
+
+    func showStoreReview(completion: @escaping () -> Void) {
+        let review = StoreReviewRequester()
+        review.showReviewRequest(completion: completion)
     }
 
     func showMessageDetails(
@@ -214,7 +221,7 @@ class MainCoordinator: Coordinator {
         profileViewController.tabBarItem = profileItem
         tabBarController.viewControllers = [mapViewController,
                                             AKNavigationController(rootViewController: closeMessagesController!),
-                                            AKNavigationController(rootViewController: profileViewController, style: .transparent)]
+                                            AKNavigationController(rootViewController: profileViewController)]
         tabBarController.selectedIndex = 0
         tabBarController.customizeTabBarLayout()
     }

@@ -96,4 +96,5 @@ public enum IconNamed: String {
     case mapFill = "map.fill"
     case person = "person"
     case personFill = "person.fill"
+    case edit = "slider.vertical.3"
 }

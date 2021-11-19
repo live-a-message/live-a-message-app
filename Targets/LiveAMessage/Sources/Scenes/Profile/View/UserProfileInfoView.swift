@@ -23,7 +23,7 @@ class UserProfileInfoView: UIView {
         return imageView
     }()
 
-    private let nameLabel: AKLabel = {
+    public let nameLabel: AKLabel = {
         let label = AKLabel(style: .title2)
         label.numberOfLines = 2
         label.text = UserData.shared.name
@@ -31,7 +31,7 @@ class UserProfileInfoView: UIView {
         return label
     }()
 
-    private let usernameLabel: AKLabel = {
+    public let usernameLabel: AKLabel = {
         let label = AKLabel(style: .body2)
         label.numberOfLines = 2
         label.text = UserData.shared.username
@@ -85,5 +85,11 @@ extension UserProfileInfoView: ViewCode {
         usernameLabel.topToBottom(of: nameLabel, offset: AKSpacing.xxxSmall.value)
         usernameLabel.leadingToTrailing(of: profilePictureImageView, offset: AKSpacing.xSmall.value)
         usernameLabel.trailingToSuperview(offset: -AKSpacing.small.value)
+    }
+}
+
+extension UserProfileInfoView {
+    func endEdit() {
+        UserData.shared.name = self.nameLabel.text
     }
 }

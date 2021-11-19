@@ -42,6 +42,7 @@
 "txtView_terms_login" = "注册即表示您同意 Akee 的服务条款和隐私政策";
 "lbl_terms_of_service" = "服务条款";
 "lbl_privacy_policy" = "隐私政策";
+"lbl_allow_ar" = "允许增强现实";
 
 // Strings from 'MessageDetails' scene
 "btn_delete" = "删除";

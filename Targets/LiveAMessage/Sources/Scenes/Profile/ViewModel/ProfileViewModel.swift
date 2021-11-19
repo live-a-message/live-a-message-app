@@ -24,7 +24,7 @@ class ProfileViewModel: ProfileViewModelProtocol {
     )
 
     let items: [ProfileModel] = [
-        ProfileModel(type: .termsOfService)
+      ProfileModel(type: .termsOfService), ProfileModel(type: .allowAR)
     ]
 
     var sections: [[ProfileCellViewModel]] = [[]]

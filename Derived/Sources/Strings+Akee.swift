@@ -36,6 +36,8 @@ public enum AkeeStrings {
   public static let btnPrimaryButton = AkeeStrings.tr("Localizable", "btn_primaryButton")
   /// Report
   public static let btnReport = AkeeStrings.tr("Localizable", "btn_report")
+  /// Allow AR
+  public static let lblAllowAr = AkeeStrings.tr("Localizable", "lbl_allow_ar")
   /// Login to host messages and\n share memory with other users
   public static let lblDescriptionSignIn = AkeeStrings.tr("Localizable", "lbl_description_sign_in")
   /// Logout
@@ -46,7 +48,7 @@ public enum AkeeStrings {
   public static let lblNotLoginInDescription = AkeeStrings.tr("Localizable", "lbl_notLoginIn_description")
   /// Hi!
   public static let lblNotLoginInTitle = AkeeStrings.tr("Localizable", "lbl_notLoginIn_title")
-  /// Privacy Policy
+  /// Privacy policy
   public static let lblPrivacyPolicy = AkeeStrings.tr("Localizable", "lbl_privacy_policy")
   /// Terms of Service
   public static let lblTermsOfService = AkeeStrings.tr("Localizable", "lbl_terms_of_service")
