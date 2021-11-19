@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import DesignSystem
 
 class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
     private let viewModel: ProfileViewModelProtocol = ProfileViewModel()
     private let appVersion = "version" + "2.0.0"
 
+
     weak var coordinator: Coordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.tableView.bind(sections: viewModel.sections)
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
+        viewModel.emptyState.button = .init(
+            action: { self.didSelectSessionButton() },
+            title: "Iniciar Sessão")
+        contentView.tableView.emptyStateView = AKEmptyState(style: .viewModel(viewModel.emptyState))
         navigationController?.title = AkeeStrings.navTitleProfile
         contentView.versionLabel.text = appVersion
     }
@@ -28,6 +34,10 @@ class ProfileViewController: UIViewController {
 
     private func doLogoff() {
         coordinator?.doLogoff()
+    }
+
+    private func didSelectSessionButton() {
+        print("@Not Implemented: Iniciar Sessão")
     }
 
     private func route(with type: ProfileItemType) {
