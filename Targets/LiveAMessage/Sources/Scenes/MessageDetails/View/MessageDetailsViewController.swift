@@ -76,10 +76,11 @@ class MessageDetailsViewController: UIViewController {
     }
 
     @objc private func close() {
-        coordinator?.showStoreReview(completion: handleDismiss)
+        handleDismiss()
+        coordinator?.showStoreReview(completion: {})
     }
 
     func handleDismiss() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.dismiss(animated: true)
     }
 }

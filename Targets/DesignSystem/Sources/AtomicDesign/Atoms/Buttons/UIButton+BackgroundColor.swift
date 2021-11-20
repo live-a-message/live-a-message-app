@@ -32,11 +32,18 @@ extension UIButton {
 
     func setIcon(imageIcon: ButtonIcon) {
         if let highlighted = imageIcon.highlighted?.rawValue {
-            self.setImage(UIImage(systemName: highlighted), for: .highlighted)
+            if let systemImage = UIImage(systemName: highlighted) {
+                self.setImage(systemImage, for: .highlighted)
+            } else if let normalImage = UIImage(named: highlighted) {
+                self.setImage(normalImage, for: .highlighted)
+            }
         }
         if let normal = imageIcon.normal?.rawValue {
-            self.setImage(UIImage(systemName: normal), for: .normal)
-
+            if let systemImage = UIImage(systemName: normal) {
+                self.setImage(systemImage, for: .normal)
+            } else if let normalImage = UIImage(named: normal) {
+                self.setImage(normalImage, for: .normal)
+            }
         }
     }
 }

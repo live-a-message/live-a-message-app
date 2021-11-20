@@ -19,6 +19,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         self.accessoryType = .disclosureIndicator
+        self.backgroundColor = .systemGroupedBackground
     }
 
     @available(*, unavailable)

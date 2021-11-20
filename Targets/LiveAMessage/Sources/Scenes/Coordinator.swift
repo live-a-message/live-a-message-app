@@ -221,7 +221,7 @@ class MainCoordinator: Coordinator {
         profileViewController.tabBarItem = profileItem
         tabBarController.viewControllers = [mapViewController,
                                             AKNavigationController(rootViewController: closeMessagesController!),
-                                            AKNavigationController(rootViewController: profileViewController)]
+                                            AKNavigationController(rootViewController: profileViewController, style: .main)]
         tabBarController.selectedIndex = 0
         tabBarController.customizeTabBarLayout()
     }

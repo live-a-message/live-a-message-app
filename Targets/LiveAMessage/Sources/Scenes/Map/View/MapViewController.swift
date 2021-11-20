@@ -50,6 +50,7 @@ class MapViewController: UIViewController {
 
     func configureViews() {
         mainView.headerView.rightButtonAction = addMessage
+        mainView.headerView.rightBottomButtonAction = changeLockCamera
         mainView.didTapPin = didTapMessagePin(_:)
     }
 
@@ -58,6 +59,15 @@ class MapViewController: UIViewController {
 extension MapViewController {
     func addMessage() {
         coordinator?.showAddMessage()
+    }
+    func changeLockCamera() {
+        let camera = MKMapCamera(
+            lookingAtCenter: viewModel.currentLocation.coordinate,
+            fromDistance: 0.01,
+            pitch: 45,
+            heading: 45)
+        camera.altitude = 500
+        mainView.mapView.setCamera(camera, animated: true)
     }
 
     func didTapMessagePin(_ annotation: MKAnnotation?) {
