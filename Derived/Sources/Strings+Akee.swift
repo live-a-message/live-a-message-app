@@ -14,8 +14,12 @@ import Foundation
 public enum AkeeStrings {
   /// Agree
   public static let agree = AkeeStrings.tr("Localizable", "agree")
+  /// Your not logged, start a new session in profile page to add new messages
+  public static let alertDescription = AkeeStrings.tr("Localizable", "alert_description")
   /// Do you really want do logout?
   public static let alertLogoutMessage = AkeeStrings.tr("Localizable", "alert_logout_message")
+  /// Can't send messages
+  public static let alertTitle = AkeeStrings.tr("Localizable", "alert_title")
   /// Check what people are sharing over here!
   public static let bodyNotifCloseMessage = AkeeStrings.tr("Localizable", "body_notif_close_message")
   /// Accept the terms of service

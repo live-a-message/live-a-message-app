@@ -29,7 +29,13 @@ public class UserData {
         }
     }
     public var isLoggedIn: Bool {
-        true
+        get {
+            defaults.bool(forKey: Key.isLoggedIn.rawValue)
+        }
+        set {
+            set(value: newValue, key: .isLoggedIn)
+            delegate?.didValuesUpdate()
+        }
     }
 
     public var agreeWithTerms: Bool {

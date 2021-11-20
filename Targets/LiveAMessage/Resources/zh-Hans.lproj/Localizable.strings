@@ -12,6 +12,8 @@
 "btn_report" = "报告";
 "btn_blockUser" = "阻止用户";
 "btn_dismiss" = "解雇";
+"alert_title" = "无法发送消息";
+"alert_description" = "您尚未登录，请在个人资料页面开始一个新会话以添加新消息";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "关闭消息";

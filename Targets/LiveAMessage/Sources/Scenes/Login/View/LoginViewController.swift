@@ -33,7 +33,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.authButton.addTarget(self, action: #selector(didTapAuthButton), for: .touchUpInside)
+        mainView.joinNowButton.addTarget(self, action: #selector(didTapJoinNowButton), for: .touchUpInside)
+
         mainView.readTheTermsLabel.delegate = self
+    }
+    
+    @objc func didTapJoinNowButton() {
+        coordinator?.showMap()
     }
 
     @objc func didTapAuthButton() {
@@ -52,6 +58,7 @@ extension LoginViewController: SignInWithAppleAuthorizationDelegate {
     }
 
     func didFinishFetching() {
+        UserData.shared.set(value: false, key: .isLoggedIn)
         coordinator?.showMap()
     }
 }
