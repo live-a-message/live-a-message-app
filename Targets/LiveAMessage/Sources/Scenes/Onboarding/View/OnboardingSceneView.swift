@@ -55,7 +55,7 @@ class OnboardingSceneView: UIView, ViewCode {
     }
 
     func setupConstraints() {
-        animationView.topToSuperview(offset: AKSpacing.xxxLarge.value)
+        animationView.topToSuperview(offset: AKSpacing.xxxLarge.value + AKSpacing.large.value)
         animationView.height(224)
         animationView.leftToSuperview()
         animationView.rightToSuperview()
