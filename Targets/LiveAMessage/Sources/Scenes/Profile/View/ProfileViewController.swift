@@ -20,6 +20,12 @@ class ProfileViewController: UIViewController {
         }
     }
     weak var coordinator: Coordinator?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.loadSections()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.tableView.isScrollEnabled = UserData.shared.isLoggedIn

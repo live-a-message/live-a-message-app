@@ -13,6 +13,7 @@ import Networking
 protocol ProfileViewModelProtocol {
     var sections: [[ProfileCellViewModel]] { get set }
     var emptyState: EmptyStateViewModel { get set }
+    func loadSections()
 }
 
 class ProfileViewModel: ProfileViewModelProtocol {
@@ -34,7 +35,14 @@ class ProfileViewModel: ProfileViewModelProtocol {
     }
 
     init() {
-        guard UserData.shared.isLoggedIn else { return }
+        loadSections()
+    }
+
+    public func loadSections() {
+        guard UserData.shared.isLoggedIn else {
+            sections = [[]]
+            return
+        }
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
         sections.append(firstSection)
         sections.append(contentsOf: Array(repeating: [], count: 8))
