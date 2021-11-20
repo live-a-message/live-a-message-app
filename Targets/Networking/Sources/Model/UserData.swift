@@ -29,7 +29,7 @@ public class UserData {
         }
     }
     public var isLoggedIn: Bool {
-        defaults.bool(forKey: Key.isLoggedIn.rawValue)
+        true
     }
 
     public var agreeWithTerms: Bool {
@@ -48,6 +48,10 @@ public class UserData {
             defaults.set(newValue, forKey: Key.name.rawValue)
             delegate?.didValuesUpdate()
         }
+    }
+
+    public var username: String? {
+        defaults.string(forKey: Key.name.rawValue)
     }
 
     public var email: String? {

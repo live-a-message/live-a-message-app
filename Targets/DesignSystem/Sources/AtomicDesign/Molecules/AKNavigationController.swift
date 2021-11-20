@@ -10,6 +10,7 @@ import UIKit
 
 public enum AKNavigationStyle {
     case transparent
+    case main
 }
 
 public class AKNavigationController: UINavigationController {
@@ -27,8 +28,8 @@ public class AKNavigationController: UINavigationController {
     func configure(style: AKNavigationStyle?) {
         switch style {
         case .transparent: configureTransparentStyle()
-        default:
-            break
+        case .main: configureMainStyle()
+        default: break
         }
     }
 
@@ -37,6 +38,12 @@ public class AKNavigationController: UINavigationController {
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.isTranslucent = true
         self.view.backgroundColor = .clear
+    }
+
+    func configureMainStyle() {
+        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationBar.isTranslucent = false
+        self.view.backgroundColor = AKColor.mainBackgroundColor
     }
 
     required init?(coder aDecoder: NSCoder) {

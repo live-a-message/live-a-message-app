@@ -33,7 +33,7 @@ public class SignInWithAppleAuthorization: NSObject, AutheticationService {
     }
 
     public func clearCredentials() {
-        UserData.shared.clear()
+        UserData.shared.set(value: false, key: .isLoggedIn)
     }
 }
 
@@ -49,7 +49,7 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
                 save(user: User(
                     name: name + " " + (appleIDCredential.fullName?.familyName ?? ""),
                     id: identifier,
-                    email: email ?? ""
+                    email: email ?? "", username: "@\(name.lowercased())_\(UUID().uuidString.lowercased().split(separator: "-").first ?? "akee")"
                     )
                 )
             } else {

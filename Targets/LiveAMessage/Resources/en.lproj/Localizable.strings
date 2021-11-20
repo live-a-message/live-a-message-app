@@ -24,7 +24,10 @@
 "lbl_termsOfService_profile" = "Terms of Service";
 "navTitle_profile" = "Profile";
 "lbl_logout_profile" = "Logout";
-
+"lbl_version" = "version";
+"lbl_notLoginIn_title" = "Hi!";
+"lbl_notLoginIn_description" = "In order to be able to interact with other users, you need to start a session";
+"btn_primaryButton" = "Start session";
 "agree" = "Agree";
 
 // Strings from `Login` scene

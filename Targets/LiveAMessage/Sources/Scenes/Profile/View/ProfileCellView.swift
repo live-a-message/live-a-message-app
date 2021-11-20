@@ -19,6 +19,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         self.accessoryType = .disclosureIndicator
+        self.backgroundColor = .systemGroupedBackground
     }
 
     @available(*, unavailable)
@@ -41,7 +42,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
             self.accessoryType = .none
             self.accessoryView = nil
             self.textLabel?.textColor = AKColor.red
-            self.textLabel?.textAlignment = .left
+            self.textLabel?.textAlignment = .center
         }
 
         if viewModel.type == .allowAR {
@@ -57,7 +58,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
     func configureAnonymousCell() {
         self.switchView.tintColor = AKColor.mainRed
         self.accessoryType = .none
-        self.textLabel?.textColor = AKColor.red
+        self.accessoryView?.tintColor = AKColor.mainRed
         self.accessoryView = switchView
     }
 }

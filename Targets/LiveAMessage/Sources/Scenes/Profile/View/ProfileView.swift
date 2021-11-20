@@ -15,10 +15,14 @@ class ProfileView: UIView, ViewCode {
 
     lazy var tableView: AKTableView<ProfileCellViewModel, ProfileCellView> = {
         let tableView = AKTableView<ProfileCellViewModel, ProfileCellView>(frame: .zero, style: .grouped)
+        tableView.tableHeaderView = UserProfileInfoView()
         tableView.tableHeaderView = profileView
         tableView.heightForHeaderView = AKSpacing.xxxLarge.value + (2 * AKSpacing.small.value)
         return tableView
     }()
+
+    lazy var footerView = UIView(frame: .init(origin: .zero, size: .init(width: frame.width, height: 254)))
+    lazy var versionLabel: AKLabel = { AKLabel(style: .body2) }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,13 +37,19 @@ class ProfileView: UIView, ViewCode {
 
     func buildHierarchy() {
         addSubview(tableView)
+        footerView.addSubview(versionLabel)
     }
 
     func setupConstraints() {
         tableView.edgesToSuperview()
+        versionLabel.topToSuperview(offset: AKSpacing.xxxSmall.value)
+        versionLabel.bottomToSuperview()
+        versionLabel.centerXToSuperview()
+        tableView.tableFooterView = footerView
     }
 
     func configureViews() {
         backgroundColor = AKColor.mainBackgroundColor
+        tableView.backgroundColor = .clear
     }
 }

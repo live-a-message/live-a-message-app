@@ -18,6 +18,7 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum AkeeAsset {
   public static let mapDark = AkeeImages(name: "map_dark")
+  public static let pinzinhoEmptyState = AkeeImages(name: "pinzinho_empty_state")
   public static let avatar = AkeeImages(name: "avatar")
   public static let marker = AkeeImages(name: "marker")
 }

@@ -7,21 +7,34 @@
 //
 
 import Foundation
+import DesignSystem
+import Networking
 
 protocol ProfileViewModelProtocol {
     var sections: [[ProfileCellViewModel]] { get set }
+    var emptyState: EmptyStateViewModel { get set }
 }
 
-struct ProfileViewModel: ProfileViewModelProtocol {
+class ProfileViewModel: ProfileViewModelProtocol {
+
+    var emptyState = EmptyStateViewModel(
+        icon: AkeeAsset.pinzinhoEmptyState.image,
+        title: AkeeStrings.lblNotLoginInTitle,
+        description: AkeeStrings.lblNotLoginInDescription
+    )
 
     let items: [ProfileModel] = [
-      ProfileModel(type: .termsOfService), ProfileModel(type: .allowAR)
+      ProfileModel(type: .termsOfService)
     ]
 
-    var sections: [[ProfileCellViewModel]] = []
+    var sections: [[ProfileCellViewModel]] = [[]]
+
+    func didSelectSessionButton() {
+
+    }
 
     init() {
-
+        guard UserData.shared.isLoggedIn else { return }
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
         sections.append(firstSection)
         sections.append(contentsOf: Array(repeating: [], count: 8))

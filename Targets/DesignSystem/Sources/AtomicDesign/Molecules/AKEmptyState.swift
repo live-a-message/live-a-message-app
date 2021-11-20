@@ -8,9 +8,34 @@
 
 import UIKit
 
+public struct EmptyStateViewModel {
+
+    public let icon: UIImage?
+    public let title: String?
+    public let description: String?
+    public var button: ButtonModel?
+
+    public init(icon: UIImage?, title: String?, description: String?, button: EmptyStateViewModel.ButtonModel? = nil) {
+        self.icon = icon
+        self.title = title
+        self.description = description
+        self.button = button
+    }
+
+    public struct ButtonModel {
+        public init(action: @escaping () -> Void, title: String) {
+            self.action = action
+            self.title = title
+        }
+        let action: () -> Void
+        let title: String
+    }
+}
+
 public class AKEmptyState: UIView {
 
     let style: Style
+    public var viewModel: EmptyStateViewModel?
 
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -20,6 +45,8 @@ public class AKEmptyState: UIView {
     }()
 
     lazy var titleLabel: AKLabel = { AKLabel(style: .title3) }()
+    lazy var descriptionLabel: AKLabel = { AKLabel(style: .body1) }()
+    lazy var primaryButton: AKButton = { AKButton(style: .default) }()
 
     public init(style: Style) {
         self.style = style
@@ -39,6 +66,7 @@ extension AKEmptyState: ViewCode {
 
     public enum Style {
         case generic
+        case viewModel(_ viewModel: EmptyStateViewModel)
         case withImage(_ image: UIImage)
         case withText(_ title: String)
         case withImageAndTitle(_ image: UIImage, _ title: String)
@@ -47,25 +75,34 @@ extension AKEmptyState: ViewCode {
     public func buildHierarchy() {
         addSubview(imageView)
         addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        addSubview(primaryButton)
     }
 
     public func setupConstraints() {
         let spacing = AKSpacing.medium.value
         let imageSize = CGSize(width: 264, height: 264)
-        NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -imageSize.height / 3),
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            imageView.heightAnchor.constraint(equalToConstant: imageSize.height),
-            imageView.widthAnchor.constraint(equalToConstant: imageSize.width),
+        imageView.centerXToSuperview()
+        imageView.topToSuperview(offset: AKSpacing.xxxLarge.value * 2)
+        imageView.size(imageSize)
 
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: spacing),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
+        titleLabel.topToBottom(of: imageView, offset: spacing)
+        titleLabel.leadingToSuperview(offset: spacing)
+        titleLabel.trailingToSuperview(offset: spacing)
+
+        descriptionLabel.topToBottom(of: titleLabel, offset: spacing)
+        descriptionLabel.leadingToSuperview(offset: spacing)
+        descriptionLabel.trailingToSuperview(offset: spacing)
+
+        primaryButton.topToBottom(of: descriptionLabel, offset: AKSpacing.xxLarge.value)
+        primaryButton.leadingToSuperview(offset: spacing)
+        primaryButton.trailingToSuperview(offset: spacing)
     }
 
     public func configureViews() {
         backgroundColor = AKColor.mainBackgroundColor
+        primaryButton.isHidden = true
         switch style {
         case .generic:
             imageView.image = DesignSystemAsset.floatingEmptyState.image
@@ -77,6 +114,24 @@ extension AKEmptyState: ViewCode {
         case .withImageAndTitle(let image, let title):
             titleLabel.text = title
             imageView.image = image
+        case .viewModel(let viewModel):
+            configureViewModel(viewModel)
         }
+    }
+
+    private func configureViewModel(_ viewModel: EmptyStateViewModel) {
+        self.viewModel = viewModel
+        titleLabel.text = viewModel.title
+        descriptionLabel.text = viewModel.description
+        imageView.image = viewModel.icon
+        if let button = viewModel.button {
+            primaryButton.isHidden = false
+            primaryButton.setTitle(button.title, for: .normal)
+            primaryButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        }
+    }
+
+    @objc func buttonAction() {
+        viewModel?.button?.action()
     }
 }

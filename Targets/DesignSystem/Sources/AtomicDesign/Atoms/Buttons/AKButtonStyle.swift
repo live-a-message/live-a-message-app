@@ -97,4 +97,6 @@ public enum IconNamed: String {
     case person = "person"
     case personFill = "person.fill"
     case edit = "slider.vertical.3"
+    case locationSelected = "ic_location_selected"
+    case location = "ic_location"
 }

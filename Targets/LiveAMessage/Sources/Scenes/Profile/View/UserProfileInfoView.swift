@@ -23,13 +23,20 @@ class UserProfileInfoView: UIView {
         return imageView
     }()
 
-    let userNameLabel: UITextField = {
-        let textfield = UITextField()
-        textfield.font = .systemFont(ofSize: 22)
-        textfield.text = Configuration.shared.name
-        textfield.textAlignment = .left
-        textfield.isUserInteractionEnabled = false
-        return textfield
+    public let nameLabel: AKLabel = {
+        let label = AKLabel(style: .title2)
+        label.numberOfLines = 2
+        label.text = UserData.shared.name
+        label.textAlignment = .left
+        return label
+    }()
+
+    public let usernameLabel: AKLabel = {
+        let label = AKLabel(style: .body2)
+        label.numberOfLines = 2
+        label.text = UserData.shared.username
+        label.textAlignment = .left
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -45,12 +52,14 @@ class UserProfileInfoView: UIView {
 extension UserProfileInfoView: ViewCode {
     func buildHierarchy() {
         addSubview(profilePictureImageView)
-        addSubview(userNameLabel)
+        addSubview(nameLabel)
+        addSubview(usernameLabel)
     }
 
     func setupConstraints() {
         setupProfilePictureConstraints()
-        setupUserNameLabelConstraints()
+        setupFullNameLabelConstraints()
+        setupUsernameLabelConstraints()
     }
 
     func configureViews() {
@@ -66,15 +75,21 @@ extension UserProfileInfoView: ViewCode {
         profilePictureImageView.bottomToSuperview(offset: -AKSpacing.small.value)
     }
 
-    private func setupUserNameLabelConstraints() {
-        userNameLabel.bottom(to: profilePictureImageView, profilePictureImageView.centerYAnchor)
-        userNameLabel.leadingToTrailing(of: profilePictureImageView, offset: AKSpacing.small.value)
-        userNameLabel.trailingToSuperview(offset: -AKSpacing.small.value)
+    private func setupFullNameLabelConstraints() {
+        nameLabel.bottom(to: profilePictureImageView, profilePictureImageView.centerYAnchor)
+        nameLabel.leadingToTrailing(of: profilePictureImageView, offset: AKSpacing.xSmall.value)
+        nameLabel.trailingToSuperview(offset: -AKSpacing.small.value)
+    }
+
+    private func setupUsernameLabelConstraints() {
+        usernameLabel.topToBottom(of: nameLabel, offset: AKSpacing.xxxSmall.value)
+        usernameLabel.leadingToTrailing(of: profilePictureImageView, offset: AKSpacing.xSmall.value)
+        usernameLabel.trailingToSuperview(offset: -AKSpacing.small.value)
     }
 }
 
 extension UserProfileInfoView {
     func endEdit() {
-        UserData.shared.name = self.userNameLabel.text
+        UserData.shared.name = self.nameLabel.text
     }
 }

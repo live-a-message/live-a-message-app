@@ -14,6 +14,7 @@ import DesignSystem
 protocol Coordinator: AnyObject {
     func start(window: UIWindow?)
     func showLogin()
+    func presentLogin()
     func showLogout()
     func showMap()
     func showAddMessage()
@@ -74,6 +75,11 @@ class MainCoordinator: Coordinator {
         let navigation = AKNavigationController(rootViewController: loginViewController, style: .transparent)
         navigation.modalPresentationStyle = .fullScreen
         window?.rootViewController?.present(navigation, animated: true)
+    }
+
+    func presentLogin() {
+        let navigation = AKNavigationController(rootViewController: loginViewController, style: .transparent)
+        tabBarController.present(navigation, animated: true)
     }
 
     func showLogout() {
@@ -215,7 +221,7 @@ class MainCoordinator: Coordinator {
         profileViewController.tabBarItem = profileItem
         tabBarController.viewControllers = [mapViewController,
                                             AKNavigationController(rootViewController: closeMessagesController!),
-                                            AKNavigationController(rootViewController: profileViewController)]
+                                            AKNavigationController(rootViewController: profileViewController, style: .main)]
         tabBarController.selectedIndex = 0
         tabBarController.customizeTabBarLayout()
     }

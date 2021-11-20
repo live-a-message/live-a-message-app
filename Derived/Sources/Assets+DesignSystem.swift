@@ -19,7 +19,10 @@
 public enum DesignSystemAsset {
   public static let icClose = DesignSystemImages(name: "ic_close")
   public static let icIndicator = DesignSystemImages(name: "ic_indicator")
+  public static let icLocation = DesignSystemImages(name: "ic_location")
+  public static let icLocatonSelected = DesignSystemImages(name: "ic_locaton_selected")
   public static let floatingEmptyState = DesignSystemImages(name: "floating_empty_state")
+  public static let pinzinhoEmptyState = DesignSystemImages(name: "pinzinho_empty_state")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

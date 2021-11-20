@@ -59,6 +59,7 @@ class MessageDetailTableViewCell: UITableViewCell, ViewCode {
         messageImage.left(to: self, offset: corner)
         messageImage.right(to: self, offset: -corner)
         messageImage.height(400)
+        messageImage.bottomToSuperview()
     }
 
     func configureViews() {

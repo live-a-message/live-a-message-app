@@ -50,8 +50,7 @@ class MapView: MKMapView {
 extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
-        circleRenderer.fillColor = AKColor.mainRed
-        circleRenderer.alpha = 0.08
+        circleRenderer.fillColor = AKColor.mainRed.withAlphaComponent(0.08)
         return circleRenderer
     }
 
@@ -64,8 +63,7 @@ extension MapView: MKMapViewDelegate {
         } else {
             annotationView?.annotation = annotation
         }
-        let image = AkeeAsset.marker.image
-        annotationView?.image = image
+        annotationView?.image = AkeeAsset.marker.image
         return annotationView
     }
 
