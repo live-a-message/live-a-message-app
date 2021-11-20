@@ -45,7 +45,7 @@ class MapHeaderView: UIView, ViewCode {
         rightButton.topToSuperview(offset: AKSpacing.small.value)
         rightButton.rightToSuperview(offset: -AKSpacing.small.value)
 
-        rightBottomButton.topToBottom(of: rightButton, offset: AKSpacing.xSmall.value)
+        rightBottomButton.topToBottom(of: rightButton, offset: AKSpacing.small.value)
         rightBottomButton.rightToSuperview(offset: -AKSpacing.small.value)
         rightBottomButton.bottomToSuperview(offset: -AKSpacing.small.value)
 

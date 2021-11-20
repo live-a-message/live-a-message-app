@@ -55,7 +55,7 @@ class OnboardingSceneView: UIView, ViewCode {
     }
 
     func setupConstraints() {
-        animationView.topToSuperview(offset: AKSpacing.xxxLarge.value)
+        animationView.topToSuperview(offset: AKSpacing.xxxLarge.value + AKSpacing.large.value)
         animationView.height(224)
         animationView.leftToSuperview()
         animationView.rightToSuperview()
@@ -67,8 +67,8 @@ class OnboardingSceneView: UIView, ViewCode {
         descriptionLabel.rightToSuperview(offset: -AKSpacing.small.value)
         nextButton.centerXToSuperview()
         nextButton.height(AKSpacing.xxxLarge.value)
-        nextButton.leftToSuperview(offset: AKSpacing.xxxLarge.value)
-        nextButton.rightToSuperview(offset: -AKSpacing.xxxLarge.value)
+        nextButton.leftToSuperview(offset: AKSpacing.medium.value)
+        nextButton.rightToSuperview(offset: -AKSpacing.medium.value)
         nextButton.bottomToSuperview(offset: -AKSpacing.xxxLarge.value)
     }
 

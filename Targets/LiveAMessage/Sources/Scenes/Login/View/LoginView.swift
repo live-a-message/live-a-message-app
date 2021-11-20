@@ -111,7 +111,7 @@ class LoginView: UIView, ViewCode {
 
         joinNowButton.leadingToSuperview(offset: AKSpacing.xLarge.value)
         joinNowButton.trailingToSuperview(offset: AKSpacing.xLarge.value)
-        joinNowButton.bottomToTop(of: authButton, offset: -AKSpacing.xxSmall.value)
+        joinNowButton.bottomToTop(of: authButton, offset: -AKSpacing.small.value)
     }
 
     func configureViews() {

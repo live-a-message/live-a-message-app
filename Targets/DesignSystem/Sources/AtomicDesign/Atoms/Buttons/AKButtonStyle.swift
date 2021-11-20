@@ -10,7 +10,7 @@ import UIKit
 
 extension AKButtonStyle {
     public static let `default` = AKButtonStyle(
-        height: 64.0,
+        height: 48.0,
         highlightedColor: AKColor.darkRed,
         backgroundColor: AKColor.mainRed,
         borderWidth: 0.0,
