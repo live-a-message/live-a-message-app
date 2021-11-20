@@ -75,7 +75,8 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
     }
 
-    func buildItem() -> UIBarButtonItem {
+    func buildItem() -> UIBarButtonItem? {
+        guard UserData.shared.isLoggedIn else { return nil }
         if editingState {
             let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(disallowEdit))
             button.tintColor = AKColor.red

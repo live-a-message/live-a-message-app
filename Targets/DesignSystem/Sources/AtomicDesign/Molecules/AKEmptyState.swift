@@ -121,6 +121,9 @@ extension AKEmptyState: ViewCode {
 
     private func configureViewModel(_ viewModel: EmptyStateViewModel) {
         self.viewModel = viewModel
+        let imageSize = CGSize(width: 160, height: 160)
+        imageView.size(imageSize)
+        imageView.topToSuperview(offset: AKSpacing.small.value)
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
         imageView.image = viewModel.icon

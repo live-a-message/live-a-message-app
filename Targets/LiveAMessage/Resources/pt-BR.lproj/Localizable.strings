@@ -12,6 +12,8 @@
 "btn_report" = "Reportar";
 "btn_blockUser" = "Bloquear Usuário";
 "btn_dismiss" = "Fechar";
+"alert_title" = "Não é possível adicionar mensagens";
+"alert_description" = "Você não está logado, inicie uma nova sessão na página de perfil para adicionar novas mensagens";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Mensagens";

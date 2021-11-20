@@ -12,6 +12,8 @@
 "btn_report" = "Report";
 "btn_blockUser" = "Block User";
 "btn_dismiss" = "Dismiss";
+"alert_title" = "Can't add messages";
+"alert_description" = "Your not logged, start a new session in profile page to add new messages";
 
 // Strings from `CloseMessages` scene.
 "navTitle_close_messages" = "Messages";

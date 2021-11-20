@@ -58,6 +58,15 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     func addMessage() {
+        guard UserData.shared.isLoggedIn else {
+            self.showAlert(
+                model: AlertModel(
+                    title: AkeeStrings.alertTitle,
+                    message: AkeeStrings.alertDescription,
+                    firstButton: DesignSystemStrings.ok
+                ))
+            return
+        }
         coordinator?.showAddMessage()
     }
     func changeLockCamera() {

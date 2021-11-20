@@ -37,6 +37,13 @@ class LoginView: UIView, ViewCode {
         textView.isScrollEnabled = false
         return textView
     }()
+    
+    lazy var joinNowButton: AKButton = {
+        let button = AKButton(style: .default)
+        button.setTitle("Join now", for: .normal)
+        button.height(48)
+        return button
+    }()
 
     lazy var authButton: ASAuthorizationAppleIDButton = {
         let style = UIScreen.main.traitCollection.userInterfaceStyle
@@ -56,7 +63,7 @@ class LoginView: UIView, ViewCode {
         container.stackView.layoutMargins = UIEdgeInsets(
             top: AKSpacing.xxxLarge.value,
             left: AKSpacing.medium.value,
-            bottom: AKSpacing.xxxLarge.value * 2,
+            bottom: AKSpacing.xxxLarge.value * 4,
             right: AKSpacing.medium.value
         )
         return container
@@ -87,20 +94,24 @@ class LoginView: UIView, ViewCode {
         container.addArrangedSubview(titleLabel)
         container.addArrangedSubview(descriptionLabel)
         container.addSubview(readTheTermsLabel)
+        container.addSubview(joinNowButton)
         container.addSubview(authButton)
     }
 
     func setupConstraints() {
         container.edgesToSuperview(usingSafeArea: true)
 
-        authButton.leadingToSuperview(offset: AKSpacing.xLarge.value)
-        authButton.trailingToSuperview(offset: AKSpacing.xLarge.value)
-        authButton.bottomToSuperview(offset: -AKSpacing.xxxLarge.value)
-
         readTheTermsLabel.leadingToSuperview(offset: AKSpacing.xLarge.value)
         readTheTermsLabel.trailingToSuperview(offset: AKSpacing.xLarge.value)
-        readTheTermsLabel.topToBottom(of: authButton, offset: AKSpacing.xxxSmall.value)
-        readTheTermsLabel.bottomToSuperview(offset: -AKSpacing.xxxSmall.value)
+        readTheTermsLabel.bottomToSuperview(offset: -AKSpacing.small.value)
+
+        authButton.leadingToSuperview(offset: AKSpacing.xLarge.value)
+        authButton.trailingToSuperview(offset: AKSpacing.xLarge.value)
+        authButton.bottomToTop(of: readTheTermsLabel, offset: -AKSpacing.xxSmall.value)
+
+        joinNowButton.leadingToSuperview(offset: AKSpacing.xLarge.value)
+        joinNowButton.trailingToSuperview(offset: AKSpacing.xLarge.value)
+        joinNowButton.bottomToTop(of: authButton, offset: -AKSpacing.xxSmall.value)
     }
 
     func configureViews() {
