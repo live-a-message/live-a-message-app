@@ -67,8 +67,8 @@ class OnboardingSceneView: UIView, ViewCode {
         descriptionLabel.rightToSuperview(offset: -AKSpacing.small.value)
         nextButton.centerXToSuperview()
         nextButton.height(AKSpacing.xxxLarge.value)
-        nextButton.leftToSuperview(offset: AKSpacing.xxxLarge.value)
-        nextButton.rightToSuperview(offset: -AKSpacing.xxxLarge.value)
+        nextButton.leftToSuperview(offset: AKSpacing.medium.value)
+        nextButton.rightToSuperview(offset: -AKSpacing.medium.value)
         nextButton.bottomToSuperview(offset: -AKSpacing.xxxLarge.value)
     }
 
