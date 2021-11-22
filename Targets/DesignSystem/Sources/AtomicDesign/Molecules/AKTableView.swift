@@ -86,13 +86,14 @@ public class AKTableView<Item: TableViewCellViewModel,
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sectionsTitle = sectionsTitle else { return nil }
-        guard sectionsTitle.count > .zero && section > 0 else { return nil }
-        return sectionsTitle[section - 1]
+//        guard let sectionsTitle = sectionsTitle else { return nil }
+//        guard sectionsTitle.count > .zero && section > 0 else { return nil }
+//        return sectionsTitle[section - 1]
+        return nil
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let firstSection = sections.first else { return tableFooterView }
+        guard let firstSection = sections.first else { return nil }
         if sections.count == 1 && firstSection.isEmpty {
             heightForHeaderView = .zero
             return emptyStateView

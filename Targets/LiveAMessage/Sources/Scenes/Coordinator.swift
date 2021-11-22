@@ -73,7 +73,7 @@ class MainCoordinator: Coordinator {
 
     func showLogin() {
         let navigation = AKNavigationController(rootViewController: loginViewController, style: .transparent)
-        loginViewController.mainView.joinNowButton.isHidden = false
+        loginViewController.mainView.joinNowButton.isHidden = true
         navigation.modalPresentationStyle = .fullScreen
         window?.rootViewController?.present(navigation, animated: true)
     }

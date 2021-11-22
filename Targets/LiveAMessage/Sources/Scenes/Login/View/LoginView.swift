@@ -42,6 +42,7 @@ class LoginView: UIView, ViewCode {
         let button = AKButton(style: .default)
         button.setTitle("Join now", for: .normal)
         button.height(48)
+        button.isHidden = true
         return button
     }()
 

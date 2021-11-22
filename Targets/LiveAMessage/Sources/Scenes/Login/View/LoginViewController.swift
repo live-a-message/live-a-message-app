@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
 
         mainView.readTheTermsLabel.delegate = self
     }
-    
+
     @objc func didTapJoinNowButton() {
         coordinator?.showMap()
     }
@@ -58,7 +58,7 @@ extension LoginViewController: SignInWithAppleAuthorizationDelegate {
     }
 
     func didFinishFetching() {
-        UserData.shared.set(value: false, key: .isLoggedIn)
+        UserData.shared.set(value: true, key: .isLoggedIn)
         coordinator?.showMap()
     }
 }

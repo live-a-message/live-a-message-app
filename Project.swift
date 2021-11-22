@@ -14,7 +14,9 @@ let infoPlist: [String: InfoPlist.Value] = [
         ]
     ],
     "NSLocationWhenInUseUsageDescription": "We need the user location to show near messages based on users location",
-    "LSSupportsOpeningDocumentsInPlace": "YES"
+    "LSSupportsOpeningDocumentsInPlace": "YES",
+    "NSPhotoLibraryUsageDescription": "We need access to your photos so we can add them to your messages.",
+    "PHPhotoLibraryPreventAutomaticLimitedAccessAlert": true
 ]
 
 let targets = [
