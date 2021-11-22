@@ -24,17 +24,18 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.loadSections()
+        contentView.tableView.bind(sections: viewModel.sections)
+        contentView.tableView.isScrollEnabled = UserData.shared.isLoggedIn
+        contentView.tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.tableView.isScrollEnabled = UserData.shared.isLoggedIn
-        contentView.tableView.bind(sections: viewModel.sections)
         contentView.tableView.didSelectRowAt = { self.route(with: $0.type) }
-        viewModel.emptyState.button = .init(
-            action: { self.didSelectSessionButton() },
-            title: AkeeStrings.btnPrimaryButton)
-        contentView.tableView.emptyStateView = AKEmptyState(style: .viewModel(viewModel.emptyState))
+//        viewModel.emptyState.button = .init(
+//            action: { self.didSelectSessionButton() },
+//            title: AkeeStrings.btnPrimaryButton)
+//        contentView.tableView.emptyStateView = AKEmptyState(style: .viewModel(viewModel.emptyState))
         navigationController?.title = AkeeStrings.navTitleProfile
         contentView.versionLabel.text = appVersion
         navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
