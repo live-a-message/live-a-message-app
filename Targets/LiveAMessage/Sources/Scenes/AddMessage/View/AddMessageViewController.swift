@@ -60,9 +60,11 @@ class AddMessageViewController: UIViewController {
     }
 
     @objc func tooglePicker() {
-        self.picker.allowsEditing = false
-        self.picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.picker.allowsEditing = false
+            self.picker.sourceType = .photoLibrary
+            self.present(self.picker, animated: true, completion: nil)
+        }
     }
 
     @objc private func requestAuthorizationForPhotos() {
