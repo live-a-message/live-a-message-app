@@ -3,7 +3,7 @@
 
 Akee is an app that allows you live messages wherever you are. Theses messages will be linked with the place you leave them so other users can look then once they are in the same place.
 
-[Available on Appstore](https://apps.apple.com/br/app/revisadinho/id1587033972?l=en#?platform=iphone) \
+[Available on Appstore](https://apps.apple.com/us/app/akee-live-a-message/id1586816446?ign-mpt=uo%3D2) \
 [Documentation](https://four-tango-674.notion.site/Documenta-o-aaf970a231ee4f888a180fe44db021ad)
 
 
