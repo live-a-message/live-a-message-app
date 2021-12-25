@@ -13,6 +13,8 @@ enum ProfileItemType {
     case logout
     case anonymous
     case allowAR
+    case blockedUsers
+    case edit
 
     var localized: String {
         switch self {
@@ -24,6 +26,10 @@ enum ProfileItemType {
             return AkeeStrings.lblAllowAr
         case .anonymous:
             return "Ativar modo anonimo"
+        case .blockedUsers:
+            return "Blocked users"
+        case .edit:
+            return "edit"
         }
     }
 }

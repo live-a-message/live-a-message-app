@@ -14,11 +14,7 @@ class ProfileViewController: UIViewController {
     private let contentView = ProfileView()
     private var viewModel: ProfileViewModelProtocol = ProfileViewModel()
     private let appVersion = AkeeStrings.lblVersion + " 2.0.0"
-    private var editingState: Bool = false {
-        didSet {
-            updateUI()
-        }
-    }
+
     weak var coordinator: Coordinator?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,38 +55,22 @@ class ProfileViewController: UIViewController {
             self.coordinator?.showTermsOfService(.push(nav: nav))
         case .logout:
             self.coordinator?.doLogoff()
+        case .blockedUsers:
+            self.coordinator?.showBlockedUsers()
         default:
             break
         }
     }
-
-    @objc
-    func allowEdit() {
-        self.editingState = true
-    }
-
-    @objc
-    func disallowEdit() {
-        self.editingState = false
-        self.contentView.profileView.endEdit()
-    }
-
-    func updateUI() {
-        self.contentView.profileView.nameLabel.isUserInteractionEnabled = editingState
-        if editingState {self.contentView.profileView.nameLabel.becomeFirstResponder()}
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = buildItem()
+    
+    
+    @objc func didTapEditButton() {
+        self.route(with: .edit)
     }
 
     func buildItem() -> UIBarButtonItem? {
         guard UserData.shared.isLoggedIn else { return nil }
-        if editingState {
-            let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(disallowEdit))
-            button.tintColor = AKColor.red
-            return button
-        } else {
-            let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEdit))
-            button.tintColor = AKColor.red
-            return button
-        }
+        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEditButton))
+        button.tintColor = AKColor.red
+        return button
     }
 }

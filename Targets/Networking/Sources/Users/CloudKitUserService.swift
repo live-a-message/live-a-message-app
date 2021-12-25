@@ -40,6 +40,32 @@ public class CloudKitUserService: UserService {
         database.add(operation)
     }
 
+    public func fetch(identifiers: [String], completion: @escaping ((Result<[User], UserServiceError>) -> Void)) {
+        let predicates = identifiers.compactMap({ NSPredicate(format: "id == %@", $0) })
+        let orPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        let query = CKQuery(recordType: CKRecordType.UsersInfo.rawValue, predicate: orPredicate)
+        let operation = CKQueryOperation(query: query)
+        var users = [User]()
+
+        operation.recordFetchedBlock = { record in
+            guard let user = try? CKUser(record).user else {
+                completion(.failure(.failedToDecode))
+                return
+            }
+            users.append(user)
+        }
+
+        operation.queryCompletionBlock = { _, error in
+            guard error == nil else {
+                completion(.failure(.networkError))
+                return
+            }
+            completion(.success(users))
+        }
+        operation.qualityOfService = .utility
+        database.add(operation)
+    }
+
     public func save(user: User, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
         let record = CKUser.encode(user)
         database.save(record) { record, error in

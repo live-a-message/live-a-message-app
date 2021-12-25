@@ -31,7 +31,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
         self.textLabel?.text = viewModel.title
 
         if viewModel.type == .anonymous {
-            configureAnonymousCell()
+            configureSwitchCell()
             switchView.addTarget(
                 viewModel,
                 action: #selector(viewModel.didTapAnonymousSwitch),
@@ -46,7 +46,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
         }
 
         if viewModel.type == .allowAR {
-            configureAnonymousCell()
+            configureSwitchCell()
             self.switchView.isOn = Configuration.shared.allowAR
             switchView.addTarget(
                 viewModel,
@@ -55,7 +55,7 @@ class ProfileCellView: UITableViewCell, TableViewCell {
         }
     }
 
-    func configureAnonymousCell() {
+    func configureSwitchCell() {
         self.switchView.tintColor = AKColor.mainRed
         self.accessoryType = .none
         self.accessoryView?.tintColor = AKColor.mainRed
