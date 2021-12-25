@@ -43,6 +43,7 @@ class ProfileViewModel: ProfileViewModelProtocol {
             sections = [[]]
             return
         }
+        sections = [[]]
         let firstSection = items.map({ ProfileCellViewModel(model: $0) })
         sections.append(firstSection)
         sections.append(contentsOf: Array(repeating: [], count: 8))

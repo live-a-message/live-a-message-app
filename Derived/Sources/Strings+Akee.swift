@@ -18,7 +18,7 @@ public enum AkeeStrings {
   public static let alertDescription = AkeeStrings.tr("Localizable", "alert_description")
   /// Do you really want do logout?
   public static let alertLogoutMessage = AkeeStrings.tr("Localizable", "alert_logout_message")
-  /// Can't send messages
+  /// Can't add messages
   public static let alertTitle = AkeeStrings.tr("Localizable", "alert_title")
   /// Check what people are sharing over here!
   public static let bodyNotifCloseMessage = AkeeStrings.tr("Localizable", "body_notif_close_message")

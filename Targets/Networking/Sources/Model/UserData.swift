@@ -57,7 +57,7 @@ public class UserData {
     }
 
     public var username: String? {
-        defaults.string(forKey: Key.name.rawValue)
+        defaults.string(forKey: Key.username.rawValue)
     }
 
     public var email: String? {
@@ -89,6 +89,7 @@ public class UserData {
         defaults.setValue(user.name, forKey: Key.name.rawValue)
         defaults.setValue(user.id, forKey: Key.id.rawValue)
         defaults.setValue(true, forKey: Key.isLoggedIn.rawValue)
+        defaults.setValue(user.username, forKey: Key.username.rawValue)
     }
 
     public func set(value: Any, key: Key) {
@@ -117,6 +118,7 @@ extension UserData {
         case blockedIDs
         case readMessages
         case allowAR
+        case username
     }
 
 }

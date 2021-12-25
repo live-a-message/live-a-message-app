@@ -9,6 +9,7 @@
 import UIKit
 import DesignSystem
 import Networking
+import PhotosUI
 
 class AddMessageViewController: UIViewController {
 
@@ -29,7 +30,7 @@ class AddMessageViewController: UIViewController {
     override func loadView() {
         messageView.cancelAction = cancel
         messageView.saveAction = save(_:)
-        messageView.cameraAction = tooglePicker
+        messageView.cameraAction = requestAuthorizationForPhotos
         view = messageView
     }
 
@@ -59,11 +60,24 @@ class AddMessageViewController: UIViewController {
     }
 
     @objc func tooglePicker() {
-        self.picker.allowsEditing = false
-        self.picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.picker.allowsEditing = false
+            self.picker.sourceType = .photoLibrary
+            self.present(self.picker, animated: true, completion: nil)
+        }
     }
 
+    @objc private func requestAuthorizationForPhotos() {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                if status == .authorized {
+                    self.tooglePicker()
+                }
+            }
+        } else {
+            self.tooglePicker()
+        }
+    }
 }
 
 extension AddMessageViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
