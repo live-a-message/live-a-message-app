@@ -30,7 +30,11 @@ public class UserData {
     }
     public var isLoggedIn: Bool {
         get {
-            defaults.bool(forKey: Key.isLoggedIn.rawValue)
+            #if DEBUG
+                return true
+            #else
+                return defaults.bool(forKey: Key.isLoggedIn.rawValue)
+            #endif
         }
         set {
             set(value: newValue, key: .isLoggedIn)
@@ -98,11 +102,6 @@ public class UserData {
 
     public func clear() {
         set(value: false, key: Key.isLoggedIn)
-        set(value: false, key: Key.agreeWithTerms)
-        defaults.setValue(nil, forKey: Key.id.rawValue)
-        defaults.setValue(nil, forKey: Key.name.rawValue)
-        defaults.setValue(nil, forKey: Key.email.rawValue)
-        defaults.setValue(nil, forKey: Key.blockedIDs.rawValue)
     }
 }
 

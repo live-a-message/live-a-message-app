@@ -37,7 +37,7 @@ class LoginView: UIView, ViewCode {
         textView.isScrollEnabled = false
         return textView
     }()
-    
+
     lazy var joinNowButton: AKButton = {
         let button = AKButton(style: .default)
         button.setTitle("Join now", for: .normal)

@@ -57,9 +57,11 @@ extension LoginViewController: SignInWithAppleAuthorizationDelegate {
 
     func didFinishWithError(_ error: Error) {
         os_log("Error: Failed to signIn")
+        AKLoadingView.shared.stopLoading(didSucceed: false)
     }
 
     func didFinishFetching() {
+        AKLoadingView.shared.stopLoading(didSucceed: true)
         UserData.shared.set(value: true, key: .isLoggedIn)
         coordinator?.showMap()
     }
