@@ -40,7 +40,7 @@ class AddMessageViewModel: AddMessageViewModelProtocol {
 
         messageService.addMessage(message: message) { result in
             switch result {
-            case .success(_ ):
+            case .success:
                 self.didSaveMessage?(message)
             case .failure(let error):
                 NSLog(error.localizedDescription, "error")

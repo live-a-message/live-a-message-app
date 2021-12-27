@@ -33,7 +33,7 @@ public class LocalMessageService: MessageService {
                 case .success(var messages):
                     messages.append(message)
                     self.writeMessageArrayToFile(messages, completion: completion)
-                case .failure(_):
+                case .failure:
                     completion(.failure(.failedToRead))
                 }
             }
@@ -48,7 +48,7 @@ public class LocalMessageService: MessageService {
             case .success(var messages):
                 messages.removeAll(where: { $0.id == message.id })
                 self.writeMessageArrayToFile(messages, completion: completion)
-            case .failure(_):
+            case .failure:
                 completion(.failure(.failedToRead))
             }
         }
