@@ -8,6 +8,7 @@
 
 import UIKit
 import Networking
+import DesignSystem
 import OSLog
 
 class LoginViewController: UIViewController {
@@ -43,6 +44,7 @@ class LoginViewController: UIViewController {
     }
 
     @objc func didTapAuthButton() {
+        AKLoadingView.shared.startLoading(on: self)
         viewModel?.authenticate()
     }
 
