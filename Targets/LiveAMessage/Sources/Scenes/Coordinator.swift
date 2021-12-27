@@ -201,11 +201,7 @@ class MainCoordinator: Coordinator {
     }
 
     private func isUserLoggedIn() -> Bool {
-        #if DEBUG
-            return true
-        #else
-            return UserData.shared.isLoggedIn
-        #endif
+        return UserData.shared.isLoggedIn
     }
 
     private func configureTabBar() {

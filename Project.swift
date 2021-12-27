@@ -33,7 +33,7 @@ let targets = [
             "Targets/LiveAMessage/Assets.xcassets/**"
         ],
         entitlements: "Akee.entitlements",
-        actions: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
+        scripts: [.post(script: "scripts/swiftlint.sh", name: "SwiftLint")],
         dependencies: [
             .target(name: "Networking"),
             .target(name: "DesignSystem")

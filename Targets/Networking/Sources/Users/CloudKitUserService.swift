@@ -112,7 +112,7 @@ public class CloudKitUserService: UserService {
                 UserData.shared.set(value: blockedUsers, key: .blockedIDs)
                 self.updateBlockedUsers(record: record) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                     completion(.success(true))
                     case .failure(let error):
                     completion(.failure(error))

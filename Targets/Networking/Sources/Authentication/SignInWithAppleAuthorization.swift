@@ -77,7 +77,7 @@ extension SignInWithAppleAuthorization: ASAuthorizationControllerDelegate {
     private func save(user: User) {
         service.save(user: user, completion: { result in
             switch result {
-            case .success(_):
+            case .success:
                 UserData.shared.save(user: user)
                 self.delegate?.didFinishFetching()
             case .failure(let error):

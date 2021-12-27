@@ -38,7 +38,7 @@ class TermsViewController: UIViewController {
             case .success(let terms):
                 self.mainView.loadingIndicator.set(.stop)
                 self.mainView.bind(terms: terms)
-            case .failure(_):
+            case .failure:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.mainView.loadingIndicator.set(.stop)
                     self.dismiss(animated: true)
