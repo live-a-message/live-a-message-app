@@ -62,8 +62,7 @@ class ProfileViewController: UIViewController {
             break
         }
     }
-    
-    
+
     @objc func didTapEditButton() {
         self.route(with: .edit)
     }

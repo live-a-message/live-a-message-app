@@ -23,10 +23,31 @@ class BlockedUsersViewController: UIViewController {
             self.loadingIndicator.set(.load)
             self.tableView.bind(sections: self.viewModel.sections)
         }}
+
+        viewModel.delegate = self
+        tableView.didSelectRowAt = { [weak self] blockedUserViewModel in
+            guard let self = self else { return }
+            AKLoadingView.shared.startLoading(on: self)
+            self.viewModel.unblockUser(id: blockedUserViewModel.user.id)
+        }
     }
 
     private func configureViews() {
+        navigationController?.navigationBar.tintColor = AKColor.mainRed
         view.addSubview(tableView)
         tableView.edgesToSuperview()
     }
+}
+
+extension BlockedUsersViewController: BlockedUserViewModelDelegate {
+    func success() {
+        AKLoadingView.shared.stopLoading(didSucceed: true)
+    }
+    func failure() {
+        AKLoadingView.shared.stopLoading(didSucceed: false)
+
+    }
+    
+    
+    
 }

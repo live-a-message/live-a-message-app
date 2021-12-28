@@ -152,7 +152,7 @@ class MainCoordinator: Coordinator {
         let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
         closeMessagesViewModel?.currentLocation = location
     }
-    
+
     func showBlockedUsers() {
         profileViewController.navigationController?.pushViewController(BlockedUsersViewController(), animated: true)
     }

@@ -26,17 +26,16 @@ final class BlockedUsersCellView: UITableViewCell, TableViewCell {
     func setup(viewModel: BlockedUsersCellViewModel) {
         self.selectionStyle = .none
         self.tintColor = AKColor.mainRed
-        self.imageView?.image = UIImage(systemName: IconNamed.envelope.rawValue)
-        self.imageView?.layer.cornerRadius = 8
-        self.imageView?.clipsToBounds = true
         self.textLabel?.text = viewModel.title
     }
 }
 
 final class BlockedUsersCellViewModel: TableViewCellViewModel {
     var title: String
+    var user: User
 
     init(user: User) {
+        self.user = user
         self.title = user.name
     }
 }

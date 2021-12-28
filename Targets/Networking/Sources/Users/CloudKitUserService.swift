@@ -123,6 +123,32 @@ public class CloudKitUserService: UserService {
             }
         }
     }
+    
+    
+    public func unblock(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
+        fetchBlockedUsers { result in
+            switch result {
+            case .success(let record):
+                guard var blockedUsers = try? CKBlockedUsers(record).users else {
+                    completion(.failure(.failedToDecode))
+                    return
+                }
+                blockedUsers.removeAll(where: { $0 == userId })
+                record["users"] = blockedUsers
+                UserData.shared.set(value: blockedUsers, key: .blockedIDs)
+                self.updateBlockedUsers(record: record) { result in
+                    switch result {
+                    case .success:
+                    completion(.success(true))
+                    case .failure(let error):
+                    completion(.failure(error))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
     public func fetchBlockedUsers(completion: @escaping ((Result<CKRecord, UserServiceError>) -> Void)) {
         let meId = UserData.shared.id
