@@ -25,6 +25,7 @@ protocol Coordinator: AnyObject {
     func showDeleteMenu(with message: Message, on viewController: UIViewController)
     func showStoreReview(completion: @escaping () -> Void)
     func doLogoff()
+    func showBlockedUsers()
 }
 
 class MainCoordinator: Coordinator {
@@ -150,6 +151,10 @@ class MainCoordinator: Coordinator {
         closeMessagesController?.updateDataSource(messages: messages)
         let location = Location(from: mapViewController.viewModel.currentLocation.coordinate)
         closeMessagesViewModel?.currentLocation = location
+    }
+
+    func showBlockedUsers() {
+        profileViewController.navigationController?.pushViewController(BlockedUsersViewController(), animated: true)
     }
 
     func doLogoff() {

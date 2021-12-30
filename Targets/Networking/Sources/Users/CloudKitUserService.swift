@@ -40,6 +40,31 @@ public class CloudKitUserService: UserService {
         database.add(operation)
     }
 
+    public func fetch(identifiers: [String], completion: @escaping ((Result<[User], UserServiceError>) -> Void)) {
+        let predicates = NSPredicate(format: "id IN %@", identifiers)
+        let query = CKQuery(recordType: CKRecordType.UsersInfo.rawValue, predicate: predicates)
+        let operation = CKQueryOperation(query: query)
+        var users = [User]()
+
+        operation.recordFetchedBlock = { record in
+            guard let user = try? CKUser(record).user else {
+                completion(.failure(.failedToDecode))
+                return
+            }
+            users.append(user)
+        }
+
+        operation.queryCompletionBlock = { _, error in
+            guard error == nil else {
+                completion(.failure(.networkError))
+                return
+            }
+            completion(.success(users))
+        }
+        operation.qualityOfService = .utility
+        database.add(operation)
+    }
+
     public func save(user: User, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
         let record = CKUser.encode(user)
         database.save(record) { record, error in
@@ -82,6 +107,31 @@ public class CloudKitUserService: UserService {
                     return
                 }
                 blockedUsers.append(userId)
+                record["users"] = blockedUsers
+                UserData.shared.set(value: blockedUsers, key: .blockedIDs)
+                self.updateBlockedUsers(record: record) { result in
+                    switch result {
+                    case .success:
+                    completion(.success(true))
+                    case .failure(let error):
+                    completion(.failure(error))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    public func unblock(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
+        fetchBlockedUsers { result in
+            switch result {
+            case .success(let record):
+                guard var blockedUsers = try? CKBlockedUsers(record).users else {
+                    completion(.failure(.failedToDecode))
+                    return
+                }
+                blockedUsers.removeAll(where: { $0 == userId })
                 record["users"] = blockedUsers
                 UserData.shared.set(value: blockedUsers, key: .blockedIDs)
                 self.updateBlockedUsers(record: record) { result in

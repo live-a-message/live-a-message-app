@@ -14,6 +14,11 @@ public protocol UserService: AnyObject {
     ///     - identifier: the id of the user
     ///     - completion: the result of fetching user
     func fetch(identifier: String, completion: @escaping ((Result<User, UserServiceError>) -> Void))
+    /// Fetchs user included in a given  identifier.
+    /// - Parameters:
+    ///     - identifier: the id of the user
+    ///     - completion: the result of fetching user
+    func fetch(identifiers: [String], completion: @escaping ((Result<[User], UserServiceError>) -> Void))
     /// Save user to user defaults when starts log-in
     /// - Parameters:
     ///     - user: the following user to be saved

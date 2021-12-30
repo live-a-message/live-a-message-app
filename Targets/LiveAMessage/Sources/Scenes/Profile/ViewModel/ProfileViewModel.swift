@@ -25,7 +25,7 @@ class ProfileViewModel: ProfileViewModelProtocol {
     )
 
     let items: [ProfileModel] = [
-      ProfileModel(type: .termsOfService)
+      ProfileModel(type: .termsOfService), ProfileModel(type: .blockedUsers)
     ]
 
     var sections: [[ProfileCellViewModel]] = [[]]
