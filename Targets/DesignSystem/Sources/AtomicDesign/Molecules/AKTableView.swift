@@ -112,4 +112,11 @@ public class AKTableView<Item: TableViewCellViewModel,
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = AKColor.mainBackgroundColor
     }
+
+    public func deselectSelectedRow(animated: Bool) {
+        if let indexPathForSelectedRow = self.indexPathForSelectedRow {
+            self.deselectRow(at: indexPathForSelectedRow, animated: animated)
+        }
+    }
+
 }

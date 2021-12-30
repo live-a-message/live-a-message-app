@@ -41,9 +41,8 @@ public class CloudKitUserService: UserService {
     }
 
     public func fetch(identifiers: [String], completion: @escaping ((Result<[User], UserServiceError>) -> Void)) {
-        let predicates = identifiers.compactMap({ NSPredicate(format: "id == %@", $0) })
-        let orPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        let query = CKQuery(recordType: CKRecordType.UsersInfo.rawValue, predicate: orPredicate)
+        let predicates = NSPredicate(format: "id IN %@", identifiers)
+        let query = CKQuery(recordType: CKRecordType.UsersInfo.rawValue, predicate: predicates)
         let operation = CKQueryOperation(query: query)
         var users = [User]()
 
@@ -123,8 +122,7 @@ public class CloudKitUserService: UserService {
             }
         }
     }
-    
-    
+
     public func unblock(userId: String, completion: @escaping ((Result<Bool, UserServiceError>) -> Void)) {
         fetchBlockedUsers { result in
             switch result {

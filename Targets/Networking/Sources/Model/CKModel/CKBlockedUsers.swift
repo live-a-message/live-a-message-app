@@ -16,7 +16,7 @@ protocol Blockable {
 public class CKBlockedUsers: Blockable {
 
     private(set) var userId: String
-    private(set) var users: [String]
+    public var users: [String]
     private(set) var recordID: CKRecord.ID
 
     public init(_ record: CKRecord) throws {
